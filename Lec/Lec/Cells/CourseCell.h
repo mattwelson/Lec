@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CourseViewController.h"
 
 @interface CourseCell : UITableViewCell
 

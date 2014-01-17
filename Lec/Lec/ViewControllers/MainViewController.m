@@ -29,6 +29,8 @@
     [super viewDidLoad];
     [self navagationTopBar];
     [self courseTableView];
+    self.courseView.delegate = self;
+    self.courseView.dataSource = self;
     
 }
 
@@ -54,13 +56,28 @@
 
 - (void) courseTableView
 {
-    UITableView *courseView = [[UITableView alloc] initWithFrame:CGRectMake(0, 65, 320, self.view.frame.size.height-64)];
-    [courseView setScrollEnabled:YES];
-    [courseView setNeedsDisplayInRect:CGRectMake(0, 0, 320, 2000)];
-    [self.view addSubview:courseView];
+    self.courseView = [[UITableView alloc] initWithFrame:CGRectMake(0, 65, 320, self.view.frame.size.height-64)];
+    [self.courseView setScrollEnabled:YES];
+    [self.courseView setNeedsDisplayInRect:CGRectMake(0, 0, 320, 2000)];
+    [self.view addSubview:self.courseView];
 }
 
+- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+}
 
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return nil;
+}
+
+-(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 0;
+}
+
+//Delete this function when the cells are added to the table view.
 - (void) changeCoursePage
 {
     [self.navigationController pushViewController:[[CourseViewController alloc] initWithNibName:@"CourseViewController" bundle:nil] animated:YES];

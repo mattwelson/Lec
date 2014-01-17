@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "CourseViewController.h"
+#import "CourseCell.h"
 
-@interface MainViewController : UIViewController
+@interface MainViewController : UIViewController<UITableViewDelegate, UITableViewDataSource>
+
+@property UITableView *courseView;
+
+- (void) changeCoursePage;
 @end
