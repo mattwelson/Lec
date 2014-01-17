@@ -12,7 +12,9 @@
 
 @interface MainViewController : UIViewController<UITableViewDelegate, UITableViewDataSource>
 
+
 @property UITableView *courseView;
+@property NSMutableArray *dataArray;
 
 - (void) changeCoursePage;
 @end

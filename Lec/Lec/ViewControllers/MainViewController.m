@@ -19,6 +19,12 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        self.dataArray = [[NSMutableArray alloc] init];
+        [self.dataArray addObject:@"1"];
+        [self.dataArray addObject:@"2"];
+        [self.dataArray addObject:@"3"];
+        [self.dataArray addObject:@"4"];
+        [self.dataArray addObject:@"5"];
     }
     return self;
 }
@@ -69,12 +75,15 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return nil;
+    CourseCell *cell = [[CourseCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
+    cell.textLabel.text = [_dataArray objectAtIndex:indexPath.row];
+    
+    return cell;
 }
 
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 0;
+    return [_dataArray count];
 }
 
 //Delete this function when the cells are added to the table view.
