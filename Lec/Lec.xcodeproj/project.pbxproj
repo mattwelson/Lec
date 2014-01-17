@@ -7,6 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0B6BD586188914B300A7D8F9 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B6BD584188914B300A7D8F9 /* MainViewController.m */; };
+		0B6BD587188914B300A7D8F9 /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0B6BD585188914B300A7D8F9 /* MainViewController.xib */; };
+		0B6BD58B1889155A00A7D8F9 /* CourseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B6BD5891889155A00A7D8F9 /* CourseViewController.m */; };
+		0B6BD58C1889155A00A7D8F9 /* CourseViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0B6BD58A1889155A00A7D8F9 /* CourseViewController.xib */; };
+		0B6BD5901889157000A7D8F9 /* RecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B6BD58E1889157000A7D8F9 /* RecordViewController.m */; };
+		0B6BD5911889157000A7D8F9 /* RecordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0B6BD58F1889157000A7D8F9 /* RecordViewController.xib */; };
+		0B6BD5951889158500A7D8F9 /* PlaybackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B6BD5931889158500A7D8F9 /* PlaybackViewController.m */; };
+		0B6BD5961889158500A7D8F9 /* PlaybackViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0B6BD5941889158500A7D8F9 /* PlaybackViewController.xib */; };
+		0B6BD59B18891B1E00A7D8F9 /* nav_add_btn.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B6BD59918891B1E00A7D8F9 /* nav_add_btn.png */; };
+		0B6BD59C18891B1E00A7D8F9 /* nav_add_btn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B6BD59A18891B1E00A7D8F9 /* nav_add_btn@2x.png */; };
+		0B6BD5A018891FB300A7D8F9 /* CourseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B6BD59F18891FB300A7D8F9 /* CourseCell.m */; };
 		C9B0C5DB187FBE7F002D4A63 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9B0C5DA187FBE7F002D4A63 /* Foundation.framework */; };
 		C9B0C5DD187FBE7F002D4A63 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9B0C5DC187FBE7F002D4A63 /* CoreGraphics.framework */; };
 		C9B0C5DF187FBE7F002D4A63 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9B0C5DE187FBE7F002D4A63 /* UIKit.framework */; };
@@ -35,6 +46,22 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0B6BD583188914B300A7D8F9 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainViewController.h; path = ViewControllers/MainViewController.h; sourceTree = "<group>"; };
+		0B6BD584188914B300A7D8F9 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MainViewController.m; path = ViewControllers/MainViewController.m; sourceTree = "<group>"; };
+		0B6BD585188914B300A7D8F9 /* MainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MainViewController.xib; path = ViewControllers/MainViewController.xib; sourceTree = "<group>"; };
+		0B6BD5881889155A00A7D8F9 /* CourseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CourseViewController.h; path = ViewControllers/CourseViewController.h; sourceTree = "<group>"; };
+		0B6BD5891889155A00A7D8F9 /* CourseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CourseViewController.m; path = ViewControllers/CourseViewController.m; sourceTree = "<group>"; };
+		0B6BD58A1889155A00A7D8F9 /* CourseViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CourseViewController.xib; path = ViewControllers/CourseViewController.xib; sourceTree = "<group>"; };
+		0B6BD58D1889157000A7D8F9 /* RecordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RecordViewController.h; path = ViewControllers/RecordViewController.h; sourceTree = "<group>"; };
+		0B6BD58E1889157000A7D8F9 /* RecordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RecordViewController.m; path = ViewControllers/RecordViewController.m; sourceTree = "<group>"; };
+		0B6BD58F1889157000A7D8F9 /* RecordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = RecordViewController.xib; path = ViewControllers/RecordViewController.xib; sourceTree = "<group>"; };
+		0B6BD5921889158500A7D8F9 /* PlaybackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlaybackViewController.h; path = ViewControllers/PlaybackViewController.h; sourceTree = "<group>"; };
+		0B6BD5931889158500A7D8F9 /* PlaybackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PlaybackViewController.m; path = ViewControllers/PlaybackViewController.m; sourceTree = "<group>"; };
+		0B6BD5941889158500A7D8F9 /* PlaybackViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PlaybackViewController.xib; path = ViewControllers/PlaybackViewController.xib; sourceTree = "<group>"; };
+		0B6BD59918891B1E00A7D8F9 /* nav_add_btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nav_add_btn.png; sourceTree = "<group>"; };
+		0B6BD59A18891B1E00A7D8F9 /* nav_add_btn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nav_add_btn@2x.png"; sourceTree = "<group>"; };
+		0B6BD59E18891FB300A7D8F9 /* CourseCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CourseCell.h; path = Cells/CourseCell.h; sourceTree = "<group>"; };
+		0B6BD59F18891FB300A7D8F9 /* CourseCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CourseCell.m; path = Cells/CourseCell.m; sourceTree = "<group>"; };
 		C9B0C5D7187FBE7F002D4A63 /* Lec.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lec.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C9B0C5DA187FBE7F002D4A63 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		C9B0C5DC187FBE7F002D4A63 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -81,6 +108,52 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0B6BD5821889147200A7D8F9 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				0B6BD583188914B300A7D8F9 /* MainViewController.h */,
+				0B6BD584188914B300A7D8F9 /* MainViewController.m */,
+				0B6BD585188914B300A7D8F9 /* MainViewController.xib */,
+				0B6BD5881889155A00A7D8F9 /* CourseViewController.h */,
+				0B6BD5891889155A00A7D8F9 /* CourseViewController.m */,
+				0B6BD58A1889155A00A7D8F9 /* CourseViewController.xib */,
+				0B6BD58D1889157000A7D8F9 /* RecordViewController.h */,
+				0B6BD58E1889157000A7D8F9 /* RecordViewController.m */,
+				0B6BD58F1889157000A7D8F9 /* RecordViewController.xib */,
+				0B6BD5921889158500A7D8F9 /* PlaybackViewController.h */,
+				0B6BD5931889158500A7D8F9 /* PlaybackViewController.m */,
+				0B6BD5941889158500A7D8F9 /* PlaybackViewController.xib */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		0B6BD59718891B0C00A7D8F9 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				0B6BD59818891B1E00A7D8F9 /* Navigation */,
+			);
+			name = Assets;
+			sourceTree = "<group>";
+		};
+		0B6BD59818891B1E00A7D8F9 /* Navigation */ = {
+			isa = PBXGroup;
+			children = (
+				0B6BD59918891B1E00A7D8F9 /* nav_add_btn.png */,
+				0B6BD59A18891B1E00A7D8F9 /* nav_add_btn@2x.png */,
+			);
+			name = Navigation;
+			path = Assets/Navigation;
+			sourceTree = "<group>";
+		};
+		0B6BD59D18891F8E00A7D8F9 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				0B6BD59E18891FB300A7D8F9 /* CourseCell.h */,
+				0B6BD59F18891FB300A7D8F9 /* CourseCell.m */,
+			);
+			name = Cells;
+			sourceTree = "<group>";
+		};
 		C9B0C5CE187FBE7F002D4A63 = {
 			isa = PBXGroup;
 			children = (
@@ -115,6 +188,9 @@
 		C9B0C5E2187FBE7F002D4A63 /* Lec */ = {
 			isa = PBXGroup;
 			children = (
+				0B6BD59D18891F8E00A7D8F9 /* Cells */,
+				0B6BD59718891B0C00A7D8F9 /* Assets */,
+				0B6BD5821889147200A7D8F9 /* ViewControllers */,
 				C9B0C5EB187FBE7F002D4A63 /* LECAppDelegate.h */,
 				C9B0C5EC187FBE7F002D4A63 /* LECAppDelegate.m */,
 				C9B0C5F1187FBE7F002D4A63 /* Images.xcassets */,
@@ -230,7 +306,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				C9B0C5E7187FBE7F002D4A63 /* InfoPlist.strings in Resources */,
+				0B6BD59B18891B1E00A7D8F9 /* nav_add_btn.png in Resources */,
+				0B6BD5911889157000A7D8F9 /* RecordViewController.xib in Resources */,
+				0B6BD58C1889155A00A7D8F9 /* CourseViewController.xib in Resources */,
+				0B6BD5961889158500A7D8F9 /* PlaybackViewController.xib in Resources */,
+				0B6BD587188914B300A7D8F9 /* MainViewController.xib in Resources */,
 				C9B0C5F2187FBE7F002D4A63 /* Images.xcassets in Resources */,
+				0B6BD59C18891B1E00A7D8F9 /* nav_add_btn@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -249,9 +331,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0B6BD5A018891FB300A7D8F9 /* CourseCell.m in Sources */,
 				C9B0C5E9187FBE7F002D4A63 /* main.m in Sources */,
 				C9B0C5F0187FBE7F002D4A63 /* Lec.xcdatamodeld in Sources */,
+				0B6BD5951889158500A7D8F9 /* PlaybackViewController.m in Sources */,
 				C9B0C5ED187FBE7F002D4A63 /* LECAppDelegate.m in Sources */,
+				0B6BD5901889157000A7D8F9 /* RecordViewController.m in Sources */,
+				0B6BD586188914B300A7D8F9 /* MainViewController.m in Sources */,
+				0B6BD58B1889155A00A7D8F9 /* CourseViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -452,6 +539,7 @@
 				C9B0C60B187FBE7F002D4A63 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		C9B0C60C187FBE7F002D4A63 /* Build configuration list for PBXNativeTarget "LecTests" */ = {
 			isa = XCConfigurationList;
@@ -460,6 +548,7 @@
 				C9B0C60E187FBE7F002D4A63 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
