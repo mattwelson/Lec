@@ -7,14 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "CourseViewController.h"
-#import "CourseCell.h"
+#import "LECImportHeader.h"
 
 @interface MainViewController : UIViewController<UITableViewDelegate, UITableViewDataSource>
 
 
 @property UITableView *courseView;
 @property NSMutableArray *dataArray;
+@property LECHomeViewModel *viewModel;
 
 - (void) changeCoursePage;
 @end

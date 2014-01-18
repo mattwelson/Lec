@@ -18,6 +18,17 @@
 		0B6BD59B18891B1E00A7D8F9 /* nav_add_btn.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B6BD59918891B1E00A7D8F9 /* nav_add_btn.png */; };
 		0B6BD59C18891B1E00A7D8F9 /* nav_add_btn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B6BD59A18891B1E00A7D8F9 /* nav_add_btn@2x.png */; };
 		0B6BD5A018891FB300A7D8F9 /* CourseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B6BD59F18891FB300A7D8F9 /* CourseCell.m */; };
+		C9605CA21889F3B500F3DE57 /* Course.m in Sources */ = {isa = PBXBuildFile; fileRef = C9605CA11889F3B500F3DE57 /* Course.m */; };
+		C9605CA51889F3B600F3DE57 /* Lecture.m in Sources */ = {isa = PBXBuildFile; fileRef = C9605CA41889F3B600F3DE57 /* Lecture.m */; };
+		C9605CA81889F3B600F3DE57 /* Tag.m in Sources */ = {isa = PBXBuildFile; fileRef = C9605CA71889F3B600F3DE57 /* Tag.m */; };
+		C9605CAB1889F4B800F3DE57 /* LECBaseViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C9605CAA1889F4B800F3DE57 /* LECBaseViewModel.m */; };
+		C9605CAE1889F5AD00F3DE57 /* LECHomeViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C9605CAD1889F5AD00F3DE57 /* LECHomeViewModel.m */; };
+		C9605CB21889F6CC00F3DE57 /* LECBaseCellViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C9605CB11889F6CC00F3DE57 /* LECBaseCellViewModel.m */; };
+		C9605CBA1889F99800F3DE57 /* LECCourseCellViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C9605CB91889F99800F3DE57 /* LECCourseCellViewModel.m */; };
+		C9605CBE188A001B00F3DE57 /* LECDummyCourse.m in Sources */ = {isa = PBXBuildFile; fileRef = C9605CBD188A001B00F3DE57 /* LECDummyCourse.m */; };
+		C9605CC0188A11D300F3DE57 /* Colours.plist in Resources */ = {isa = PBXBuildFile; fileRef = C9605CBF188A11D300F3DE57 /* Colours.plist */; };
+		C9605CC4188A179400F3DE57 /* LECColourService.m in Sources */ = {isa = PBXBuildFile; fileRef = C9605CC3188A179400F3DE57 /* LECColourService.m */; };
+		C9605CC8188A311100F3DE57 /* LECDatabaseService.m in Sources */ = {isa = PBXBuildFile; fileRef = C9605CC7188A311100F3DE57 /* LECDatabaseService.m */; };
 		C9B0C5DB187FBE7F002D4A63 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9B0C5DA187FBE7F002D4A63 /* Foundation.framework */; };
 		C9B0C5DD187FBE7F002D4A63 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9B0C5DC187FBE7F002D4A63 /* CoreGraphics.framework */; };
 		C9B0C5DF187FBE7F002D4A63 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9B0C5DE187FBE7F002D4A63 /* UIKit.framework */; };
@@ -62,6 +73,28 @@
 		0B6BD59A18891B1E00A7D8F9 /* nav_add_btn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nav_add_btn@2x.png"; sourceTree = "<group>"; };
 		0B6BD59E18891FB300A7D8F9 /* CourseCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CourseCell.h; path = Cells/CourseCell.h; sourceTree = "<group>"; };
 		0B6BD59F18891FB300A7D8F9 /* CourseCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CourseCell.m; path = Cells/CourseCell.m; sourceTree = "<group>"; };
+		C9605CA01889F3B500F3DE57 /* Course.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Course.h; path = DataModels/Course.h; sourceTree = "<group>"; };
+		C9605CA11889F3B500F3DE57 /* Course.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Course.m; path = DataModels/Course.m; sourceTree = "<group>"; };
+		C9605CA31889F3B600F3DE57 /* Lecture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Lecture.h; path = DataModels/Lecture.h; sourceTree = "<group>"; };
+		C9605CA41889F3B600F3DE57 /* Lecture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Lecture.m; path = DataModels/Lecture.m; sourceTree = "<group>"; };
+		C9605CA61889F3B600F3DE57 /* Tag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Tag.h; path = DataModels/Tag.h; sourceTree = "<group>"; };
+		C9605CA71889F3B600F3DE57 /* Tag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Tag.m; path = DataModels/Tag.m; sourceTree = "<group>"; };
+		C9605CA91889F4B800F3DE57 /* LECBaseViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LECBaseViewModel.h; path = ViewModels/LECBaseViewModel.h; sourceTree = "<group>"; };
+		C9605CAA1889F4B800F3DE57 /* LECBaseViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LECBaseViewModel.m; path = ViewModels/LECBaseViewModel.m; sourceTree = "<group>"; };
+		C9605CAC1889F5AD00F3DE57 /* LECHomeViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LECHomeViewModel.h; path = ViewModels/LECHomeViewModel.h; sourceTree = "<group>"; };
+		C9605CAD1889F5AD00F3DE57 /* LECHomeViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LECHomeViewModel.m; path = ViewModels/LECHomeViewModel.m; sourceTree = "<group>"; };
+		C9605CB01889F6CC00F3DE57 /* LECBaseCellViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LECBaseCellViewModel.h; path = "Cell View Models/LECBaseCellViewModel.h"; sourceTree = "<group>"; };
+		C9605CB11889F6CC00F3DE57 /* LECBaseCellViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LECBaseCellViewModel.m; path = "Cell View Models/LECBaseCellViewModel.m"; sourceTree = "<group>"; };
+		C9605CB51889F88B00F3DE57 /* LECImportHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LECImportHeader.h; sourceTree = "<group>"; };
+		C9605CB81889F99800F3DE57 /* LECCourseCellViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LECCourseCellViewModel.h; path = "Cell View Models/LECCourseCellViewModel.h"; sourceTree = "<group>"; };
+		C9605CB91889F99800F3DE57 /* LECCourseCellViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LECCourseCellViewModel.m; path = "Cell View Models/LECCourseCellViewModel.m"; sourceTree = "<group>"; };
+		C9605CBC188A001B00F3DE57 /* LECDummyCourse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LECDummyCourse.h; path = DataModels/LECDummyCourse.h; sourceTree = "<group>"; };
+		C9605CBD188A001B00F3DE57 /* LECDummyCourse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LECDummyCourse.m; path = DataModels/LECDummyCourse.m; sourceTree = "<group>"; };
+		C9605CBF188A11D300F3DE57 /* Colours.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Colours.plist; sourceTree = "<group>"; };
+		C9605CC2188A179400F3DE57 /* LECColourService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LECColourService.h; path = Assets/LECColourService.h; sourceTree = "<group>"; };
+		C9605CC3188A179400F3DE57 /* LECColourService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LECColourService.m; path = Assets/LECColourService.m; sourceTree = "<group>"; };
+		C9605CC6188A311100F3DE57 /* LECDatabaseService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LECDatabaseService.h; path = DataModels/LECDatabaseService.h; sourceTree = "<group>"; };
+		C9605CC7188A311100F3DE57 /* LECDatabaseService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LECDatabaseService.m; path = DataModels/LECDatabaseService.m; sourceTree = "<group>"; };
 		C9B0C5D7187FBE7F002D4A63 /* Lec.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lec.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C9B0C5DA187FBE7F002D4A63 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		C9B0C5DC187FBE7F002D4A63 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -130,6 +163,7 @@
 		0B6BD59718891B0C00A7D8F9 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				C9605CC1188A174D00F3DE57 /* Colour */,
 				0B6BD59818891B1E00A7D8F9 /* Navigation */,
 			);
 			name = Assets;
@@ -152,6 +186,79 @@
 				0B6BD59F18891FB300A7D8F9 /* CourseCell.m */,
 			);
 			name = Cells;
+			sourceTree = "<group>";
+		};
+		C9605CAF1889F66300F3DE57 /* Cell View Models */ = {
+			isa = PBXGroup;
+			children = (
+				C9605CB01889F6CC00F3DE57 /* LECBaseCellViewModel.h */,
+				C9605CB11889F6CC00F3DE57 /* LECBaseCellViewModel.m */,
+				C9605CB81889F99800F3DE57 /* LECCourseCellViewModel.h */,
+				C9605CB91889F99800F3DE57 /* LECCourseCellViewModel.m */,
+			);
+			name = "Cell View Models";
+			sourceTree = "<group>";
+		};
+		C9605CBB1889FFFC00F3DE57 /* Dummies */ = {
+			isa = PBXGroup;
+			children = (
+				C9605CBC188A001B00F3DE57 /* LECDummyCourse.h */,
+				C9605CBD188A001B00F3DE57 /* LECDummyCourse.m */,
+			);
+			name = Dummies;
+			sourceTree = "<group>";
+		};
+		C9605CC1188A174D00F3DE57 /* Colour */ = {
+			isa = PBXGroup;
+			children = (
+				C9605CC2188A179400F3DE57 /* LECColourService.h */,
+				C9605CC3188A179400F3DE57 /* LECColourService.m */,
+			);
+			name = Colour;
+			sourceTree = "<group>";
+		};
+		C9605CC5188A30CE00F3DE57 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				C9605CC6188A311100F3DE57 /* LECDatabaseService.h */,
+				C9605CC7188A311100F3DE57 /* LECDatabaseService.m */,
+			);
+			name = Service;
+			sourceTree = "<group>";
+		};
+		C9A0047E1889EBD200D27A6C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		C9A0047F1889EBDC00D27A6C /* View Model */ = {
+			isa = PBXGroup;
+			children = (
+				C9605CAF1889F66300F3DE57 /* Cell View Models */,
+				C9605CA91889F4B800F3DE57 /* LECBaseViewModel.h */,
+				C9605CAA1889F4B800F3DE57 /* LECBaseViewModel.m */,
+				C9605CAC1889F5AD00F3DE57 /* LECHomeViewModel.h */,
+				C9605CAD1889F5AD00F3DE57 /* LECHomeViewModel.m */,
+			);
+			name = "View Model";
+			sourceTree = "<group>";
+		};
+		C9A004801889EBF100D27A6C /* Database */ = {
+			isa = PBXGroup;
+			children = (
+				C9605CC5188A30CE00F3DE57 /* Service */,
+				C9605CBB1889FFFC00F3DE57 /* Dummies */,
+				C9B0C5EE187FBE7F002D4A63 /* Lec.xcdatamodeld */,
+				C9605CA61889F3B600F3DE57 /* Tag.h */,
+				C9605CA71889F3B600F3DE57 /* Tag.m */,
+				C9605CA31889F3B600F3DE57 /* Lecture.h */,
+				C9605CA41889F3B600F3DE57 /* Lecture.m */,
+				C9605CA01889F3B500F3DE57 /* Course.h */,
+				C9605CA11889F3B500F3DE57 /* Course.m */,
+			);
+			name = Database;
 			sourceTree = "<group>";
 		};
 		C9B0C5CE187FBE7F002D4A63 = {
@@ -188,13 +295,15 @@
 		C9B0C5E2187FBE7F002D4A63 /* Lec */ = {
 			isa = PBXGroup;
 			children = (
+				C9A004801889EBF100D27A6C /* Database */,
+				C9A0047F1889EBDC00D27A6C /* View Model */,
+				C9A0047E1889EBD200D27A6C /* Model */,
 				0B6BD59718891B0C00A7D8F9 /* Assets */,
 				0B6BD59D18891F8E00A7D8F9 /* Cells */,
 				0B6BD5821889147200A7D8F9 /* ViewControllers */,
 				C9B0C5EB187FBE7F002D4A63 /* LECAppDelegate.h */,
 				C9B0C5EC187FBE7F002D4A63 /* LECAppDelegate.m */,
 				C9B0C5F1187FBE7F002D4A63 /* Images.xcassets */,
-				C9B0C5EE187FBE7F002D4A63 /* Lec.xcdatamodeld */,
 				C9B0C5E3187FBE7F002D4A63 /* Supporting Files */,
 			);
 			path = Lec;
@@ -207,6 +316,8 @@
 				C9B0C5E5187FBE7F002D4A63 /* InfoPlist.strings */,
 				C9B0C5E8187FBE7F002D4A63 /* main.m */,
 				C9B0C5EA187FBE7F002D4A63 /* Lec-Prefix.pch */,
+				C9605CB51889F88B00F3DE57 /* LECImportHeader.h */,
+				C9605CBF188A11D300F3DE57 /* Colours.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -306,6 +417,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C9B0C5E7187FBE7F002D4A63 /* InfoPlist.strings in Resources */,
+				C9605CC0188A11D300F3DE57 /* Colours.plist in Resources */,
 				0B6BD59B18891B1E00A7D8F9 /* nav_add_btn.png in Resources */,
 				0B6BD5911889157000A7D8F9 /* RecordViewController.xib in Resources */,
 				0B6BD58C1889155A00A7D8F9 /* CourseViewController.xib in Resources */,
@@ -331,12 +443,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C9605CA81889F3B600F3DE57 /* Tag.m in Sources */,
 				0B6BD5A018891FB300A7D8F9 /* CourseCell.m in Sources */,
 				C9B0C5E9187FBE7F002D4A63 /* main.m in Sources */,
 				C9B0C5F0187FBE7F002D4A63 /* Lec.xcdatamodeld in Sources */,
+				C9605CAB1889F4B800F3DE57 /* LECBaseViewModel.m in Sources */,
 				0B6BD5951889158500A7D8F9 /* PlaybackViewController.m in Sources */,
+				C9605CC4188A179400F3DE57 /* LECColourService.m in Sources */,
+				C9605CA51889F3B600F3DE57 /* Lecture.m in Sources */,
+				C9605CAE1889F5AD00F3DE57 /* LECHomeViewModel.m in Sources */,
+				C9605CB21889F6CC00F3DE57 /* LECBaseCellViewModel.m in Sources */,
+				C9605CBA1889F99800F3DE57 /* LECCourseCellViewModel.m in Sources */,
+				C9605CA21889F3B500F3DE57 /* Course.m in Sources */,
 				C9B0C5ED187FBE7F002D4A63 /* LECAppDelegate.m in Sources */,
+				C9605CBE188A001B00F3DE57 /* LECDummyCourse.m in Sources */,
 				0B6BD5901889157000A7D8F9 /* RecordViewController.m in Sources */,
+				C9605CC8188A311100F3DE57 /* LECDatabaseService.m in Sources */,
 				0B6BD586188914B300A7D8F9 /* MainViewController.m in Sources */,
 				0B6BD58B1889155A00A7D8F9 /* CourseViewController.m in Sources */,
 			);

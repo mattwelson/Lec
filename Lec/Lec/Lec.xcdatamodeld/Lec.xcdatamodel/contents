@@ -1,4 +1,29 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model name="Test1.xcdatamodel" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
-    <elements/>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="3401" systemVersion="13B42" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Course" representedClassName="Course" syncable="YES">
+        <attribute name="colour" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="courseDescription" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="courseName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="icon" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="lectures" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Lecture" inverseName="course" inverseEntity="Lecture" syncable="YES"/>
+    </entity>
+    <entity name="Lecture" representedClassName="Lecture" syncable="YES">
+        <attribute name="lectureDescription" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="lectureName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="recordingPath" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="totalTime" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <relationship name="course" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Course" inverseName="lectures" inverseEntity="Course" syncable="YES"/>
+        <relationship name="tags" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Tag" inverseName="lecture" inverseEntity="Tag" syncable="YES"/>
+    </entity>
+    <entity name="Tag" representedClassName="Tag" syncable="YES">
+        <attribute name="currentTime" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="lecture" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Lecture" inverseName="tags" inverseEntity="Lecture" syncable="YES"/>
+    </entity>
+    <fetchRequest name="fr_get_courses" entity="Course"/>
+    <elements>
+        <element name="Course" positionX="160" positionY="189" width="128" height="118"/>
+        <element name="Lecture" positionX="421" positionY="189" width="128" height="133"/>
+        <element name="Tag" positionX="664" positionY="234" width="128" height="88"/>
+    </elements>
 </model>

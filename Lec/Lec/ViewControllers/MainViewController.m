@@ -7,6 +7,7 @@
 //
 
 #import "MainViewController.h"
+#import "LECImportHeader.h"
 
 @interface MainViewController ()
 
@@ -19,12 +20,13 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        self.dataArray = [[NSMutableArray alloc] init];
-        [self.dataArray addObject:@"1"];
-        [self.dataArray addObject:@"2"];
-        [self.dataArray addObject:@"3"];
-        [self.dataArray addObject:@"4"];
-        [self.dataArray addObject:@"5"];
+        [self setViewModel:[[LECHomeViewModel alloc] init]];
+        NSMutableArray *modelDummies = [self courseDummies];
+        [self setDataArray:[NSMutableArray array]];
+        for (LECDummyCourse *c in modelDummies)
+        {
+            [[self dataArray] addObject:[LECCourseCellViewModel courseCellWithDummy:c andColourService:[self.viewModel colourService]]];
+        }
     }
     return self;
 }
@@ -35,8 +37,6 @@
     [super viewDidLoad];
     [self navagationTopBar];
     [self courseTableView];
-    self.courseView.delegate = self;
-    self.courseView.dataSource = self;
     
 }
 
@@ -66,6 +66,9 @@
     [self.courseView setScrollEnabled:YES];
     [self.courseView setNeedsDisplayInRect:CGRectMake(0, 0, 320, 2000)];
     [self.view addSubview:self.courseView];
+    self.courseView.delegate = self;
+    self.courseView.dataSource = self;
+    [[self courseView] setSeparatorStyle:UITableViewCellSeparatorStyleNone];
 }
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -75,10 +78,20 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    CourseCell *cell = [[CourseCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
-    cell.textLabel.text = [_dataArray objectAtIndex:indexPath.row];
+    CourseCell *cell = [[CourseCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"Cell"];
+    
+    LECCourseCellViewModel *cellViewModel = [[self dataArray] objectAtIndex:indexPath.row];
+    
+    cell.textLabel.text = [cellViewModel titleText];
+    cell.detailTextLabel.text = [cellViewModel subText];
+    [[cellViewModel colourService] addGradientForColour:[cellViewModel colourString] toView:[cell contentView]];
     
     return cell;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 100;
 }
 
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -95,6 +108,21 @@
 - (void) addCourseBut
 {
     //This is where we will add Courses to the tableView
+}
+
+#pragma mark - DUMMY TESTS
+-(NSMutableArray *)courseDummies
+{
+    NSMutableArray *dataModels = [NSMutableArray arrayWithObjects:
+                                  [LECDummyCourse dummyCourse:@"Hello"],
+                                  [LECDummyCourse dummyCourse:@"Julin"],
+                                  [LECDummyCourse dummyCourse:@"Cosc345"],
+                                  [LECDummyCourse dummyCourse:@"Fond Memories"],
+                                  [LECDummyCourse dummyCourse:@"Testy"],
+                                  [LECDummyCourse dummyCourse:@"Test"],
+                                  [LECDummyCourse dummyCourse:@"Willowbank me!"],
+                                  nil];
+    return dataModels;
 }
 
 @end

@@ -14,8 +14,12 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        
-        
+        self.textLabel.textColor = [UIColor whiteColor];
+        self.detailTextLabel.textColor = [UIColor whiteColor];
+        CGRect frame = [self frame];
+        frame.size.height = 100;
+        [self setFrame:frame];
+        [[self contentView] setFrame:frame];
     }
     return self;
 }
