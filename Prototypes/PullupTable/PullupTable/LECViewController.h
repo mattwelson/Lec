@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LECViewController : UIViewController
+@interface LECViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+
+@property NSMutableArray *data;
 
 @end
