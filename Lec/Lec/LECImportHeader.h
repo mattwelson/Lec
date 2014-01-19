@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+#import "LECDefines.h"
+
 #pragma mark - Database
 #import "Tag.h"
 #import "Lecture.h"
