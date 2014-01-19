@@ -17,5 +17,6 @@
 @property (nonatomic, retain) NSSet *lectures;
 
 +(LECDummyCourse *)dummyCourse:(NSString *)title;
++(LECDummyCourse *)dummyCourse:(NSString *)title withColour:(NSString *)colour;
 
 @end
