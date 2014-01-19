@@ -28,20 +28,20 @@
 		<key>HighlightColour</key>
 		<dict>
 			<key>RValue</key>
-			<integer>0</integer>
+			<integer>46</integer>
 			<key>GValue</key>
-			<integer>0</integer>
+			<integer>213</integer>
 			<key>BValue</key>
-			<integer>0</integer>
+			<integer>250</integer>
 		</dict>
 		<key>BaseColour</key>
 		<dict>
 			<key>RValue</key>
-			<integer>0</integer>
+			<integer>36</integer>
 			<key>GValue</key>
-			<integer>0</integer>
+			<integer>103</integer>
 			<key>BValue</key>
-			<integer>0</integer>
+			<integer>236</integer>
 		</dict>
 	</dict>
 	<key>Green</key>
@@ -49,20 +49,20 @@
 		<key>HighlightColour</key>
 		<dict>
 			<key>RValue</key>
-			<integer>0</integer>
+			<integer>138</integer>
 			<key>GValue</key>
-			<integer>0</integer>
+			<integer>249</integer>
 			<key>BValue</key>
-			<integer>0</integer>
+			<integer>118</integer>
 		</dict>
 		<key>BaseColour</key>
 		<dict>
 			<key>RValue</key>
-			<integer>0</integer>
+			<integer>36</integer>
 			<key>GValue</key>
-			<integer>0</integer>
+			<integer>209</integer>
 			<key>BValue</key>
-			<integer>0</integer>
+			<integer>46</integer>
 		</dict>
 	</dict>
 	<key>Black</key>
@@ -70,20 +70,20 @@
 		<key>HighlightColour</key>
 		<dict>
 			<key>RValue</key>
-			<integer>0</integer>
+			<integer>74</integer>
 			<key>GValue</key>
-			<integer>0</integer>
+			<integer>74</integer>
 			<key>BValue</key>
-			<integer>0</integer>
+			<integer>74</integer>
 		</dict>
 		<key>BaseColour</key>
 		<dict>
 			<key>RValue</key>
-			<integer>0</integer>
+			<integer>43</integer>
 			<key>GValue</key>
-			<integer>0</integer>
+			<integer>43</integer>
 			<key>BValue</key>
-			<integer>0</integer>
+			<integer>43</integer>
 		</dict>
 	</dict>
 	<key>Pink</key>
@@ -112,20 +112,20 @@
 		<key>HighlightColour</key>
 		<dict>
 			<key>RValue</key>
-			<integer>0</integer>
+			<integer>195</integer>
 			<key>GValue</key>
-			<integer>0</integer>
+			<integer>78</integer>
 			<key>BValue</key>
-			<integer>0</integer>
+			<integer>248</integer>
 		</dict>
 		<key>BaseColour</key>
 		<dict>
 			<key>RValue</key>
-			<integer>0</integer>
+			<integer>89</integer>
 			<key>GValue</key>
-			<integer>0</integer>
+			<integer>89</integer>
 			<key>BValue</key>
-			<integer>0</integer>
+			<integer>211</integer>
 		</dict>
 	</dict>
 </dict>
