@@ -37,12 +37,22 @@
     return self;
 }
 
+//Because modelDummies and dataArray are different (which the clicking and the loading cells are taken from)
+-(void)reloadTables{
+    [self setDataArray:[NSMutableArray array]];
+    for (LECDummyCourse *c in modelDummies)
+    {
+        [[self dataArray] addObject:[LECCourseCellViewModel courseCellWithDummy:c andColourService:[self.viewModel colourService]]];
+    }
+}
+
 - (void)viewDidLoad
 {
     // Do any additional setup after loading the view from its nib.
     [super viewDidLoad];
     [self navagationTopBar];
     [self courseTableView];
+    [self addCourseIntoView];
     
 }
 
@@ -77,7 +87,7 @@
     [[self courseView] setSeparatorStyle:UITableViewCellSeparatorStyleNone];
 }
 
-- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     LECDummyCourse *dummies = [modelDummies objectAtIndex:indexPath.row];
     [self.navigationController pushViewController:[[CourseViewController alloc] initWithCourse:@"CourseViewController" bundle:nil selectedCourse:dummies]animated:YES];
@@ -112,12 +122,24 @@
     [self.navigationController pushViewController:[[CourseViewController alloc] initWithNibName:@"CourseViewController" bundle:nil] animated:YES];
 }
 
-- (void)addCourse
-{
-    //This is where we will add Courses to the tableView
+-(void)addCourseIntoView{
     addCourseView = [[UIView alloc]initWithFrame:CGRectMake(0, 60, self.view.frame.size.width, 0)];
     addCourseView.backgroundColor = [UIColor whiteColor];
     
+    courseNameInput = [[UITextField alloc]initWithFrame:CGRectMake(60, 10, self.view.frame.size.width-60, 50)];
+    courseNameInput.placeholder = @"Course Name";
+    [courseNameInput setFont:[UIFont fontWithName:@"Avenir" size:30]];
+    [addCourseView addSubview:courseNameInput];
+    
+    courseDescriptorInput = [[UITextField alloc]initWithFrame:CGRectMake(60, 50, self.view.frame.size.width-60,50)];
+    courseDescriptorInput.placeholder = @"Course Description";
+    [courseDescriptorInput setFont:[UIFont fontWithName:@"Avenir" size:15]];
+    [addCourseView addSubview:courseDescriptorInput];
+}
+
+- (void)addCourse
+{
+    //This is where we will add Courses to the tableView
 
     [UIView animateWithDuration:0.2
                           delay:0.0
@@ -127,15 +149,8 @@
                          self.courseView.frame = CGRectMake(0, 100, 320, self.view.frame.size.height);
                      }
                      completion:^(BOOL finished){
-                        courseNameInput = [[UITextField alloc]initWithFrame:CGRectMake(60, 10, addCourseView.frame.size.width-60, addCourseView.frame.size.height/2)];
-                         courseNameInput.placeholder = @"Course Name";
-                         [courseNameInput setFont:[UIFont fontWithName:@"Avenir" size:30]];
-                         [addCourseView addSubview:courseNameInput];
-                         
-                        courseDescriptorInput = [[UITextField alloc]initWithFrame:CGRectMake(60, addCourseView.frame.size.height/2, addCourseView.frame.size.width-60, addCourseView.frame.size.height/2)];
-                         courseDescriptorInput.placeholder = @"Course Description";
-                         [courseDescriptorInput setFont:[UIFont fontWithName:@"Avenir" size:15]];
-                         [addCourseView addSubview:courseDescriptorInput];
+                         [courseNameInput becomeFirstResponder];
+
                          
                          UIImage *tickImg = [UIImage imageNamed:@"icon_checkmark.png"];
                              self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:tickImg style:UIBarButtonItemStylePlain target:self action:@selector(saveCourse)];
@@ -144,6 +159,11 @@
 }
 
 -(void)saveCourse{
+    LECDummyCourse *dummyAdd = [LECDummyCourse dummyCourse:courseNameInput.text withColour:@"Red"];
+    //[[self dataArray] insertObject:[LECCourseCellViewModel courseCellWithDummy:dummyAdd andColourService:[self.viewModel colourService]] atIndex:0];
+    [modelDummies insertObject:dummyAdd atIndex:0];
+    [self reloadTables];
+    [self.courseView reloadData];
 
     [UIView animateWithDuration:0.2
                           delay:0.0
@@ -156,8 +176,6 @@
                          [addCourseView removeFromSuperview];
                          UIImage *plusImg = [UIImage imageNamed:@"nav_add_btn.png"];
                          self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:plusImg style:UIBarButtonItemStylePlain target:self action:@selector(addCourse)];
-                         
-                         
                          
                      }];
 }

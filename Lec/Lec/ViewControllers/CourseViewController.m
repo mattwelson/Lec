@@ -44,15 +44,8 @@
 
 - (void) navagationTopBar
 {
-    UINavigationBar *navBar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, 320, 64)];
-    UINavigationItem *navItems = [[UINavigationItem alloc] init];
     
-    UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:self action:@selector(backButPressed)];
-    
-    navItems.title = selectedCourse.courseName;
-    navItems.leftBarButtonItem = backItem;
-    navBar.items = [NSArray arrayWithObject:navItems];
-    [self.view addSubview:navBar];
+    self.navigationItem.title = selectedCourse.courseName;
 }
 
 - (void) backButPressed
