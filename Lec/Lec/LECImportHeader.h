@@ -16,9 +16,11 @@
 
 #pragma mark - View Model
 #import "LECColourService.h"
-#import "LECBaseCellViewModel.h"
+#import "LECTableView.h"
 #import "LECBaseViewModel.h"
+#import "LECBaseCellViewModel.h"
 #import "LECCourseCellViewModel.h"
+
 #import "LECHomeViewModel.h"
 #import "CourseCell.h"
 #import "MainViewController.h"

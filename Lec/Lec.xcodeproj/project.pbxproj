@@ -18,6 +18,13 @@
 		0B6BD59B18891B1E00A7D8F9 /* nav_add_btn.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B6BD59918891B1E00A7D8F9 /* nav_add_btn.png */; };
 		0B6BD59C18891B1E00A7D8F9 /* nav_add_btn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B6BD59A18891B1E00A7D8F9 /* nav_add_btn@2x.png */; };
 		0B6BD5A018891FB300A7D8F9 /* CourseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B6BD59F18891FB300A7D8F9 /* CourseCell.m */; };
+		8BE7581D188B48DD007B6C02 /* LECTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BE7581C188B48DD007B6C02 /* LECTableView.m */; };
+		8BE75820188B4EA5007B6C02 /* LECCourseViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BE7581F188B4EA5007B6C02 /* LECCourseViewModel.m */; };
+		8BE75823188B4F23007B6C02 /* LECLectureViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BE75822188B4F23007B6C02 /* LECLectureViewModel.m */; };
+		8BE75828188B508D007B6C02 /* icon_cancel.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BE75824188B508D007B6C02 /* icon_cancel.png */; };
+		8BE75829188B508D007B6C02 /* icon_cancel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BE75825188B508D007B6C02 /* icon_cancel@2x.png */; };
+		8BE7582A188B508D007B6C02 /* icon_checkmark.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BE75826188B508D007B6C02 /* icon_checkmark.png */; };
+		8BE7582B188B508D007B6C02 /* icon_checkmark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BE75827188B508D007B6C02 /* icon_checkmark@2x.png */; };
 		C9605CA21889F3B500F3DE57 /* Course.m in Sources */ = {isa = PBXBuildFile; fileRef = C9605CA11889F3B500F3DE57 /* Course.m */; };
 		C9605CA51889F3B600F3DE57 /* Lecture.m in Sources */ = {isa = PBXBuildFile; fileRef = C9605CA41889F3B600F3DE57 /* Lecture.m */; };
 		C9605CA81889F3B600F3DE57 /* Tag.m in Sources */ = {isa = PBXBuildFile; fileRef = C9605CA71889F3B600F3DE57 /* Tag.m */; };
@@ -73,6 +80,17 @@
 		0B6BD59A18891B1E00A7D8F9 /* nav_add_btn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nav_add_btn@2x.png"; sourceTree = "<group>"; };
 		0B6BD59E18891FB300A7D8F9 /* CourseCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CourseCell.h; path = Cells/CourseCell.h; sourceTree = "<group>"; };
 		0B6BD59F18891FB300A7D8F9 /* CourseCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CourseCell.m; path = Cells/CourseCell.m; sourceTree = "<group>"; };
+		8B523BB4188B2FAE002796A6 /* LECTableViewDataSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = LECTableViewDataSource.h; path = ViewModels/LECTableViewDataSource.h; sourceTree = "<group>"; };
+		8BE7581B188B48DD007B6C02 /* LECTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LECTableView.h; path = Views/LECTableView.h; sourceTree = "<group>"; };
+		8BE7581C188B48DD007B6C02 /* LECTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LECTableView.m; path = Views/LECTableView.m; sourceTree = "<group>"; };
+		8BE7581E188B4EA5007B6C02 /* LECCourseViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LECCourseViewModel.h; path = ViewModels/LECCourseViewModel.h; sourceTree = "<group>"; };
+		8BE7581F188B4EA5007B6C02 /* LECCourseViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LECCourseViewModel.m; path = ViewModels/LECCourseViewModel.m; sourceTree = "<group>"; };
+		8BE75821188B4F23007B6C02 /* LECLectureViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LECLectureViewModel.h; path = ViewModels/LECLectureViewModel.h; sourceTree = "<group>"; };
+		8BE75822188B4F23007B6C02 /* LECLectureViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LECLectureViewModel.m; path = ViewModels/LECLectureViewModel.m; sourceTree = "<group>"; };
+		8BE75824188B508D007B6C02 /* icon_cancel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_cancel.png; sourceTree = "<group>"; };
+		8BE75825188B508D007B6C02 /* icon_cancel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_cancel@2x.png"; sourceTree = "<group>"; };
+		8BE75826188B508D007B6C02 /* icon_checkmark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_checkmark.png; sourceTree = "<group>"; };
+		8BE75827188B508D007B6C02 /* icon_checkmark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_checkmark@2x.png"; sourceTree = "<group>"; };
 		C9605CA01889F3B500F3DE57 /* Course.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Course.h; path = DataModels/Course.h; sourceTree = "<group>"; };
 		C9605CA11889F3B500F3DE57 /* Course.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Course.m; path = DataModels/Course.m; sourceTree = "<group>"; };
 		C9605CA31889F3B600F3DE57 /* Lecture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Lecture.h; path = DataModels/Lecture.h; sourceTree = "<group>"; };
@@ -172,6 +190,10 @@
 		0B6BD59818891B1E00A7D8F9 /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
+				8BE75824188B508D007B6C02 /* icon_cancel.png */,
+				8BE75825188B508D007B6C02 /* icon_cancel@2x.png */,
+				8BE75826188B508D007B6C02 /* icon_checkmark.png */,
+				8BE75827188B508D007B6C02 /* icon_checkmark@2x.png */,
 				0B6BD59918891B1E00A7D8F9 /* nav_add_btn.png */,
 				0B6BD59A18891B1E00A7D8F9 /* nav_add_btn@2x.png */,
 			);
@@ -186,6 +208,16 @@
 				0B6BD59F18891FB300A7D8F9 /* CourseCell.m */,
 			);
 			name = Cells;
+			sourceTree = "<group>";
+		};
+		8BE7581A188B48B1007B6C02 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				8BE7581B188B48DD007B6C02 /* LECTableView.h */,
+				8BE7581C188B48DD007B6C02 /* LECTableView.m */,
+				8B523BB4188B2FAE002796A6 /* LECTableViewDataSource.h */,
+			);
+			name = Views;
 			sourceTree = "<group>";
 		};
 		C9605CAF1889F66300F3DE57 /* Cell View Models */ = {
@@ -241,6 +273,10 @@
 				C9605CAA1889F4B800F3DE57 /* LECBaseViewModel.m */,
 				C9605CAC1889F5AD00F3DE57 /* LECHomeViewModel.h */,
 				C9605CAD1889F5AD00F3DE57 /* LECHomeViewModel.m */,
+				8BE7581E188B4EA5007B6C02 /* LECCourseViewModel.h */,
+				8BE7581F188B4EA5007B6C02 /* LECCourseViewModel.m */,
+				8BE75821188B4F23007B6C02 /* LECLectureViewModel.h */,
+				8BE75822188B4F23007B6C02 /* LECLectureViewModel.m */,
 			);
 			name = "View Model";
 			sourceTree = "<group>";
@@ -295,6 +331,7 @@
 		C9B0C5E2187FBE7F002D4A63 /* Lec */ = {
 			isa = PBXGroup;
 			children = (
+				8BE7581A188B48B1007B6C02 /* Views */,
 				C9A004801889EBF100D27A6C /* Database */,
 				C9A0047F1889EBDC00D27A6C /* View Model */,
 				C9A0047E1889EBD200D27A6C /* Model */,
@@ -418,12 +455,16 @@
 			files = (
 				C9B0C5E7187FBE7F002D4A63 /* InfoPlist.strings in Resources */,
 				C9605CC0188A11D300F3DE57 /* Colours.plist in Resources */,
+				8BE75829188B508D007B6C02 /* icon_cancel@2x.png in Resources */,
+				8BE75828188B508D007B6C02 /* icon_cancel.png in Resources */,
 				0B6BD59B18891B1E00A7D8F9 /* nav_add_btn.png in Resources */,
 				0B6BD5911889157000A7D8F9 /* RecordViewController.xib in Resources */,
 				0B6BD58C1889155A00A7D8F9 /* CourseViewController.xib in Resources */,
 				0B6BD5961889158500A7D8F9 /* PlaybackViewController.xib in Resources */,
 				0B6BD587188914B300A7D8F9 /* MainViewController.xib in Resources */,
+				8BE7582B188B508D007B6C02 /* icon_checkmark@2x.png in Resources */,
 				C9B0C5F2187FBE7F002D4A63 /* Images.xcassets in Resources */,
+				8BE7582A188B508D007B6C02 /* icon_checkmark.png in Resources */,
 				0B6BD59C18891B1E00A7D8F9 /* nav_add_btn@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -447,13 +488,16 @@
 				0B6BD5A018891FB300A7D8F9 /* CourseCell.m in Sources */,
 				C9B0C5E9187FBE7F002D4A63 /* main.m in Sources */,
 				C9B0C5F0187FBE7F002D4A63 /* Lec.xcdatamodeld in Sources */,
+				8BE7581D188B48DD007B6C02 /* LECTableView.m in Sources */,
 				C9605CAB1889F4B800F3DE57 /* LECBaseViewModel.m in Sources */,
 				0B6BD5951889158500A7D8F9 /* PlaybackViewController.m in Sources */,
 				C9605CC4188A179400F3DE57 /* LECColourService.m in Sources */,
+				8BE75820188B4EA5007B6C02 /* LECCourseViewModel.m in Sources */,
 				C9605CA51889F3B600F3DE57 /* Lecture.m in Sources */,
 				C9605CAE1889F5AD00F3DE57 /* LECHomeViewModel.m in Sources */,
 				C9605CB21889F6CC00F3DE57 /* LECBaseCellViewModel.m in Sources */,
 				C9605CBA1889F99800F3DE57 /* LECCourseCellViewModel.m in Sources */,
+				8BE75823188B4F23007B6C02 /* LECLectureViewModel.m in Sources */,
 				C9605CA21889F3B500F3DE57 /* Course.m in Sources */,
 				C9B0C5ED187FBE7F002D4A63 /* LECAppDelegate.m in Sources */,
 				C9605CBE188A001B00F3DE57 /* LECDummyCourse.m in Sources */,
