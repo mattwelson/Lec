@@ -12,6 +12,7 @@
 @interface MainViewController (){
     UIBarButtonItem *plusItem;
     UINavigationBar *navBar;
+    NSMutableArray *modelDummies;
 }
 
 @end
