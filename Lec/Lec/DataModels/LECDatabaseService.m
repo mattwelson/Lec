@@ -7,6 +7,7 @@
 //
 
 #import "LECDatabaseService.h"
+#import "Course.h"
 
 @implementation LECDatabaseService
 
@@ -30,6 +31,17 @@
         [NSException raise:@"Database exception!" format:@"Oh no"];
     }
     return [NSMutableArray arrayWithArray:courses];
+}
+
+// should work!
+-(BOOL) addNewCourse:(LECCourseCellViewModel *)newCourse
+{
+    Course *dbCourse = [NSEntityDescription insertNewObjectForEntityForName:@"Course" inManagedObjectContext:self.managedObjectContext];
+    dbCourse.courseDescription = newCourse.subText;
+    dbCourse.courseName = newCourse.titleText;
+    NSError *error;
+    [self.managedObjectContext save:&error];
+    return error == NULL;
 }
 
 @end

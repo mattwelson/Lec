@@ -7,6 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "LECCourseCellViewModel.h"
+
 
 @interface LECDatabaseService : NSObject
 
