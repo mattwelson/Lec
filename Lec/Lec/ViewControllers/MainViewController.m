@@ -11,8 +11,10 @@
 
 @interface MainViewController (){
     UIBarButtonItem *plusItem;
-    UINavigationBar *navBar;
     NSMutableArray *modelDummies;
+    UIView *addCourseView;
+    UITextField *courseNameInput;
+    UITextField *courseDescriptorInput;
 }
 
 @end
@@ -52,16 +54,12 @@
 
 - (void) navagationTopBar
 {
-    navBar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, 320, 64)];
-    UINavigationItem *navItems = [[UINavigationItem alloc] init];
-    
     UIImage *plusImg = [UIImage imageNamed:@"nav_add_btn.png"];
-    plusItem = [[UIBarButtonItem alloc] initWithImage:plusImg style:UIBarButtonItemStylePlain target:self action:@selector(addCourse)];
+//    plusItem = [[UIBarButtonItem alloc] initWithImage:plusImg style:UIBarButtonItemStylePlain target:self action:@selector(addCourse)];
     
-    navItems.title = @"Lec";
-    navItems.rightBarButtonItem = plusItem;
-    navBar.items = [NSArray arrayWithObject:navItems];
-    [self.view addSubview:navBar];
+    self.navigationItem.title = @"Lec";
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:plusImg style:UIBarButtonItemStylePlain target:self action:@selector(addCourse)];
 }
 
 - (void) courseClicked
@@ -70,9 +68,9 @@
 
 - (void) courseTableView
 {
-    self.courseView = [[UITableView alloc] initWithFrame:CGRectMake(0, 65, 320, self.view.frame.size.height-64)];
+    self.courseView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, self.view.frame.size.height)];
     [self.courseView setScrollEnabled:YES];
-    [self.courseView setNeedsDisplayInRect:CGRectMake(0, 0, 320, 2000)];
+    [self.courseView setNeedsDisplayInRect:CGRectMake(0, 0, 320, self.view.frame.size.height)];
     [self.view addSubview:self.courseView];
     self.courseView.delegate = self;
     self.courseView.dataSource = self;
@@ -117,7 +115,7 @@
 - (void)addCourse
 {
     //This is where we will add Courses to the tableView
-    UIView *addCourseView = [[UIView alloc]initWithFrame:CGRectMake(0, 60, self.view.frame.size.width, 0)];
+    addCourseView = [[UIView alloc]initWithFrame:CGRectMake(0, 60, self.view.frame.size.width, 0)];
     addCourseView.backgroundColor = [UIColor whiteColor];
     
 
@@ -126,28 +124,42 @@
                         options: UIViewAnimationOptionCurveEaseIn
                      animations:^{
                          addCourseView.frame = CGRectMake(0, 60, self.view.frame.size.width, 100);
-                         self.courseView.frame = CGRectMake(0, 165, 320, self.view.frame.size.height-64);
+                         self.courseView.frame = CGRectMake(0, 100, 320, self.view.frame.size.height);
                      }
                      completion:^(BOOL finished){
-                         UITextField *courseNameInput = [[UITextField alloc]initWithFrame:CGRectMake(60, 10, addCourseView.frame.size.width-60, addCourseView.frame.size.height/2)];
+                        courseNameInput = [[UITextField alloc]initWithFrame:CGRectMake(60, 10, addCourseView.frame.size.width-60, addCourseView.frame.size.height/2)];
                          courseNameInput.placeholder = @"Course Name";
                          [courseNameInput setFont:[UIFont fontWithName:@"Avenir" size:30]];
                          [addCourseView addSubview:courseNameInput];
                          
-                         UITextField *courseDescriptorInput = [[UITextField alloc]initWithFrame:CGRectMake(60, addCourseView.frame.size.height/2, addCourseView.frame.size.width-60, addCourseView.frame.size.height/2)];
+                        courseDescriptorInput = [[UITextField alloc]initWithFrame:CGRectMake(60, addCourseView.frame.size.height/2, addCourseView.frame.size.width-60, addCourseView.frame.size.height/2)];
                          courseDescriptorInput.placeholder = @"Course Description";
                          [courseDescriptorInput setFont:[UIFont fontWithName:@"Avenir" size:15]];
                          [addCourseView addSubview:courseDescriptorInput];
                          
                          UIImage *tickImg = [UIImage imageNamed:@"icon_checkmark.png"];
-                         plusItem = [[UIBarButtonItem alloc] initWithImage:tickImg style:UIBarButtonItemStylePlain target:self action:@selector(saveCourse)];
+                             self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:tickImg style:UIBarButtonItemStylePlain target:self action:@selector(saveCourse)];
                      }];
     [self.view addSubview:addCourseView];
 }
 
 -(void)saveCourse{
-    UIImage *plusImg = [UIImage imageNamed:@"nav_add_btn.png"];
-    plusItem = [[UIBarButtonItem alloc] initWithImage:plusImg style:UIBarButtonItemStylePlain target:self action:@selector(addCourse)];
+
+    [UIView animateWithDuration:0.2
+                          delay:0.0
+                        options: UIViewAnimationOptionCurveEaseIn
+                     animations:^{
+                         addCourseView.frame = CGRectMake(0, 0, addCourseView.frame.size.width, 0);
+                         self.courseView.frame = CGRectMake(0, 0, 320, self.view.frame.size.height);
+                     }
+                     completion:^(BOOL finished){
+                         [addCourseView removeFromSuperview];
+                         UIImage *plusImg = [UIImage imageNamed:@"nav_add_btn.png"];
+                         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:plusImg style:UIBarButtonItemStylePlain target:self action:@selector(addCourse)];
+                         
+                         
+                         
+                     }];
 }
 
 #pragma mark - DUMMY TESTS
