@@ -23,6 +23,18 @@
     return self;
 }
 
+- (id)initWithCourse:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil selectedCourse:(LECDummyCourse *)course
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        selectedCourse = course;
+        NSString *name = selectedCourse.courseName;
+        NSLog(@"Course: [%@] has been pressed!", name);
+        // Custom initialization
+    }
+    return self;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -32,15 +44,8 @@
 
 - (void) navagationTopBar
 {
-    UINavigationBar *navBar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, 320, 64)];
-    UINavigationItem *navItems = [[UINavigationItem alloc] init];
     
-    UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:self action:@selector(backButPressed)];
-    
-    navItems.title = @"CoursePage";
-    navItems.leftBarButtonItem = backItem;
-    navBar.items = [NSArray arrayWithObject:navItems];
-    [self.view addSubview:navBar];
+    self.navigationItem.title = selectedCourse.courseName;
 }
 
 - (void) backButPressed
