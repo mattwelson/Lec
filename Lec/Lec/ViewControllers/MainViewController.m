@@ -133,18 +133,18 @@
     
     courseDescriptorInput = [[UITextField alloc]initWithFrame:CGRectMake(60, 50, self.view.frame.size.width-60,50)];
     courseDescriptorInput.placeholder = @"Course Description";
-    [courseDescriptorInput setFont:[UIFont fontWithName:@"Avenir" size:15]];
+    [courseDescriptorInput setFont:[UIFont fontWithName:DEFAUILTFONT size:15]];
     [addCourseView addSubview:courseDescriptorInput];
 }
 
 - (void)addCourse
 {
     //This is where we will add Courses to the tableView
-
     [UIView animateWithDuration:0.2
                           delay:0.0
                         options: UIViewAnimationOptionCurveEaseIn
                      animations:^{
+                         [self addCourseIntoView];
                          addCourseView.frame = CGRectMake(0, 60, self.view.frame.size.width, 100);
                          self.courseView.frame = CGRectMake(0, 100, 320, self.view.frame.size.height);
                      }

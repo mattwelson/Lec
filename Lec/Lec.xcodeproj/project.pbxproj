@@ -80,6 +80,7 @@
 		0B6BD59A18891B1E00A7D8F9 /* nav_add_btn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nav_add_btn@2x.png"; sourceTree = "<group>"; };
 		0B6BD59E18891FB300A7D8F9 /* CourseCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CourseCell.h; path = Cells/CourseCell.h; sourceTree = "<group>"; };
 		0B6BD59F18891FB300A7D8F9 /* CourseCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CourseCell.m; path = Cells/CourseCell.m; sourceTree = "<group>"; };
+		73275013188BC5D400F5CB04 /* LECDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LECDefines.h; sourceTree = "<group>"; };
 		8B523BB4188B2FAE002796A6 /* LECTableViewDataSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = LECTableViewDataSource.h; path = ViewModels/LECTableViewDataSource.h; sourceTree = "<group>"; };
 		8BE7581B188B48DD007B6C02 /* LECTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LECTableView.h; path = Views/LECTableView.h; sourceTree = "<group>"; };
 		8BE7581C188B48DD007B6C02 /* LECTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LECTableView.m; path = Views/LECTableView.m; sourceTree = "<group>"; };
@@ -346,6 +347,7 @@
 				C9B0C5E8187FBE7F002D4A63 /* main.m */,
 				C9B0C5EA187FBE7F002D4A63 /* Lec-Prefix.pch */,
 				C9605CB51889F88B00F3DE57 /* LECImportHeader.h */,
+				73275013188BC5D400F5CB04 /* LECDefines.h */,
 				C9605CBF188A11D300F3DE57 /* Colours.plist */,
 			);
 			name = "Supporting Files";
