@@ -9,7 +9,9 @@
 #import "MainViewController.h"
 #import "LECImportHeader.h"
 
-@interface MainViewController ()
+@interface MainViewController (){
+    NSMutableArray *modelDummies;
+}
 
 @end
 
@@ -21,7 +23,7 @@
     if (self) {
         // Custom initialization
         [self setViewModel:[[LECHomeViewModel alloc] init]];
-        NSMutableArray *modelDummies = [self courseDummies];
+         modelDummies = [self courseDummies];
         [self setDataArray:[NSMutableArray array]];
         for (LECDummyCourse *c in modelDummies)
         {
@@ -60,6 +62,10 @@
     [self.view addSubview:navBar];
 }
 
+- (void) courseClicked
+{
+}
+
 - (void) courseTableView
 {
     self.courseView = [[UITableView alloc] initWithFrame:CGRectMake(0, 65, 320, self.view.frame.size.height-64)];
@@ -73,10 +79,11 @@
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    LECDummyCourse *dummies = [modelDummies objectAtIndex:indexPath.row];
+    [self.navigationController pushViewController:[[CourseViewController alloc] initWithCourse:@"CourseViewController" bundle:nil selectedCourse:dummies]animated:YES];
 }
 
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     CourseCell *cell = [[CourseCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"Cell"];
     
