@@ -1,16 +1,16 @@
 //
-//  LECTableViewModel.m
+//  LECTableView.m
 //  Lec
 //
 //  Created by Codie Westphall on 19/01/14.
 //  Copyright (c) 2014 South45. All rights reserved.
 //
 
-#import "LECTableViewModel.h"
+#import "LECTableView.h"
 
 const float LEC_ROW_HEIGHT = 100.0f;
 
-@implementation LECTableViewModel{
+@implementation LECTableView{
     UIScrollView *_scrollView;
 }
 
@@ -49,5 +49,4 @@ const float LEC_ROW_HEIGHT = 100.0f;
     _dataSource = dataSource;
     [self refreshView];
 }
-
 @end

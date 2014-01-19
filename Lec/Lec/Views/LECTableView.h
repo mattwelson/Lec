@@ -1,5 +1,5 @@
 //
-//  LECTableViewModel.h
+//  LECTableView.h
 //  Lec
 //
 //  Created by Codie Westphall on 19/01/14.
@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "LECTableViewDataSource.h"
 
-@interface LECTableViewModel : UIView
+@interface LECTableView : UIView
 
 @property (nonatomic, assign) id<LECTableViewDataSource> dataSource;
 
