@@ -11,6 +11,7 @@
 
 @interface MainViewController (){
     UIBarButtonItem *plusItem;
+    UINavigationBar *navBar;
 }
 
 @end
@@ -50,7 +51,7 @@
 
 - (void) navagationTopBar
 {
-    UINavigationBar *navBar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, 320, 64)];
+    navBar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, 320, 64)];
     UINavigationItem *navItems = [[UINavigationItem alloc] init];
     
     UIImage *plusImg = [UIImage imageNamed:@"nav_add_btn.png"];
@@ -132,7 +133,7 @@
                          [courseDescriptorInput setFont:[UIFont fontWithName:@"Avenir" size:15]];
                          [addCourseView addSubview:courseDescriptorInput];
                          
-                         UIImage *tickImg = [UIImage imageNamed:@"nav_add_btn.png"];
+                         UIImage *tickImg = [UIImage imageNamed:@"icon_checkmark.png"];
                          plusItem = [[UIBarButtonItem alloc] initWithImage:tickImg style:UIBarButtonItemStylePlain target:self action:@selector(saveCourse)];
                      }];
     [self.view addSubview:addCourseView];
