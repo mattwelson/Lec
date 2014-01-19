@@ -121,13 +121,13 @@
 -(NSMutableArray *)courseDummies
 {
     NSMutableArray *dataModels = [NSMutableArray arrayWithObjects:
-                                  [LECDummyCourse dummyCourse:@"Hello"],
-                                  [LECDummyCourse dummyCourse:@"Julin"],
-                                  [LECDummyCourse dummyCourse:@"Cosc345"],
-                                  [LECDummyCourse dummyCourse:@"Fond Memories"],
-                                  [LECDummyCourse dummyCourse:@"Testy"],
-                                  [LECDummyCourse dummyCourse:@"Test"],
-                                  [LECDummyCourse dummyCourse:@"Willowbank me!"],
+                                  [LECDummyCourse dummyCourse:@"COSC326" withColour:@"Red"],
+                                  [LECDummyCourse dummyCourse:@"Julin" withColour:@"Green"],
+                                  [LECDummyCourse dummyCourse:@"Cosc345" withColour:@"Orange"],
+                                  [LECDummyCourse dummyCourse:@"Fond Memories" withColour:@"Cyan"],
+                                  [LECDummyCourse dummyCourse:@"Testy" withColour:@"Yellow"],
+                                  [LECDummyCourse dummyCourse:@"Test" withColour:@"Purple"],
+                                  [LECDummyCourse dummyCourse:@"Willowbank me!" withColour:@"Blue"],
                                   nil];
     return dataModels;
 }

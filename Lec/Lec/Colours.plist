@@ -23,6 +23,48 @@
 			<integer>104</integer>
 		</dict>
 	</dict>
+	<key>Orange</key>
+	<dict>
+		<key>HighlightColour</key>
+		<dict>
+			<key>RValue</key>
+			<integer>255</integer>
+			<key>GValue</key>
+			<integer>149</integer>
+			<key>BValue</key>
+			<integer>0</integer>
+		</dict>
+		<key>BaseColour</key>
+		<dict>
+			<key>RValue</key>
+			<integer>255</integer>
+			<key>GValue</key>
+			<integer>94</integer>
+			<key>BValue</key>
+			<integer>58</integer>
+		</dict>
+	</dict>
+	<key>Yellow</key>
+	<dict>
+		<key>HighlightColour</key>
+		<dict>
+			<key>RValue</key>
+			<integer>254</integer>
+			<key>GValue</key>
+			<integer>217</integer>
+			<key>BValue</key>
+			<integer>88</integer>
+		</dict>
+		<key>BaseColour</key>
+		<dict>
+			<key>RValue</key>
+			<integer>254</integer>
+			<key>GValue</key>
+			<integer>204</integer>
+			<key>BValue</key>
+			<integer>47</integer>
+		</dict>
+	</dict>
 	<key>Blue</key>
 	<dict>
 		<key>HighlightColour</key>
@@ -126,6 +168,27 @@
 			<integer>89</integer>
 			<key>BValue</key>
 			<integer>211</integer>
+		</dict>
+	</dict>
+	<key>Cyan</key>
+	<dict>
+		<key>HighlightColour</key>
+		<dict>
+			<key>RValue</key>
+			<integer>90</integer>
+			<key>GValue</key>
+			<integer>235</integer>
+			<key>BValue</key>
+			<integer>199</integer>
+		</dict>
+		<key>BaseColour</key>
+		<dict>
+			<key>RValue</key>
+			<integer>95</integer>
+			<key>GValue</key>
+			<integer>201</integer>
+			<key>BValue</key>
+			<integer>248</integer>
 		</dict>
 	</dict>
 </dict>

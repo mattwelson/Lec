@@ -22,4 +22,15 @@
     return dummy;
 }
 
++(LECDummyCourse *)dummyCourse:(NSString *)title withColour:(NSString *)colour
+{
+    LECDummyCourse *dummy = [[LECDummyCourse alloc] init];
+    
+    [dummy setCourseDescription:@"Hello this is a dumb description"];
+    [dummy setCourseName:title];
+    [dummy setColour:colour];
+    
+    return dummy;
+}
+
 @end
