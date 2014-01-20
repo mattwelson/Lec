@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "LECCourseCellViewModel.h"
+#import "Course.h"
 
 
 @interface LECDatabaseService : NSObject
@@ -17,5 +17,8 @@
 +(LECDatabaseService *) databaseServiceForManagedObjectContext:(NSManagedObjectContext *)obcon;
 
 -(NSMutableArray *) getCourses;
+
+-(Course *) newCourseForAdding;
+-(BOOL) saveChanges;
 
 @end

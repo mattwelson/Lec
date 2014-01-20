@@ -20,12 +20,9 @@
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="lecture" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Lecture" inverseName="tags" inverseEntity="Lecture" syncable="YES"/>
     </entity>
-    <fetchRequest name="fr_get_courses" entity="Lecture"/>
-    <fetchRequest name="fr_get_lectures" entity="Course"/>
-    <fetchRequest name="fr_get_tags" entity="Tag"/>
     <elements>
-        <element name="Course" positionX="160" positionY="189" width="128" height="118"/>
-        <element name="Lecture" positionX="421" positionY="189" width="128" height="133"/>
-        <element name="Tag" positionX="664" positionY="234" width="128" height="88"/>
+        <element name="Course" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Lecture" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Tag" positionX="0" positionY="0" width="0" height="0"/>
     </elements>
 </model>

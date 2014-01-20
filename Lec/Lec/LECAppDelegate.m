@@ -22,7 +22,65 @@
     [self.window setRootViewController:navigationController];
     [self.window setBackgroundColor:[UIColor whiteColor]];
     [self.window makeKeyAndVisible];
+    
+#warning remove test logic
+    [self simpleDataTest];
     return YES;
+}
+
+-(void)simpleDataTest
+{
+    //[self directInteraction];
+    [self dbService];
+}
+
+-(void)directInteraction
+{
+    NSManagedObjectContext *context = [self managedObjectContext];
+    Course *course = [NSEntityDescription insertNewObjectForEntityForName:@"Course" inManagedObjectContext:context];
+    course.courseName = @"Hi Mom!";
+    course.courseDescription = @"Different description!";
+    course.colour = @"Purply-pink!";
+    course.icon = @"Jolly roger";
+    NSError *error;
+    if (![context save:&error])
+    {
+        NSLog(@"GODDAMMIT! %@", [error localizedDescription]);
+    }
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Course" inManagedObjectContext:context];
+    [fetchRequest setEntity:entity];
+    NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
+    if (error) NSLog(@"Fetching failed");
+    for (Course *c in fetchedObjects){
+        NSLog(@"%@: %@", c.courseName, c.courseDescription);
+    }
+}
+
+-(void)dbService
+{
+    /* Done in init of view model or else stored in app delegate globally */
+    NSManagedObjectContext *context = [self managedObjectContext];
+    LECDatabaseService *dbService = [LECDatabaseService databaseServiceForManagedObjectContext:context];
+    
+    /* Retrieves an empty course ready to be editted */
+    Course *course = [dbService newCourseForAdding];
+    
+    /* Looks chunky but will be done through direct user editting (and perhaps defaults ) */
+    course.courseName = @"FROM SERVICE!";
+    course.courseDescription = @"Different description!";
+    course.colour = @"Purply-pink!";
+    course.icon = @"Jolly roger";
+    
+    /* Saves changes with error handling */
+    [dbService saveChanges];
+    
+    /* Just prints out the retrieved objects from db */
+    NSArray *fetchedObjects = [dbService getCourses];
+    for (Course *c in fetchedObjects){
+        NSLog(@"%@: %@", c.courseName, c.courseDescription);
+    }
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

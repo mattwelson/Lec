@@ -13,7 +13,7 @@
 
 +(LECDatabaseService *) databaseServiceForManagedObjectContext:(NSManagedObjectContext *)obcon
 {
-    LECDatabaseService *service;
+    LECDatabaseService *service = [[LECDatabaseService alloc] init];
     if (service)
     {
         service.managedObjectContext = obcon;
@@ -23,7 +23,10 @@
 
 -(NSMutableArray *) getCourses
 {
-    NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"fr_get_courses"];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"Course" inManagedObjectContext:[self managedObjectContext]];
+    [fetchRequest setEntity:entityDescription];
+    
     NSError *error;
     NSArray *courses = [[self managedObjectContext] executeFetchRequest:fetchRequest error:&error];
     if (error)
@@ -34,14 +37,18 @@
 }
 
 // should work!
--(BOOL) addNewCourse:(LECCourseCellViewModel *)newCourse
+-(Course *) newCourseForAdding
 {
     Course *dbCourse = [NSEntityDescription insertNewObjectForEntityForName:@"Course" inManagedObjectContext:self.managedObjectContext];
-    dbCourse.courseDescription = newCourse.subText;
-    dbCourse.courseName = newCourse.titleText;
+    return dbCourse;
+}
+
+-(BOOL) saveChanges
+{
     NSError *error;
-    [self.managedObjectContext save:&error];
-    return error == NULL;
+    if ([self.managedObjectContext save:&error]) return YES;
+    [NSException raise:@"DB I/O" format:@"Save failed: %@", [error localizedDescription]];
+    return NO;
 }
 
 @end
