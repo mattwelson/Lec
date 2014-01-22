@@ -12,7 +12,7 @@
 
 @property NSDictionary *colourDictionary;
 
-+(LECColourService *)colourService;
++ (LECColourService *)sharedColourService;
 
 -(UIColor *) baseColourFor:(NSString *)colourName;
 -(UIColor *) highlightColourFor:(NSString *)colourName;

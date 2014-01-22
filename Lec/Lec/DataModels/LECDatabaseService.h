@@ -14,11 +14,11 @@
 
 @property NSManagedObjectContext *managedObjectContext;
 
-+(LECDatabaseService *) databaseServiceForManagedObjectContext:(NSManagedObjectContext *)obcon;
++ (LECDatabaseService *) sharedDBService;
 
--(NSMutableArray *) getCourses;
+- (NSMutableArray *) getCourses;
 
--(Course *) newCourseForAdding;
--(BOOL) saveChanges;
+- (Course *) newCourseForAdding;
+- (BOOL) saveChanges;
 
 @end

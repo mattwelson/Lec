@@ -10,6 +10,5 @@
 
 @interface LECHomeViewModel : LECBaseViewModel
 
-@property NSMutableArray *courses;
 
 @end

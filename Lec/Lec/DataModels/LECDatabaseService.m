@@ -11,17 +11,21 @@
 
 @implementation LECDatabaseService
 
-+(LECDatabaseService *) databaseServiceForManagedObjectContext:(NSManagedObjectContext *)obcon
+static LECDatabaseService *sharedInstance = nil;
+
++ (id) sharedDBService
 {
-    LECDatabaseService *service = [[LECDatabaseService alloc] init];
-    if (service)
+    if (sharedInstance) return sharedInstance;
+    
+    sharedInstance = [[LECDatabaseService alloc] init];
+    if (sharedInstance)
     {
-        service.managedObjectContext = obcon;
+        [sharedInstance setManagedObjectContext:[(id)[[UIApplication sharedApplication] delegate] managedObjectContext]];
     }
-    return service;
+    return sharedInstance;
 }
 
--(NSMutableArray *) getCourses
+- (NSMutableArray *) getCourses
 {
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"Course" inManagedObjectContext:[self managedObjectContext]];
@@ -37,13 +41,13 @@
 }
 
 // should work!
--(Course *) newCourseForAdding
+- (Course *) newCourseForAdding
 {
     Course *dbCourse = [NSEntityDescription insertNewObjectForEntityForName:@"Course" inManagedObjectContext:self.managedObjectContext];
     return dbCourse;
 }
 
--(BOOL) saveChanges
+- (BOOL) saveChanges
 {
     NSError *error;
     if ([self.managedObjectContext save:&error]) return YES;

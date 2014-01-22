@@ -10,21 +10,21 @@
 
 @implementation LECCourseCellViewModel
 
-+(LECCourseCellViewModel *) courseCellWith:(Course *)course andColourService:(LECColourService *)cservice
++(LECCourseCellViewModel *) courseCellWith:(Course *)course
 {
     LECCourseCellViewModel *courseCellModel = [[LECCourseCellViewModel alloc] init];
     
     [courseCellModel setCourse:course];
     [courseCellModel setTitleText:[course courseName]];
     [courseCellModel setSubText:[course courseDescription]];
-    [courseCellModel setTintColour:[cservice baseColourFor:[course colour]]];
+    [courseCellModel setTintColour:[[LECColourService sharedColourService] baseColourFor:[course colour]]];
     
-    [courseCellModel setColourService:cservice];
+    [courseCellModel setColourString:[course colour]];
     
     return courseCellModel;
 }
 
-+(LECCourseCellViewModel *) courseCellWithDummy:(LECDummyCourse *)course andColourService:(LECColourService *)cservice
++(LECCourseCellViewModel *) courseCellWithDummy:(LECDummyCourse *)course
 {
     LECCourseCellViewModel *courseCellModel = [[LECCourseCellViewModel alloc] init];
     
@@ -33,7 +33,6 @@
     [courseCellModel setSubText:[course courseDescription]];
     //[courseCellModel setTintColor:[cservice baseColourFor:[course colour]]];
     
-    [courseCellModel setColourService:cservice];
     [courseCellModel setColourString:[course colour]];
     
     return courseCellModel;

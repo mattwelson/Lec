@@ -7,7 +7,22 @@
 //
 
 #import "LECHomeViewModel.h"
+#import "LECCourseCellViewModel.h"
 
 @implementation LECHomeViewModel
+
+-(instancetype)init
+{
+    self = [super init];
+    if (self){
+        NSArray *modelData = [[LECDatabaseService sharedDBService] getCourses];
+        for (Course *course in modelData)
+        {
+            [self.tableData addObject:[LECCourseCellViewModel courseCellWith:course]];
+            NSLog(@"Colour: %@", course.colour);
+        }
+    }
+    return self;
+}
 
 @end

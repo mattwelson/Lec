@@ -27,23 +27,8 @@
     if (self) {
         // Custom initialization
         [self setViewModel:[[LECHomeViewModel alloc] init]];
-         modelDummies = [self courseDummies];
-        [self setDataArray:[NSMutableArray array]];
-        for (LECDummyCourse *c in modelDummies)
-        {
-            [[self dataArray] addObject:[LECCourseCellViewModel courseCellWithDummy:c andColourService:[self.viewModel colourService]]];
-        }
     }
     return self;
-}
-
-//Because modelDummies and dataArray are different (which the clicking and the loading cells are taken from)
--(void)reloadTables{
-    [self setDataArray:[NSMutableArray array]];
-    for (LECDummyCourse *c in modelDummies)
-    {
-        [[self dataArray] addObject:[LECCourseCellViewModel courseCellWithDummy:c andColourService:[self.viewModel colourService]]];
-    }
 }
 
 - (void)viewDidLoad
@@ -80,7 +65,7 @@
 {
     self.courseView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, self.view.frame.size.height)];
     [self.courseView setScrollEnabled:YES];
-    [self.courseView setNeedsDisplayInRect:CGRectMake(0, 0, 320, self.view.frame.size.height)];
+    [self.courseView setNeedsDisplay];
     [self.view addSubview:self.courseView];
     self.courseView.delegate = self;
     self.courseView.dataSource = self;
@@ -97,11 +82,11 @@
 {
     CourseCell *cell = [[CourseCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"Cell"];
     
-    LECCourseCellViewModel *cellViewModel = [[self dataArray] objectAtIndex:indexPath.row];
+    LECCourseCellViewModel *cellViewModel = [self.viewModel.tableData objectAtIndex:indexPath.row];
     
     cell.textLabel.text = [cellViewModel titleText];
     cell.detailTextLabel.text = [cellViewModel subText];
-    [[cellViewModel colourService] addGradientForColour:[cellViewModel colourString] toView:[cell contentView]];
+    [[LECColourService sharedColourService] addGradientForColour:[cellViewModel colourString] toView:[cell contentView]];
     
     return cell;
 }
@@ -113,7 +98,7 @@
 
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [_dataArray count];
+    return [self.viewModel.tableData count];
 }
 
 //Delete this function when the cells are added to the table view.
@@ -162,7 +147,6 @@
     LECDummyCourse *dummyAdd = [LECDummyCourse dummyCourse:courseNameInput.text withColour:@"Red"];
     //[[self dataArray] insertObject:[LECCourseCellViewModel courseCellWithDummy:dummyAdd andColourService:[self.viewModel colourService]] atIndex:0];
     [modelDummies insertObject:dummyAdd atIndex:0];
-    [self reloadTables];
     [self.courseView reloadData];
 
     [UIView animateWithDuration:0.2
@@ -179,20 +163,4 @@
                          
                      }];
 }
-
-#pragma mark - DUMMY TESTS
--(NSMutableArray *)courseDummies
-{
-    NSMutableArray *dataModels = [NSMutableArray arrayWithObjects:
-                                  [LECDummyCourse dummyCourse:@"COSC326" withColour:@"Red"],
-                                  [LECDummyCourse dummyCourse:@"Julin" withColour:@"Green"],
-                                  [LECDummyCourse dummyCourse:@"Cosc345" withColour:@"Orange"],
-                                  [LECDummyCourse dummyCourse:@"Fond Memories" withColour:@"Cyan"],
-                                  [LECDummyCourse dummyCourse:@"Testy" withColour:@"Yellow"],
-                                  [LECDummyCourse dummyCourse:@"Test" withColour:@"Purple"],
-                                  [LECDummyCourse dummyCourse:@"Willowbank me!" withColour:@"Blue"],
-                                  nil];
-    return dataModels;
-}
-
 @end

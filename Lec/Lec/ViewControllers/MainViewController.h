@@ -13,7 +13,6 @@
 
 
 @property UITableView *courseView;
-@property NSMutableArray *dataArray;
 @property LECHomeViewModel *viewModel;
 
 - (void) changeCoursePage;
