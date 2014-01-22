@@ -25,18 +25,7 @@
     
 #warning remove test logic
     //[self simpleDataTest];
-   // [self reFucktorDb];
     return YES;
-}
-
--(void)reFucktorDb
-{
-    NSArray *array = [[LECDatabaseService sharedDBService] getCourses];
-    for (Course *c in array)
-    {
-        c.colour = @"Red";
-    }
-    [[LECDatabaseService sharedDBService] saveChanges];
 }
 
 -(void)simpleDataTest
