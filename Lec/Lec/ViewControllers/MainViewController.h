@@ -12,7 +12,7 @@
 @interface MainViewController : UIViewController<UITableViewDelegate, UITableViewDataSource>
 
 
-@property UITableView *courseView;
+@property UITableView *courseTableView;
 @property LECHomeViewModel *viewModel;
 
 - (void) changeCoursePage;

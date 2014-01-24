@@ -10,8 +10,8 @@
 #import "LECImportHeader.h"
 
 @interface MainViewController (){
+    // UI elements only
     UIBarButtonItem *plusItem;
-    NSMutableArray *modelDummies;
     UIView *addCourseView;
     UITextField *courseNameInput;
     UITextField *courseDescriptorInput;
@@ -36,7 +36,7 @@
     // Do any additional setup after loading the view from its nib.
     [super viewDidLoad];
     [self navagationTopBar];
-    [self courseTableView];
+    [self courseTableViewSetup];
     [self addCourseIntoView];
     
 }
@@ -61,21 +61,21 @@
 {
 }
 
-- (void) courseTableView
+- (void) courseTableViewSetup
 {
-    self.courseView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, self.view.frame.size.height)];
-    [self.courseView setScrollEnabled:YES];
-    [self.courseView setNeedsDisplay];
-    [self.view addSubview:self.courseView];
-    self.courseView.delegate = self;
-    self.courseView.dataSource = self;
-    [[self courseView] setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+    self.courseTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, self.view.frame.size.height)];
+    [self.courseTableView setScrollEnabled:YES];
+    [self.courseTableView setNeedsDisplay];
+    [self.view addSubview:self.courseTableView];
+    self.courseTableView.delegate = self;
+    self.courseTableView.dataSource = self;
+    [[self courseTableView] setSeparatorStyle:UITableViewCellSeparatorStyleNone];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    LECDummyCourse *dummies = [modelDummies objectAtIndex:indexPath.row];
-    [self.navigationController pushViewController:[[CourseViewController alloc] initWithCourse:@"CourseViewController" bundle:nil selectedCourse:dummies]animated:YES];
+    Course *selectedCourse = [[self.viewModel.tableData objectAtIndex:indexPath.row] course];
+    [self.navigationController pushViewController:[[CourseViewController alloc] initWithCourse:@"CourseViewController" bundle:nil selectedCourse:selectedCourse] animated:YES];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -131,7 +131,7 @@
                      animations:^{
                          [self addCourseIntoView];
                          addCourseView.frame = CGRectMake(0, 60, self.view.frame.size.width, 100);
-                         self.courseView.frame = CGRectMake(0, 100, 320, self.view.frame.size.height);
+                         self.courseTableView.frame = CGRectMake(0, 100, 320, self.view.frame.size.height);
                      }
                      completion:^(BOOL finished){
                          [courseNameInput becomeFirstResponder];
@@ -144,17 +144,15 @@
 }
 
 -(void)saveCourse{
-    LECDummyCourse *dummyAdd = [LECDummyCourse dummyCourse:courseNameInput.text withColour:@"Red"];
-    //[[self dataArray] insertObject:[LECCourseCellViewModel courseCellWithDummy:dummyAdd andColourService:[self.viewModel colourService]] atIndex:0];
-    [modelDummies insertObject:dummyAdd atIndex:0];
-    [self.courseView reloadData];
+    [[LECDatabaseService sharedDBService] saveChanges]; // saves changes made to course scratch pad
+    [self.courseTableView reloadData]; // refreshes table view
 
     [UIView animateWithDuration:0.2
                           delay:0.0
                         options: UIViewAnimationOptionCurveEaseIn
                      animations:^{
                          addCourseView.frame = CGRectMake(0, 0, addCourseView.frame.size.width, 0);
-                         self.courseView.frame = CGRectMake(0, 0, 320, self.view.frame.size.height);
+                         self.courseTableView.frame = CGRectMake(0, 0, 320, self.view.frame.size.height);
                      }
                      completion:^(BOOL finished){
                          [addCourseView removeFromSuperview];
