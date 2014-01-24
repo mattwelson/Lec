@@ -37,7 +37,7 @@ static LECDatabaseService *sharedInstance = nil;
     {
         [NSException raise:@"Database exception!" format:@"Oh no"];
     }
-    return [NSMutableArray arrayWithArray:courses];
+    return [NSMutableArray arrayWithArray:[[courses reverseObjectEnumerator] allObjects]];
 }
 
 // should work!
@@ -53,6 +53,12 @@ static LECDatabaseService *sharedInstance = nil;
     if ([self.managedObjectContext save:&error]) return YES;
     [NSException raise:@"DB I/O" format:@"Save failed: %@", [error localizedDescription]];
     return NO;
+}
+
+-(void)deleteObject:(NSManagedObject *)object
+{
+    [self.managedObjectContext deleteObject:object];
+    [self saveChanges];
 }
 
 @end

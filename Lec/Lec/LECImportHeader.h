@@ -14,7 +14,6 @@
 #import "Tag.h"
 #import "Lecture.h"
 #import "Course.h"
-#import "LECDummyCourse.h"
 
 #pragma mark - View Model
 #import "LECColourService.h"

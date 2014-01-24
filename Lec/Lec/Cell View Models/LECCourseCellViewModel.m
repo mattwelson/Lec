@@ -24,18 +24,4 @@
     return courseCellModel;
 }
 
-+(LECCourseCellViewModel *) courseCellWithDummy:(LECDummyCourse *)course
-{
-    LECCourseCellViewModel *courseCellModel = [[LECCourseCellViewModel alloc] init];
-    
-    [courseCellModel setCourse:nil];
-    [courseCellModel setTitleText:[course courseName]];
-    [courseCellModel setSubText:[course courseDescription]];
-    //[courseCellModel setTintColor:[cservice baseColourFor:[course colour]]];
-    
-    [courseCellModel setColourString:[course colour]];
-    
-    return courseCellModel;
-}
-
 @end

@@ -17,5 +17,4 @@
 @dynamic icon;
 @dynamic lectures;
 
-
 @end

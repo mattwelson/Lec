@@ -15,6 +15,5 @@
 @property UIImage *icon;
 
 +(LECCourseCellViewModel *) courseCellWith:(Course *)course;
-+(LECCourseCellViewModel *) courseCellWithDummy:(LECDummyCourse *)course;
 
 @end

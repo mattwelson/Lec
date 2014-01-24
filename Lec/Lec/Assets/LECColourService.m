@@ -31,6 +31,11 @@ static LECColourService *sharedService;
     return sharedService;
 }
 
+-(NSArray *)colourKeys
+{
+    return [[sharedService colourDictionary] allKeys];
+}
+
 -(UIColor *) baseColourFor:(NSString *)colourName
 {
     return [self colourFor:colourName forKey:@"BaseColour"];

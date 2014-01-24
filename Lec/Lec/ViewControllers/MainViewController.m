@@ -91,6 +91,15 @@
     return cell;
 }
 
+-(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (editingStyle == UITableViewCellEditingStyleDelete)
+    {
+        [self.viewModel deleteCourseAtIndex:indexPath.row];
+        [self.courseTableView reloadData];
+    }
+}
+
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 100;
@@ -144,7 +153,16 @@
 }
 
 -(void)saveCourse{
+    Course *course = [[LECDatabaseService sharedDBService] newCourseForAdding];
+    course.courseName = [courseNameInput text];
+    course.courseDescription = [courseDescriptorInput text];
+    
+    NSArray *colourKeys = [[LECColourService sharedColourService] colourKeys];
+    course.colour = [colourKeys objectAtIndex:arc4random() % [colourKeys count]];
+    course.icon = @"Hat";
     [[LECDatabaseService sharedDBService] saveChanges]; // saves changes made to course scratch pad
+    
+    [self.viewModel.tableData insertObject:[LECCourseCellViewModel courseCellWith:course] atIndex:0];
     [self.courseTableView reloadData]; // refreshes table view
 
     [UIView animateWithDuration:0.2

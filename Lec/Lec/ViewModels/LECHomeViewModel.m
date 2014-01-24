@@ -25,4 +25,12 @@
     return self;
 }
 
+-(void)deleteCourseAtIndex:(NSInteger)index
+{
+    LECCourseCellViewModel *courseCell = [self.tableData objectAtIndex:index];
+    Course *course = courseCell.course;
+    [[LECDatabaseService sharedDBService] deleteObject:course];
+    [self.tableData removeObject:courseCell];
+}
+
 @end

@@ -14,9 +14,12 @@
 
 + (LECColourService *)sharedColourService;
 
+- (NSArray *) colourKeys;
+
 -(UIColor *) baseColourFor:(NSString *)colourName;
 -(UIColor *) highlightColourFor:(NSString *)colourName;
 -(UIColor *) colourFor:(NSString *)colourName forKey:(NSString *)key;
+
 -(void) addGradientForColour:(NSString *)colour toView:(UIView *)view;
 
 @end

@@ -16,9 +16,11 @@
 
 + (LECDatabaseService *) sharedDBService;
 
+#pragma mark Course Operations
 - (NSMutableArray *) getCourses;
-
 - (Course *) newCourseForAdding;
 - (BOOL) saveChanges;
+
+- (void) deleteObject:(NSManagedObject *)object;
 
 @end

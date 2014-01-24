@@ -10,7 +10,7 @@
 #import "LECImportHeader.h"
 
 @interface CourseViewController : UIViewController{
-    LECDummyCourse *selectedCourse;
+    Course *selectedCourse;
 }
 - (id)initWithCourse:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil selectedCourse:(NSObject *)course;
 
