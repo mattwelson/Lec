@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "LECImportHeader.h"
 
-@interface MainViewController : UIViewController<UITableViewDelegate, UITableViewDataSource>
+@interface MainViewController : UIViewController<UITableViewDelegate, UITableViewDataSource, UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 
 
 @property UITableView *courseTableView;
