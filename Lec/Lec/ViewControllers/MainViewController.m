@@ -53,9 +53,52 @@
 //    plusItem = [[UIBarButtonItem alloc] initWithImage:plusImg style:UIBarButtonItemStylePlain target:self action:@selector(addCourse)];
     
     self.navigationItem.title = @"Lec";
-    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav_add_btn.png"] style:UIBarButtonItemStylePlain target:self action:@selector(colorViewAppear)];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:plusImg style:UIBarButtonItemStylePlain target:self action:@selector(addCourse)];
 }
+
+- (void) colorViewAppear
+{
+    UIImageView *colorHolder = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
+    
+     UICollectionViewFlowLayout *layout=[[UICollectionViewFlowLayout alloc] init];
+    
+    layout.sectionInset = UIEdgeInsetsMake(180, 50, 200, 50);
+    layout.minimumLineSpacing = 30.0f;
+    UICollectionView *colorView = [[UICollectionView alloc]initWithFrame:self.view.frame collectionViewLayout:layout];
+    
+    [colorView setDataSource:self];
+    [colorView setDelegate:self];
+    [colorView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"cellIdentifier"];
+    colorView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.5];
+    
+    [colorHolder setBackgroundColor:[[UIColor blackColor] colorWithAlphaComponent:0.9]];
+    
+    //[self.view addSubview:colorView];
+    //NSLog(@"%@",[self.view subviews]);
+    [[UIApplication sharedApplication].keyWindow addSubview:colorView];
+    
+}
+
+// 1
+- (NSInteger)collectionView:(UICollectionView *)view numberOfItemsInSection:(NSInteger)section {
+    
+    return 9;
+}
+// 2
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    UICollectionViewCell *cell=[collectionView dequeueReusableCellWithReuseIdentifier:@"cellIdentifier" forIndexPath:indexPath];
+    
+    cell.backgroundColor=[UIColor blueColor];
+    return cell;
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    return CGSizeMake(50, 50);
+}
+
 
 - (void) courseClicked
 {
