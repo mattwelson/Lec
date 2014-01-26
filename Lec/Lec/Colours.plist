@@ -49,20 +49,20 @@
 		<key>HighlightColour</key>
 		<dict>
 			<key>RValue</key>
-			<integer>254</integer>
+			<integer>253</integer>
 			<key>GValue</key>
-			<integer>217</integer>
+			<integer>243</integer>
 			<key>BValue</key>
-			<integer>88</integer>
+			<integer>3</integer>
 		</dict>
 		<key>BaseColour</key>
 		<dict>
 			<key>RValue</key>
 			<integer>254</integer>
 			<key>GValue</key>
-			<integer>204</integer>
+			<integer>177</integer>
 			<key>BValue</key>
-			<integer>47</integer>
+			<integer>0</integer>
 		</dict>
 	</dict>
 	<key>Blue</key>
@@ -91,20 +91,20 @@
 		<key>HighlightColour</key>
 		<dict>
 			<key>RValue</key>
-			<integer>138</integer>
+			<integer>99</integer>
 			<key>GValue</key>
 			<integer>249</integer>
 			<key>BValue</key>
-			<integer>118</integer>
+			<integer>72</integer>
 		</dict>
 		<key>BaseColour</key>
 		<dict>
 			<key>RValue</key>
-			<integer>36</integer>
+			<integer>3</integer>
 			<key>GValue</key>
-			<integer>209</integer>
+			<integer>193</integer>
 			<key>BValue</key>
-			<integer>46</integer>
+			<integer>14</integer>
 		</dict>
 	</dict>
 	<key>Black</key>
@@ -175,20 +175,20 @@
 		<key>HighlightColour</key>
 		<dict>
 			<key>RValue</key>
-			<integer>90</integer>
+			<integer>2</integer>
 			<key>GValue</key>
-			<integer>235</integer>
+			<integer>255</integer>
 			<key>BValue</key>
-			<integer>199</integer>
+			<integer>252</integer>
 		</dict>
 		<key>BaseColour</key>
 		<dict>
 			<key>RValue</key>
-			<integer>95</integer>
+			<integer>0</integer>
 			<key>GValue</key>
-			<integer>201</integer>
+			<integer>208</integer>
 			<key>BValue</key>
-			<integer>248</integer>
+			<integer>198</integer>
 		</dict>
 	</dict>
 </dict>
