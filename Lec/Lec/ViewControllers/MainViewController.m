@@ -197,6 +197,8 @@
 }
 
 -(void)saveCourse{
+#warning temp fix to stop no input for the course name. Will add warning box later
+    if (courseNameInput.text.length > 0) {
     Course *course = [[LECDatabaseService sharedDBService] newCourseForAdding];
     course.courseName = [courseNameInput text];
     course.courseDescription = [courseDescriptorInput text];
@@ -222,5 +224,6 @@
                          self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:plusImg style:UIBarButtonItemStylePlain target:self action:@selector(addCourse)];
                          
                      }];
+    }
 }
 @end
