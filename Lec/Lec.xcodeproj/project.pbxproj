@@ -32,7 +32,6 @@
 		C9605CAE1889F5AD00F3DE57 /* LECHomeViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C9605CAD1889F5AD00F3DE57 /* LECHomeViewModel.m */; };
 		C9605CB21889F6CC00F3DE57 /* LECBaseCellViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C9605CB11889F6CC00F3DE57 /* LECBaseCellViewModel.m */; };
 		C9605CBA1889F99800F3DE57 /* LECCourseCellViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C9605CB91889F99800F3DE57 /* LECCourseCellViewModel.m */; };
-		C9605CBE188A001B00F3DE57 /* LECDummyCourse.m in Sources */ = {isa = PBXBuildFile; fileRef = C9605CBD188A001B00F3DE57 /* LECDummyCourse.m */; };
 		C9605CC0188A11D300F3DE57 /* Colours.plist in Resources */ = {isa = PBXBuildFile; fileRef = C9605CBF188A11D300F3DE57 /* Colours.plist */; };
 		C9605CC4188A179400F3DE57 /* LECColourService.m in Sources */ = {isa = PBXBuildFile; fileRef = C9605CC3188A179400F3DE57 /* LECColourService.m */; };
 		C9605CC8188A311100F3DE57 /* LECDatabaseService.m in Sources */ = {isa = PBXBuildFile; fileRef = C9605CC7188A311100F3DE57 /* LECDatabaseService.m */; };
@@ -107,8 +106,6 @@
 		C9605CB51889F88B00F3DE57 /* LECImportHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LECImportHeader.h; sourceTree = "<group>"; };
 		C9605CB81889F99800F3DE57 /* LECCourseCellViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LECCourseCellViewModel.h; path = "Cell View Models/LECCourseCellViewModel.h"; sourceTree = "<group>"; };
 		C9605CB91889F99800F3DE57 /* LECCourseCellViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LECCourseCellViewModel.m; path = "Cell View Models/LECCourseCellViewModel.m"; sourceTree = "<group>"; };
-		C9605CBC188A001B00F3DE57 /* LECDummyCourse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LECDummyCourse.h; path = DataModels/LECDummyCourse.h; sourceTree = "<group>"; };
-		C9605CBD188A001B00F3DE57 /* LECDummyCourse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LECDummyCourse.m; path = DataModels/LECDummyCourse.m; sourceTree = "<group>"; };
 		C9605CBF188A11D300F3DE57 /* Colours.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Colours.plist; sourceTree = "<group>"; };
 		C9605CC2188A179400F3DE57 /* LECColourService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LECColourService.h; path = Assets/LECColourService.h; sourceTree = "<group>"; };
 		C9605CC3188A179400F3DE57 /* LECColourService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LECColourService.m; path = Assets/LECColourService.m; sourceTree = "<group>"; };
@@ -239,15 +236,6 @@
 			name = "Cell View Models";
 			sourceTree = "<group>";
 		};
-		C9605CBB1889FFFC00F3DE57 /* Dummies */ = {
-			isa = PBXGroup;
-			children = (
-				C9605CBC188A001B00F3DE57 /* LECDummyCourse.h */,
-				C9605CBD188A001B00F3DE57 /* LECDummyCourse.m */,
-			);
-			name = Dummies;
-			sourceTree = "<group>";
-		};
 		C9A0047E1889EBD200D27A6C /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -274,7 +262,6 @@
 		C9A004801889EBF100D27A6C /* Database */ = {
 			isa = PBXGroup;
 			children = (
-				C9605CBB1889FFFC00F3DE57 /* Dummies */,
 				C9B0C5EE187FBE7F002D4A63 /* Lec.xcdatamodeld */,
 				C9605CA61889F3B600F3DE57 /* Tag.h */,
 				C9605CA71889F3B600F3DE57 /* Tag.m */,
@@ -502,7 +489,6 @@
 				8BE75823188B4F23007B6C02 /* LECLectureViewModel.m in Sources */,
 				C9605CA21889F3B500F3DE57 /* Course.m in Sources */,
 				C9B0C5ED187FBE7F002D4A63 /* LECAppDelegate.m in Sources */,
-				C9605CBE188A001B00F3DE57 /* LECDummyCourse.m in Sources */,
 				0B6BD5901889157000A7D8F9 /* RecordViewController.m in Sources */,
 				C9605CC8188A311100F3DE57 /* LECDatabaseService.m in Sources */,
 				0B6BD586188914B300A7D8F9 /* MainViewController.m in Sources */,
