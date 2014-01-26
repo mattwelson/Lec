@@ -15,6 +15,10 @@
     UIView *addCourseView;
     UITextField *courseNameInput;
     UITextField *courseDescriptorInput;
+    UIView *colorButtonView;
+    UIView *iconButtonView;
+    NSArray *colorArray;
+    NSString *selectedColor;
 }
 
 @end
@@ -38,6 +42,7 @@
     [self navagationTopBar];
     [self courseTableViewSetup];
     [self addCourseIntoView];
+
     
 }
 
@@ -53,30 +58,35 @@
 //    plusItem = [[UIBarButtonItem alloc] initWithImage:plusImg style:UIBarButtonItemStylePlain target:self action:@selector(addCourse)];
     
     self.navigationItem.title = @"Lec";
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav_add_btn.png"] style:UIBarButtonItemStylePlain target:self action:@selector(colorViewAppear)];
+    //self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav_add_btn.png"] style:UIBarButtonItemStylePlain target:self action:@selector(colorViewAppear)];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:plusImg style:UIBarButtonItemStylePlain target:self action:@selector(addCourse)];
 }
 
 - (void) colorViewAppear
 {
+    [courseNameInput resignFirstResponder];
+    
     UIImageView *colorHolder = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
     
      UICollectionViewFlowLayout *layout=[[UICollectionViewFlowLayout alloc] init];
     
     layout.sectionInset = UIEdgeInsetsMake(180, 50, 200, 50);
     layout.minimumLineSpacing = 30.0f;
-    UICollectionView *colorView = [[UICollectionView alloc]initWithFrame:self.view.frame collectionViewLayout:layout];
+    self.colorView = [[UICollectionView alloc]initWithFrame:self.view.frame collectionViewLayout:layout];
     
-    [colorView setDataSource:self];
-    [colorView setDelegate:self];
-    [colorView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"cellIdentifier"];
-    colorView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.5];
+    [self.colorView setDataSource:self];
+    [self.colorView setDelegate:self];
+    [self.colorView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"cellIdentifier"];
+    self.colorView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.5];
     
     [colorHolder setBackgroundColor:[[UIColor blackColor] colorWithAlphaComponent:0.9]];
     
+    //Change so it reads in all values of the plist
+    colorArray= [[NSArray alloc]initWithObjects:@"Red",@"Orange",@"Yellow",@"Blue",@"Green",@"Black",@"Pink",@"Purple",@"Cyan", nil];
+    
     //[self.view addSubview:colorView];
     //NSLog(@"%@",[self.view subviews]);
-    [[UIApplication sharedApplication].keyWindow addSubview:colorView];
+    [[UIApplication sharedApplication].keyWindow addSubview:self.colorView];
     
 }
 
@@ -89,9 +99,19 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     UICollectionViewCell *cell=[collectionView dequeueReusableCellWithReuseIdentifier:@"cellIdentifier" forIndexPath:indexPath];
+ 
+    cell.layer.cornerRadius = cell.frame.size.height/2;
+    cell.layer.masksToBounds = YES;
+    cell.layer.borderWidth = 0;
     
-    cell.backgroundColor=[UIColor blueColor];
+    NSString *cellColor = [colorArray objectAtIndex:indexPath.row];
+    [[LECColourService sharedColourService] addGradientForColour:cellColor toView:[cell contentView]];
     return cell;
+}
+
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    selectedColor = [colorArray objectAtIndex:indexPath.row];
+    [self.colorView removeFromSuperview];
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -172,6 +192,19 @@
     courseDescriptorInput.placeholder = @"Course Description";
     [courseDescriptorInput setFont:[UIFont fontWithName:DEFAUILTFONT size:15]];
     [addCourseView addSubview:courseDescriptorInput];
+    
+    colorButtonView = [[UIView alloc]initWithFrame:CGRectMake(0, 5, 50, 50)];
+    colorButtonView.backgroundColor = [UIColor whiteColor];
+    [addCourseView addSubview:colorButtonView];
+    
+    UIButton *colorPickerButton = [[UIButton alloc]initWithFrame:CGRectMake(5, 5, 30, 30)];
+    [[LECColourService sharedColourService] addGradientForColour:@"Red" toView:colorPickerButton];
+    colorPickerButton.layer.cornerRadius = colorPickerButton.frame.size.height/2;
+    colorPickerButton.layer.masksToBounds = YES;
+    colorPickerButton.layer.borderWidth = 0;
+    [colorPickerButton addTarget:Nil action:@selector(colorViewAppear) forControlEvents:UIControlEventTouchDown];
+    [colorButtonView addSubview:colorPickerButton];
+
 }
 
 - (void)addCourse
@@ -214,7 +247,8 @@
     UIImage *plusImg = [UIImage imageNamed:@"nav_add_btn.png"];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:plusImg style:UIBarButtonItemStylePlain target:self action:@selector(addCourse)];
         
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav_add_btn.png"] style:UIBarButtonItemStylePlain target:self action:@selector(colorViewAppear)];
+    //self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav_add_btn.png"] style:UIBarButtonItemStylePlain target:self action:@selector(colorViewAppear)];
+        self.navigationItem.leftBarButtonItem = nil;
         
     [UIView animateWithDuration:0.2
                           delay:0.0
@@ -235,7 +269,9 @@
     UIImage *plusImg = [UIImage imageNamed:@"nav_add_btn.png"];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:plusImg style:UIBarButtonItemStylePlain target:self action:@selector(addCourse)];
     
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav_add_btn.png"] style:UIBarButtonItemStylePlain target:self action:@selector(colorViewAppear)];
+    //self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav_add_btn.png"] style:UIBarButtonItemStylePlain target:self action:@selector(colorViewAppear)];
+    self.navigationItem.leftBarButtonItem = nil;
+
     
     [UIView animateWithDuration:0.2
                           delay:0.0
