@@ -184,13 +184,14 @@
                          [self addCourseIntoView];
                          addCourseView.frame = CGRectMake(0, 60, self.view.frame.size.width, 100);
                          self.courseTableView.frame = CGRectMake(0, 100, 320, self.view.frame.size.height);
+                         
+                         
+                         UIImage *tickImg = [UIImage imageNamed:@"icon_checkmark.png"];
+                         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:tickImg style:UIBarButtonItemStylePlain target:self action:@selector(saveCourse)];
                      }
                      completion:^(BOOL finished){
                          [courseNameInput becomeFirstResponder];
 
-                         
-                         UIImage *tickImg = [UIImage imageNamed:@"icon_checkmark.png"];
-                             self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:tickImg style:UIBarButtonItemStylePlain target:self action:@selector(saveCourse)];
                      }];
     [self.view addSubview:addCourseView];
 }
