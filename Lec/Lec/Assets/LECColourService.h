@@ -21,5 +21,6 @@
 -(UIColor *) colourFor:(NSString *)colourName forKey:(NSString *)key;
 
 -(void) addGradientForColour:(NSString *)colour toView:(UIView *)view;
+-(void)changeGradientToColour:(NSString *)colour forView:(UIView *)view;
 
 @end

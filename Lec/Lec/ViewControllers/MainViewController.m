@@ -17,6 +17,7 @@
     UITextField *courseDescriptorInput;
     UIView *colorButtonView;
     UIView *iconButtonView;
+    UIButton *colorPickerButton;
     NSArray *colorArray;
     NSString *selectedColor;
 }
@@ -42,8 +43,10 @@
     [self navagationTopBar];
     [self courseTableViewSetup];
     [self addCourseIntoView];
-
-    
+}
+-(void)viewDidAppear:(BOOL)animated{
+    [self.navigationController.navigationBar setBarTintColor:[UIColor whiteColor]];
+    [self.navigationController.navigationBar setTranslucent:NO];
 }
 
 - (void)didReceiveMemoryWarning
@@ -64,7 +67,7 @@
 
 - (void) colorViewAppear
 {
-    [courseNameInput resignFirstResponder];
+    [self.view endEditing:YES];
     
     UIImageView *colorHolder = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
     
@@ -72,7 +75,7 @@
     
     layout.sectionInset = UIEdgeInsetsMake(180, 50, 200, 50);
     layout.minimumLineSpacing = 30.0f;
-    self.colorView = [[UICollectionView alloc]initWithFrame:self.view.frame collectionViewLayout:layout];
+    self.colorView = [[UICollectionView alloc]initWithFrame: [[UIScreen mainScreen] applicationFrame] collectionViewLayout:layout];
     
     [self.colorView setDataSource:self];
     [self.colorView setDelegate:self];
@@ -81,8 +84,8 @@
     
     [colorHolder setBackgroundColor:[[UIColor blackColor] colorWithAlphaComponent:0.9]];
     
-    //Change so it reads in all values of the plist
-    colorArray= [[NSArray alloc]initWithObjects:@"Red",@"Orange",@"Yellow",@"Blue",@"Green",@"Black",@"Pink",@"Purple",@"Cyan", nil];
+    //Creates the array based on the plist
+    colorArray =  [[LECColourService sharedColourService]colourKeys];
     
     //[self.view addSubview:colorView];
     //NSLog(@"%@",[self.view subviews]);
@@ -111,7 +114,9 @@
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     selectedColor = [colorArray objectAtIndex:indexPath.row];
+    [[LECColourService sharedColourService] changeGradientToColour:selectedColor forView:colorPickerButton];
     [self.colorView removeFromSuperview];
+
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -180,8 +185,11 @@
 
 #pragma mark Methods for that little add course view
 -(void)addCourseIntoView{
-    addCourseView = [[UIView alloc]initWithFrame:CGRectMake(0, 60, self.view.frame.size.width, 0)];
+    addCourseView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 0)];
     addCourseView.backgroundColor = [UIColor whiteColor];
+    addCourseView.layer.borderWidth = 1;
+    addCourseView.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    
     
     courseNameInput = [[UITextField alloc]initWithFrame:CGRectMake(60, 10, self.view.frame.size.width-60, 0)];
     courseNameInput.placeholder = @"Course Name";
@@ -193,13 +201,23 @@
     [courseDescriptorInput setFont:[UIFont fontWithName:DEFAUILTFONT size:15]];
     [addCourseView addSubview:courseDescriptorInput];
     
-    colorButtonView = [[UIView alloc]initWithFrame:CGRectMake(0, 5, 50, 50)];
-    colorButtonView.backgroundColor = [UIColor whiteColor];
+    colorButtonView = [[UIView alloc]initWithFrame:CGRectMake(-1, -1, 50, 52)];
+    colorButtonView.backgroundColor = [UIColor clearColor];
+    colorButtonView.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    colorButtonView.layer.borderWidth = 1.0f;
     [addCourseView addSubview:colorButtonView];
     
-    UIButton *colorPickerButton = [[UIButton alloc]initWithFrame:CGRectMake(5, 5, 30, 30)];
+    iconButtonView = [[UIView alloc]initWithFrame:CGRectMake(-1, 50, 50, 50)];
+    iconButtonView.backgroundColor = [UIColor clearColor];
+    iconButtonView.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    iconButtonView.layer.borderWidth = 1.0f;
+    [addCourseView addSubview:iconButtonView];
+    
+    colorPickerButton = [[UIButton alloc]initWithFrame:CGRectMake(9, 10, 32, 32)];
     [[LECColourService sharedColourService] addGradientForColour:@"Red" toView:colorPickerButton];
-    colorPickerButton.layer.cornerRadius = colorPickerButton.frame.size.height/2;
+    //[[LECColourService sharedColourService] addGradientForColour:@"Red" toView:colorPickerButton];
+    colorPickerButton.backgroundColor = [UIColor blackColor];
+    colorPickerButton.layer.cornerRadius = colorPickerButton.frame.size.width/2;
     colorPickerButton.layer.masksToBounds = YES;
     colorPickerButton.layer.borderWidth = 0;
     [colorPickerButton addTarget:Nil action:@selector(colorViewAppear) forControlEvents:UIControlEventTouchDown];
@@ -209,6 +227,9 @@
 
 - (void)addCourse
 {
+    //Default colour
+    selectedColor = @"Red";
+    
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon_checkmark.png"] style:UIBarButtonItemStylePlain target:self action:@selector(saveCourse)];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon_cancel.png"] style:UIBarButtonItemStylePlain target:self action:@selector(cancelSaveCourse)];
     //This is where we will add Courses to the tableView
@@ -217,9 +238,9 @@
                         options: UIViewAnimationOptionCurveEaseIn
                      animations:^{
                          [self addCourseIntoView];
-                         addCourseView.frame = CGRectMake(0, 60, self.view.frame.size.width, 100);
+                         addCourseView.frame = CGRectMake(0, 0, self.view.frame.size.width, 100);
                          self.courseTableView.frame = CGRectMake(0, 100, 320, self.view.frame.size.height);
-                        courseNameInput.frame = CGRectMake(60, 10, self.view.frame.size.width-60, 50);
+                        courseNameInput.frame = CGRectMake(60, 5, self.view.frame.size.width-60, 50);
                          courseDescriptorInput.frame = CGRectMake(60, 50, self.view.frame.size.width-60,50);
                      }
                      completion:^(BOOL finished){
@@ -236,6 +257,15 @@
         course.courseName = [courseNameInput text];
         course.courseDescription = [courseDescriptorInput text];
         
+        //The random colours to add
+//        NSArray *colourKeys = [[LECColourService sharedColourService] colourKeys];
+//        course.colour = [colourKeys objectAtIndex:arc4random() % [colourKeys count]];
+        
+        //Manual add colour to database
+        course.colour = selectedColor;
+        
+        course.icon = @"Hat";
+        [[LECDatabaseService sharedDBService] saveChanges]; // saves changes made to course scratch pad
     //self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav_add_btn.png"] style:UIBarButtonItemStylePlain target:self action:@selector(colorViewAppear)];
         self.navigationItem.leftBarButtonItem = nil;
         
