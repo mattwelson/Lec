@@ -10,8 +10,8 @@
 #import "LECImportHeader.h"
 
 @interface MainViewController (){
+    // UI elements only
     UIBarButtonItem *plusItem;
-    NSMutableArray *modelDummies;
     UIView *addCourseView;
     UITextField *courseNameInput;
     UITextField *courseDescriptorInput;
@@ -27,23 +27,8 @@
     if (self) {
         // Custom initialization
         [self setViewModel:[[LECHomeViewModel alloc] init]];
-         modelDummies = [self courseDummies];
-        [self setDataArray:[NSMutableArray array]];
-        for (LECDummyCourse *c in modelDummies)
-        {
-            [[self dataArray] addObject:[LECCourseCellViewModel courseCellWithDummy:c andColourService:[self.viewModel colourService]]];
-        }
     }
     return self;
-}
-
-//Because modelDummies and dataArray are different (which the clicking and the loading cells are taken from)
--(void)reloadTables{
-    [self setDataArray:[NSMutableArray array]];
-    for (LECDummyCourse *c in modelDummies)
-    {
-        [[self dataArray] addObject:[LECCourseCellViewModel courseCellWithDummy:c andColourService:[self.viewModel colourService]]];
-    }
 }
 
 - (void)viewDidLoad
@@ -51,7 +36,7 @@
     // Do any additional setup after loading the view from its nib.
     [super viewDidLoad];
     [self navagationTopBar];
-    [self courseTableView];
+    [self courseTableViewSetup];
     [self addCourseIntoView];
     
 }
@@ -76,34 +61,43 @@
 {
 }
 
-- (void) courseTableView
+- (void) courseTableViewSetup
 {
-    self.courseView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, self.view.frame.size.height)];
-    [self.courseView setScrollEnabled:YES];
-    [self.courseView setNeedsDisplayInRect:CGRectMake(0, 0, 320, self.view.frame.size.height)];
-    [self.view addSubview:self.courseView];
-    self.courseView.delegate = self;
-    self.courseView.dataSource = self;
-    [[self courseView] setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+    self.courseTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, self.view.frame.size.height)];
+    [self.courseTableView setScrollEnabled:YES];
+    [self.courseTableView setNeedsDisplay];
+    [self.view addSubview:self.courseTableView];
+    self.courseTableView.delegate = self;
+    self.courseTableView.dataSource = self;
+    [[self courseTableView] setSeparatorStyle:UITableViewCellSeparatorStyleNone];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    LECDummyCourse *dummies = [modelDummies objectAtIndex:indexPath.row];
-    [self.navigationController pushViewController:[[CourseViewController alloc] initWithCourse:@"CourseViewController" bundle:nil selectedCourse:dummies]animated:YES];
+    Course *selectedCourse = [[self.viewModel.tableData objectAtIndex:indexPath.row] course];
+    [self.navigationController pushViewController:[[CourseViewController alloc] initWithCourse:@"CourseViewController" bundle:nil selectedCourse:selectedCourse] animated:YES];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     CourseCell *cell = [[CourseCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"Cell"];
     
-    LECCourseCellViewModel *cellViewModel = [[self dataArray] objectAtIndex:indexPath.row];
+    LECCourseCellViewModel *cellViewModel = [self.viewModel.tableData objectAtIndex:indexPath.row];
     
     cell.textLabel.text = [cellViewModel titleText];
     cell.detailTextLabel.text = [cellViewModel subText];
-    [[cellViewModel colourService] addGradientForColour:[cellViewModel colourString] toView:[cell contentView]];
+    [[LECColourService sharedColourService] addGradientForColour:[cellViewModel colourString] toView:[cell contentView]];
     
     return cell;
+}
+
+-(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (editingStyle == UITableViewCellEditingStyleDelete)
+    {
+        [self.viewModel deleteCourseAtIndex:indexPath.row];
+        [self.courseTableView reloadData];
+    }
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -113,7 +107,7 @@
 
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [_dataArray count];
+    return [self.viewModel.tableData count];
 }
 
 //Delete this function when the cells are added to the table view.
@@ -146,7 +140,7 @@
                      animations:^{
                          [self addCourseIntoView];
                          addCourseView.frame = CGRectMake(0, 60, self.view.frame.size.width, 100);
-                         self.courseView.frame = CGRectMake(0, 100, 320, self.view.frame.size.height);
+                         self.courseTableView.frame = CGRectMake(0, 100, 320, self.view.frame.size.height);
                      }
                      completion:^(BOOL finished){
                          [courseNameInput becomeFirstResponder];
@@ -159,18 +153,24 @@
 }
 
 -(void)saveCourse{
-    LECDummyCourse *dummyAdd = [LECDummyCourse dummyCourse:courseNameInput.text withColour:@"Red"];
-    //[[self dataArray] insertObject:[LECCourseCellViewModel courseCellWithDummy:dummyAdd andColourService:[self.viewModel colourService]] atIndex:0];
-    [modelDummies insertObject:dummyAdd atIndex:0];
-    [self reloadTables];
-    [self.courseView reloadData];
+    Course *course = [[LECDatabaseService sharedDBService] newCourseForAdding];
+    course.courseName = [courseNameInput text];
+    course.courseDescription = [courseDescriptorInput text];
+    
+    NSArray *colourKeys = [[LECColourService sharedColourService] colourKeys];
+    course.colour = [colourKeys objectAtIndex:arc4random() % [colourKeys count]];
+    course.icon = @"Hat";
+    [[LECDatabaseService sharedDBService] saveChanges]; // saves changes made to course scratch pad
+    
+    [self.viewModel.tableData insertObject:[LECCourseCellViewModel courseCellWith:course] atIndex:0];
+    [self.courseTableView reloadData]; // refreshes table view
 
     [UIView animateWithDuration:0.2
                           delay:0.0
                         options: UIViewAnimationOptionCurveEaseIn
                      animations:^{
                          addCourseView.frame = CGRectMake(0, 0, addCourseView.frame.size.width, 0);
-                         self.courseView.frame = CGRectMake(0, 0, 320, self.view.frame.size.height);
+                         self.courseTableView.frame = CGRectMake(0, 0, 320, self.view.frame.size.height);
                      }
                      completion:^(BOOL finished){
                          [addCourseView removeFromSuperview];
@@ -179,20 +179,4 @@
                          
                      }];
 }
-
-#pragma mark - DUMMY TESTS
--(NSMutableArray *)courseDummies
-{
-    NSMutableArray *dataModels = [NSMutableArray arrayWithObjects:
-                                  [LECDummyCourse dummyCourse:@"COSC326" withColour:@"Red"],
-                                  [LECDummyCourse dummyCourse:@"Julin" withColour:@"Green"],
-                                  [LECDummyCourse dummyCourse:@"Cosc345" withColour:@"Orange"],
-                                  [LECDummyCourse dummyCourse:@"Fond Memories" withColour:@"Cyan"],
-                                  [LECDummyCourse dummyCourse:@"Testy" withColour:@"Yellow"],
-                                  [LECDummyCourse dummyCourse:@"Test" withColour:@"Purple"],
-                                  [LECDummyCourse dummyCourse:@"Willowbank me!" withColour:@"Blue"],
-                                  nil];
-    return dataModels;
-}
-
 @end

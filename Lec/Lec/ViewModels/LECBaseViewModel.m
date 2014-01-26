@@ -10,12 +10,12 @@
 
 @implementation LECBaseViewModel
 
--(instancetype) init
+-(instancetype)init
 {
-    self = [super init];
-    if (self)
+    self= [super init];
+    if(self)
     {
-        [self setColourService:[LECColourService colourService]];
+        [self setTableData:[NSMutableArray array]]; // allocs an empty array to hold cellviewmodels!
     }
     return self;
 }

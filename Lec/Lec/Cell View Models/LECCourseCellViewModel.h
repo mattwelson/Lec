@@ -14,7 +14,6 @@
 @property Course *course;
 @property UIImage *icon;
 
-+(LECCourseCellViewModel *) courseCellWith:(Course *)course andColourService:(LECColourService *)cservice;
-+(LECCourseCellViewModel *) courseCellWithDummy:(LECDummyCourse *)course andColourService:(LECColourService *)cservice;
++(LECCourseCellViewModel *) courseCellWith:(Course *)course;
 
 @end

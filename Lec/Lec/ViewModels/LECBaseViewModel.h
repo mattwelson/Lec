@@ -14,8 +14,6 @@
 
 @property NSString *navTitle;
 
-@property LECColourService *colourService;
-
-@property LECDatabaseService *dataService;
+@property NSMutableArray *tableData;
 
 @end

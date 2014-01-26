@@ -24,7 +24,7 @@
     [self.window makeKeyAndVisible];
     
 #warning remove test logic
-    [self simpleDataTest];
+    //[self simpleDataTest];
     return YES;
 }
 
@@ -61,16 +61,15 @@
 -(void)dbService
 {
     /* Done in init of view model or else stored in app delegate globally */
-    NSManagedObjectContext *context = [self managedObjectContext];
-    LECDatabaseService *dbService = [LECDatabaseService databaseServiceForManagedObjectContext:context];
+    LECDatabaseService *dbService = [LECDatabaseService sharedDBService];
     
     /* Retrieves an empty course ready to be editted */
     Course *course = [dbService newCourseForAdding];
     
     /* Looks chunky but will be done through direct user editting (and perhaps defaults ) */
-    course.courseName = @"FROM SERVICE!";
+    course.courseName = @"Hi Shared Service!";
     course.courseDescription = @"Different description!";
-    course.colour = @"Purply-pink!";
+    course.colour = @"Purple";
     course.icon = @"Jolly roger";
     
     /* Saves changes with error handling */

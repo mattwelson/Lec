@@ -10,6 +10,8 @@
 
 @implementation LECColourService
 
+static LECColourService *sharedService;
+
 -(LECColourService *) init
 {
     self = [super init];
@@ -21,9 +23,17 @@
     return self;
 }
 
-+(LECColourService *)colourService
++ (LECColourService *) sharedColourService
 {
-    return [[LECColourService alloc] init];
+    if (sharedService) return sharedService;
+    
+    sharedService = [[LECColourService alloc] init];
+    return sharedService;
+}
+
+-(NSArray *)colourKeys
+{
+    return [[sharedService colourDictionary] allKeys];
 }
 
 -(UIColor *) baseColourFor:(NSString *)colourName

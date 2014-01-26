@@ -163,18 +163,15 @@
 		0B6BD5821889147200A7D8F9 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				C9B9CE16188FB990003A0972 /* XIBs */,
 				0B6BD583188914B300A7D8F9 /* MainViewController.h */,
 				0B6BD584188914B300A7D8F9 /* MainViewController.m */,
-				0B6BD585188914B300A7D8F9 /* MainViewController.xib */,
 				0B6BD5881889155A00A7D8F9 /* CourseViewController.h */,
 				0B6BD5891889155A00A7D8F9 /* CourseViewController.m */,
-				0B6BD58A1889155A00A7D8F9 /* CourseViewController.xib */,
 				0B6BD58D1889157000A7D8F9 /* RecordViewController.h */,
 				0B6BD58E1889157000A7D8F9 /* RecordViewController.m */,
-				0B6BD58F1889157000A7D8F9 /* RecordViewController.xib */,
 				0B6BD5921889158500A7D8F9 /* PlaybackViewController.h */,
 				0B6BD5931889158500A7D8F9 /* PlaybackViewController.m */,
-				0B6BD5941889158500A7D8F9 /* PlaybackViewController.xib */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -369,6 +366,17 @@
 				C9B0C602187FBE7F002D4A63 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		C9B9CE16188FB990003A0972 /* XIBs */ = {
+			isa = PBXGroup;
+			children = (
+				0B6BD585188914B300A7D8F9 /* MainViewController.xib */,
+				0B6BD58A1889155A00A7D8F9 /* CourseViewController.xib */,
+				0B6BD58F1889157000A7D8F9 /* RecordViewController.xib */,
+				0B6BD5941889158500A7D8F9 /* PlaybackViewController.xib */,
+			);
+			name = XIBs;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

@@ -12,8 +12,7 @@
 @interface MainViewController : UIViewController<UITableViewDelegate, UITableViewDataSource>
 
 
-@property UITableView *courseView;
-@property NSMutableArray *dataArray;
+@property UITableView *courseTableView;
 @property LECHomeViewModel *viewModel;
 
 - (void) changeCoursePage;
