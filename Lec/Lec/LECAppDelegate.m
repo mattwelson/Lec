@@ -28,6 +28,11 @@
     return YES;
 }
 
+-(void)addExampleCoursePopulated
+{
+    
+}
+
 -(void)simpleDataTest
 {
     //[self directInteraction];

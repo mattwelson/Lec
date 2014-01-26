@@ -83,7 +83,6 @@
     CourseCell *cell = [[CourseCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"Cell"];
     
     LECCourseCellViewModel *cellViewModel = [self.viewModel.tableData objectAtIndex:indexPath.row];
-    
     cell.textLabel.text = [cellViewModel titleText];
     cell.detailTextLabel.text = [cellViewModel subText];
     [[LECColourService sharedColourService] addGradientForColour:[cellViewModel colourString] toView:[cell contentView]];
@@ -96,7 +95,7 @@
     if (editingStyle == UITableViewCellEditingStyleDelete)
     {
         [self.viewModel deleteCourseAtIndex:indexPath.row];
-        [self.courseTableView reloadData];
+        [self.courseTableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
     }
 }
 

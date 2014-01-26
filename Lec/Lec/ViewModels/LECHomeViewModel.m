@@ -19,7 +19,6 @@
         for (Course *course in modelData)
         {
             [self.tableData addObject:[LECCourseCellViewModel courseCellWith:course]];
-            NSLog(@"Colour: %@", course.colour);
         }
     }
     return self;

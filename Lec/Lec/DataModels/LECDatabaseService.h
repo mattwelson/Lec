@@ -8,7 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import "Course.h"
-
+#import "Lecture.h"
+#import "Tag.h"
 
 @interface LECDatabaseService : NSObject
 
@@ -19,8 +20,15 @@
 #pragma mark Course Operations
 - (NSMutableArray *) getCourses;
 - (Course *) newCourseForAdding;
-- (BOOL) saveChanges;
 
+#pragma mark Lecture Operations
+- (Lecture *) newLectureForCourse:(Course *)course;
+
+#pragma mark Tag Operations
+-(Tag *) newTagForLecture:(Lecture *)lecture;
+
+#pragma mark General Operations
+- (BOOL) saveChanges;
 - (void) deleteObject:(NSManagedObject *)object;
 
 @end

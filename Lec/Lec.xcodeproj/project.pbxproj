@@ -247,14 +247,7 @@
 			isa = PBXGroup;
 			children = (
 				C9605CAF1889F66300F3DE57 /* Cell View Models */,
-				C9605CA91889F4B800F3DE57 /* LECBaseViewModel.h */,
-				C9605CAA1889F4B800F3DE57 /* LECBaseViewModel.m */,
-				C9605CAC1889F5AD00F3DE57 /* LECHomeViewModel.h */,
-				C9605CAD1889F5AD00F3DE57 /* LECHomeViewModel.m */,
-				8BE7581E188B4EA5007B6C02 /* LECCourseViewModel.h */,
-				8BE7581F188B4EA5007B6C02 /* LECCourseViewModel.m */,
-				8BE75821188B4F23007B6C02 /* LECLectureViewModel.h */,
-				8BE75822188B4F23007B6C02 /* LECLectureViewModel.m */,
+				C9FBD625189495AB00D1A7D6 /* Screen View Models */,
 			);
 			name = "View Model";
 			sourceTree = "<group>";
@@ -364,6 +357,21 @@
 				0B6BD5941889158500A7D8F9 /* PlaybackViewController.xib */,
 			);
 			name = XIBs;
+			sourceTree = "<group>";
+		};
+		C9FBD625189495AB00D1A7D6 /* Screen View Models */ = {
+			isa = PBXGroup;
+			children = (
+				C9605CA91889F4B800F3DE57 /* LECBaseViewModel.h */,
+				C9605CAA1889F4B800F3DE57 /* LECBaseViewModel.m */,
+				C9605CAC1889F5AD00F3DE57 /* LECHomeViewModel.h */,
+				C9605CAD1889F5AD00F3DE57 /* LECHomeViewModel.m */,
+				8BE7581E188B4EA5007B6C02 /* LECCourseViewModel.h */,
+				8BE7581F188B4EA5007B6C02 /* LECCourseViewModel.m */,
+				8BE75821188B4F23007B6C02 /* LECLectureViewModel.h */,
+				8BE75822188B4F23007B6C02 /* LECLectureViewModel.m */,
+			);
+			name = "Screen View Models";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

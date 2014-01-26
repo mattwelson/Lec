@@ -40,11 +40,24 @@ static LECDatabaseService *sharedInstance = nil;
     return [NSMutableArray arrayWithArray:[[courses reverseObjectEnumerator] allObjects]];
 }
 
-// should work!
 - (Course *) newCourseForAdding
 {
     Course *dbCourse = [NSEntityDescription insertNewObjectForEntityForName:@"Course" inManagedObjectContext:self.managedObjectContext];
     return dbCourse;
+}
+
+-(Lecture *) newLectureForCourse:(Course *)course
+{
+    Lecture *dbLecture = [NSEntityDescription insertNewObjectForEntityForName:@"Lecture" inManagedObjectContext:self.managedObjectContext];
+    dbLecture.course = course;
+    return dbLecture;
+}
+
+-(Tag *)newTagForLecture:(Lecture *)lecture
+{
+    Tag *dbTag = [NSEntityDescription insertNewObjectForEntityForName:@"Tag" inManagedObjectContext:self.managedObjectContext];
+    dbTag.lecture = lecture;
+    return dbTag;
 }
 
 - (BOOL) saveChanges
