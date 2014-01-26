@@ -22,6 +22,7 @@
 #import "LECBaseCellViewModel.h"
 #import "LECCourseCellViewModel.h"
 
+#import "LECColorCollectionView.h"
 #import "LECHomeViewModel.h"
 #import "CourseCell.h"
 #import "MainViewController.h"
