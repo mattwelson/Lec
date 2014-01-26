@@ -198,31 +198,31 @@
 -(void)saveCourse{
 #warning temp fix to stop no input for the course name. Will add warning box later
     if (courseNameInput.text.length > 0) {
-    Course *course = [[LECDatabaseService sharedDBService] newCourseForAdding];
-    course.courseName = [courseNameInput text];
-    course.courseDescription = [courseDescriptorInput text];
-    
-    NSArray *colourKeys = [[LECColourService sharedColourService] colourKeys];
-    course.colour = [colourKeys objectAtIndex:arc4random() % [colourKeys count]];
-    course.icon = @"Hat";
-    [[LECDatabaseService sharedDBService] saveChanges]; // saves changes made to course scratch pad
-    
-    [self.viewModel.tableData insertObject:[LECCourseCellViewModel courseCellWith:course] atIndex:0];
-    [self.courseTableView reloadData]; // refreshes table view
+        Course *course = [[LECDatabaseService sharedDBService] newCourseForAdding];
+        course.courseName = [courseNameInput text];
+        course.courseDescription = [courseDescriptorInput text];
+        
+        NSArray *colourKeys = [[LECColourService sharedColourService] colourKeys];
+        course.colour = [colourKeys objectAtIndex:arc4random() % [colourKeys count]];
+        course.icon = @"Hat";
+        [[LECDatabaseService sharedDBService] saveChanges]; // saves changes made to course scratch pad
+        
+        [self.viewModel.tableData insertObject:[LECCourseCellViewModel courseCellWith:course] atIndex:0];
+        [self.courseTableView reloadData]; // refreshes table view
 
-    [UIView animateWithDuration:0.2
-                          delay:0.0
-                        options: UIViewAnimationOptionCurveEaseIn
-                     animations:^{
-                         addCourseView.frame = CGRectMake(0, 0, addCourseView.frame.size.width, 0);
-                         self.courseTableView.frame = CGRectMake(0, 0, 320, self.view.frame.size.height);
-                     }
-                     completion:^(BOOL finished){
-                         [addCourseView removeFromSuperview];
-                         UIImage *plusImg = [UIImage imageNamed:@"nav_add_btn.png"];
-                         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:plusImg style:UIBarButtonItemStylePlain target:self action:@selector(addCourse)];
-                         
-                     }];
+        [UIView animateWithDuration:0.2
+                              delay:0.0
+                            options: UIViewAnimationOptionCurveEaseIn
+                         animations:^{
+                             addCourseView.frame = CGRectMake(0, 0, addCourseView.frame.size.width, 0);
+                             self.courseTableView.frame = CGRectMake(0, 0, 320, self.view.frame.size.height);
+                         }
+                         completion:^(BOOL finished){
+                             [addCourseView removeFromSuperview];
+                             UIImage *plusImg = [UIImage imageNamed:@"nav_add_btn.png"];
+                             self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:plusImg style:UIBarButtonItemStylePlain target:self action:@selector(addCourse)];
+                             
+                         }];
     }
 }
 @end

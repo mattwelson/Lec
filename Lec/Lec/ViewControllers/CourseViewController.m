@@ -27,10 +27,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        selectedCourse = course;
-        NSString *name = selectedCourse.courseName;
-        NSLog(@"Course: [%@] has been pressed!", name);
-        // Custom initialization
+        viewModel = [LECCourseViewModel courseViewModelWithCourse:course];
     }
     return self;
 }
@@ -40,12 +37,17 @@
     [super viewDidLoad];
     [self navagationTopBar];
     // Do any additional setup after loading the view from its nib.
+    for(LECLectureCellViewModel *leccell in viewModel.tableData)
+    {
+        NSLog(@"%@ - %@", leccell.titleText, leccell.subText);
+    }
 }
 
 - (void) navagationTopBar
 {
-    
-    self.navigationItem.title = selectedCourse.courseName;
+    self.navigationItem.title = viewModel.navTitle;
+    [self.navigationController.navigationBar setBarTintColor:[viewModel tintColour]];
+    [self.navigationController.navigationBar setTranslucent:NO];
 }
 
 - (void) backButPressed

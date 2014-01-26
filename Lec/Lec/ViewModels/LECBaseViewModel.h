@@ -13,7 +13,7 @@
 @interface LECBaseViewModel : NSObject
 
 @property NSString *navTitle;
-
+@property UIColor *tintColour;
 @property NSMutableArray *tableData;
 
 @end
