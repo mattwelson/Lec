@@ -10,7 +10,7 @@
 #import "LECImportHeader.h"
 
 @interface CourseViewController : UIViewController{
-    Course *selectedCourse;
+    LECCourseViewModel *viewModel;
 }
 - (id)initWithCourse:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil selectedCourse:(NSObject *)course;
 

@@ -8,8 +8,8 @@
         <relationship name="lectures" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Lecture" inverseName="course" inverseEntity="Lecture" syncable="YES"/>
     </entity>
     <entity name="Lecture" representedClassName="Lecture" syncable="YES">
-        <attribute name="lectureDescription" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="lectureName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="lectureNumber" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="recordingPath" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="totalTime" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <relationship name="course" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Course" inverseName="lectures" inverseEntity="Course" syncable="YES"/>

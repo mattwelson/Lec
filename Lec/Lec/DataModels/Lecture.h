@@ -2,18 +2,18 @@
 //  Lecture.h
 //  Lec
 //
-//  Created by Matt Welson on 18/01/14.
+//  Created by Matt Welson on 26/01/14.
 //  Copyright (c) 2014 South45. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class Course;
+@class Course, Tag;
 
 @interface Lecture : NSManagedObject
 
-@property (nonatomic, retain) NSString * lectureDescription;
+@property (nonatomic, retain) NSNumber * lectureNumber;
 @property (nonatomic, retain) NSString * lectureName;
 @property (nonatomic, retain) NSString * recordingPath;
 @property (nonatomic, retain) NSNumber * totalTime;
@@ -23,8 +23,8 @@
 
 @interface Lecture (CoreDataGeneratedAccessors)
 
-- (void)addTagsObject:(NSManagedObject *)value;
-- (void)removeTagsObject:(NSManagedObject *)value;
+- (void)addTagsObject:(Tag *)value;
+- (void)removeTagsObject:(Tag *)value;
 - (void)addTags:(NSSet *)values;
 - (void)removeTags:(NSSet *)values;
 

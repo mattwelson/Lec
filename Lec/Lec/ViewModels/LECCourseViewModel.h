@@ -10,7 +10,10 @@
 
 @interface LECCourseViewModel : LECBaseViewModel
 
-@property NSMutableArray *lectures;
 @property Course *course;
+
+@property UIImage *iconImage; // the image that represents the course
+
++(LECCourseViewModel *) courseViewModelWithCourse:(Course *)course;
 
 @end

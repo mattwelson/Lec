@@ -27,7 +27,6 @@
 		8BE7582A188B508D007B6C02 /* icon_checkmark.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BE75826188B508D007B6C02 /* icon_checkmark.png */; };
 		8BE7582B188B508D007B6C02 /* icon_checkmark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BE75827188B508D007B6C02 /* icon_checkmark@2x.png */; };
 		C9605CA21889F3B500F3DE57 /* Course.m in Sources */ = {isa = PBXBuildFile; fileRef = C9605CA11889F3B500F3DE57 /* Course.m */; };
-		C9605CA51889F3B600F3DE57 /* Lecture.m in Sources */ = {isa = PBXBuildFile; fileRef = C9605CA41889F3B600F3DE57 /* Lecture.m */; };
 		C9605CA81889F3B600F3DE57 /* Tag.m in Sources */ = {isa = PBXBuildFile; fileRef = C9605CA71889F3B600F3DE57 /* Tag.m */; };
 		C9605CAB1889F4B800F3DE57 /* LECBaseViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C9605CAA1889F4B800F3DE57 /* LECBaseViewModel.m */; };
 		C9605CAE1889F5AD00F3DE57 /* LECHomeViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C9605CAD1889F5AD00F3DE57 /* LECHomeViewModel.m */; };
@@ -51,6 +50,9 @@
 		C9B0C5FC187FBE7F002D4A63 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9B0C5E0187FBE7F002D4A63 /* CoreData.framework */; };
 		C9B0C604187FBE7F002D4A63 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C9B0C602187FBE7F002D4A63 /* InfoPlist.strings */; };
 		C9B0C606187FBE7F002D4A63 /* LecTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C9B0C605187FBE7F002D4A63 /* LecTests.m */; };
+		C9FBD6281894A2B700D1A7D6 /* Example.m in Sources */ = {isa = PBXBuildFile; fileRef = C9FBD6271894A2B700D1A7D6 /* Example.m */; };
+		C9FBD62B1894B02100D1A7D6 /* Lecture.m in Sources */ = {isa = PBXBuildFile; fileRef = C9FBD62A1894B02100D1A7D6 /* Lecture.m */; };
+		C9FBD62E1894B26B00D1A7D6 /* LECLectureCellViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C9FBD62D1894B26B00D1A7D6 /* LECLectureCellViewModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -96,8 +98,6 @@
 		8BE75827188B508D007B6C02 /* icon_checkmark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_checkmark@2x.png"; sourceTree = "<group>"; };
 		C9605CA01889F3B500F3DE57 /* Course.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Course.h; path = DataModels/Course.h; sourceTree = "<group>"; };
 		C9605CA11889F3B500F3DE57 /* Course.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Course.m; path = DataModels/Course.m; sourceTree = "<group>"; };
-		C9605CA31889F3B600F3DE57 /* Lecture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Lecture.h; path = DataModels/Lecture.h; sourceTree = "<group>"; };
-		C9605CA41889F3B600F3DE57 /* Lecture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Lecture.m; path = DataModels/Lecture.m; sourceTree = "<group>"; };
 		C9605CA61889F3B600F3DE57 /* Tag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Tag.h; path = DataModels/Tag.h; sourceTree = "<group>"; };
 		C9605CA71889F3B600F3DE57 /* Tag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Tag.m; path = DataModels/Tag.m; sourceTree = "<group>"; };
 		C9605CA91889F4B800F3DE57 /* LECBaseViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LECBaseViewModel.h; path = ViewModels/LECBaseViewModel.h; sourceTree = "<group>"; };
@@ -132,6 +132,12 @@
 		C9B0C601187FBE7F002D4A63 /* LecTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "LecTests-Info.plist"; sourceTree = "<group>"; };
 		C9B0C603187FBE7F002D4A63 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		C9B0C605187FBE7F002D4A63 /* LecTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LecTests.m; sourceTree = "<group>"; };
+		C9FBD6261894A2B700D1A7D6 /* Example.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Example.h; path = Test/Example.h; sourceTree = "<group>"; };
+		C9FBD6271894A2B700D1A7D6 /* Example.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Example.m; path = Test/Example.m; sourceTree = "<group>"; };
+		C9FBD6291894B02100D1A7D6 /* Lecture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Lecture.h; path = DataModels/Lecture.h; sourceTree = "<group>"; };
+		C9FBD62A1894B02100D1A7D6 /* Lecture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Lecture.m; path = DataModels/Lecture.m; sourceTree = "<group>"; };
+		C9FBD62C1894B26B00D1A7D6 /* LECLectureCellViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LECLectureCellViewModel.h; path = "Cell View Models/LECLectureCellViewModel.h"; sourceTree = "<group>"; };
+		C9FBD62D1894B26B00D1A7D6 /* LECLectureCellViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LECLectureCellViewModel.m; path = "Cell View Models/LECLectureCellViewModel.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -237,15 +243,19 @@
 				C9605CB11889F6CC00F3DE57 /* LECBaseCellViewModel.m */,
 				C9605CB81889F99800F3DE57 /* LECCourseCellViewModel.h */,
 				C9605CB91889F99800F3DE57 /* LECCourseCellViewModel.m */,
+				C9FBD62C1894B26B00D1A7D6 /* LECLectureCellViewModel.h */,
+				C9FBD62D1894B26B00D1A7D6 /* LECLectureCellViewModel.m */,
 			);
 			name = "Cell View Models";
 			sourceTree = "<group>";
 		};
-		C9A0047E1889EBD200D27A6C /* Model */ = {
+		C9A0047E1889EBD200D27A6C /* Test */ = {
 			isa = PBXGroup;
 			children = (
+				C9FBD6261894A2B700D1A7D6 /* Example.h */,
+				C9FBD6271894A2B700D1A7D6 /* Example.m */,
 			);
-			name = Model;
+			name = Test;
 			sourceTree = "<group>";
 		};
 		C9A0047F1889EBDC00D27A6C /* View Model */ = {
@@ -261,10 +271,10 @@
 			isa = PBXGroup;
 			children = (
 				C9B0C5EE187FBE7F002D4A63 /* Lec.xcdatamodeld */,
+				C9FBD6291894B02100D1A7D6 /* Lecture.h */,
+				C9FBD62A1894B02100D1A7D6 /* Lecture.m */,
 				C9605CA61889F3B600F3DE57 /* Tag.h */,
 				C9605CA71889F3B600F3DE57 /* Tag.m */,
-				C9605CA31889F3B600F3DE57 /* Lecture.h */,
-				C9605CA41889F3B600F3DE57 /* Lecture.m */,
 				C9605CA01889F3B500F3DE57 /* Course.h */,
 				C9605CA11889F3B500F3DE57 /* Course.m */,
 			);
@@ -309,7 +319,7 @@
 				8BE7581A188B48B1007B6C02 /* Views */,
 				C9A004801889EBF100D27A6C /* Database */,
 				C9A0047F1889EBDC00D27A6C /* View Model */,
-				C9A0047E1889EBD200D27A6C /* Model */,
+				C9A0047E1889EBD200D27A6C /* Test */,
 				0B6BD59718891B0C00A7D8F9 /* Assets */,
 				0B6BD59D18891F8E00A7D8F9 /* Cells */,
 				0B6BD5821889147200A7D8F9 /* ViewControllers */,
@@ -488,6 +498,7 @@
 			files = (
 				C9605CA81889F3B600F3DE57 /* Tag.m in Sources */,
 				0B6BD5A018891FB300A7D8F9 /* CourseCell.m in Sources */,
+				C9FBD6281894A2B700D1A7D6 /* Example.m in Sources */,
 				C9B0C5E9187FBE7F002D4A63 /* main.m in Sources */,
 				C9B0C5F0187FBE7F002D4A63 /* Lec.xcdatamodeld in Sources */,
 				8BE7581D188B48DD007B6C02 /* LECTableView.m in Sources */,
@@ -495,8 +506,9 @@
 				0B6BD5951889158500A7D8F9 /* PlaybackViewController.m in Sources */,
 				C9605CC4188A179400F3DE57 /* LECColourService.m in Sources */,
 				8BE75820188B4EA5007B6C02 /* LECCourseViewModel.m in Sources */,
-				C9605CA51889F3B600F3DE57 /* Lecture.m in Sources */,
+				C9FBD62B1894B02100D1A7D6 /* Lecture.m in Sources */,
 				C9605CAE1889F5AD00F3DE57 /* LECHomeViewModel.m in Sources */,
+				C9FBD62E1894B26B00D1A7D6 /* LECLectureCellViewModel.m in Sources */,
 				C9605CB21889F6CC00F3DE57 /* LECBaseCellViewModel.m in Sources */,
 				C9605CBA1889F99800F3DE57 /* LECCourseCellViewModel.m in Sources */,
 				8BE75823188B4F23007B6C02 /* LECLectureViewModel.m in Sources */,

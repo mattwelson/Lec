@@ -7,6 +7,7 @@
 //
 
 #import "LECAppDelegate.h"
+#import "Example.h"
 
 @implementation LECAppDelegate
 
@@ -16,6 +17,9 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    // Uncomment to get a new course with a lecture and a few tags
+    //[Example addCoursePopulated];
+    
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:[[MainViewController alloc] initWithNibName:@"MainViewController" bundle:nil]];
     //[navigationController setNavigationBarHidden:YES];
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -23,69 +27,10 @@
     [self.window setBackgroundColor:[UIColor whiteColor]];
     [self.window makeKeyAndVisible];
     
-#warning remove test logic
-    //[self simpleDataTest];
     return YES;
 }
 
--(void)addExampleCoursePopulated
-{
-    
-}
 
--(void)simpleDataTest
-{
-    //[self directInteraction];
-    [self dbService];
-}
-
--(void)directInteraction
-{
-    NSManagedObjectContext *context = [self managedObjectContext];
-    Course *course = [NSEntityDescription insertNewObjectForEntityForName:@"Course" inManagedObjectContext:context];
-    course.courseName = @"Hi Mom!";
-    course.courseDescription = @"Different description!";
-    course.colour = @"Purply-pink!";
-    course.icon = @"Jolly roger";
-    NSError *error;
-    if (![context save:&error])
-    {
-        NSLog(@"GODDAMMIT! %@", [error localizedDescription]);
-    }
-    
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Course" inManagedObjectContext:context];
-    [fetchRequest setEntity:entity];
-    NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
-    if (error) NSLog(@"Fetching failed");
-    for (Course *c in fetchedObjects){
-        NSLog(@"%@: %@", c.courseName, c.courseDescription);
-    }
-}
-
--(void)dbService
-{
-    /* Done in init of view model or else stored in app delegate globally */
-    LECDatabaseService *dbService = [LECDatabaseService sharedDBService];
-    
-    /* Retrieves an empty course ready to be editted */
-    Course *course = [dbService newCourseForAdding];
-    
-    /* Looks chunky but will be done through direct user editting (and perhaps defaults ) */
-    course.courseName = @"Hi Shared Service!";
-    course.courseDescription = @"Different description!";
-    course.colour = @"Purple";
-    course.icon = @"Jolly roger";
-    
-    /* Saves changes with error handling */
-    [dbService saveChanges];
-    
-    /* Just prints out the retrieved objects from db */
-    NSArray *fetchedObjects = [dbService getCourses];
-    for (Course *c in fetchedObjects){
-        NSLog(@"%@: %@", c.courseName, c.courseDescription);
-    }
-}
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {
