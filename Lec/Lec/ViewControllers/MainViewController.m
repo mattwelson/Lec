@@ -159,16 +159,17 @@
     [self.navigationController pushViewController:[[CourseViewController alloc] initWithNibName:@"CourseViewController" bundle:nil] animated:YES];
 }
 
+#pragma mark Methods for that little add course view
 -(void)addCourseIntoView{
     addCourseView = [[UIView alloc]initWithFrame:CGRectMake(0, 60, self.view.frame.size.width, 0)];
     addCourseView.backgroundColor = [UIColor whiteColor];
     
-    courseNameInput = [[UITextField alloc]initWithFrame:CGRectMake(60, 10, self.view.frame.size.width-60, 50)];
+    courseNameInput = [[UITextField alloc]initWithFrame:CGRectMake(60, 10, self.view.frame.size.width-60, 0)];
     courseNameInput.placeholder = @"Course Name";
     [courseNameInput setFont:[UIFont fontWithName:@"Avenir" size:30]];
     [addCourseView addSubview:courseNameInput];
     
-    courseDescriptorInput = [[UITextField alloc]initWithFrame:CGRectMake(60, 50, self.view.frame.size.width-60,50)];
+    courseDescriptorInput = [[UITextField alloc]initWithFrame:CGRectMake(60, 50, self.view.frame.size.width-60,0)];
     courseDescriptorInput.placeholder = @"Course Description";
     [courseDescriptorInput setFont:[UIFont fontWithName:DEFAUILTFONT size:15]];
     [addCourseView addSubview:courseDescriptorInput];
@@ -176,6 +177,8 @@
 
 - (void)addCourse
 {
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon_checkmark.png"] style:UIBarButtonItemStylePlain target:self action:@selector(saveCourse)];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon_cancel.png"] style:UIBarButtonItemStylePlain target:self action:@selector(cancelSaveCourse)];
     //This is where we will add Courses to the tableView
     [UIView animateWithDuration:0.2
                           delay:0.0
@@ -184,10 +187,8 @@
                          [self addCourseIntoView];
                          addCourseView.frame = CGRectMake(0, 60, self.view.frame.size.width, 100);
                          self.courseTableView.frame = CGRectMake(0, 100, 320, self.view.frame.size.height);
-                         
-                         
-                         UIImage *tickImg = [UIImage imageNamed:@"icon_checkmark.png"];
-                         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:tickImg style:UIBarButtonItemStylePlain target:self action:@selector(saveCourse)];
+                        courseNameInput.frame = CGRectMake(60, 10, self.view.frame.size.width-60, 50);
+                         courseDescriptorInput.frame = CGRectMake(60, 50, self.view.frame.size.width-60,50);
                      }
                      completion:^(BOOL finished){
                          [courseNameInput becomeFirstResponder];
@@ -211,6 +212,11 @@
     [self.viewModel.tableData insertObject:[LECCourseCellViewModel courseCellWith:course] atIndex:0];
     [self.courseTableView reloadData]; // refreshes table view
 
+    UIImage *plusImg = [UIImage imageNamed:@"nav_add_btn.png"];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:plusImg style:UIBarButtonItemStylePlain target:self action:@selector(addCourse)];
+        
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav_add_btn.png"] style:UIBarButtonItemStylePlain target:self action:@selector(colorViewAppear)];
+        
     [UIView animateWithDuration:0.2
                           delay:0.0
                         options: UIViewAnimationOptionCurveEaseIn
@@ -220,10 +226,30 @@
                      }
                      completion:^(BOOL finished){
                          [addCourseView removeFromSuperview];
-                         UIImage *plusImg = [UIImage imageNamed:@"nav_add_btn.png"];
-                         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:plusImg style:UIBarButtonItemStylePlain target:self action:@selector(addCourse)];
                          
                      }];
     }
+}
+
+
+-(void)cancelSaveCourse{
+    UIImage *plusImg = [UIImage imageNamed:@"nav_add_btn.png"];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:plusImg style:UIBarButtonItemStylePlain target:self action:@selector(addCourse)];
+    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav_add_btn.png"] style:UIBarButtonItemStylePlain target:self action:@selector(colorViewAppear)];
+    
+    [UIView animateWithDuration:0.2
+                          delay:0.0
+                        options: UIViewAnimationOptionCurveEaseIn
+                     animations:^{
+                         addCourseView.frame = CGRectMake(0, 0, addCourseView.frame.size.width, 0);
+                         self.courseTableView.frame = CGRectMake(0, 0, 320, self.view.frame.size.height);
+                     }
+                     completion:^(BOOL finished){
+                         [addCourseView removeFromSuperview];
+                         
+                     }];
+    
+    
 }
 @end
