@@ -11,5 +11,6 @@
 @interface LECCourseViewModel : LECBaseViewModel
 
 @property NSMutableArray *lectures;
+@property Course *course;
 
 @end
