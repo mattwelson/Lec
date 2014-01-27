@@ -46,7 +46,8 @@
 - (void) navagationTopBar
 {
     self.navigationItem.title = viewModel.navTitle;
-    [self.navigationController.navigationBar setBarTintColor:[viewModel tintColour]];
+    //[self.navigationController.navigationBar setBarTintColor:[viewModel tintColour]];
+    [self.navigationController.navigationBar setBackgroundImage:[[LECColourService sharedColourService] navGradientForColour:[[viewModel course] colour]] forBarMetrics:UIBarMetricsDefault];
     [self.navigationController.navigationBar setTranslucent:NO];
 }
 
