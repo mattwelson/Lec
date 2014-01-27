@@ -13,6 +13,7 @@
 
 
 @property UITableView *courseTableView;
+@property UICollectionView *colorView;
 @property LECHomeViewModel *viewModel;
 
 - (void) changeCoursePage;

@@ -18,6 +18,7 @@
     [courseCellModel setTitleText:[course courseName]];
     [courseCellModel setSubText:[course courseDescription]];
     [courseCellModel setTintColour:[[LECColourService sharedColourService] baseColourFor:[course colour]]];
+    [courseCellModel setIcon:[course icon]];
     
     [courseCellModel setColourString:[course colour]];
     
