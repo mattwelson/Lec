@@ -211,14 +211,14 @@
     
     courseNameInput = [[UITextField alloc]initWithFrame:CGRectMake(60, 10, self.view.frame.size.width-60, 0)];
     courseNameInput.placeholder = @"Course Name";
-    [courseNameInput setFont:[UIFont fontWithName:DEFAULTFONT size:30]];
+    [courseNameInput setFont:[UIFont fontWithName:DEFAULTFONT size:COURSENAMEECELLFONTSIZE]];
     [courseNameInput setTextColor:HEADERCOLOR];
     [courseNameInput setAutocapitalizationType:UITextAutocapitalizationTypeWords];
     [addCourseView addSubview:courseNameInput];
     
     courseDescriptorInput = [[UITextField alloc]initWithFrame:CGRectMake(60, 50, self.view.frame.size.width-60,0)];
     courseDescriptorInput.placeholder = @"Course Description";
-    [courseDescriptorInput setFont:[UIFont fontWithName:DEFAULTFONT size:15]];
+    [courseDescriptorInput setFont:[UIFont fontWithName:DEFAULTFONT size:COURSEDESCRIPTIONCELLFONTSIZE]];
     [courseDescriptorInput setTextColor:HEADERCOLOR];
     [courseDescriptorInput setAutocapitalizationType:UITextAutocapitalizationTypeWords];
     [addCourseView addSubview:courseDescriptorInput];
