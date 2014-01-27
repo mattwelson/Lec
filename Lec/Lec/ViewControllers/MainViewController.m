@@ -296,22 +296,7 @@
         [self.viewModel.tableData insertObject:[LECCourseCellViewModel courseCellWith:course] atIndex:0];
         [self.courseTableView reloadData]; // refreshes table view
 
-    UIImage *plusImg = [UIImage imageNamed:@"nav_add_btn.png"];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:plusImg style:UIBarButtonItemStylePlain target:self action:@selector(addCourse)];
-        
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav_add_btn.png"] style:UIBarButtonItemStylePlain target:self action:@selector(colorViewAppear)];
-        
-    [UIView animateWithDuration:0.2
-                          delay:0.0
-                        options: UIViewAnimationOptionCurveEaseIn
-                     animations:^{
-                         addCourseView.frame = CGRectMake(0, 0, addCourseView.frame.size.width, 0);
-                         self.courseTableView.frame = CGRectMake(0, 0, 320, self.view.frame.size.height);
-                     }
-                     completion:^(BOOL finished){
-                         [addCourseView removeFromSuperview];
-                         
-                     }];
+        [self closeSaveCourse];
     }
 }
 
