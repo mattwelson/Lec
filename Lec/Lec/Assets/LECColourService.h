@@ -11,6 +11,7 @@
 @interface LECColourService : NSObject
 
 @property NSDictionary *colourDictionary;
+@property UIImage *originalHeaderImage;
 
 + (LECColourService *)sharedColourService;
 
@@ -22,6 +23,7 @@
 
 -(void) addGradientForColour:(NSString *)colour toView:(UIView *)view;
 -(void)changeGradientToColour:(NSString *)colour forView:(UIView *)view;
+
 -(UIImage *)navGradientForColour:(NSString *)colour;
 
 @end

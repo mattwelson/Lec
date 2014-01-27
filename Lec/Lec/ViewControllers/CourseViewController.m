@@ -43,10 +43,16 @@
     }
 }
 
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [self.navigationController.navigationBar setBackgroundImage:[[LECColourService sharedColourService] originalHeaderImage] forBarMetrics:UIBarMetricsDefault];
+}
+
 - (void) navagationTopBar
 {
     self.navigationItem.title = viewModel.navTitle;
     //[self.navigationController.navigationBar setBarTintColor:[viewModel tintColour]];
+    [[LECColourService sharedColourService] setOriginalHeaderImage:[self.navigationController.navigationBar backgroundImageForBarMetrics:UIBarMetricsDefault]];
     [self.navigationController.navigationBar setBackgroundImage:[[LECColourService sharedColourService] navGradientForColour:[[viewModel course] colour]] forBarMetrics:UIBarMetricsDefault];
     [self.navigationController.navigationBar setTranslucent:NO];
 }
