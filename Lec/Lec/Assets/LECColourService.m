@@ -67,6 +67,9 @@ static LECColourService *sharedService;
     [[view layer] insertSublayer:gradient atIndex:0];
 }
 
+
+
+
 -(UIImage *)navGradientForColour:(NSString *)colour
 {
     CAGradientLayer *gradient = [CAGradientLayer layer];
