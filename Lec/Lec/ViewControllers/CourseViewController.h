@@ -13,6 +13,7 @@
     LECCourseViewModel *viewModel;
 }
 
+@property UITableView *courseTableView;
 @property UITableView *lectureTableView;
 
 - (id)initWithCourse:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil selectedCourse:(NSObject *)course;

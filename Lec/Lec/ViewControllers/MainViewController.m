@@ -43,10 +43,9 @@
     [self navagationTopBar];
     [self courseTableViewSetup];
     [self addCourseIntoView];
+    
 }
 -(void)viewDidAppear:(BOOL)animated{
-    [self.navigationController.navigationBar setBarTintColor:[UIColor whiteColor]];
-    [self.navigationController.navigationBar setTranslucent:NO];
 }
 
 - (void)didReceiveMemoryWarning
@@ -57,6 +56,7 @@
 
 - (void) navagationTopBar
 {
+    //self.navigationController.navigationBar.frame = CGRectMake(0, 0, 320, 68);
     UIImage *plusImg = [UIImage imageNamed:@"nav_add_btn.png"];
     self.navigationItem.title = self.viewModel.navTitle;
         
@@ -68,6 +68,7 @@
     self.navigationController.navigationBar.tintColor = NAVTINTCOLOR;
 
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:plusImg style:UIBarButtonItemStylePlain target:self action:@selector(addCourse)];
+    
 }
 
 - (void) colorViewAppear
@@ -161,6 +162,13 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     Course *selectedCourse = [[self.viewModel.tableData objectAtIndex:indexPath.row] course];
+    
+    
+    //CODE TO ADJUST TO COURSEVIEW NAV
+    self.navigationController.navigationBar.frame = CGRectMake(0, 0, 320, 150);
+    [self.navigationController.navigationBar setBackgroundImage:[[LECColourService sharedColourService] navGradientForColour:[selectedCourse colour]navHeight:150] forBarMetrics:UIBarMetricsDefault];
+
+    
     [self.navigationController pushViewController:[[CourseViewController alloc] initWithCourse:@"CourseViewController" bundle:nil selectedCourse:selectedCourse] animated:YES];
 }
 
