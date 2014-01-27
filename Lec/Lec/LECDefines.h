@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-#define DEFAUILTFONT @"Avenir"
+#define DEFAULTFONT @"Avenir"
 #define COURSENAMEECELLFONTSIZE 32
 #define COURSEDESCRIPTIONCELLFONTSIZE 14
 

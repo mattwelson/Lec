@@ -16,12 +16,12 @@
     if (self) {
         self.courseNameLabel = [[UILabel alloc]initWithFrame:CGRectMake(80, 20, self.frame.size.width-80, 40)];
         self.courseNameLabel.textColor = [UIColor whiteColor];
-        self.courseNameLabel.font = [UIFont fontWithName:DEFAUILTFONT size:COURSENAMEECELLFONTSIZE];
+        self.courseNameLabel.font = [UIFont fontWithName:DEFAULTFONT size:COURSENAMEECELLFONTSIZE];
         [self addSubview:self.courseNameLabel];
         
         self.courseDescriptionLabel = [[UILabel alloc]initWithFrame:CGRectMake(80, 50, self.frame.size.width-80, 40)];
         self.courseDescriptionLabel.textColor = [UIColor whiteColor];
-        self.courseDescriptionLabel.font = [UIFont fontWithName:DEFAUILTFONT size:COURSEDESCRIPTIONCELLFONTSIZE];
+        self.courseDescriptionLabel.font = [UIFont fontWithName:DEFAULTFONT size:COURSEDESCRIPTIONCELLFONTSIZE];
         [self addSubview:self.courseDescriptionLabel];
 
         CGRect frame = [self frame];

@@ -202,12 +202,12 @@
     
     courseNameInput = [[UITextField alloc]initWithFrame:CGRectMake(60, 10, self.view.frame.size.width-60, 0)];
     courseNameInput.placeholder = @"Course Name";
-    [courseNameInput setFont:[UIFont fontWithName:@"Avenir" size:30]];
+    [courseNameInput setFont:[UIFont fontWithName:DEFAULTFONT size:30]];
     [addCourseView addSubview:courseNameInput];
     
     courseDescriptorInput = [[UITextField alloc]initWithFrame:CGRectMake(60, 50, self.view.frame.size.width-60,0)];
     courseDescriptorInput.placeholder = @"Course Description";
-    [courseDescriptorInput setFont:[UIFont fontWithName:DEFAUILTFONT size:15]];
+    [courseDescriptorInput setFont:[UIFont fontWithName:DEFAULTFONT size:15]];
     [addCourseView addSubview:courseDescriptorInput];
     
     colorButtonView = [[UIView alloc]initWithFrame:CGRectMake(-1, -1, 50, 0)];
