@@ -75,6 +75,7 @@
     layout.minimumLineSpacing = 30.0f;
     self.colorView = [[UICollectionView alloc]initWithFrame: [[UIScreen mainScreen] applicationFrame] collectionViewLayout:layout];
     
+    [self.colorView setScrollEnabled:NO];
     [self.colorView setDataSource:self];
     [self.colorView setDelegate:self];
     [self.colorView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"cellIdentifier"];
@@ -203,12 +204,12 @@
     
     courseNameInput = [[UITextField alloc]initWithFrame:CGRectMake(60, 10, self.view.frame.size.width-60, 0)];
     courseNameInput.placeholder = @"Course Name";
-    [courseNameInput setFont:[UIFont fontWithName:DEFAULTFONT size:30]];
+    [courseNameInput setFont:[UIFont fontWithName:DEFAULTFONT size:COURSENAMEECELLFONTSIZE]];
     [addCourseView addSubview:courseNameInput];
     
     courseDescriptorInput = [[UITextField alloc]initWithFrame:CGRectMake(60, 50, self.view.frame.size.width-60,0)];
     courseDescriptorInput.placeholder = @"Course Description";
-    [courseDescriptorInput setFont:[UIFont fontWithName:DEFAULTFONT size:15]];
+    [courseDescriptorInput setFont:[UIFont fontWithName:DEFAULTFONT size:COURSEDESCRIPTIONCELLFONTSIZE]];
     [addCourseView addSubview:courseDescriptorInput];
     
     colorButtonView = [[UIView alloc]initWithFrame:CGRectMake(-1, -1, 50, 0)];
