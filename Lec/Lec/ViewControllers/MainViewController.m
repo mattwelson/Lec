@@ -82,6 +82,7 @@
     layout.minimumLineSpacing = 30.0f;
     self.colorView = [[UICollectionView alloc]initWithFrame: [[UIScreen mainScreen] applicationFrame] collectionViewLayout:layout];
     
+    [self.colorView setScrollEnabled:NO];
     [self.colorView setDataSource:self];
     [self.colorView setDelegate:self];
     [self.colorView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"cellIdentifier"];

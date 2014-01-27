@@ -50,7 +50,7 @@
     [self.navigationController.navigationBar setTranslucent:NO];
 }
 
-- (void) backButPressed
+- (void) backButtPressed
 {
     [self.navigationController popViewControllerAnimated:YES];
 }
