@@ -46,6 +46,10 @@
     
 }
 -(void)viewDidAppear:(BOOL)animated{
+    self.navigationController.navigationBar.frame = CGRectMake(0, 0, 320, 68);
+    [self.navigationController.navigationBar setBackgroundImage:Nil forBarMetrics:UIBarMetricsDefault];
+    [self.navigationController.navigationBar setTitleVerticalPositionAdjustment:0.0f forBarMetrics:UIBarMetricsDefault];
+    [self.navigationController.navigationBar setTranslucent:NO];
 }
 
 - (void)didReceiveMemoryWarning
