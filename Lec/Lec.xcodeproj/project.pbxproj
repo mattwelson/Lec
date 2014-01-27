@@ -20,6 +20,9 @@
 		0B6BD5A018891FB300A7D8F9 /* CourseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B6BD59F18891FB300A7D8F9 /* CourseCell.m */; };
 		0BA86AB818925F1800805240 /* LECColorCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BA86AB718925F1800805240 /* LECColorCollectionView.m */; };
 		73CD6EB21895F06400F183C7 /* LECIconService.m in Sources */ = {isa = PBXBuildFile; fileRef = 73CD6EB11895F06400F183C7 /* LECIconService.m */; };
+		73CD6EB918961B6900F183C7 /* Icons.plist in Resources */ = {isa = PBXBuildFile; fileRef = 73CD6EB818961B6900F183C7 /* Icons.plist */; };
+		73CD6EBC1896328600F183C7 /* subject_cs.png in Resources */ = {isa = PBXBuildFile; fileRef = 73CD6EBA1896328600F183C7 /* subject_cs.png */; };
+		73CD6EBD1896328600F183C7 /* subject_cs@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 73CD6EBB1896328600F183C7 /* subject_cs@2x.png */; };
 		8BE7581D188B48DD007B6C02 /* LECTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BE7581C188B48DD007B6C02 /* LECTableView.m */; };
 		8BE75820188B4EA5007B6C02 /* LECCourseViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BE7581F188B4EA5007B6C02 /* LECCourseViewModel.m */; };
 		8BE75823188B4F23007B6C02 /* LECLectureViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BE75822188B4F23007B6C02 /* LECLectureViewModel.m */; };
@@ -88,6 +91,9 @@
 		73275013188BC5D400F5CB04 /* LECDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LECDefines.h; sourceTree = "<group>"; };
 		73CD6EB01895F06400F183C7 /* LECIconService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LECIconService.h; path = Assets/LECIconService.h; sourceTree = "<group>"; };
 		73CD6EB11895F06400F183C7 /* LECIconService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LECIconService.m; path = Assets/LECIconService.m; sourceTree = "<group>"; };
+		73CD6EB818961B6900F183C7 /* Icons.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Icons.plist; path = Assets/Icons.plist; sourceTree = "<group>"; };
+		73CD6EBA1896328600F183C7 /* subject_cs.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = subject_cs.png; sourceTree = "<group>"; };
+		73CD6EBB1896328600F183C7 /* subject_cs@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "subject_cs@2x.png"; sourceTree = "<group>"; };
 		8B523BB4188B2FAE002796A6 /* LECTableViewDataSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = LECTableViewDataSource.h; path = ViewModels/LECTableViewDataSource.h; sourceTree = "<group>"; };
 		8BE7581B188B48DD007B6C02 /* LECTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LECTableView.h; path = Views/LECTableView.h; sourceTree = "<group>"; };
 		8BE7581C188B48DD007B6C02 /* LECTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LECTableView.m; path = Views/LECTableView.m; sourceTree = "<group>"; };
@@ -188,6 +194,7 @@
 		0B6BD59718891B0C00A7D8F9 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				73CD6EB718961B4600F183C7 /* Icons */,
 				0B6BD59818891B1E00A7D8F9 /* Navigation */,
 			);
 			name = Assets;
@@ -214,6 +221,15 @@
 				0B6BD59F18891FB300A7D8F9 /* CourseCell.m */,
 			);
 			name = Cells;
+			sourceTree = "<group>";
+		};
+		73CD6EB718961B4600F183C7 /* Icons */ = {
+			isa = PBXGroup;
+			children = (
+				73CD6EBA1896328600F183C7 /* subject_cs.png */,
+				73CD6EBB1896328600F183C7 /* subject_cs@2x.png */,
+			);
+			name = Icons;
 			sourceTree = "<group>";
 		};
 		8BE7581A188B48B1007B6C02 /* Views */ = {
@@ -346,6 +362,7 @@
 				C9605CB51889F88B00F3DE57 /* LECImportHeader.h */,
 				73275013188BC5D400F5CB04 /* LECDefines.h */,
 				C9605CBF188A11D300F3DE57 /* Colours.plist */,
+				73CD6EB818961B6900F183C7 /* Icons.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -471,7 +488,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				C9B0C5E7187FBE7F002D4A63 /* InfoPlist.strings in Resources */,
+				73CD6EB918961B6900F183C7 /* Icons.plist in Resources */,
 				C9605CC0188A11D300F3DE57 /* Colours.plist in Resources */,
+				73CD6EBD1896328600F183C7 /* subject_cs@2x.png in Resources */,
 				8BE75829188B508D007B6C02 /* icon_cancel@2x.png in Resources */,
 				8BE75828188B508D007B6C02 /* icon_cancel.png in Resources */,
 				0B6BD59B18891B1E00A7D8F9 /* nav_add_btn.png in Resources */,
@@ -483,6 +502,7 @@
 				C9B0C5F2187FBE7F002D4A63 /* Images.xcassets in Resources */,
 				8BE7582A188B508D007B6C02 /* icon_checkmark.png in Resources */,
 				0B6BD59C18891B1E00A7D8F9 /* nav_add_btn@2x.png in Resources */,
+				73CD6EBC1896328600F183C7 /* subject_cs.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

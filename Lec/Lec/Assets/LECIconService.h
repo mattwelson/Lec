@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "LECImportHeader.h"
 
 @interface LECIconService : NSObject
 
@@ -15,6 +16,7 @@
 + (LECIconService *)sharedIconService;
 
 - (NSArray *) iconKeys;
+-(UIImage *) iconFor:(NSString *)iconName;
 
 -(void) addIcon:(NSString *)icon toView:(UIView *)view;
 

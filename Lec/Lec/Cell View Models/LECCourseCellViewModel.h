@@ -12,7 +12,7 @@
 @interface LECCourseCellViewModel : LECBaseCellViewModel
 
 @property Course *course;
-@property UIImage *icon;
+@property NSString *icon;
 
 +(LECCourseCellViewModel *) courseCellWith:(Course *)course;
 

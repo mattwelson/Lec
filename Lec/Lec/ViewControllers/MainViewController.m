@@ -163,6 +163,7 @@
     LECCourseCellViewModel *cellViewModel = [self.viewModel.tableData objectAtIndex:indexPath.row];
     cell.courseNameLabel.text = [cellViewModel titleText];
     cell.courseDescriptionLabel.text = [cellViewModel subText];
+    [[LECIconService sharedIconService] addIcon:[cellViewModel icon] toView:[cell contentView]];
     [[LECColourService sharedColourService] addGradientForColour:[cellViewModel colourString] toView:[cell contentView]];
     
     return cell;
@@ -275,7 +276,7 @@
         //Manual add colour to database
         course.colour = selectedColor;
         
-        course.icon = @"Hat";
+        course.icon = @"cs";
         [[LECDatabaseService sharedDBService] saveChanges]; // saves changes made to course scratch pad
     //self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav_add_btn.png"] style:UIBarButtonItemStylePlain target:self action:@selector(colorViewAppear)];
         self.navigationItem.leftBarButtonItem = nil;
