@@ -58,7 +58,14 @@
 - (void) navagationTopBar
 {
     UIImage *plusImg = [UIImage imageNamed:@"nav_add_btn.png"];
-    self.navigationItem.title = @"Lec";
+    self.navigationItem.title = @"Your Courses";
+        
+    [[UINavigationBar appearance] setTitleTextAttributes: @{
+                                                            NSForegroundColorAttributeName: HEADERCOLOR,
+                                                            NSFontAttributeName: [UIFont fontWithName:DEFAULTFONT size:HEADERSIZE]
+                                                            }];
+    
+    self.navigationController.navigationBar.tintColor = NAVTINTCOLOR;
 
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:plusImg style:UIBarButtonItemStylePlain target:self action:@selector(addCourse)];
 }
@@ -67,7 +74,7 @@
 {
     [self.view endEditing:YES];
     
-    UIImageView *colorHolder = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
+    //UIImageView *colorHolder = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
     
     UICollectionViewFlowLayout *layout=[[UICollectionViewFlowLayout alloc] init];
     
@@ -80,7 +87,7 @@
     [self.colorView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"cellIdentifier"];
     self.colorView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0];
     
-    [colorHolder setBackgroundColor:[[UIColor blackColor] colorWithAlphaComponent:0.9]];
+    //[colorHolder setBackgroundColor:[[UIColor blackColor] colorWithAlphaComponent:0.9]];
     
     //Creates the array based on the plist
     colorArray =  [[LECColourService sharedColourService]colourKeys];
@@ -90,7 +97,7 @@
                           delay:0.0
                         options: UIViewAnimationOptionCurveEaseIn
                      animations:^{
-                         self.colorView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.7];
+                         self.colorView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.8];
 
                      }
                      completion:^(BOOL finished){
@@ -204,11 +211,15 @@
     courseNameInput = [[UITextField alloc]initWithFrame:CGRectMake(60, 10, self.view.frame.size.width-60, 0)];
     courseNameInput.placeholder = @"Course Name";
     [courseNameInput setFont:[UIFont fontWithName:DEFAULTFONT size:30]];
+    [courseNameInput setTextColor:HEADERCOLOR];
+    [courseNameInput setAutocapitalizationType:UITextAutocapitalizationTypeWords];
     [addCourseView addSubview:courseNameInput];
     
     courseDescriptorInput = [[UITextField alloc]initWithFrame:CGRectMake(60, 50, self.view.frame.size.width-60,0)];
     courseDescriptorInput.placeholder = @"Course Description";
     [courseDescriptorInput setFont:[UIFont fontWithName:DEFAULTFONT size:15]];
+    [courseDescriptorInput setTextColor:HEADERCOLOR];
+    [courseDescriptorInput setAutocapitalizationType:UITextAutocapitalizationTypeWords];
     [addCourseView addSubview:courseDescriptorInput];
     
     colorButtonView = [[UIView alloc]initWithFrame:CGRectMake(-1, -1, 50, 0)];
