@@ -58,10 +58,8 @@
 - (void) navagationTopBar
 {
     UIImage *plusImg = [UIImage imageNamed:@"nav_add_btn.png"];
-//    plusItem = [[UIBarButtonItem alloc] initWithImage:plusImg style:UIBarButtonItemStylePlain target:self action:@selector(addCourse)];
-    
     self.navigationItem.title = @"Lec";
-    //self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav_add_btn.png"] style:UIBarButtonItemStylePlain target:self action:@selector(colorViewAppear)];
+
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:plusImg style:UIBarButtonItemStylePlain target:self action:@selector(addCourse)];
 }
 
@@ -163,8 +161,8 @@
     CourseCell *cell = [[CourseCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"Cell"];
     
     LECCourseCellViewModel *cellViewModel = [self.viewModel.tableData objectAtIndex:indexPath.row];
-    cell.textLabel.text = [cellViewModel titleText];
-    cell.detailTextLabel.text = [cellViewModel subText];
+    cell.courseNameLabel.text = [cellViewModel titleText];
+    cell.courseDescriptionLabel.text = [cellViewModel subText];
     [[LECColourService sharedColourService] addGradientForColour:[cellViewModel colourString] toView:[cell contentView]];
     
     return cell;
@@ -201,7 +199,6 @@
     addCourseView.backgroundColor = [UIColor whiteColor];
     addCourseView.layer.borderWidth = 1;
     addCourseView.layer.borderColor = [UIColor lightGrayColor].CGColor;
-    
     
     courseNameInput = [[UITextField alloc]initWithFrame:CGRectMake(60, 10, self.view.frame.size.width-60, 0)];
     courseNameInput.placeholder = @"Course Name";

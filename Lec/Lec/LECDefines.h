@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 
 #define DEFAUILTFONT @"Avenir"
+#define COURSENAMEECELLFONTSIZE 32
+#define COURSEDESCRIPTIONCELLFONTSIZE 14
 
 @interface LECDefines : NSObject
 

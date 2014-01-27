@@ -11,4 +11,7 @@
 
 @interface CourseCell : UITableViewCell
 
+@property UILabel *courseNameLabel;
+@property UILabel *courseDescriptionLabel;
+
 @end
