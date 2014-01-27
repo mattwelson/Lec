@@ -20,6 +20,7 @@
         {
             [self.tableData addObject:[LECCourseCellViewModel courseCellWith:course]];
         }
+        self.navTitle = @"Your Courses"; // This is where this should be set.
     }
     return self;
 }

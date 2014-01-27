@@ -18,8 +18,8 @@
     UIView *colorButtonView;
     UIView *iconButtonView;
     UIButton *colorPickerButton;
-    NSArray *colorArray;
-    NSString *selectedColor;
+    NSArray *colorArray; // View model?
+    NSString *selectedColor; // View model?
 }
 
 @end
@@ -58,7 +58,7 @@
 - (void) navagationTopBar
 {
     UIImage *plusImg = [UIImage imageNamed:@"nav_add_btn.png"];
-    self.navigationItem.title = @"Your Courses";
+    self.navigationItem.title = self.viewModel.navTitle;
         
     [[UINavigationBar appearance] setTitleTextAttributes: @{
                                                             NSForegroundColorAttributeName: HEADERCOLOR,

@@ -12,6 +12,9 @@
 @interface CourseViewController : UIViewController{
     LECCourseViewModel *viewModel;
 }
+
+@property UITableView *lectureTableView;
+
 - (id)initWithCourse:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil selectedCourse:(NSObject *)course;
 
 @end
