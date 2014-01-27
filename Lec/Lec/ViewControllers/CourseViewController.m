@@ -35,12 +35,16 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self navagationTopBar];
     // Do any additional setup after loading the view from its nib.
     for(LECLectureCellViewModel *leccell in viewModel.tableData)
     {
         NSLog(@"%@ - %@", leccell.titleText, leccell.subText);
     }
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    [self navagationTopBar];
 }
 
 -(void)viewWillDisappear:(BOOL)animated
