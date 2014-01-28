@@ -169,8 +169,8 @@
     
     
     //CODE TO ADJUST TO COURSEVIEW NAV
-    self.navigationController.navigationBar.frame = CGRectMake(0, 0, 320, 150);
-    [self.navigationController.navigationBar setBackgroundImage:[[LECColourService sharedColourService] navGradientForColour:[selectedCourse colour]navHeight:150] forBarMetrics:UIBarMetricsDefault];
+//    self.navigationController.navigationBar.frame = CGRectMake(0, 0, 320, 150);
+//    [self.navigationController.navigationBar setBackgroundImage:[[LECColourService sharedColourService] navGradientForColour:[selectedCourse colour]navHeight:150] forBarMetrics:UIBarMetricsDefault];
 
     
     [self.navigationController pushViewController:[[CourseViewController alloc] initWithCourse:@"CourseViewController" bundle:nil selectedCourse:selectedCourse] animated:YES];

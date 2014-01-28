@@ -24,6 +24,6 @@
 -(void) addGradientForColour:(NSString *)colour toView:(UIView *)view;
 -(void)changeGradientToColour:(NSString *)colour forView:(UIView *)view;
 
--(UIImage *)navGradientForColour:(NSString *)colour navHeight:(int) height;
+-(UIImage *)navGradientForColour:(NSString *)colour;
 
 @end

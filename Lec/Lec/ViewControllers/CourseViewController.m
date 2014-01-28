@@ -49,14 +49,14 @@
     [self courseTableViewSetup];
 }
 
--(void)viewWillDisappear:(BOOL)animated
-{
-    //[self.navigationController.navigationBar setBackgroundImage:[[LECColourService sharedColourService] originalHeaderImage] forBarMetrics:UIBarMetricsDefault];
-    self.navigationController.navigationBar.frame = CGRectMake(0, 0, 320, 68);
-    [self.navigationController.navigationBar setBackgroundImage:Nil forBarMetrics:UIBarMetricsDefault];
-    [self.navigationController.navigationBar setTitleVerticalPositionAdjustment:0.0f forBarMetrics:UIBarMetricsDefault];
-    [self.navigationController.navigationBar setTranslucent:NO];
-}
+//-(void)viewWillDisappear:(BOOL)animated
+//{
+//    //[self.navigationController.navigationBar setBackgroundImage:[[LECColourService sharedColourService] originalHeaderImage] forBarMetrics:UIBarMetricsDefault];
+//    self.navigationController.navigationBar.frame = CGRectMake(0, 0, 320, 68);
+//    [self.navigationController.navigationBar setBackgroundImage:Nil forBarMetrics:UIBarMetricsDefault];
+//    [self.navigationController.navigationBar setTitleVerticalPositionAdjustment:0.0f forBarMetrics:UIBarMetricsDefault];
+//    [self.navigationController.navigationBar setTranslucent:NO];
+//}
 
 
 
@@ -66,8 +66,10 @@
     
     self.navigationItem.title = viewModel.navTitle;
     //[self.navigationController.navigationBar setBarTintColor:[viewModel tintColour]];
-    [[LECColourService sharedColourService] setOriginalHeaderImage:[self.navigationController.navigationBar backgroundImageForBarMetrics:UIBarMetricsDefault]];
-    [self.navigationController.navigationBar setTitleVerticalPositionAdjustment:-50.0f forBarMetrics:UIBarMetricsDefault];
+//    [[LECColourService sharedColourService] setOriginalHeaderImage:[self.navigationController.navigationBar backgroundImageForBarMetrics:UIBarMetricsDefault]];
+//    [self.navigationController.navigationBar setTitleVerticalPositionAdjustment:-50.0f forBarMetrics:UIBarMetricsDefault];
+    [self.navigationController.navigationBar setBackgroundImage:[[LECColourService sharedColourService] navGradientForColour:[[viewModel course] colour]] forBarMetrics:UIBarMetricsDefault];
+    
     //[self.navigationController.navigationBar setTitleTextAttributes:];
     
 
