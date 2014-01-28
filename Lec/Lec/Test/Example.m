@@ -18,7 +18,7 @@
     newCourse.courseName = @"Test101";
     newCourse.courseDescription = @"An introduction to testing";
     newCourse.colour = @"Red";
-    newCourse.icon = @"Warning";
+    newCourse.icon = @"cs";
     [dbService saveChanges];
     
     // Add lecture

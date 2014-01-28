@@ -20,7 +20,7 @@
     cellViewModel.titleText = [NSString stringWithFormat:@"Lecture %@",lecture.lectureNumber];
     cellViewModel.subText = [lecture lectureName];
     // set accessory and has recorded!
-    
+    cellViewModel.colourString = [[lecture course] colour];
     return cellViewModel;
 }
 

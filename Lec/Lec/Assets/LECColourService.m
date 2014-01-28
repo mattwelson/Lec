@@ -81,19 +81,4 @@ static LECColourService *sharedService;
     [[view layer] insertSublayer:gradient atIndex:0];
     
 }
-
-
--(UIImage *)navGradientForColour:(NSString *)colour
-{
-    CAGradientLayer *gradient = [CAGradientLayer layer];
-    [gradient setColors:[NSArray arrayWithObjects:
-                         (id)[[self highlightColourFor:colour] CGColor],
-                         (id)[[self baseColourFor:colour] CGColor], nil]];
-    [gradient setFrame:CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, 68)];
-    UIGraphicsBeginImageContext([gradient frame].size);
-    [gradient renderInContext:UIGraphicsGetCurrentContext()];
-    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    return image;
-}
 @end

@@ -11,8 +11,6 @@
 
 @interface LECBaseCellViewModel : NSObject
 
-@property LECColourService *colourService;
-
 @property NSString *titleText;
 @property NSString *subText;
 @property UIColor *tintColour;

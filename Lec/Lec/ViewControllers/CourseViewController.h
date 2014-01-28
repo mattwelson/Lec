@@ -9,13 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "LECImportHeader.h"
 
-@interface CourseViewController : UIViewController{
-    LECCourseViewModel *viewModel;
-}
+@interface CourseViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
-@property UITableView *courseTableView;
+@property LECCourseViewModel *viewModel;
+
 @property UITableView *lectureTableView;
 
-- (id)initWithCourse:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil selectedCourse:(NSObject *)course;
+- (id)initWithCourse:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil selectedCourse:(Course *)course;
 
 @end
