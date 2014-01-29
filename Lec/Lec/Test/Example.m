@@ -50,6 +50,18 @@
     newLecture.lectureName = @"Good luck!";
     newLecture.lectureNumber = [NSNumber numberWithShort:7];
     
+    newLecture = [dbService newLectureForCourse:newCourse];
+    newLecture.lectureName = @"Good luck!";
+    newLecture.lectureNumber = [NSNumber numberWithShort:8];
+    
+    newLecture = [dbService newLectureForCourse:newCourse];
+    newLecture.lectureName = @"Good luck!";
+    newLecture.lectureNumber = [NSNumber numberWithShort:9];
+    
+    newLecture = [dbService newLectureForCourse:newCourse];
+    newLecture.lectureName = @"Good luck!";
+    newLecture.lectureNumber = [NSNumber numberWithShort:10];
+    
     // Add Tags
     Tag *tag;
     NSArray *names = [NSArray arrayWithObjects:@"Hello", @"Friend", @"How", @"Are", @"You", nil];

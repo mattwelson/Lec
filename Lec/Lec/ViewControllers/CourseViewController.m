@@ -71,8 +71,10 @@
 
 - (void) courseTableViewSetup
 {
-    self.lectureTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, 320, self.view.frame.size.height)];
-    [self.lectureTableView setContentSize:CGSizeMake(320.0f, 2000.0f)];
+    self.lectureTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, 320, self.view.frame.size.height-64)];
+    //[self.lectureTableView setContentSize:CGSizeMake(320.0f, 2000.0f)];
+    [self.lectureTableView setContentSize:CGSizeMake(320.0f, self.view.frame.size.height-64)];
+
     [self.lectureTableView setBackgroundColor:[UIColor clearColor]];
     [self.lectureTableView setShowsVerticalScrollIndicator:NO];
     [self.lectureTableView setScrollEnabled:YES];
@@ -104,15 +106,26 @@
 #pragma mark TableView stuff!
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self.viewModel.tableData count] + 1; // fucking terrible. Could use sections?
+    if (section == 0) {
+        return 1;
+    }
+    else {
+        return [self.viewModel.tableData count]; // fucking terrible. Could use sections?
+    }
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    // Return the number of sections.
+    return 2;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
      LectureCell *cell = [[LectureCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"Cell"];
     
-    if (indexPath.row != 0) {
-        LECLectureCellViewModel *cellViewModel = [self.viewModel.tableData objectAtIndex:indexPath.row-1]; // this is fucking terrible.
+    if ([indexPath section] == 1) {
+        LECLectureCellViewModel *cellViewModel = [self.viewModel.tableData objectAtIndex:indexPath.row];
         cell.courseNameLabel.text = [cellViewModel titleText];
         cell.courseDescriptionLabel.text = [cellViewModel subText];
         cell.courseDescriptionLabel.textColor = [[LECColourService sharedColourService] highlightColourFor:cellViewModel.colourString];
@@ -129,8 +142,8 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row == 0) {
-        return 136;
+    if ([indexPath section] == 0) {
+        return 116;
     }
     else {
         return 75;
@@ -150,4 +163,5 @@
     [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor colorWithWhite:1.0 alpha:self.lectureTableView.contentOffset.y/100], NSForegroundColorAttributeName, [UIFont fontWithName:DEFAULTFONT size:HEADERSIZE], NSFontAttributeName, nil]];
     
 }
+
 @end

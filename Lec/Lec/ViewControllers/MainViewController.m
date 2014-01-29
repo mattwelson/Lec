@@ -62,7 +62,7 @@
     UIImage *plusImg = [UIImage imageNamed:@"nav_add_btn.png"];
     self.navigationItem.title = self.viewModel.navTitle;
     self.navigationController.navigationBar.backgroundColor = [UIColor whiteColor];
-    self.navigationController.navigationBar.translucent = YES;
+    self.navigationController.navigationBar.translucent = NO;
     
     [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:HEADERCOLOR, NSForegroundColorAttributeName,[UIFont fontWithName:DEFAULTFONT size:HEADERSIZE], NSFontAttributeName, nil]];
     
@@ -272,7 +272,7 @@
                         options: UIViewAnimationOptionCurveEaseIn
                      animations:^{
                          [self addCourseIntoView];
-                         addCourseView.frame = CGRectMake(0, 64, self.view.frame.size.width, 100);
+                         addCourseView.frame = CGRectMake(0, 0, self.view.frame.size.width, 100);
                          self.courseTableView.frame = CGRectMake(0, 100, 320, self.view.frame.size.height);
                         courseNameInput.frame = CGRectMake(60, 5, self.view.frame.size.width-60, 50);
                          courseDescriptorInput.frame = CGRectMake(60, 50, self.view.frame.size.width-60,50);
