@@ -19,6 +19,7 @@
 -(UIImage *) iconFor:(NSString *)iconName;
 
 -(void) addIcon:(NSString *)icon toView:(UIView *)view;
+-(UIImageView *)addIconCourseScreen:(NSString *)icon toView:(UIView *)view;
 
 
 @end

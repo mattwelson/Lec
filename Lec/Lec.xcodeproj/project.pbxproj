@@ -19,6 +19,7 @@
 		0B6BD59C18891B1E00A7D8F9 /* nav_add_btn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B6BD59A18891B1E00A7D8F9 /* nav_add_btn@2x.png */; };
 		0B6BD5A018891FB300A7D8F9 /* CourseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B6BD59F18891FB300A7D8F9 /* CourseCell.m */; };
 		0BA86AB818925F1800805240 /* LECColorCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BA86AB718925F1800805240 /* LECColorCollectionView.m */; };
+		7318CDA11898AEFD002E23A0 /* LECCourseHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7318CDA01898AEFD002E23A0 /* LECCourseHeaderView.m */; };
 		73CD6EB21895F06400F183C7 /* LECIconService.m in Sources */ = {isa = PBXBuildFile; fileRef = 73CD6EB11895F06400F183C7 /* LECIconService.m */; };
 		73CD6EB918961B6900F183C7 /* Icons.plist in Resources */ = {isa = PBXBuildFile; fileRef = 73CD6EB818961B6900F183C7 /* Icons.plist */; };
 		73CD6EBC1896328600F183C7 /* subject_cs.png in Resources */ = {isa = PBXBuildFile; fileRef = 73CD6EBA1896328600F183C7 /* subject_cs.png */; };
@@ -89,6 +90,8 @@
 		0B6BD59F18891FB300A7D8F9 /* CourseCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CourseCell.m; path = Cells/CourseCell.m; sourceTree = "<group>"; };
 		0BA86AB618925F1800805240 /* LECColorCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LECColorCollectionView.h; path = Views/LECColorCollectionView.h; sourceTree = "<group>"; };
 		0BA86AB718925F1800805240 /* LECColorCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LECColorCollectionView.m; path = Views/LECColorCollectionView.m; sourceTree = "<group>"; };
+		7318CD9F1898AEFD002E23A0 /* LECCourseHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LECCourseHeaderView.h; path = Views/LECCourseHeaderView.h; sourceTree = "<group>"; };
+		7318CDA01898AEFD002E23A0 /* LECCourseHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LECCourseHeaderView.m; path = Views/LECCourseHeaderView.m; sourceTree = "<group>"; };
 		73275013188BC5D400F5CB04 /* LECDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LECDefines.h; sourceTree = "<group>"; };
 		73CD6EB01895F06400F183C7 /* LECIconService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LECIconService.h; path = Assets/LECIconService.h; sourceTree = "<group>"; };
 		73CD6EB11895F06400F183C7 /* LECIconService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LECIconService.m; path = Assets/LECIconService.m; sourceTree = "<group>"; };
@@ -245,6 +248,8 @@
 				8B523BB4188B2FAE002796A6 /* LECTableViewDataSource.h */,
 				0BA86AB618925F1800805240 /* LECColorCollectionView.h */,
 				0BA86AB718925F1800805240 /* LECColorCollectionView.m */,
+				7318CD9F1898AEFD002E23A0 /* LECCourseHeaderView.h */,
+				7318CDA01898AEFD002E23A0 /* LECCourseHeaderView.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -554,6 +559,7 @@
 				C9605CBA1889F99800F3DE57 /* LECCourseCellViewModel.m in Sources */,
 				8BE75823188B4F23007B6C02 /* LECLectureViewModel.m in Sources */,
 				C9605CA21889F3B500F3DE57 /* Course.m in Sources */,
+				7318CDA11898AEFD002E23A0 /* LECCourseHeaderView.m in Sources */,
 				73CD6EB21895F06400F183C7 /* LECIconService.m in Sources */,
 				C9B0C5ED187FBE7F002D4A63 /* LECAppDelegate.m in Sources */,
 				0B6BD5901889157000A7D8F9 /* RecordViewController.m in Sources */,

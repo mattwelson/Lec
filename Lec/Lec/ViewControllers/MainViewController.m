@@ -40,16 +40,13 @@
 {
     // Do any additional setup after loading the view from its nib.
     [super viewDidLoad];
-    [self navagationTopBar];
     [self courseTableViewSetup];
     [self addCourseIntoView];
+    [self navagationTopBar];
     
 }
 -(void)viewDidAppear:(BOOL)animated{
-    self.navigationController.navigationBar.frame = CGRectMake(0, 0, 320, 68);
-    [self.navigationController.navigationBar setBackgroundImage:Nil forBarMetrics:UIBarMetricsDefault];
-    [self.navigationController.navigationBar setTitleVerticalPositionAdjustment:0.0f forBarMetrics:UIBarMetricsDefault];
-    [self.navigationController.navigationBar setTranslucent:NO];
+    [self navagationTopBar];
 }
 
 - (void)didReceiveMemoryWarning
@@ -61,17 +58,20 @@
 - (void) navagationTopBar
 {
     //self.navigationController.navigationBar.frame = CGRectMake(0, 0, 320, 68);
+    //[self.navigationController.navigationBar setTranslucent:YES];
     UIImage *plusImg = [UIImage imageNamed:@"nav_add_btn.png"];
     self.navigationItem.title = self.viewModel.navTitle;
-        
-    [[UINavigationBar appearance] setTitleTextAttributes: @{
-                                                            NSForegroundColorAttributeName: HEADERCOLOR,
-                                                            NSFontAttributeName: [UIFont fontWithName:DEFAULTFONT size:HEADERSIZE]
-                                                            }];
+    
+    [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:HEADERCOLOR, NSForegroundColorAttributeName,[UIFont fontWithName:DEFAULTFONT size:HEADERSIZE], NSFontAttributeName, nil]];
+    
+//    [[UINavigationBar appearance] setTitleTextAttributes: @{
+//                                                            NSForegroundColorAttributeName: HEADERCOLOR,
+//                                                            NSFontAttributeName: [UIFont fontWithName:DEFAULTFONT size:HEADERSIZE]
+//                                                            }];
     
     self.navigationController.navigationBar.tintColor = NAVTINTCOLOR;
 
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:plusImg style:UIBarButtonItemStylePlain target:self action:@selector(addCourse)];
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:plusImg style:UIBarButtonItemStylePlain target:self action:@selector(addCourse)];
     
 }
 
@@ -270,7 +270,7 @@
                         options: UIViewAnimationOptionCurveEaseIn
                      animations:^{
                          [self addCourseIntoView];
-                         addCourseView.frame = CGRectMake(0, 0, self.view.frame.size.width, 100);
+                         addCourseView.frame = CGRectMake(0, 64, self.view.frame.size.width, 100);
                          self.courseTableView.frame = CGRectMake(0, 100, 320, self.view.frame.size.height);
                         courseNameInput.frame = CGRectMake(60, 5, self.view.frame.size.width-60, 50);
                          courseDescriptorInput.frame = CGRectMake(60, 50, self.view.frame.size.width-60,50);

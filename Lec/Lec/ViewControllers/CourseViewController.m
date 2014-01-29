@@ -9,7 +9,9 @@
 #import "CourseViewController.h"
 #import "LectureCell.h"
 
-@interface CourseViewController ()
+@interface CourseViewController (){
+    LECCourseHeaderView *headerView;
+}
 
 @end
 
@@ -33,25 +35,45 @@
     return self;
 }
 
--(void)viewDidAppear:(BOOL)animated
-{
+-(void)viewDidLoad {
+    [self createHeaderView];
     [self navagationTopBar];
     [self courseTableViewSetup];
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
+}
+
+
+-(void)createHeaderView {
+    headerView = [[LECCourseHeaderView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 200) course:self.viewModel];
+    [self.view addSubview:headerView];
 }
 
 - (void) navagationTopBar
 {
     UIImage *plusImg = [UIImage imageNamed:@"nav_add_btn.png"];
+
     
     self.navigationItem.title = self.viewModel.navTitle;
-    [self.navigationController.navigationBar setTranslucent:NO];
-     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:plusImg style:UIBarButtonItemStylePlain target:self action:@selector(addLecture)];
+    
+    [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor colorWithWhite:1.0 alpha:0.0], NSForegroundColorAttributeName,[UIFont fontWithName:DEFAULTFONT size:HEADERSIZE], NSFontAttributeName, nil]];
+    
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+    self.navigationController.navigationBar.shadowImage = [UIImage new];
+    [self.navigationController.navigationBar setTranslucent:YES];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:plusImg style:UIBarButtonItemStylePlain target:self action:@selector(addLecture)];
 }
 
 - (void) courseTableViewSetup
 {
-    self.lectureTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, self.view.frame.size.height)];
+    self.lectureTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, 320, self.view.frame.size.height)];
     [self.lectureTableView setContentSize:CGSizeMake(320.0f, 2000.0f)];
+    [self.lectureTableView setBackgroundColor:[UIColor clearColor]];
+    [self.lectureTableView setShowsVerticalScrollIndicator:NO];
     [self.lectureTableView setScrollEnabled:YES];
     [self.lectureTableView setDelegate:self];
     [self.lectureTableView setDataSource:self];
@@ -81,29 +103,45 @@
 #pragma mark TableView stuff!
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self.viewModel.tableData count];
+    return 50;
+    //return [self.viewModel.tableData count];
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
      LectureCell *cell = [[LectureCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"Cell"];
     
-    LECLectureCellViewModel *cellViewModel = [self.viewModel.tableData objectAtIndex:indexPath.row];
-    cell.courseNameLabel.text = [cellViewModel titleText];
-    cell.courseDescriptionLabel.text = [cellViewModel subText];
-    cell.courseDescriptionLabel.textColor = [[LECColourService sharedColourService] highlightColourFor:cellViewModel.colourString];
-    cell.courseNameLabel.textColor = [[LECColourService sharedColourService] baseColourFor:cellViewModel.colourString];
+    if (indexPath.row == 0) {
+        cell.backgroundColor = [UIColor clearColor];
+        [cell setUserInteractionEnabled:NO];
+    }
+    
+//    else {
+//        LECLectureCellViewModel *cellViewModel = [self.viewModel.tableData objectAtIndex:indexPath.row-1];
+//        cell.courseNameLabel.text = [cellViewModel titleText];
+//        cell.courseDescriptionLabel.text = [cellViewModel subText];
+//        cell.courseDescriptionLabel.textColor = [[LECColourService sharedColourService] highlightColourFor:cellViewModel.colourString];
+//        cell.courseNameLabel.textColor = [[LECColourService sharedColourService] baseColourFor:cellViewModel.colourString];
+//        cell.backgroundColor = [UIColor whiteColor];
+    else {
+        cell.courseNameLabel.text = @"Hello";
+    }
     // todo: move this shit
     
     // gist.github.com/calebd/6076663
-    
+    //}
     
     return cell;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 100;
+    if (indexPath.row == 0) {
+        return 136;
+    }
+    else {
+        return 75;
+    }
 }
 
 -(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
@@ -111,5 +149,12 @@
     UIView *footer = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 0)];
     [footer setBackgroundColor:[UIColor clearColor]];
     return footer;
+}
+
+#pragma mark Scrolling Delegates
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    [headerView changeAlpha:self.lectureTableView.contentOffset.y];
+    [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor colorWithWhite:1.0 alpha:self.lectureTableView.contentOffset.y/100], NSForegroundColorAttributeName, [UIFont fontWithName:DEFAULTFONT size:HEADERSIZE], NSFontAttributeName, nil]];
+    
 }
 @end

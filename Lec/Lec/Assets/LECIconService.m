@@ -56,5 +56,23 @@ static LECIconService *sharedService;
     }
 }
 
+-(UIImageView *)addIconCourseScreen:(NSString *)icon toView:(UIView *)view{
+    if ([self iconFor:icon] != NULL) {
+        UIImageView *iconImgView = [[UIImageView alloc]initWithImage:[self iconFor:icon]];
+        iconImgView.image = [iconImgView.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        [iconImgView setTintColor:[UIColor whiteColor]];
+        
+        //[gradient setFrame:[view frame]];
+        [iconImgView setFrame:CGRectMake(120, 30, 60, 60)];
+        //[view insertSubview:iconImgView atIndex:0];
+        //[view.layer insertSublayer:iconImgView.layer atIndex:0];
+        //[view.layer addSublayer:iconImgView.layer];
+        return iconImgView;
+    }
+    else {
+        return NULL;
+    }
+}
+
 
 @end
