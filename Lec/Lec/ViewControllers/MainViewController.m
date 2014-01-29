@@ -61,6 +61,8 @@
     //[self.navigationController.navigationBar setTranslucent:YES];
     UIImage *plusImg = [UIImage imageNamed:@"nav_add_btn.png"];
     self.navigationItem.title = self.viewModel.navTitle;
+    self.navigationController.navigationBar.backgroundColor = [UIColor whiteColor];
+    self.navigationController.navigationBar.translucent = NO;
     
     [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:HEADERCOLOR, NSForegroundColorAttributeName,[UIFont fontWithName:DEFAULTFONT size:HEADERSIZE], NSFontAttributeName, nil]];
     
@@ -235,7 +237,7 @@
     [courseDescriptorInput setAutocapitalizationType:UITextAutocapitalizationTypeWords];
     [addCourseView addSubview:courseDescriptorInput];
     
-    colorButtonView = [[UIView alloc]initWithFrame:CGRectMake(-1, -1, 50, 0)];
+    colorButtonView = [[UIView alloc]initWithFrame:CGRectMake(-1, 0, 50, 0)];
     colorButtonView.backgroundColor = [UIColor clearColor];
     colorButtonView.layer.borderColor = [UIColor lightGrayColor].CGColor;
     colorButtonView.layer.borderWidth = 1.0f;
@@ -270,11 +272,11 @@
                         options: UIViewAnimationOptionCurveEaseIn
                      animations:^{
                          [self addCourseIntoView];
-                         addCourseView.frame = CGRectMake(0, 64, self.view.frame.size.width, 100);
+                         addCourseView.frame = CGRectMake(0, 0, self.view.frame.size.width, 100);
                          self.courseTableView.frame = CGRectMake(0, 100, 320, self.view.frame.size.height);
                         courseNameInput.frame = CGRectMake(60, 5, self.view.frame.size.width-60, 50);
                          courseDescriptorInput.frame = CGRectMake(60, 50, self.view.frame.size.width-60,50);
-                         colorButtonView.frame = CGRectMake(-1, -1, 50, 52);
+                         colorButtonView.frame = CGRectMake(-1, 0, 50, 52);
                          iconButtonView.frame = CGRectMake(-1, 50, 50, 50);
                          colorPickerButton.frame = CGRectMake(9, 10, 32, 32);
                          [[LECColourService sharedColourService] addGradientForColour:selectedColor toView:colorPickerButton];
