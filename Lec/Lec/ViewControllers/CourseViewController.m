@@ -103,6 +103,7 @@
     newLecture.lectureName = @"The first lecture ever";
     newLecture.lectureNumber = [NSNumber numberWithInt:1];
     [[LECDatabaseService sharedDBService] saveChanges];
+    [self.viewModel.tableData insertObject:[LECLectureCellViewModel lectureCellVMWithLecture:newLecture] atIndex:0];
     [self.lectureTableView reloadData];
 }
 
