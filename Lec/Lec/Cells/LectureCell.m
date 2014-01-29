@@ -15,12 +15,12 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         // Initialization code
-        self.courseNameLabel = [[UILabel alloc]initWithFrame:CGRectMake(80, 10, self.frame.size.width-80, 40)];
+        self.courseNameLabel = [[UILabel alloc]initWithFrame:CGRectMake(20, 10, self.frame.size.width-80, 40)];
         self.courseNameLabel.textColor = [UIColor whiteColor];
         self.courseNameLabel.font = [UIFont fontWithName:DEFAULTFONT size:COURSENAMEECELLFONTSIZE];
         [self addSubview:self.courseNameLabel];
         
-        self.courseDescriptionLabel = [[UILabel alloc]initWithFrame:CGRectMake(80, 35, self.frame.size.width-80, 40)];
+        self.courseDescriptionLabel = [[UILabel alloc]initWithFrame:CGRectMake(20, 35, self.frame.size.width-80, 40)];
         self.courseDescriptionLabel.textColor = [UIColor whiteColor];
         self.courseDescriptionLabel.font = [UIFont fontWithName:DEFAULTFONT size:COURSEDESCRIPTIONCELLFONTSIZE];
         [self addSubview:self.courseDescriptionLabel];

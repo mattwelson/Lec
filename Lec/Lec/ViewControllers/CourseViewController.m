@@ -53,25 +53,26 @@
 
 - (void) navagationTopBar
 {
+    UINavigationBar *navBar = [self.navigationController navigationBar];
     UIImage *plusImg = [UIImage imageNamed:@"nav_add_btn.png"];
 
     
     self.navigationItem.title = self.viewModel.navTitle;
     
-    [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor colorWithWhite:1.0 alpha:0.0], NSForegroundColorAttributeName,[UIFont fontWithName:DEFAULTFONT size:HEADERSIZE], NSFontAttributeName, nil]];
+    [navBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor colorWithWhite:1.0 alpha:0.0], NSForegroundColorAttributeName,[UIFont fontWithName:DEFAULTFONT size:HEADERSIZE], NSFontAttributeName, nil]];
     
-    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    navBar.tintColor = [UIColor whiteColor];
 
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
-    self.navigationController.navigationBar.shadowImage = [UIImage new];
-    [self.navigationController.navigationBar setTranslucent:YES];
+    [navBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault]; // breaks shit when we go back.
+    navBar.shadowImage = [UIImage new];
+    [navBar setTranslucent:YES]; // what the fuck, it's not there!
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:plusImg style:UIBarButtonItemStylePlain target:self action:@selector(addLecture)];
 }
 
 - (void) courseTableViewSetup
 {
-    self.lectureTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, 320, self.view.frame.size.height)];
-    [self.lectureTableView setContentSize:CGSizeMake(320.0f, 2000.0f)];
+    self.lectureTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, 320, self.view.frame.size.height-64)]; // view frame is the wrong size
+    [self.lectureTableView setContentSize:CGSizeMake(320.0f, 2000.0f)]; // what the shit?
     [self.lectureTableView setBackgroundColor:[UIColor clearColor]];
     [self.lectureTableView setShowsVerticalScrollIndicator:NO];
     [self.lectureTableView setScrollEnabled:YES];
@@ -136,17 +137,10 @@
     }
 }
 
--(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
-{
-    UIView *footer = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 0)];
-    [footer setBackgroundColor:[UIColor clearColor]];
-    return footer;
-}
-
 #pragma mark Scrolling Delegates
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
     [headerView changeAlpha:self.lectureTableView.contentOffset.y];
-    [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor colorWithWhite:1.0 alpha:self.lectureTableView.contentOffset.y/100], NSForegroundColorAttributeName, [UIFont fontWithName:DEFAULTFONT size:HEADERSIZE], NSFontAttributeName, nil]];
+    [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor colorWithWhite:1.0 alpha:-0.3+(self.lectureTableView.contentOffset.y/100)], NSForegroundColorAttributeName, [UIFont fontWithName:DEFAULTFONT size:HEADERSIZE], NSFontAttributeName, nil]];
     
 }
 @end

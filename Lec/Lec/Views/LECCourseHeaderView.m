@@ -48,9 +48,9 @@
 -(void)changeAlpha:(CGFloat) tableOffset{
     
     if (tableOffset > 0 && tableOffset < 140) {
-        subjectImg.alpha = 1-(tableOffset/100);
-        titleLabel.alpha = 1-(tableOffset/100);
-        descriptionLabel.alpha = 1-(tableOffset/100);
+        subjectImg.alpha = 1-(tableOffset/75);
+        titleLabel.alpha = 1-(tableOffset/75);
+        descriptionLabel.alpha = 1-(tableOffset/75);
         //self.navigationController.navigationBar.alpha = 0+(thisTableView.contentOffset.y/100);
         self.frame = CGRectMake(0, 0-tableOffset/5, self.frame.size.width, 200);
         navTitle.alpha = -0.9 + (tableOffset/50);

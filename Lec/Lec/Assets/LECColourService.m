@@ -79,6 +79,5 @@ static LECColourService *sharedService;
                          (id)[[self baseColourFor:colour] CGColor], nil]];
     [gradient setFrame:CGRectMake(0, 0, view.frame.size.width, view.frame.size.height)];
     [[view layer] insertSublayer:gradient atIndex:0];
-    
 }
 @end
