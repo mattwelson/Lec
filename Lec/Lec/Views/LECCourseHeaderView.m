@@ -30,14 +30,14 @@
         titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 100, self.frame.size.width, 50)];
         titleLabel.text = courseModel.course.courseName;
         titleLabel.textAlignment = NSTextAlignmentCenter;
-        titleLabel.font = [UIFont fontWithName:@"Avenir-Book" size:40];
+        titleLabel.font = [UIFont fontWithName:DEFAULTFONTLIGHT size:40];
         titleLabel.textColor = [UIColor whiteColor];
         [self addSubview:titleLabel];
         
         descriptionLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 140, self.frame.size.width, 50)];
         descriptionLabel.text = courseModel.course.courseDescription;
         descriptionLabel.textAlignment = NSTextAlignmentCenter;
-        descriptionLabel.font = [UIFont fontWithName:@"Avenir-Book" size:15];
+        descriptionLabel.font = [UIFont fontWithName:DEFAULTFONTLIGHT size:15];
         descriptionLabel.textColor = [UIColor whiteColor];
         [self addSubview:descriptionLabel];
         
@@ -51,7 +51,7 @@
         subjectImg.alpha = 1-(tableOffset/50); // different to be more dynamic
         titleLabel.alpha = 1-(tableOffset/75);
         descriptionLabel.alpha = 1-(tableOffset/75);
-        self.frame = CGRectMake(0, 0-tableOffset/5, self.frame.size.width, 200);
+        self.frame = CGRectMake(0, 0-tableOffset/3, self.frame.size.width, 200);
         navTitle.alpha = -0.9 + (tableOffset/50);
     }
     

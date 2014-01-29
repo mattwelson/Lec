@@ -25,7 +25,6 @@
     
     for (Lecture *lec in lectures)
     {
-        NSLog(@"%@", lec.lectureNumber);
         [viewModel.tableData addObject:[LECLectureCellViewModel lectureCellVMWithLecture:lec]];
     }
     

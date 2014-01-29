@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 #define DEFAULTFONT @"Avenir"
+#define DEFAULTFONTLIGHT @"Avenir-Book"
 
 #define HEADERSIZE 22
 #define HEADERCOLOR [UIColor colorWithRed:44/255. green:62/255. blue:80/255. alpha:1.0]
