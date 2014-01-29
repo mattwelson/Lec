@@ -11,6 +11,9 @@
 
 @interface CourseViewController (){
     LECCourseHeaderView *headerView;
+    Course *currentCourse;
+    LECDatabaseService *dbService;
+    Lecture *newLecture;
 }
 
 @end
@@ -30,7 +33,9 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.viewModel = [LECCourseViewModel courseViewModelWithCourse:course];
+        currentCourse = course;
+        self.viewModel = [LECCourseViewModel courseViewModelWithCourse:currentCourse];
+        dbService = [LECDatabaseService sharedDBService];
         [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent]; //sets the status bar to white
     }
     return self;
@@ -68,7 +73,7 @@
     navBar.shadowImage = [UIImage new];
     [navBar setTranslucent:YES]; // what the fuck, it's not there!
     [navBar setBackgroundColor:[UIColor clearColor]]; // apparently it is!
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:plusImg style:UIBarButtonItemStylePlain target:self action:@selector(addLecture)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:plusImg style:UIBarButtonItemStylePlain target:self action:@selector(addLectureView)];
 }
 
 - (void) courseTableViewSetup
@@ -85,9 +90,16 @@
 }
 
 
-- (void) addLecture
+- (void) addLectureView
 {
+    
+}
 
+- (void) savedPressed
+{
+    newLecture = [dbService newLectureForCourse:currentCourse];
+    newLecture.lectureName = @"The first lecture ever";
+    newLecture.lectureNumber = [NSNumber numberWithInt:1];
 }
 
 
