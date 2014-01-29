@@ -57,19 +57,12 @@
 
 - (void) navagationTopBar
 {
-    //self.navigationController.navigationBar.frame = CGRectMake(0, 0, 320, 68);
-    //[self.navigationController.navigationBar setTranslucent:YES];
     UIImage *plusImg = [UIImage imageNamed:@"nav_add_btn.png"];
     self.navigationItem.title = self.viewModel.navTitle;
     self.navigationController.navigationBar.backgroundColor = [UIColor whiteColor];
     self.navigationController.navigationBar.translucent = NO;
     
     [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:HEADERCOLOR, NSForegroundColorAttributeName,[UIFont fontWithName:DEFAULTFONT size:HEADERSIZE], NSFontAttributeName, nil]];
-    
-//    [[UINavigationBar appearance] setTitleTextAttributes: @{
-//                                                            NSForegroundColorAttributeName: HEADERCOLOR,
-//                                                            NSFontAttributeName: [UIFont fontWithName:DEFAULTFONT size:HEADERSIZE]
-//                                                            }];
     
     self.navigationController.navigationBar.tintColor = NAVTINTCOLOR;
 
@@ -80,8 +73,6 @@
 - (void) colorViewAppear
 {
     [self.view endEditing:YES];
-    
-    //UIImageView *colorHolder = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
     
     UICollectionViewFlowLayout *layout=[[UICollectionViewFlowLayout alloc] init];
     
@@ -94,8 +85,6 @@
     [self.colorView setDelegate:self];
     [self.colorView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"cellIdentifier"];
     self.colorView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0];
-    
-    //[colorHolder setBackgroundColor:[[UIColor blackColor] colorWithAlphaComponent:0.9]];
     
     //Creates the array based on the plist
     colorArray =  [[LECColourService sharedColourService]colourKeys];
@@ -168,12 +157,6 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     Course *selectedCourse = [[self.viewModel.tableData objectAtIndex:indexPath.row] course];
-    
-    
-    //CODE TO ADJUST TO COURSEVIEW NAV
-//    self.navigationController.navigationBar.frame = CGRectMake(0, 0, 320, 150);
-//    [self.navigationController.navigationBar setBackgroundImage:[[LECColourService sharedColourService] navGradientForColour:[selectedCourse colour]navHeight:150] forBarMetrics:UIBarMetricsDefault];
-
     
     [self.navigationController pushViewController:[[CourseViewController alloc] initWithCourse:@"CourseViewController" bundle:nil selectedCourse:selectedCourse] animated:YES];
 }
@@ -294,17 +277,11 @@
         Course *course = [[LECDatabaseService sharedDBService] newCourseForAdding];
         course.courseName = [courseNameInput text];
         course.courseDescription = [courseDescriptorInput text];
-        
-        //The random colours to add
-//        NSArray *colourKeys = [[LECColourService sharedColourService] colourKeys];
-//        course.colour = [colourKeys objectAtIndex:arc4random() % [colourKeys count]];
-        
-        //Manual add colour to database
+
         course.colour = selectedColor;
         
         course.icon = @"cs";
         [[LECDatabaseService sharedDBService] saveChanges]; // saves changes made to course scratch pad
-    //self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav_add_btn.png"] style:UIBarButtonItemStylePlain target:self action:@selector(colorViewAppear)];
         self.navigationItem.leftBarButtonItem = nil;
         
         [self.viewModel.tableData insertObject:[LECCourseCellViewModel courseCellWith:course] atIndex:0];
@@ -319,7 +296,6 @@
     UIImage *plusImg = [UIImage imageNamed:@"nav_add_btn.png"];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:plusImg style:UIBarButtonItemStylePlain target:self action:@selector(addCourse)];
     
-    //self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav_add_btn.png"] style:UIBarButtonItemStylePlain target:self action:@selector(colorViewAppear)];
     self.navigationItem.leftBarButtonItem = nil;
 
     

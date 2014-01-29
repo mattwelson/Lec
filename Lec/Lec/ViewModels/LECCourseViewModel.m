@@ -20,10 +20,13 @@
     viewModel.navTitle = [course courseName];
     
     
-    NSArray *lectures = [course.lectures allObjects];
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"lectureNumber" ascending:NO];
+    NSArray *lectures = [[course.lectures allObjects] sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];
+    
     for (Lecture *lec in lectures)
     {
-        [viewModel.tableData insertObject:[LECLectureCellViewModel lectureCellVMWithLecture:lec] atIndex:0];
+        NSLog(@"%@", lec.lectureNumber);
+        [viewModel.tableData addObject:[LECLectureCellViewModel lectureCellVMWithLecture:lec]];
     }
     
     return viewModel;

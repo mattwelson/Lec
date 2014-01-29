@@ -66,17 +66,18 @@
     [navBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault]; // breaks shit when we go back.
     navBar.shadowImage = [UIImage new];
     [navBar setTranslucent:YES]; // what the fuck, it's not there!
+    [navBar setBackgroundColor:[UIColor clearColor]]; // apparently it is!
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:plusImg style:UIBarButtonItemStylePlain target:self action:@selector(addLecture)];
 }
 
 - (void) courseTableViewSetup
 {
-    self.lectureTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, 320, self.view.frame.size.height-64)]; // view frame is the wrong size
-    [self.lectureTableView setContentSize:CGSizeMake(320.0f, 2000.0f)]; // what the shit?
+    self.lectureTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, 320, self.view.frame.size.height-64)]; // Codie HATES this bit
+    [self.lectureTableView setContentSize:CGSizeMake(320.0f, self.view.frame.size.height-64)];
     [self.lectureTableView setBackgroundColor:[UIColor clearColor]];
     [self.lectureTableView setShowsVerticalScrollIndicator:NO];
     [self.lectureTableView setScrollEnabled:YES];
-    [self.lectureTableView setDelegate:self];
+    [self.lectureTableView setDelegate:self]; // should set this to a seperate class built for this sort of shit
     [self.lectureTableView setDataSource:self];
     [self.lectureTableView setNeedsDisplay];
     [self.view addSubview:self.lectureTableView];
@@ -108,8 +109,7 @@
         return 1;
     }
     else {
-        return [self.viewModel.tableData count]; // fucking terrible. Could use sections?
-    }
+        return [self.viewModel.tableData count];    }
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -123,6 +123,7 @@
      LectureCell *cell = [[LectureCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"Cell"];
     
     if ([indexPath section] == 1) {
+        // Should be a populate method or similar
         LECLectureCellViewModel *cellViewModel = [self.viewModel.tableData objectAtIndex:indexPath.row];
         cell.courseNameLabel.text = [cellViewModel titleText];
         cell.courseDescriptionLabel.text = [cellViewModel subText];
@@ -149,7 +150,7 @@
 }
 
 #pragma mark Scrolling Delegates
--(void)scrollViewDidScroll:(UIScrollView *)scrollView{
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView{ // change to a different method? Not getting called enough
     [headerView changeAlpha:self.lectureTableView.contentOffset.y];
     [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor colorWithWhite:1.0 alpha:-0.3+(self.lectureTableView.contentOffset.y/100)], NSForegroundColorAttributeName, [UIFont fontWithName:DEFAULTFONT size:HEADERSIZE], NSFontAttributeName, nil]];
     
