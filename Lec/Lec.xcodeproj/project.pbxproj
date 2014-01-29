@@ -240,20 +240,6 @@
 			name = Icons;
 			sourceTree = "<group>";
 		};
-		8BE7581A188B48B1007B6C02 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				8BE7581B188B48DD007B6C02 /* LECTableView.h */,
-				8BE7581C188B48DD007B6C02 /* LECTableView.m */,
-				8B523BB4188B2FAE002796A6 /* LECTableViewDataSource.h */,
-				0BA86AB618925F1800805240 /* LECColorCollectionView.h */,
-				0BA86AB718925F1800805240 /* LECColorCollectionView.m */,
-				7318CD9F1898AEFD002E23A0 /* LECCourseHeaderView.h */,
-				7318CDA01898AEFD002E23A0 /* LECCourseHeaderView.m */,
-			);
-			name = Views;
-			sourceTree = "<group>";
-		};
 		8BE7582C188B876E007B6C02 /* Services */ = {
 			isa = PBXGroup;
 			children = (
@@ -347,7 +333,6 @@
 			isa = PBXGroup;
 			children = (
 				8BE7582C188B876E007B6C02 /* Services */,
-				8BE7581A188B48B1007B6C02 /* Views */,
 				C9A004801889EBF100D27A6C /* Database */,
 				C9A0047F1889EBDC00D27A6C /* View Model */,
 				C9A0047E1889EBD200D27A6C /* Test */,
@@ -409,6 +394,13 @@
 		C9CA77DD1896593700980310 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				8BE7581B188B48DD007B6C02 /* LECTableView.h */,
+				8BE7581C188B48DD007B6C02 /* LECTableView.m */,
+				8B523BB4188B2FAE002796A6 /* LECTableViewDataSource.h */,
+				0BA86AB618925F1800805240 /* LECColorCollectionView.h */,
+				0BA86AB718925F1800805240 /* LECColorCollectionView.m */,
+				7318CD9F1898AEFD002E23A0 /* LECCourseHeaderView.h */,
+				7318CDA01898AEFD002E23A0 /* LECCourseHeaderView.m */,
 				0B6BD59D18891F8E00A7D8F9 /* Cells */,
 			);
 			name = Views;

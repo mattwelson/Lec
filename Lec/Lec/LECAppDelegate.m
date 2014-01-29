@@ -17,6 +17,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+#warning See comment
     // Uncomment to get a new course with a lecture and a few tags
     //[Example addCoursePopulated];
     

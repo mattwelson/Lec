@@ -103,33 +103,25 @@
 #pragma mark TableView stuff!
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 50;
-    //return [self.viewModel.tableData count];
+    return [self.viewModel.tableData count] + 1; // fucking terrible. Could use sections?
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
      LectureCell *cell = [[LectureCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"Cell"];
     
-    if (indexPath.row == 0) {
+    if (indexPath.row != 0) {
+        LECLectureCellViewModel *cellViewModel = [self.viewModel.tableData objectAtIndex:indexPath.row-1]; // this is fucking terrible.
+        cell.courseNameLabel.text = [cellViewModel titleText];
+        cell.courseDescriptionLabel.text = [cellViewModel subText];
+        cell.courseDescriptionLabel.textColor = [[LECColourService sharedColourService] highlightColourFor:cellViewModel.colourString];
+        cell.courseNameLabel.textColor = [[LECColourService sharedColourService] baseColourFor:cellViewModel.colourString];
+        cell.backgroundColor = [UIColor whiteColor];
+    }
+    else {
         cell.backgroundColor = [UIColor clearColor];
         [cell setUserInteractionEnabled:NO];
     }
-    
-//    else {
-//        LECLectureCellViewModel *cellViewModel = [self.viewModel.tableData objectAtIndex:indexPath.row-1];
-//        cell.courseNameLabel.text = [cellViewModel titleText];
-//        cell.courseDescriptionLabel.text = [cellViewModel subText];
-//        cell.courseDescriptionLabel.textColor = [[LECColourService sharedColourService] highlightColourFor:cellViewModel.colourString];
-//        cell.courseNameLabel.textColor = [[LECColourService sharedColourService] baseColourFor:cellViewModel.colourString];
-//        cell.backgroundColor = [UIColor whiteColor];
-    else {
-        cell.courseNameLabel.text = @"Hello";
-    }
-    // todo: move this shit
-    
-    // gist.github.com/calebd/6076663
-    //}
     
     return cell;
 }

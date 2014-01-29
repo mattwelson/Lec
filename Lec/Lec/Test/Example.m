@@ -26,6 +26,30 @@
     newLecture.lectureName = @"The first lecture ever";
     newLecture.lectureNumber = [NSNumber numberWithShort:1];
     
+    newLecture = [dbService newLectureForCourse:newCourse];
+    newLecture.lectureName = @"Hi Julin";
+    newLecture.lectureNumber = [NSNumber numberWithShort:2];
+    
+    newLecture = [dbService newLectureForCourse:newCourse];
+    newLecture.lectureName = @"Quick lecture making!";
+    newLecture.lectureNumber = [NSNumber numberWithShort:3];
+    
+    newLecture = [dbService newLectureForCourse:newCourse];
+    newLecture.lectureName = @"Hope this works!!";
+    newLecture.lectureNumber = [NSNumber numberWithShort:4];
+    
+    newLecture = [dbService newLectureForCourse:newCourse];
+    newLecture.lectureName = @"If not!";
+    newLecture.lectureNumber = [NSNumber numberWithShort:5];
+    
+    newLecture = [dbService newLectureForCourse:newCourse];
+    newLecture.lectureName = @"Save between each new lecture!";
+    newLecture.lectureNumber = [NSNumber numberWithShort:6];
+    
+    newLecture = [dbService newLectureForCourse:newCourse];
+    newLecture.lectureName = @"Good luck!";
+    newLecture.lectureNumber = [NSNumber numberWithShort:7];
+    
     // Add Tags
     Tag *tag;
     NSArray *names = [NSArray arrayWithObjects:@"Hello", @"Friend", @"How", @"Are", @"You", nil];
