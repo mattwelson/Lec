@@ -31,6 +31,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.viewModel = [LECCourseViewModel courseViewModelWithCourse:course];
+        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent]; //sets the status bar to white
     }
     return self;
 }
