@@ -73,7 +73,7 @@
     navBar.shadowImage = [UIImage new];
     [navBar setTranslucent:YES]; // what the fuck, it's not there!
     [navBar setBackgroundColor:[UIColor clearColor]]; // apparently it is!
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:plusImg style:UIBarButtonItemStylePlain target:self action:@selector(addLectureView)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:plusImg style:UIBarButtonItemStylePlain target:self action:@selector(savedPressed)];
 }
 
 - (void) courseTableViewSetup
@@ -95,11 +95,15 @@
     
 }
 
+//will work more on it when im awake
+//saves lecture to current course lectures do not increment
 - (void) savedPressed
 {
     newLecture = [dbService newLectureForCourse:currentCourse];
     newLecture.lectureName = @"The first lecture ever";
     newLecture.lectureNumber = [NSNumber numberWithInt:1];
+    [[LECDatabaseService sharedDBService] saveChanges];
+    [self.lectureTableView reloadData];
 }
 
 
