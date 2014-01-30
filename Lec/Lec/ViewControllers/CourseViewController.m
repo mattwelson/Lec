@@ -12,7 +12,7 @@
 @interface CourseViewController (){
     LECCourseHeaderView *headerView;
     Course *currentCourse;
-    LECCourseViewModel *lecModelView;
+    LECCourseViewModel *courseViewModel;
 }
 
 @end
@@ -28,12 +28,12 @@
     return self;
 }
 
-- (id)initWithCourse:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil selectedCourse:(Course *)course
+- (id)initWithCourse:(Course *)course
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    self = [super initWithNibName:@"CourseViewController" bundle:nil];
     if (self) {
         currentCourse = course;
-        lecModelView = [[LECCourseViewModel alloc]initWithCourse:currentCourse];
+        courseViewModel = [[LECCourseViewModel alloc]initWithCourse:currentCourse];
         [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent]; //sets the status bar to white
     }
     return self;
@@ -47,7 +47,7 @@
 }
 
 -(void)createHeaderView {
-    headerView = [[LECCourseHeaderView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 200) course:lecModelView];
+    headerView = [[LECCourseHeaderView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 200) course:courseViewModel];
     [self.view addSubview:headerView];
 }
 
@@ -57,7 +57,7 @@
     UIImage *plusImg = [UIImage imageNamed:@"nav_add_btn.png"];
 
     
-    self.navigationItem.title = lecModelView.navTitle;
+    self.navigationItem.title = courseViewModel.navTitle;
     
     [navBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor colorWithWhite:1.0 alpha:0.0], NSForegroundColorAttributeName,[UIFont fontWithName:DEFAULTFONT size:HEADERSIZE], NSFontAttributeName, nil]];
     
@@ -91,7 +91,7 @@
 
 - (void) savedPressed
 {
-    [lecModelView addLecture:@"Testing!@#$"];
+    [courseViewModel addLecture:@"Testing!@#$"];
     [self.lectureTableView reloadData];
 }
 
@@ -102,13 +102,22 @@
 }
 
 #pragma mark TableView stuff!
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    Lecture *selectedLecture = [[courseViewModel.tableData objectAtIndex:indexPath.row] lecture]; // should a nice method
+    
+    [self.navigationController pushViewController:[[RecordViewController alloc] initWithLecture:selectedLecture] animated:YES];
+}
+
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (section == 0) {
         return 1;
     }
     else {
-        return [lecModelView.tableData count];    }
+        return [courseViewModel.tableData count];
+    }
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -123,7 +132,7 @@
     
     if ([indexPath section] == 1) {
         // Should be a populate method or similar
-        LECLectureCellViewModel *cellViewModel = [lecModelView.tableData objectAtIndex:indexPath.row];
+        LECLectureCellViewModel *cellViewModel = [courseViewModel.tableData objectAtIndex:indexPath.row];
         cell.courseNameLabel.text = [cellViewModel titleText];
         cell.courseDescriptionLabel.text = [cellViewModel subText];
         cell.courseDescriptionLabel.textColor = [[LECColourService sharedColourService] highlightColourFor:cellViewModel.colourString];
@@ -152,7 +161,7 @@
 {
     if (editingStyle == UITableViewCellEditingStyleDelete)
     {
-        [lecModelView deleteLectureAtIndex:indexPath.row];
+        [courseViewModel deleteLectureAtIndex:indexPath.row];
         [self.lectureTableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
     }
 }

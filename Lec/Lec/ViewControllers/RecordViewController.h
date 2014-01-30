@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Lecture.h"
 
 @interface RecordViewController : UIViewController
+
+-(id)initWithLecture:(Lecture *)lecture;
 
 @end

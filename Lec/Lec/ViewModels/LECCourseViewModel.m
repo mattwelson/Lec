@@ -33,10 +33,10 @@
             [self.tableData addObject:[LECLectureCellViewModel lectureCellVMWithLecture:lec]];
         }
         if ((unsigned int)[lectures count] == 0) {
-            i = 1;
+            i = 0;
         }
         else{
-            i = (unsigned int)[lectures count];
+            i = [[[lectures objectAtIndex:0] lectureNumber] unsignedIntegerValue];
         }
         self.tintColour = [[LECColourService sharedColourService] baseColourFor:[course colour]];
         self.navTitle = [course courseName];
@@ -54,12 +54,12 @@
 
 -(void)addLecture:(NSString *)name
 {
+    i++;
     newLecture = [dbService newLectureForCourse:self.currentCourse];
     newLecture.lectureName = name;
     newLecture.lectureNumber = [NSNumber numberWithInt:i];
     [[LECDatabaseService sharedDBService] saveChanges];
     [self.tableData insertObject:[LECLectureCellViewModel lectureCellVMWithLecture:newLecture] atIndex:0];
-    i++;
 }
 
 @end

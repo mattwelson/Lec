@@ -13,6 +13,6 @@
 
 @property UITableView *lectureTableView;
 
-- (id)initWithCourse:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil selectedCourse:(Course *)course;
+- (id)initWithCourse:(Course *)course;
 
 @end

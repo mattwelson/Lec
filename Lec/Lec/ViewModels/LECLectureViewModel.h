@@ -10,6 +10,8 @@
 
 @interface LECLectureViewModel : LECBaseViewModel
 
++(LECLectureViewModel *)viewModelWithLecture:(Lecture *)lecture;
+
 @property Lecture *lecture;
 @property NSMutableArray *tags;
 // instance of AVAudio

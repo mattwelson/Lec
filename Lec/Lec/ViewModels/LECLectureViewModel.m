@@ -10,4 +10,11 @@
 
 @implementation LECLectureViewModel
 
++(LECLectureViewModel *)viewModelWithLecture:(Lecture *)lecture
+{
+    LECLectureViewModel *vm = [[LECLectureViewModel alloc] init];
+    vm.lecture = lecture;
+    return vm;
+}
+
 @end

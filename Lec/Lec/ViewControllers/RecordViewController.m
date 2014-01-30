@@ -7,18 +7,21 @@
 //
 
 #import "RecordViewController.h"
+#import "LECImportHeader.h"
 
-@interface RecordViewController ()
+@interface RecordViewController (){
+    LECLectureViewModel *viewModel;
+}
 
 @end
 
 @implementation RecordViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (id)initWithLecture:(Lecture *)lecture
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    self = [super initWithNibName:@"RecordViewController" bundle:nil];
     if (self) {
-        // Custom initialization
+        viewModel = [LECLectureViewModel viewModelWithLecture:lecture];
     }
     return self;
 }
