@@ -7,6 +7,8 @@
 //
 
 #import "CourseCell.h"
+#import "LECDefines.h"
+#import "MainViewController.h"
 
 @implementation CourseCell
 
@@ -30,6 +32,14 @@
         [[self contentView] setFrame:frame];
     }
     return self;
+}
+
+-(void)populateFor:(LECCourseCellViewModel *)vm
+{
+    self.courseNameLabel.text = [vm titleText];
+    self.courseDescriptionLabel.text = [vm subText];
+    [[LECIconService sharedIconService] addIcon:[vm icon] toView:[self contentView]];
+    [[LECColourService sharedColourService] addGradientForColour:[vm colourString] toView:[self contentView]];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated

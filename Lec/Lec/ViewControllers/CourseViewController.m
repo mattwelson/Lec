@@ -133,11 +133,7 @@
     if ([indexPath section] == 1) {
         // Should be a populate method or similar
         LECLectureCellViewModel *cellViewModel = [courseViewModel.tableData objectAtIndex:indexPath.row];
-        cell.courseNameLabel.text = [cellViewModel titleText];
-        cell.courseDescriptionLabel.text = [cellViewModel subText];
-        cell.courseDescriptionLabel.textColor = [[LECColourService sharedColourService] highlightColourFor:cellViewModel.colourString];
-        cell.courseNameLabel.textColor = [[LECColourService sharedColourService] baseColourFor:cellViewModel.colourString];
-        cell.backgroundColor = [UIColor whiteColor];
+        [cell populateFor:cellViewModel];
     }
     else {
         cell.backgroundColor = [UIColor clearColor];

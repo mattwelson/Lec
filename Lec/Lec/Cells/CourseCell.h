@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "MainViewController.h"
+@class LECCourseCellViewModel;
 
 @interface CourseCell : UITableViewCell
+
+-(void)populateFor:(LECCourseCellViewModel *)vm;
 
 @property UILabel *courseNameLabel;
 @property UILabel *courseDescriptionLabel;

@@ -172,13 +172,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     CourseCell *cell = [[CourseCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"Cell"];
-    
-    LECCourseCellViewModel *cellViewModel = [self.viewModel.tableData objectAtIndex:indexPath.row];
-    cell.courseNameLabel.text = [cellViewModel titleText];
-    cell.courseDescriptionLabel.text = [cellViewModel subText];
-    [[LECIconService sharedIconService] addIcon:[cellViewModel icon] toView:[cell contentView]];
-    [[LECColourService sharedColourService] addGradientForColour:[cellViewModel colourString] toView:[cell contentView]];
-    
+    [cell populateFor:[self.viewModel.tableData objectAtIndex:indexPath.row]];
     return cell;
 }
 
@@ -201,12 +195,7 @@
     return [self.viewModel.tableData count];
 }
 
-// Delete this function when the cells are added to the table view.
-- (void) changeCoursePage
-{
-    [self.navigationController pushViewController:[[CourseViewController alloc] initWithNibName:@"CourseViewController" bundle:nil] animated:YES];
-}
-
+#warning Should be moved!
 #pragma mark Methods for that little add course view
 -(void)addCourseIntoView{
     addCourseView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 0)];
@@ -280,7 +269,7 @@
 }
 
 -(void)saveCourse{
-#warning temp fix to stop no input for the course name. Will add warning box later
+#warning temp fix to stop no input for the course name. Will add warning box later (CODIE!)
     if (courseNameInput.text.length > 0) {
         Course *course = [[LECDatabaseService sharedDBService] newCourseForAdding];
         course.courseName = [courseNameInput text];

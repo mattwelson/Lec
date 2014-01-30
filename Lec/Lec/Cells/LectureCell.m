@@ -33,6 +33,15 @@
     return self;
 }
 
+-(void)populateFor:(LECLectureCellViewModel *)vm
+{
+    self.courseNameLabel.text = [vm titleText];
+    self.courseDescriptionLabel.text = [vm subText];
+    self.courseDescriptionLabel.textColor = [[LECColourService sharedColourService] highlightColourFor:vm.colourString];
+    self.courseNameLabel.textColor = [[LECColourService sharedColourService] baseColourFor:vm.colourString];
+    self.backgroundColor = [UIColor whiteColor];
+}
+
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
     [super setSelected:selected animated:animated];

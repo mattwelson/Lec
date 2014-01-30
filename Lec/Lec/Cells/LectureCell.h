@@ -11,6 +11,8 @@
 
 @interface LectureCell : UITableViewCell
 
+-(void)populateFor:(LECLectureCellViewModel *)vm;
+
 @property UILabel *courseNameLabel;
 @property UILabel *courseDescriptionLabel;
 
