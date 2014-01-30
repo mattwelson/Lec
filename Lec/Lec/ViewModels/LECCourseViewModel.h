@@ -15,5 +15,6 @@
 @property UIImage *iconImage; // the image that represents the course
 
 +(LECCourseViewModel *) courseViewModelWithCourse:(Course *)course;
+-(void)deleteLectureAtIndex:(NSInteger)index;
 
 @end

@@ -30,5 +30,12 @@
     
     return viewModel;
 }
+-(void)deleteLectureAtIndex:(NSInteger)index
+{
+    LECLectureCellViewModel *lectureCell = [self.tableData objectAtIndex:index];
+    Lecture *lecture = lectureCell.lecture;
+    [[LECDatabaseService sharedDBService] deleteObject:lecture];
+    [self.tableData removeObject:lectureCell];
+}
 
 @end

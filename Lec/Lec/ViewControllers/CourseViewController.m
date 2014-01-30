@@ -167,6 +167,15 @@
     }
 }
 
+-(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (editingStyle == UITableViewCellEditingStyleDelete)
+    {
+        [self.viewModel deleteLectureAtIndex:indexPath.row];
+        [self.lectureTableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    }
+}
+
 #pragma mark Scrolling Delegates
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{ // change to a different method? Not getting called enough
     [headerView changeAlpha:self.lectureTableView.contentOffset.y];
