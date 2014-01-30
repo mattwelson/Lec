@@ -32,7 +32,12 @@
         {
             [self.tableData addObject:[LECLectureCellViewModel lectureCellVMWithLecture:lec]];
         }
-        i = (unsigned int)[lectures count];
+        if ((unsigned int)[lectures count] == 0) {
+            i = 1;
+        }
+        else{
+            i = (unsigned int)[lectures count];
+        }
         self.tintColour = [[LECColourService sharedColourService] baseColourFor:[course colour]];
         self.navTitle = [course courseName];
     }
