@@ -89,8 +89,6 @@
     
 }
 
-//will work more on it when im awake
-//saves lecture to current course lectures do not increment
 - (void) savedPressed
 {
     [lecModelView addLecture:@"Testing!@#$"];
