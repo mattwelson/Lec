@@ -9,33 +9,53 @@
 #import "LECCourseViewModel.h"
 #import "LECLectureCellViewModel.h"
 
+@interface LECCourseViewModel (){
+    Lecture *newLecture;
+    LECDatabaseService *dbService;
+    int i;
+}
+@end
+
 @implementation LECCourseViewModel
 
-+(LECCourseViewModel *)courseViewModelWithCourse:(Course *)course
+-(instancetype)initWithCourse:(Course *) course
 {
-    LECCourseViewModel *viewModel = [[LECCourseViewModel alloc] init];
-    
-    viewModel.course = course;
-    viewModel.tintColour = [[LECColourService sharedColourService] baseColourFor:[course colour]];
-    viewModel.navTitle = [course courseName];
-    
-    
-    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"lectureNumber" ascending:NO];
-    NSArray *lectures = [[course.lectures allObjects] sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];
-    
-    for (Lecture *lec in lectures)
-    {
-        [viewModel.tableData addObject:[LECLectureCellViewModel lectureCellVMWithLecture:lec]];
+    self = [super init];
+    if (self){
+        self.currentCourse = course;
+        dbService = [LECDatabaseService sharedDBService];
+        i = 1;
+        
+        
+        NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"lectureNumber" ascending:NO];
+        NSArray *lectures = [[course.lectures allObjects] sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];
+        
+        for (Lecture *lec in lectures)
+        {
+            [self.tableData addObject:[LECLectureCellViewModel lectureCellVMWithLecture:lec]];
+        }
+        self.tintColour = [[LECColourService sharedColourService] baseColourFor:[course colour]];
+        self.navTitle = [course courseName];
     }
-    
-    return viewModel;
+    return self;
 }
+
 -(void)deleteLectureAtIndex:(NSInteger)index
 {
     LECLectureCellViewModel *lectureCell = [self.tableData objectAtIndex:index];
     Lecture *lecture = lectureCell.lecture;
     [[LECDatabaseService sharedDBService] deleteObject:lecture];
     [self.tableData removeObject:lectureCell];
+}
+
+-(void)addLecture:(NSString *)name
+{
+    newLecture = [dbService newLectureForCourse:self.currentCourse];
+    newLecture.lectureName = name;
+    newLecture.lectureNumber = [NSNumber numberWithInt:i];
+    [[LECDatabaseService sharedDBService] saveChanges];
+    [self.tableData insertObject:[LECLectureCellViewModel lectureCellVMWithLecture:newLecture] atIndex:0];
+    i++;
 }
 
 @end

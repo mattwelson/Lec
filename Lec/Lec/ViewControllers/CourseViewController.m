@@ -12,8 +12,7 @@
 @interface CourseViewController (){
     LECCourseHeaderView *headerView;
     Course *currentCourse;
-    LECDatabaseService *dbService;
-    Lecture *newLecture;
+    LECCourseViewModel *lecModelView;
 }
 
 @end
@@ -34,8 +33,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         currentCourse = course;
-        self.viewModel = [LECCourseViewModel courseViewModelWithCourse:currentCourse];
-        dbService = [LECDatabaseService sharedDBService];
+        lecModelView = [[LECCourseViewModel alloc]initWithCourse:currentCourse];
         [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent]; //sets the status bar to white
     }
     return self;
@@ -47,13 +45,8 @@
     [self courseTableViewSetup];
 }
 
--(void)viewDidAppear:(BOOL)animated
-{
-}
-
-
 -(void)createHeaderView {
-    headerView = [[LECCourseHeaderView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 200) course:self.viewModel];
+    headerView = [[LECCourseHeaderView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 200) course:lecModelView];
     [self.view addSubview:headerView];
 }
 
@@ -63,7 +56,7 @@
     UIImage *plusImg = [UIImage imageNamed:@"nav_add_btn.png"];
 
     
-    self.navigationItem.title = self.viewModel.navTitle;
+    self.navigationItem.title = lecModelView.navTitle;
     
     [navBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor colorWithWhite:1.0 alpha:0.0], NSForegroundColorAttributeName,[UIFont fontWithName:DEFAULTFONT size:HEADERSIZE], NSFontAttributeName, nil]];
     
@@ -99,19 +92,8 @@
 //saves lecture to current course lectures do not increment
 - (void) savedPressed
 {
-    newLecture = [dbService newLectureForCourse:currentCourse];
-    newLecture.lectureName = @"The first lecture ever";
-    newLecture.lectureNumber = [NSNumber numberWithInt:1];
-    [[LECDatabaseService sharedDBService] saveChanges];
-    [self.viewModel.tableData insertObject:[LECLectureCellViewModel lectureCellVMWithLecture:newLecture] atIndex:0];
+    [lecModelView addLecture:@"Testing!@#$"];
     [self.lectureTableView reloadData];
-}
-
-
-- (void) backButtPressed
-{
-    
-    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)didReceiveMemoryWarning
@@ -127,7 +109,7 @@
         return 1;
     }
     else {
-        return [self.viewModel.tableData count];    }
+        return [lecModelView.tableData count];    }
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -142,7 +124,7 @@
     
     if ([indexPath section] == 1) {
         // Should be a populate method or similar
-        LECLectureCellViewModel *cellViewModel = [self.viewModel.tableData objectAtIndex:indexPath.row];
+        LECLectureCellViewModel *cellViewModel = [lecModelView.tableData objectAtIndex:indexPath.row];
         cell.courseNameLabel.text = [cellViewModel titleText];
         cell.courseDescriptionLabel.text = [cellViewModel subText];
         cell.courseDescriptionLabel.textColor = [[LECColourService sharedColourService] highlightColourFor:cellViewModel.colourString];
@@ -171,7 +153,7 @@
 {
     if (editingStyle == UITableViewCellEditingStyleDelete)
     {
-        [self.viewModel deleteLectureAtIndex:indexPath.row];
+        [lecModelView deleteLectureAtIndex:indexPath.row];
         [self.lectureTableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
     }
 }

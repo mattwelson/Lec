@@ -22,20 +22,20 @@
     if (self) {
         // Initialization code
         startingFrame = frame;
-        [[LECColourService sharedColourService] addGradientForColour:courseModel.course.colour toView:self];
+        [[LECColourService sharedColourService] addGradientForColour:courseModel.currentCourse.colour toView:self];
         
-        subjectImg = [[LECIconService sharedIconService] addIconCourseScreen:courseModel.course.icon toView:self];
+        subjectImg = [[LECIconService sharedIconService] addIconCourseScreen:courseModel.currentCourse.icon toView:self];
         [self addSubview:subjectImg];
         
         titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 100, self.frame.size.width, 50)];
-        titleLabel.text = courseModel.course.courseName;
+        titleLabel.text = courseModel.currentCourse.courseName;
         titleLabel.textAlignment = NSTextAlignmentCenter;
         titleLabel.font = [UIFont fontWithName:DEFAULTFONTLIGHT size:40];
         titleLabel.textColor = [UIColor whiteColor];
         [self addSubview:titleLabel];
         
         descriptionLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 140, self.frame.size.width, 50)];
-        descriptionLabel.text = courseModel.course.courseDescription;
+        descriptionLabel.text = courseModel.currentCourse.courseDescription;
         descriptionLabel.textAlignment = NSTextAlignmentCenter;
         descriptionLabel.font = [UIFont fontWithName:DEFAULTFONTLIGHT size:15];
         descriptionLabel.textColor = [UIColor whiteColor];

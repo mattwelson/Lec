@@ -10,11 +10,12 @@
 
 @interface LECCourseViewModel : LECBaseViewModel
 
-@property Course *course;
+@property Course *currentCourse;
 
 @property UIImage *iconImage; // the image that represents the course
 
-+(LECCourseViewModel *) courseViewModelWithCourse:(Course *)course;
+-(instancetype)initWithCourse:(Course *) course;
 -(void)deleteLectureAtIndex:(NSInteger)index;
+-(void)addLecture:(NSString *)name;
 
 @end

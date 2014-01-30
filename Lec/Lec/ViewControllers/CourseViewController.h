@@ -11,8 +11,6 @@
 
 @interface CourseViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
-@property LECCourseViewModel *viewModel;
-
 @property UITableView *lectureTableView;
 
 - (id)initWithCourse:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil selectedCourse:(Course *)course;
