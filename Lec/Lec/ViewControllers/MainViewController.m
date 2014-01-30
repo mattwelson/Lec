@@ -201,7 +201,7 @@
     return [self.viewModel.tableData count];
 }
 
-//Delete this function when the cells are added to the table view.
+// Delete this function when the cells are added to the table view.
 - (void) changeCoursePage
 {
     [self.navigationController pushViewController:[[CourseViewController alloc] initWithNibName:@"CourseViewController" bundle:nil] animated:YES];
