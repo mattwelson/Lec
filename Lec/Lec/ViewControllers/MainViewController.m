@@ -246,6 +246,8 @@
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon_checkmark.png"] style:UIBarButtonItemStylePlain target:self action:@selector(saveCourse)];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon_cancel.png"] style:UIBarButtonItemStylePlain target:self action:@selector(closeSaveCourse)];
+    
+    self.courseTableView.userInteractionEnabled = NO; // disable course clicking
     //This is where we will add Courses to the tableView
     [UIView animateWithDuration:0.2
                           delay:0.0
@@ -294,6 +296,7 @@
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:plusImg style:UIBarButtonItemStylePlain target:self action:@selector(addCourse)];
     
     self.navigationItem.leftBarButtonItem = nil;
+    self.courseTableView.userInteractionEnabled = YES; // re-enables course clicking
 
     
     [UIView animateWithDuration:0.2
