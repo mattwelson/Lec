@@ -55,7 +55,7 @@
         navTitle.alpha = -0.9 + (tableOffset/50);
     }
     
-    else if(tableOffset == 0) {
+    else if(tableOffset < 2) {
         subjectImg.alpha = 1;
         titleLabel.alpha = 1;
         descriptionLabel.alpha = 1;
