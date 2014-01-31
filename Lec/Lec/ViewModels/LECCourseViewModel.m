@@ -12,7 +12,7 @@
 @interface LECCourseViewModel (){
     Lecture *newLecture;
     LECDatabaseService *dbService;
-    int i; //the Lecture Number
+    unsigned long i; //the Lecture Number
 }
 @end
 

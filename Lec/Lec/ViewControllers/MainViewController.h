@@ -16,5 +16,4 @@
 @property UICollectionView *colorView;
 @property LECHomeViewModel *viewModel;
 
-- (void) changeCoursePage;
 @end
