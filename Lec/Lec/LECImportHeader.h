@@ -24,10 +24,11 @@
 #import "LECCourseViewModel.h"
 #import "LECLectureViewModel.h"
 
-#import "LECCourseHeaderView.h"
+#import "LECHeaderView.h"
 #import "LECColorCollectionView.h"
 #import "LECHomeViewModel.h"
 #import "CourseCell.h"
+#import "LectureCell.h"
 #import "MainViewController.h"
 #import "CourseViewController.h"
 #import "RecordViewController.h"

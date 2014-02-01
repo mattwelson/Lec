@@ -11,7 +11,6 @@
 
 @interface LECCourseViewModel (){
     Lecture *newLecture;
-    LECDatabaseService *dbService;
     unsigned long i; //the Lecture Number
 }
 @end
@@ -23,7 +22,6 @@
     self = [super init];
     if (self){
         self.currentCourse = course;
-        dbService = [LECDatabaseService sharedDBService];
         
         NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"lectureNumber" ascending:NO];
         NSArray *lectures = [[course.lectures allObjects] sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];
@@ -38,8 +36,11 @@
         else{
             i = [[[lectures objectAtIndex:0] lectureNumber] unsignedIntegerValue];
         }
+        
         self.tintColour = [[LECColourService sharedColourService] baseColourFor:[course colour]];
+        self.colourString = [course colour];
         self.navTitle = [course courseName];
+        self.icon = [course icon];
     }
     return self;
 }
@@ -55,10 +56,11 @@
 -(void)addLecture:(NSString *)name
 {
     i++;
+    LECDatabaseService *dbService = [LECDatabaseService sharedDBService];
     newLecture = [dbService newLectureForCourse:self.currentCourse];
     newLecture.lectureName = name;
     newLecture.lectureNumber = [NSNumber numberWithInt:i];
-    [[LECDatabaseService sharedDBService] saveChanges];
+    [dbService saveChanges];
     [self.tableData insertObject:[LECLectureCellViewModel lectureCellVMWithLecture:newLecture] atIndex:0];
 }
 

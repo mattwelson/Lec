@@ -42,11 +42,12 @@
 }
 
 -(void)viewWillAppear:(BOOL)animated{
-    //[self navagationTopBar]; MOVED EVERYTHING TO VIEWDIDAPPEAR
+    [super viewWillAppear:animated];
     
 }
 
 -(void)viewDidAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
     [self navagationTopBar];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];  //sets the status bar to black
 

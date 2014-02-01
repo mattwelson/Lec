@@ -8,10 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "LECImportHeader.h"
+#import "PullupTableViewController.h"
 
-@interface CourseViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@interface CourseViewController : PullupTableViewController
 
-@property UITableView *lectureTableView;
+@property UITableView *tableView;
 
 - (id)initWithCourse:(Course *)course;
 
