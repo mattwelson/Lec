@@ -58,7 +58,7 @@ static LECAudioService *sharedService;
 
 -(void) stopRecording
 {
-    
+    [audioRecorder stop];
 }
 
 #pragma mark Private
