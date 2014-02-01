@@ -12,7 +12,7 @@
 
 @property Course *currentCourse;
 
-@property UIImage *iconImage; // the image that represents the course
+@property NSString *icon; // the image that represents the course
 
 -(instancetype)initWithCourse:(Course *) course;
 -(void)deleteLectureAtIndex:(NSInteger)index;

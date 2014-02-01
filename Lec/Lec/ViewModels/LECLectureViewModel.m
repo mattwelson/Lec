@@ -14,6 +14,7 @@
 {
     LECLectureViewModel *vm = [[LECLectureViewModel alloc] init];
     vm.lecture = lecture;
+    vm.icon = lecture.course.icon;
     return vm;
 }
 

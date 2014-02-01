@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 South45. All rights reserved.
 //
 
-#import "LECCourseHeaderView.h"
+#import "LECHeaderView.h"
 
-@implementation LECCourseHeaderView{
+@implementation LECHeaderView{
     CGRect startingFrame;
     UIImageView *subjectImg;
     UILabel *navTitle;
@@ -16,31 +16,51 @@
     UILabel *descriptionLabel;
 }
 
-- (id)initWithFrame:(CGRect)frame course:(LECCourseViewModel *)courseModel
+- (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
-    if (self) {
-        // Initialization code
+    if(self)
+    {
         startingFrame = frame;
-        [[LECColourService sharedColourService] addGradientForColour:courseModel.currentCourse.colour toView:self];
         
-        subjectImg = [[LECIconService sharedIconService] addIconCourseScreen:courseModel.currentCourse.icon toView:self];
+        subjectImg = [UIImageView new];
+        [subjectImg setTintColor:[UIColor whiteColor]];
+        [subjectImg setFrame:CGRectMake(120, 30, 60, 60)];
         [self addSubview:subjectImg];
         
         titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 100, self.frame.size.width, 50)];
-        titleLabel.text = courseModel.currentCourse.courseName;
         titleLabel.textAlignment = NSTextAlignmentCenter;
         titleLabel.font = [UIFont fontWithName:DEFAULTFONTLIGHT size:40];
         titleLabel.textColor = [UIColor whiteColor];
         [self addSubview:titleLabel];
         
         descriptionLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 140, self.frame.size.width, 50)];
-        descriptionLabel.text = courseModel.currentCourse.courseDescription;
         descriptionLabel.textAlignment = NSTextAlignmentCenter;
         descriptionLabel.font = [UIFont fontWithName:DEFAULTFONTLIGHT size:15];
         descriptionLabel.textColor = [UIColor whiteColor];
         [self addSubview:descriptionLabel];
-        
+    }
+    return self;
+}
+
+- (id)initWithFrame:(CGRect)frame course:(LECCourseViewModel *)courseModel
+{
+    self = [self initWithFrame:frame];
+    if (self) {
+        [[LECColourService sharedColourService] addGradientForColour:courseModel.colourString toView:self];
+        subjectImg = [[LECIconService sharedIconService] addIconCourseScreen:courseModel.icon toView:subjectImg];
+        titleLabel.text = courseModel.navTitle;
+        descriptionLabel.text = courseModel.currentCourse.courseDescription;
+    }
+    return self;
+}
+
+-(id)initWithFrame:(CGRect)frame lecture:(LECLectureViewModel *)lectureModel
+{
+    self = [self initWithFrame:frame];
+    if (self) {
+        [[LECColourService sharedColourService] addGradientForColour:lectureModel.colourString toView:self];
+        subjectImg = [[LECIconService sharedIconService] addIconCourseScreen:lectureModel.icon toView:subjectImg];
     }
     return self;
 }

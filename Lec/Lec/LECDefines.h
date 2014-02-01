@@ -8,6 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
+// tableview cell identifier
+#define CELL_ID_HEADER @"courseheader"
+#define CELL_ID_LECTURE_CELL @"lecturecell"
+#define CELL_ID_COURSE_CELL @"coursecell"
+#define CELL_ID_TAG_CELL @"tagcell"
+
+
 #define DEFAULTFONT @"Avenir"
 #define DEFAULTFONTLIGHT @"Avenir-Book"
 

@@ -15,5 +15,6 @@
 @property NSString *navTitle;
 @property UIColor *tintColour;
 @property NSMutableArray *tableData;
+@property NSString *colourString;
 
 @end
