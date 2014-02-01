@@ -24,6 +24,7 @@ static LECAudioService *sharedService;
     return sharedService;
 }
 
+#pragma mark Recording
 -(void) setupAudioRecordingForPath:(NSString *)path
 {
     session = [AVAudioSession sharedInstance];
@@ -60,6 +61,9 @@ static LECAudioService *sharedService;
 {
     [audioRecorder stop];
 }
+
+#pragma mark Playback
+
 
 #pragma mark Private
 -(NSURL *)recordingPath:(NSString *)path

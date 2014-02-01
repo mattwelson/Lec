@@ -287,6 +287,20 @@
 			name = BaseViewControllers;
 			sourceTree = "<group>";
 		};
+		C96BCA22189CC2E300D5E7FD /* Partial Views */ = {
+			isa = PBXGroup;
+			children = (
+				8BE7581B188B48DD007B6C02 /* LECTableView.h */,
+				8BE7581C188B48DD007B6C02 /* LECTableView.m */,
+				8B523BB4188B2FAE002796A6 /* LECTableViewDataSource.h */,
+				0BA86AB618925F1800805240 /* LECColorCollectionView.h */,
+				0BA86AB718925F1800805240 /* LECColorCollectionView.m */,
+				7318CD9F1898AEFD002E23A0 /* LECHeaderView.h */,
+				7318CDA01898AEFD002E23A0 /* LECHeaderView.m */,
+			);
+			name = "Partial Views";
+			sourceTree = "<group>";
+		};
 		C9A0047E1889EBD200D27A6C /* Test */ = {
 			isa = PBXGroup;
 			children = (
@@ -417,13 +431,7 @@
 			isa = PBXGroup;
 			children = (
 				0B6BD59D18891F8E00A7D8F9 /* Cells */,
-				8BE7581B188B48DD007B6C02 /* LECTableView.h */,
-				8BE7581C188B48DD007B6C02 /* LECTableView.m */,
-				8B523BB4188B2FAE002796A6 /* LECTableViewDataSource.h */,
-				0BA86AB618925F1800805240 /* LECColorCollectionView.h */,
-				0BA86AB718925F1800805240 /* LECColorCollectionView.m */,
-				7318CD9F1898AEFD002E23A0 /* LECHeaderView.h */,
-				7318CDA01898AEFD002E23A0 /* LECHeaderView.m */,
+				C96BCA22189CC2E300D5E7FD /* Partial Views */,
 			);
 			name = Views;
 			sourceTree = "<group>";
