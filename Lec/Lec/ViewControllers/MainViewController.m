@@ -42,15 +42,14 @@
 }
 
 -(void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
+    //[self navagationTopBar]; MOVED EVERYTHING TO VIEWDIDAPPEAR
     
 }
 
 -(void)viewDidAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
     [self navagationTopBar];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];  //sets the status bar to black
-
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -69,7 +68,7 @@
     [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:HEADERCOLOR, NSForegroundColorAttributeName,[UIFont fontWithName:DEFAULTFONT size:HEADERSIZE], NSFontAttributeName, nil]];
     
     self.navigationController.navigationBar.tintColor = NAVTINTCOLOR;
-
+    
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:plusImg style:UIBarButtonItemStylePlain target:self action:@selector(addCourse)];
 }
@@ -153,8 +152,8 @@
 
 -(void)saveCourse{
 #warning temp fix to stop no input for the course name. Will add warning box later (CODIE!)
-//    if (courseNameInput.text.length > 0) {
-
+    //    if (courseNameInput.text.length > 0) {
+    
     //Call the delegate to get all the text fields
     [addCourseView retrieveInputs];
     
@@ -169,10 +168,10 @@
     self.navigationItem.leftBarButtonItem = nil;
     
     [self.viewModel.tableData insertObject:[LECCourseCellViewModel courseCellWith:course] atIndex:0];
-
+    
     [self.courseTableView reloadData]; // refreshes table view
     [self closeSaveCourse];
-//    }
+    //    }
 }
 
 
@@ -181,7 +180,7 @@
     
     self.navigationItem.leftBarButtonItem = nil;
     self.courseTableView.userInteractionEnabled = YES; // re-enables course clicking
-
+    
     [UIView animateWithDuration:0.2
                           delay:0.0
                         options: UIViewAnimationOptionCurveEaseIn

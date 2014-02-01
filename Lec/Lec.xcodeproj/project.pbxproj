@@ -19,8 +19,8 @@
 		0B6BD59C18891B1E00A7D8F9 /* nav_add_btn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B6BD59A18891B1E00A7D8F9 /* nav_add_btn@2x.png */; };
 		0B6BD5A018891FB300A7D8F9 /* CourseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B6BD59F18891FB300A7D8F9 /* CourseCell.m */; };
 		0BA86AB818925F1800805240 /* LECColorCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BA86AB718925F1800805240 /* LECColorCollectionView.m */; };
-		7318CDA11898AEFD002E23A0 /* LECCourseHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7318CDA01898AEFD002E23A0 /* LECCourseHeaderView.m */; };
 		738FB164189CA1D200DBF8F8 /* LECAddCourseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 738FB163189CA1D200DBF8F8 /* LECAddCourseView.m */; };
+		7318CDA11898AEFD002E23A0 /* LECHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7318CDA01898AEFD002E23A0 /* LECHeaderView.m */; };
 		73CD6EB21895F06400F183C7 /* LECIconService.m in Sources */ = {isa = PBXBuildFile; fileRef = 73CD6EB11895F06400F183C7 /* LECIconService.m */; };
 		73CD6EB918961B6900F183C7 /* Icons.plist in Resources */ = {isa = PBXBuildFile; fileRef = 73CD6EB818961B6900F183C7 /* Icons.plist */; };
 		73CD6EBC1896328600F183C7 /* subject_cs.png in Resources */ = {isa = PBXBuildFile; fileRef = 73CD6EBA1896328600F183C7 /* subject_cs.png */; };
@@ -416,8 +416,8 @@
 				8B523BB4188B2FAE002796A6 /* LECTableViewDataSource.h */,
 				0BA86AB618925F1800805240 /* LECColorCollectionView.h */,
 				0BA86AB718925F1800805240 /* LECColorCollectionView.m */,
-				7318CD9F1898AEFD002E23A0 /* LECCourseHeaderView.h */,
-				7318CDA01898AEFD002E23A0 /* LECCourseHeaderView.m */,
+				7318CD9F1898AEFD002E23A0 /* LECHeaderView.h */,
+				7318CDA01898AEFD002E23A0 /* LECHeaderView.m */,
 				738FB162189CA1D200DBF8F8 /* LECAddCourseView.h */,
 				738FB163189CA1D200DBF8F8 /* LECAddCourseView.m */,
 			);
