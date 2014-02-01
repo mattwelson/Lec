@@ -43,24 +43,26 @@
     return self;
 }
 
-- (id)initWithFrame:(CGRect)frame course:(LECCourseViewModel *)courseModel
+- (id)initWithCourse:(LECCourseViewModel *)courseModel
 {
-    self = [self initWithFrame:frame];
+    self = [self initWithFrame:CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, 200)];
     if (self) {
         [[LECColourService sharedColourService] addGradientForColour:courseModel.colourString toView:self];
         subjectImg = [[LECIconService sharedIconService] addIconCourseScreen:courseModel.icon toView:subjectImg];
         titleLabel.text = courseModel.navTitle;
-        descriptionLabel.text = courseModel.currentCourse.courseDescription;
+        descriptionLabel.text = courseModel.subTitle;
     }
     return self;
 }
 
--(id)initWithFrame:(CGRect)frame lecture:(LECLectureViewModel *)lectureModel
+-(id)initWithLecture:(LECLectureViewModel *)lectureModel
 {
-    self = [self initWithFrame:frame];
+    self = [self initWithFrame:CGRectMake(0, 0,[[UIScreen mainScreen] bounds].size.width, 200)];
     if (self) {
         [[LECColourService sharedColourService] addGradientForColour:lectureModel.colourString toView:self];
         subjectImg = [[LECIconService sharedIconService] addIconCourseScreen:lectureModel.icon toView:subjectImg];
+        titleLabel.text = lectureModel.navTitle;
+        descriptionLabel.text = lectureModel.subTitle;
     }
     return self;
 }

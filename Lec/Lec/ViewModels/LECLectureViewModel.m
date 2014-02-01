@@ -15,6 +15,9 @@
     LECLectureViewModel *vm = [[LECLectureViewModel alloc] init];
     vm.lecture = lecture;
     vm.icon = lecture.course.icon;
+    vm.colourString = lecture.course.colour;
+    vm.navTitle = [lecture lectureName];
+    vm.subTitle = [NSString stringWithFormat:@"Lecture %@", [lecture lectureNumber]];
     return vm;
 }
 

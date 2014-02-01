@@ -46,6 +46,8 @@
     navBar.shadowImage = [UIImage new];
     [navBar setTranslucent:YES]; // what the fuck, it's not there!
     [navBar setBackgroundColor:[UIColor clearColor]]; // apparently it is!
+    
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
 }
 
 - (void) courseTableViewSetup
@@ -60,7 +62,6 @@
     [self.tableView setNeedsDisplay];
     [self.view addSubview:self.tableView];
     
-    [self.tableView registerClass:[LectureCell class] forCellReuseIdentifier:CELL_ID_LECTURE_CELL];
     [self.tableView registerClass:[LectureCell class] forCellReuseIdentifier:CELL_ID_HEADER];
 }
 
@@ -74,9 +75,7 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    Lecture *selectedLecture = [[[self tableData] objectAtIndex:indexPath.row] lecture]; // should a nice method
-    
-    [self.navigationController pushViewController:[[RecordViewController alloc] initWithLecture:selectedLecture] animated:YES];
+    [self didSelectCellAt:indexPath.row];
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -140,24 +139,37 @@
 }
 
 #pragma mark Abstract methods
+-(void) abstractMethod:(NSString *)methodName
+{
+    @throw [NSException exceptionWithName:@"Abstract method!" reason:
+            [NSString stringWithFormat:@"Subclass should override %@",methodName] userInfo:nil];
+}
+
 -(void) deleteObjectFromViewModel:(NSInteger)index
 {
-    @throw [NSException exceptionWithName:@"Abstract method!" reason:@"Subclass should implement me" userInfo:nil];
+    [self abstractMethod:@"deleteObjectFromViewModel"];
 }
 
 -(id) viewModelFromSubclass
 {
-    @throw [NSException exceptionWithName:@"Abstract method!" reason:@"Subclass should implement me" userInfo:nil];
+    [self abstractMethod:@"viewModelFromSubclass"];
+    return nil;
 }
 
 -(NSArray *) tableData
 {
-    @throw [NSException exceptionWithName:@"Abstract method!" reason:@"Subclass should implement me" userInfo:nil];
+    [self abstractMethod:@"tableData"];
+    return nil;
 }
 
 -(void) createHeaderView
 {
-    @throw [NSException exceptionWithName:@"Abstract method!" reason:@"Subclass should implement me" userInfo:nil];
+    [self abstractMethod:@"createHeaderView"];
+}
+
+-(void) didSelectCellAt:(NSInteger)index
+{
+    [self abstractMethod:@"didSelectCellAt"];
 }
 
 @end

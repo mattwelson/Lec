@@ -17,15 +17,6 @@
 
 @implementation CourseViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
 - (id)initWithCourse:(Course *)course
 {
     self = [super initWithNibName:@"CourseViewController" bundle:nil];
@@ -51,7 +42,7 @@
 }
 
 -(void)createHeaderView {
-    self.headerView = [[LECHeaderView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 200) course:viewModel];
+    self.headerView = [[LECHeaderView alloc]initWithCourse:viewModel];
     [self.view addSubview:self.headerView];
 }
 
@@ -86,6 +77,12 @@
 -(NSArray *) tableData
 {
     return viewModel.tableData;
+}
+
+-(void) didSelectCellAt:(NSInteger)index
+{
+    Lecture *selectedLecture = [[viewModel.tableData objectAtIndex:index] lecture];
+    [self.navigationController pushViewController:[[RecordViewController alloc] initWithLecture:selectedLecture] animated:YES];
 }
 
 @end

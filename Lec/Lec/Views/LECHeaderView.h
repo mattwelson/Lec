@@ -11,8 +11,8 @@
 
 @interface LECHeaderView : UIView
 
-- (id)initWithFrame:(CGRect)frame course:(LECCourseViewModel *)course;
-- (id)initWithFrame:(CGRect)frame lecture:(LECLectureViewModel *)lecture;
+- (id)initWithCourse:(LECCourseViewModel *)course;
+- (id)initWithLecture:(LECLectureViewModel *)lecture;
 
 -(void)changeAlpha:(CGFloat) tableOffset;
 
