@@ -42,16 +42,15 @@
     [self courseTableViewSetup];
     [self addCourseIntoView];
     [self navagationTopBar];
-    
 }
+
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    
 }
 
 -(void)viewDidAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
+    [super viewDidAppear:animated];
     [self navagationTopBar];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];  //sets the status bar to black
 
@@ -151,7 +150,8 @@
 
 - (void) courseTableViewSetup
 {
-    self.courseTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, self.view.frame.size.height)];
+    // height hack, need to write a method that reloads correctly when the viewDidAppear whne we figure out whats causing it.
+    self.courseTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, self.view.frame.size.height-64)];
     [self.courseTableView setScrollEnabled:YES];
     [self.courseTableView setNeedsDisplay];
     [self.view addSubview:self.courseTableView];
