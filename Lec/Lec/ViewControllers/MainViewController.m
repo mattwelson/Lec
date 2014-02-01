@@ -38,8 +38,8 @@
     [super viewDidLoad];
     [self courseTableViewSetup];
     [self navagationTopBar];
-    
 }
+
 
 -(void)viewWillAppear:(BOOL)animated{
     //[self navagationTopBar]; MOVED EVERYTHING TO VIEWDIDAPPEAR
@@ -77,7 +77,8 @@
 
 - (void) courseTableViewSetup
 {
-    self.courseTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, self.view.frame.size.height)];
+    // height hack, need to write a method that reloads correctly when the viewDidAppear whne we figure out whats causing it.
+    self.courseTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, self.view.frame.size.height-64)];
     [self.courseTableView setScrollEnabled:YES];
     [self.courseTableView setNeedsDisplay];
     [self.view addSubview:self.courseTableView];
