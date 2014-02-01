@@ -9,10 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "LECHomeViewModel.h"
 #import "LECColorCollectionView.h"
+#import "LECAddCourseView.h"
+
 
 //@class LECColorCollectionView;
 
-@interface MainViewController : UIViewController<ColourPickerDelegate, UITableViewDelegate, UITableViewDataSource,UICollectionViewDelegateFlowLayout>
+@interface MainViewController : UIViewController<SaveCourseDelegate, UITableViewDelegate, UITableViewDataSource,UICollectionViewDelegateFlowLayout>
 
 
 @property UITableView *courseTableView;
