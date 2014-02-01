@@ -22,9 +22,16 @@
     self = [super initWithNibName:@"RecordViewController" bundle:nil];
     if (self) {
         viewModel = [LECLectureViewModel viewModelWithLecture:lecture];
-        NSLog(@"Name: %@\nNumber:%@", viewModel.navTitle, viewModel.subTitle);
+        
+        [viewModel prepareForRecordingAudio];
+        [viewModel startRecordingAudio];
     }
     return self;
+}
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [viewModel stopRecordingAudio];
 }
 
 - (void)didReceiveMemoryWarning

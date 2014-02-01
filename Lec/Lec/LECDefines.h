@@ -14,6 +14,7 @@
 #define CELL_ID_COURSE_CELL @"coursecell"
 #define CELL_ID_TAG_CELL @"tagcell"
 
+#define FILE_RECORDING_TYPE @"m4a"
 
 #define DEFAULTFONT @"Avenir"
 #define DEFAULTFONTLIGHT @"Avenir-Book"
