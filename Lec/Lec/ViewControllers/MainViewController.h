@@ -7,13 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "LECImportHeader.h"
+#import "LECHomeViewModel.h"
+#import "LECColorCollectionView.h"
 
-@interface MainViewController : UIViewController<UITableViewDelegate, UITableViewDataSource, UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
+//@class LECColorCollectionView;
+
+@interface MainViewController : UIViewController<ColourPickerDelegate, UITableViewDelegate, UITableViewDataSource,UICollectionViewDelegateFlowLayout>
 
 
 @property UITableView *courseTableView;
-@property UICollectionView *colorView;
+@property LECColorCollectionView *colorView;
 @property LECHomeViewModel *viewModel;
 
 @end

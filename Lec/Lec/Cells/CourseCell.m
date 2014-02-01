@@ -8,7 +8,7 @@
 
 #import "CourseCell.h"
 #import "LECDefines.h"
-#import "MainViewController.h"
+#import "LECCourseCellViewModel.h"
 
 @implementation CourseCell
 

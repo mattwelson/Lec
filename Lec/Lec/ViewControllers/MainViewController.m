@@ -18,8 +18,6 @@
     UIView *colorButtonView;
     UIView *iconButtonView;
     UIButton *colorPickerButton;
-    NSArray *colorArray; // View model?
-    NSString *selectedColor; // View model?
 }
 
 @end
@@ -81,21 +79,12 @@
 - (void) colorViewAppear
 {
     [self.view endEditing:YES];
-    
-    UICollectionViewFlowLayout *layout=[[UICollectionViewFlowLayout alloc] init];
-    
-    layout.sectionInset = UIEdgeInsetsMake(180, 50, 200, 50);
-    layout.minimumLineSpacing = 30.0f;
-    self.colorView = [[UICollectionView alloc]initWithFrame: [[UIScreen mainScreen] applicationFrame] collectionViewLayout:layout];
-    
-    [self.colorView setScrollEnabled:NO];
-    [self.colorView setDataSource:self];
-    [self.colorView setDelegate:self];
-    [self.colorView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"cellIdentifier"];
-    self.colorView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0];
+    self.colorView = [LECColorCollectionView colourCollection];
+    self.colorView.colourPickerDelegate = self;
+
     
     //Creates the array based on the plist
-    colorArray =  [[LECColourService sharedColourService]colourKeys];
+    
     [[UIApplication sharedApplication].keyWindow addSubview:self.colorView];
     
     [UIView animateWithDuration:0.2
@@ -110,45 +99,11 @@
     
 }
 
-
-// 1
-- (NSInteger)collectionView:(UICollectionView *)view numberOfItemsInSection:(NSInteger)section {
-    
-    return 9;
-}
-// 2
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    UICollectionViewCell *cell=[collectionView dequeueReusableCellWithReuseIdentifier:@"cellIdentifier" forIndexPath:indexPath];
- 
-    cell.layer.cornerRadius = cell.frame.size.height/2;
-    cell.layer.masksToBounds = YES;
-    cell.layer.borderWidth = 0;
-    
-    NSString *cellColor = [colorArray objectAtIndex:indexPath.row];
-    [[LECColourService sharedColourService] addGradientForColour:cellColor toView:[cell contentView]];
-    return cell;
+- (void)colourPickerDismissed:(NSString *)colourString {
+    [[LECColourService sharedColourService] changeGradientToColour:colourString forView:colorPickerButton];
 }
 
--(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    selectedColor = [colorArray objectAtIndex:indexPath.row];
-    [[LECColourService sharedColourService] changeGradientToColour:selectedColor forView:colorPickerButton];
-    
-    [UIView animateWithDuration:0.2
-                          delay:0.0
-                        options: UIViewAnimationOptionCurveEaseIn
-                     animations:^{
-                         self.colorView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.0];
-                     }
-                     completion:^(BOOL finished){
-                         [self.colorView removeFromSuperview];
-                     }];
-}
 
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    return CGSizeMake(50, 50);
-}
 
 
 - (void) courseTableViewSetup
@@ -242,7 +197,7 @@
 - (void)addCourse
 {
     //Default colour
-    selectedColor = @"Red";
+    //selectedColor = @"Red";
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon_checkmark.png"] style:UIBarButtonItemStylePlain target:self action:@selector(saveCourse)];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon_cancel.png"] style:UIBarButtonItemStylePlain target:self action:@selector(closeSaveCourse)];
@@ -261,7 +216,7 @@
                          colorButtonView.frame = CGRectMake(-1, 0, 50, 52);
                          iconButtonView.frame = CGRectMake(-1, 50, 50, 50);
                          colorPickerButton.frame = CGRectMake(9, 10, 32, 32);
-                         [[LECColourService sharedColourService] addGradientForColour:selectedColor toView:colorPickerButton];
+                         //[[LECColourService sharedColourService] addGradientForColour:selectedColor toView:colorPickerButton];
                      }
                      completion:^(BOOL finished){
                          [courseNameInput becomeFirstResponder];
@@ -277,7 +232,7 @@
         course.courseName = [courseNameInput text];
         course.courseDescription = [courseDescriptorInput text];
 
-        course.colour = selectedColor;
+        //course.colour = selectedColor;
         
         course.icon = @"cs";
         [[LECDatabaseService sharedDBService] saveChanges]; // saves changes made to course scratch pad
