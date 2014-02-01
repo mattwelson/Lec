@@ -49,24 +49,15 @@ static LECIconService *sharedService;
         iconImgView.image = [iconImgView.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
         [iconImgView setTintColor:[UIColor whiteColor]];
     
-        //[gradient setFrame:[view frame]];
         [iconImgView setFrame:CGRectMake(15, 25, 50, 50)];
-        //[view insertSubview:iconImgView atIndex:0];
         [view.layer insertSublayer:iconImgView.layer atIndex:0];
     }
 }
 
--(UIImageView *)addIconCourseScreen:(NSString *)icon toView:(UIView *)view{
+-(UIImageView *)addIconCourseScreen:(NSString *)icon toView:(UIImageView *)iconImgView{
     if ([self iconFor:icon] != NULL) {
-        UIImageView *iconImgView = [[UIImageView alloc]initWithImage:[self iconFor:icon]];
+        iconImgView = [iconImgView initWithImage:[self iconFor:icon]];
         iconImgView.image = [iconImgView.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-        [iconImgView setTintColor:[UIColor whiteColor]];
-        
-        //[gradient setFrame:[view frame]];
-        [iconImgView setFrame:CGRectMake(120, 30, 60, 60)];
-        //[view insertSubview:iconImgView atIndex:0];
-        //[view.layer insertSublayer:iconImgView.layer atIndex:0];
-        //[view.layer addSublayer:iconImgView.layer];
         return iconImgView;
     }
     else {

@@ -12,6 +12,7 @@
 
 +(LECLectureViewModel *)viewModelWithLecture:(Lecture *)lecture;
 
+@property NSString *icon;
 @property Lecture *lecture;
 @property NSMutableArray *tags;
 // instance of AVAudio

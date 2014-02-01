@@ -9,9 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "LECImportHeader.h"
 
-@interface LECCourseHeaderView : UIView
+@interface LECHeaderView : UIView
 
 - (id)initWithFrame:(CGRect)frame course:(LECCourseViewModel *)course;
+- (id)initWithFrame:(CGRect)frame lecture:(LECLectureViewModel *)lecture;
 
 -(void)changeAlpha:(CGFloat) tableOffset;
 

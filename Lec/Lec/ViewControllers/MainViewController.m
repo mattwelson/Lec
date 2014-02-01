@@ -18,7 +18,6 @@
     UIView *colorButtonView;
     UIView *iconButtonView;
     UIButton *colorPickerButton;
-    NSArray *colorArray; // View model?
     NSString *selectedColor; // View model?
 }
 
@@ -47,11 +46,12 @@
 }
 
 -(void)viewWillAppear:(BOOL)animated{
-    //[self navagationTopBar]; MOVED EVERYTHING TO VIEWDIDAPPEAR
+    [super viewWillAppear:animated];
     
 }
 
 -(void)viewDidAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
     [self navagationTopBar];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];  //sets the status bar to black
 
@@ -94,8 +94,6 @@
     [self.colorView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"cellIdentifier"];
     self.colorView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0];
     
-    //Creates the array based on the plist
-    colorArray =  [[LECColourService sharedColourService]colourKeys];
     [[UIApplication sharedApplication].keyWindow addSubview:self.colorView];
     
     [UIView animateWithDuration:0.2
@@ -125,13 +123,13 @@
     cell.layer.masksToBounds = YES;
     cell.layer.borderWidth = 0;
     
-    NSString *cellColor = [colorArray objectAtIndex:indexPath.row];
+    NSString *cellColor = [[[LECColourService sharedColourService] colourKeys] objectAtIndex:indexPath.row];
     [[LECColourService sharedColourService] addGradientForColour:cellColor toView:[cell contentView]];
     return cell;
 }
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    selectedColor = [colorArray objectAtIndex:indexPath.row];
+    selectedColor = [[[LECColourService sharedColourService] colourKeys] objectAtIndex:indexPath.row];
     [[LECColourService sharedColourService] changeGradientToColour:selectedColor forView:colorPickerButton];
     
     [UIView animateWithDuration:0.2

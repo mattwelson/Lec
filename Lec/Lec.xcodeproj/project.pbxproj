@@ -19,7 +19,7 @@
 		0B6BD59C18891B1E00A7D8F9 /* nav_add_btn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B6BD59A18891B1E00A7D8F9 /* nav_add_btn@2x.png */; };
 		0B6BD5A018891FB300A7D8F9 /* CourseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B6BD59F18891FB300A7D8F9 /* CourseCell.m */; };
 		0BA86AB818925F1800805240 /* LECColorCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BA86AB718925F1800805240 /* LECColorCollectionView.m */; };
-		7318CDA11898AEFD002E23A0 /* LECCourseHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7318CDA01898AEFD002E23A0 /* LECCourseHeaderView.m */; };
+		7318CDA11898AEFD002E23A0 /* LECHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7318CDA01898AEFD002E23A0 /* LECHeaderView.m */; };
 		73CD6EB21895F06400F183C7 /* LECIconService.m in Sources */ = {isa = PBXBuildFile; fileRef = 73CD6EB11895F06400F183C7 /* LECIconService.m */; };
 		73CD6EB918961B6900F183C7 /* Icons.plist in Resources */ = {isa = PBXBuildFile; fileRef = 73CD6EB818961B6900F183C7 /* Icons.plist */; };
 		73CD6EBC1896328600F183C7 /* subject_cs.png in Resources */ = {isa = PBXBuildFile; fileRef = 73CD6EBA1896328600F183C7 /* subject_cs.png */; };
@@ -40,6 +40,7 @@
 		C9605CC0188A11D300F3DE57 /* Colours.plist in Resources */ = {isa = PBXBuildFile; fileRef = C9605CBF188A11D300F3DE57 /* Colours.plist */; };
 		C9605CC4188A179400F3DE57 /* LECColourService.m in Sources */ = {isa = PBXBuildFile; fileRef = C9605CC3188A179400F3DE57 /* LECColourService.m */; };
 		C9605CC8188A311100F3DE57 /* LECDatabaseService.m in Sources */ = {isa = PBXBuildFile; fileRef = C9605CC7188A311100F3DE57 /* LECDatabaseService.m */; };
+		C96BCA1C189C562C00D5E7FD /* PullupTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C96BCA1B189C562C00D5E7FD /* PullupTableViewController.m */; };
 		C9B0C5DB187FBE7F002D4A63 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9B0C5DA187FBE7F002D4A63 /* Foundation.framework */; };
 		C9B0C5DD187FBE7F002D4A63 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9B0C5DC187FBE7F002D4A63 /* CoreGraphics.framework */; };
 		C9B0C5DF187FBE7F002D4A63 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9B0C5DE187FBE7F002D4A63 /* UIKit.framework */; };
@@ -90,8 +91,8 @@
 		0B6BD59F18891FB300A7D8F9 /* CourseCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CourseCell.m; path = Cells/CourseCell.m; sourceTree = "<group>"; };
 		0BA86AB618925F1800805240 /* LECColorCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LECColorCollectionView.h; path = Views/LECColorCollectionView.h; sourceTree = "<group>"; };
 		0BA86AB718925F1800805240 /* LECColorCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LECColorCollectionView.m; path = Views/LECColorCollectionView.m; sourceTree = "<group>"; };
-		7318CD9F1898AEFD002E23A0 /* LECCourseHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LECCourseHeaderView.h; path = Views/LECCourseHeaderView.h; sourceTree = "<group>"; };
-		7318CDA01898AEFD002E23A0 /* LECCourseHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LECCourseHeaderView.m; path = Views/LECCourseHeaderView.m; sourceTree = "<group>"; };
+		7318CD9F1898AEFD002E23A0 /* LECHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LECHeaderView.h; path = Views/LECHeaderView.h; sourceTree = "<group>"; };
+		7318CDA01898AEFD002E23A0 /* LECHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LECHeaderView.m; path = Views/LECHeaderView.m; sourceTree = "<group>"; };
 		73275013188BC5D400F5CB04 /* LECDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LECDefines.h; sourceTree = "<group>"; };
 		73CD6EB01895F06400F183C7 /* LECIconService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LECIconService.h; path = Assets/LECIconService.h; sourceTree = "<group>"; };
 		73CD6EB11895F06400F183C7 /* LECIconService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LECIconService.m; path = Assets/LECIconService.m; sourceTree = "<group>"; };
@@ -127,6 +128,8 @@
 		C9605CC3188A179400F3DE57 /* LECColourService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LECColourService.m; path = Assets/LECColourService.m; sourceTree = "<group>"; };
 		C9605CC6188A311100F3DE57 /* LECDatabaseService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LECDatabaseService.h; path = DataModels/LECDatabaseService.h; sourceTree = "<group>"; };
 		C9605CC7188A311100F3DE57 /* LECDatabaseService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LECDatabaseService.m; path = DataModels/LECDatabaseService.m; sourceTree = "<group>"; };
+		C96BCA1A189C562C00D5E7FD /* PullupTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PullupTableViewController.h; path = ViewControllers/PullupTableViewController.h; sourceTree = "<group>"; };
+		C96BCA1B189C562C00D5E7FD /* PullupTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PullupTableViewController.m; path = ViewControllers/PullupTableViewController.m; sourceTree = "<group>"; };
 		C9B0C5D7187FBE7F002D4A63 /* Lec.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lec.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C9B0C5DA187FBE7F002D4A63 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		C9B0C5DC187FBE7F002D4A63 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -184,6 +187,7 @@
 		0B6BD5821889147200A7D8F9 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				C96BCA19189C55F500D5E7FD /* BaseViewControllers */,
 				C9B9CE16188FB990003A0972 /* XIBs */,
 				0B6BD583188914B300A7D8F9 /* MainViewController.h */,
 				0B6BD584188914B300A7D8F9 /* MainViewController.m */,
@@ -264,6 +268,15 @@
 				C9FBD62D1894B26B00D1A7D6 /* LECLectureCellViewModel.m */,
 			);
 			name = "Cell View Models";
+			sourceTree = "<group>";
+		};
+		C96BCA19189C55F500D5E7FD /* BaseViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				C96BCA1A189C562C00D5E7FD /* PullupTableViewController.h */,
+				C96BCA1B189C562C00D5E7FD /* PullupTableViewController.m */,
+			);
+			name = BaseViewControllers;
 			sourceTree = "<group>";
 		};
 		C9A0047E1889EBD200D27A6C /* Test */ = {
@@ -400,8 +413,8 @@
 				8B523BB4188B2FAE002796A6 /* LECTableViewDataSource.h */,
 				0BA86AB618925F1800805240 /* LECColorCollectionView.h */,
 				0BA86AB718925F1800805240 /* LECColorCollectionView.m */,
-				7318CD9F1898AEFD002E23A0 /* LECCourseHeaderView.h */,
-				7318CDA01898AEFD002E23A0 /* LECCourseHeaderView.m */,
+				7318CD9F1898AEFD002E23A0 /* LECHeaderView.h */,
+				7318CDA01898AEFD002E23A0 /* LECHeaderView.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -551,7 +564,7 @@
 				C9605CBA1889F99800F3DE57 /* LECCourseCellViewModel.m in Sources */,
 				8BE75823188B4F23007B6C02 /* LECLectureViewModel.m in Sources */,
 				C9605CA21889F3B500F3DE57 /* Course.m in Sources */,
-				7318CDA11898AEFD002E23A0 /* LECCourseHeaderView.m in Sources */,
+				7318CDA11898AEFD002E23A0 /* LECHeaderView.m in Sources */,
 				73CD6EB21895F06400F183C7 /* LECIconService.m in Sources */,
 				C9B0C5ED187FBE7F002D4A63 /* LECAppDelegate.m in Sources */,
 				0B6BD5901889157000A7D8F9 /* RecordViewController.m in Sources */,
@@ -559,6 +572,7 @@
 				0BA86AB818925F1800805240 /* LECColorCollectionView.m in Sources */,
 				C9CA77E01896596900980310 /* LectureCell.m in Sources */,
 				0B6BD586188914B300A7D8F9 /* MainViewController.m in Sources */,
+				C96BCA1C189C562C00D5E7FD /* PullupTableViewController.m in Sources */,
 				0B6BD58B1889155A00A7D8F9 /* CourseViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
