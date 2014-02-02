@@ -10,6 +10,7 @@
 #import "LECDefines.h"
 #import "LECDatabaseService.h"
 #import "LECColourService.h"
+#import "LECIconService.h"
 
 @implementation LECAddCourseView{
     UITextField *courseNameInput;
@@ -17,7 +18,9 @@
     UIView *colorButtonView;
     UIView *iconButtonView;
     UIButton *colorPickerButton;
+    UIButton *iconPickerButton;
     NSString *selectedColour;
+    NSString *selectedIcon;
 }
 
 - (id)initWithFrame:(CGRect)frame
@@ -89,6 +92,13 @@
     
     //Default colour
     selectedColour = @"Red";
+    
+    iconPickerButton = [[UIButton alloc]initWithFrame:CGRectMake(9, 10, 32, 0)];
+    //iconPickerButton.backgroundColor = [UIColor blackColor];
+    [iconPickerButton addTarget:Nil action:@selector(iconViewAppear) forControlEvents:UIControlEventTouchDown];
+    [iconButtonView addSubview:iconPickerButton];
+    
+    selectedIcon = @"cs";
 }
 
 - (void) colorViewAppear
@@ -112,9 +122,35 @@
     
 }
 
+- (void) iconViewAppear
+{
+    [self endEditing:YES];
+    self.iconView = [LECIconCollectionView iconCollection];
+    self.iconView.iconPickerDelegate = self;
+    
+    //Creates the array based on the plist
+    
+    [[UIApplication sharedApplication].keyWindow addSubview:self.iconView];
+    
+    [UIView animateWithDuration:0.2
+                          delay:0.0
+                        options: UIViewAnimationOptionCurveEaseIn
+                     animations:^{
+                         self.iconView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.8];
+                     }
+                     completion:^(BOOL finished){
+                     }];
+    
+}
+
 - (void)colourPickerDismissed:(NSString *)colourString {
     selectedColour = colourString;
     [[LECColourService sharedColourService] changeGradientToColour:colourString forView:colorPickerButton];
+}
+
+- (void)iconPickerDismissed:(NSString *)iconString {
+    selectedIcon = iconString;
+    [iconPickerButton setImage:[[LECIconService sharedIconService]iconFor:selectedIcon] forState:UIControlStateNormal];
 }
 
 -(void)animateCourseAddView{
@@ -125,7 +161,9 @@
     colorButtonView.frame = CGRectMake(-1, 0, 50, 52);
     iconButtonView.frame = CGRectMake(-1, 50, 50, 50);
     colorPickerButton.frame = CGRectMake(9, 10, 32, 32);
+    iconPickerButton.frame = CGRectMake(9, 10, 32, 32);
     [[LECColourService sharedColourService] addGradientForColour:selectedColour toView:colorPickerButton];
+    [iconPickerButton setImage:[[LECIconService sharedIconService]iconFor:selectedIcon] forState:UIControlStateNormal];
     
     [courseNameInput becomeFirstResponder];
 
@@ -138,14 +176,14 @@
     colorButtonView.frame = CGRectMake(-1, -1, 50, 0);
     iconButtonView.frame = CGRectMake(-1, 0, 50, 0);
     colorPickerButton.frame = CGRectMake(9, 10, 32, 0);
-    
+    iconPickerButton.frame = CGRectMake(9, 10, 32, 0);
+
     [courseNameInput resignFirstResponder];
 
 }
 
 -(void)retrieveInputs {
-    [self.saveCourseDelegate saveCourse:courseNameInput.text description:courseDescriptorInput.text colour:selectedColour];
-
+    [self.saveCourseDelegate saveCourse:courseNameInput.text description:courseDescriptorInput.text colour:selectedColour icon:selectedIcon];
 }
 
 
