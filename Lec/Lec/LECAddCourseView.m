@@ -60,6 +60,7 @@
     courseNameInput.placeholder = @"Course Name";
     [courseNameInput setFont:[UIFont fontWithName:DEFAULTFONT size:COURSENAMEECELLFONTSIZE]];
     [courseNameInput setTextColor:HEADERCOLOR];
+    courseNameInput.alpha = 0.0;
     [courseNameInput setAutocapitalizationType:UITextAutocapitalizationTypeWords];
     [self addSubview:courseNameInput];
     
@@ -67,6 +68,7 @@
     courseDescriptorInput.placeholder = @"Course Description";
     [courseDescriptorInput setFont:[UIFont fontWithName:DEFAULTFONT size:COURSEDESCRIPTIONCELLFONTSIZE]];
     [courseDescriptorInput setTextColor:HEADERCOLOR];
+    courseDescriptorInput.alpha = 0.0;
     [courseDescriptorInput setAutocapitalizationType:UITextAutocapitalizationTypeWords];
     [self addSubview:courseDescriptorInput];
     
@@ -87,6 +89,7 @@
     colorPickerButton.layer.cornerRadius = colorPickerButton.frame.size.width/2;
     colorPickerButton.layer.masksToBounds = YES;
     colorPickerButton.layer.borderWidth = 0;
+    colorPickerButton.alpha = 0.0;
     [colorPickerButton addTarget:Nil action:@selector(colorViewAppear) forControlEvents:UIControlEventTouchDown];
     [colorButtonView addSubview:colorPickerButton];
     
@@ -95,6 +98,7 @@
     
     iconPickerButton = [[UIButton alloc]initWithFrame:CGRectMake(9, 10, 32, 0)];
     //iconPickerButton.backgroundColor = [UIColor blackColor];
+    iconPickerButton.alpha = 0.0;
     [iconPickerButton addTarget:Nil action:@selector(iconViewAppear) forControlEvents:UIControlEventTouchDown];
     [iconButtonView addSubview:iconPickerButton];
     
@@ -165,20 +169,52 @@
     [[LECColourService sharedColourService] addGradientForColour:selectedColour toView:colorPickerButton];
     [iconPickerButton setImage:[[LECIconService sharedIconService]iconFor:selectedIcon] forState:UIControlStateNormal];
     
-    [courseNameInput becomeFirstResponder];
+    [UIView animateWithDuration:1.0
+                          delay:0.2
+                        options: UIViewAnimationOptionCurveEaseIn
+                     animations:^{
+                         courseNameInput.alpha = 1.0;
+                         courseDescriptorInput.alpha = 1.0;
+                         colorPickerButton.alpha = 1.0;
+                         iconPickerButton.alpha = 1.0;
+                     }
+                     completion:^(BOOL finished){
+                         [courseNameInput becomeFirstResponder];
+                     }];
+    
 
 }
 
 -(void)animateViewRemoved{
-    self.frame = CGRectMake(0, 0, self.frame.size.width, 0);
-    courseNameInput.frame = CGRectMake(60, 10, self.frame.size.width-60, 0);
-    courseDescriptorInput.frame = CGRectMake(60, 10, self.frame.size.width-60,0);
-    colorButtonView.frame = CGRectMake(-1, -1, 50, 0);
-    iconButtonView.frame = CGRectMake(-1, 0, 50, 0);
-    colorPickerButton.frame = CGRectMake(9, 10, 32, 0);
-    iconPickerButton.frame = CGRectMake(9, 10, 32, 0);
+    [UIView animateWithDuration:1.0
+                          delay:0.0
+                        options: UIViewAnimationOptionCurveEaseIn
+                     animations:^{
+                         courseNameInput.alpha = 0.0;
+                         courseDescriptorInput.alpha = 0.0;
+                         colorPickerButton.alpha = 0.0;
+                         iconPickerButton.alpha = 0.0;
+                     }
+                     completion:^(BOOL finished){
+                         [courseNameInput resignFirstResponder];
+                     }];
 
-    [courseNameInput resignFirstResponder];
+    [UIView animateWithDuration:1.0
+                          delay:0.2
+                        options: UIViewAnimationOptionCurveEaseIn
+                     animations:^{
+                         self.frame = CGRectMake(0, 0, self.frame.size.width, 0);
+                         courseNameInput.frame = CGRectMake(60, 10, self.frame.size.width-60, 0);
+                         courseDescriptorInput.frame = CGRectMake(60, 10, self.frame.size.width-60,0);
+                         colorButtonView.frame = CGRectMake(-1, -1, 50, 0);
+                         iconButtonView.frame = CGRectMake(-1, 0, 50, 0);
+                         colorPickerButton.frame = CGRectMake(9, 10, 32, 0);
+                         iconPickerButton.frame = CGRectMake(9, 10, 32, 0);
+                     }
+                     completion:^(BOOL finished){
+                     }];
+    
+    
 
 }
 

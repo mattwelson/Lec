@@ -186,7 +186,7 @@
     self.courseTableView.userInteractionEnabled = YES; // re-enables course clicking
     
     [UIView animateWithDuration:0.2
-                          delay:0.0
+                          delay:0.2
                         options: UIViewAnimationOptionCurveEaseIn
                      animations:^{
                          self.courseTableView.frame = CGRectMake(0, 0, 320, self.view.frame.size.height);
