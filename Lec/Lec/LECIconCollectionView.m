@@ -49,7 +49,9 @@
 //    cell.layer.masksToBounds = YES;
 //    cell.layer.borderWidth = 0;
     UIImage *cellIcon = [[LECIconService sharedIconService] iconFor:[self.iconArray objectAtIndex:indexPath.row]];
+    cellIcon = [cellIcon imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     cell.backgroundView = [[UIImageView alloc]initWithImage:cellIcon];
+    [cell.backgroundView setTintColor:[UIColor whiteColor]];
     
     //cell.backgroundView = cellIcon;
     
