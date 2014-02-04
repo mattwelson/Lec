@@ -63,6 +63,7 @@
     [self.view addSubview:self.tableView];
     
     [self.tableView registerClass:[LectureCell class] forCellReuseIdentifier:CELL_ID_HEADER];
+    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"Cell"];
 }
 
 - (void)didReceiveMemoryWarning
@@ -80,18 +81,16 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (section == 0) {
+    if (section == 0 || section == 2) // the header or our empty state cell
         return 1;
-    }
-    else {
+    else
         return [[self tableData] count];
-    }
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    return 2;
+    return 3;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -102,6 +101,12 @@
         cell = [[LectureCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CELL_ID_LECTURE_CELL];
         LECLectureCellViewModel *cellViewModel = [[self tableData] objectAtIndex:indexPath.row];
         [cell populateFor:cellViewModel];
+    } else if (indexPath.section == 2) {
+        cell = [[LectureCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"Cell"];
+        cell.backgroundColor = [UIColor whiteColor];
+        cell.textLabel.text = @"Pull down to add a thing";
+        cell.textLabel.textColor = [UIColor lightGrayColor];
+        [cell setUserInteractionEnabled:NO];
     }
     else {
         cell = [[LectureCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CELL_ID_HEADER];
@@ -114,12 +119,12 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if ([indexPath section] == 0) {
+    if ([indexPath section] == 0)
         return 136;
-    }
-    else {
+    if ([indexPath section] == 2 && [[self tableData] count] > 0)
+        return 0;
+    else // either empty state cell or a typical cell
         return 75;
-    }
 }
 
 -(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
