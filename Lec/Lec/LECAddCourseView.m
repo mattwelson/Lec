@@ -43,7 +43,7 @@
     self = [super init];
     if (self) {
         // Initialization code
-        self.frame = CGRectMake(0, 0, 320, 0);
+        self.frame = CGRectMake(0, 64, 320, 0);
         self.backgroundColor = [UIColor whiteColor];
         self.layer.borderWidth = 1;
         self.layer.borderColor = [UIColor lightGrayColor].CGColor;
@@ -118,7 +118,7 @@
 }
 
 -(void)animateCourseAddView{
-    self.frame = CGRectMake(0, 0, self.frame.size.width, 100);
+    self.frame = CGRectMake(0, 64, self.frame.size.width, 100);
     //self.courseTableView.frame = CGRectMake(0, 100, 320, self.frame.size.height);
     courseNameInput.frame = CGRectMake(60, 5, self.frame.size.width-60, 50);
     courseDescriptorInput.frame = CGRectMake(60, 50, self.frame.size.width-60,50);
@@ -132,7 +132,7 @@
 }
 
 -(void)animateViewRemoved{
-    self.frame = CGRectMake(0, 0, self.frame.size.width, 0);
+    self.frame = CGRectMake(0, 64, self.frame.size.width, 0);
     courseNameInput.frame = CGRectMake(60, 10, self.frame.size.width-60, 0);
     courseDescriptorInput.frame = CGRectMake(60, 10, self.frame.size.width-60,0);
     colorButtonView.frame = CGRectMake(-1, -1, 50, 0);
