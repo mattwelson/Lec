@@ -8,6 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LECColorCollectionView : UICollectionView
+@protocol ColourPickerDelegate <NSObject>
+
+-(void) colourPickerDismissed:(NSString *)colourString;
 
 @end
+
+@interface LECColorCollectionView : UICollectionView <UICollectionViewDataSource, UICollectionViewDelegate>
+
++(LECColorCollectionView *)colourCollection;
+@property (nonatomic, assign) id<ColourPickerDelegate> colourPickerDelegate;
+
+@end
+
+
