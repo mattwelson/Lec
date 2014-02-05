@@ -189,12 +189,34 @@
 }
 
 -(void)animateViewRemoved{
-    self.frame = CGRectMake(0, 64, self.frame.size.width, 0);
-    courseNameInput.frame = CGRectMake(60, 10, self.frame.size.width-60, 0);
-    courseDescriptorInput.frame = CGRectMake(60, 10, self.frame.size.width-60,0);
-    colorButtonView.frame = CGRectMake(-1, -1, 50, 0);
-    iconButtonView.frame = CGRectMake(-1, 0, 50, 0);
-    colorPickerButton.frame = CGRectMake(9, 10, 32, 0);
+    [UIView animateWithDuration:1.0
+                          delay:0.0
+                        options: UIViewAnimationOptionCurveEaseIn
+                     animations:^{
+                         courseNameInput.alpha = 0.0;
+                         courseDescriptorInput.alpha = 0.0;
+                         colorPickerButton.alpha = 0.0;
+                         iconPickerButton.alpha = 0.0;
+                     }
+                     completion:^(BOOL finished){
+                         [courseNameInput resignFirstResponder];
+                     }];
+
+    [UIView animateWithDuration:1.0
+                          delay:0.2
+                        options: UIViewAnimationOptionCurveEaseIn
+                     animations:^{
+                         self.frame = CGRectMake(0, 64, self.frame.size.width, 0);
+                         courseNameInput.frame = CGRectMake(60, 10, self.frame.size.width-60, 0);
+                         courseDescriptorInput.frame = CGRectMake(60, 10, self.frame.size.width-60,0);
+                         colorButtonView.frame = CGRectMake(-1, -1, 50, 0);
+                         iconButtonView.frame = CGRectMake(-1, 0, 50, 0);
+                         colorPickerButton.frame = CGRectMake(9, 10, 32, 0);
+                         iconPickerButton.frame = CGRectMake(9, 10, 32, 0);
+                     }
+                     completion:^(BOOL finished){
+                     }];
+    
     
 
 }
