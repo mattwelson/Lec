@@ -18,4 +18,8 @@
 -(void) startRecording;
 -(void) stopRecording;
 
+-(void) setupAudioPlayback:(NSString *)path;
+-(void) startPlayback;
+-(void) stopPlayback;
+
 @end

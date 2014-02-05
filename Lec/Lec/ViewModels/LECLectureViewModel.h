@@ -15,7 +15,8 @@
 @property NSString *icon;
 @property Lecture *lecture;
 @property NSMutableArray *tags;
-@property NSString *recordingPath;
+@property (nonatomic) NSString *recordingPath;
+@property BOOL needsRecording;
 
 @property NSString *courseName;
 
@@ -24,4 +25,7 @@
 -(void)startRecordingAudio;
 -(void)stopRecordingAudio;
 
+-(void) prepareForPlayback;
+-(void) startAudioPlayback;
+-(void) stopAudioPlayback;
 @end

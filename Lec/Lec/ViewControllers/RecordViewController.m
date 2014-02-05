@@ -23,15 +23,24 @@
     if (self) {
         viewModel = [LECLectureViewModel viewModelWithLecture:lecture];
         
-        [viewModel prepareForRecordingAudio];
-        [viewModel startRecordingAudio];
+        if (viewModel.needsRecording){
+            [viewModel prepareForRecordingAudio];
+            [viewModel startRecordingAudio];
+        } else {
+            [viewModel prepareForPlayback];
+            [viewModel startAudioPlayback];
+        }
     }
     return self;
 }
 
 -(void)viewWillDisappear:(BOOL)animated
 {
-    [viewModel stopRecordingAudio];
+    if (viewModel.needsRecording){
+        [viewModel stopRecordingAudio];
+    } else {
+        [viewModel stopAudioPlayback];
+    }
 }
 
 - (void)didReceiveMemoryWarning

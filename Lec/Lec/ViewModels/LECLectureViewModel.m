@@ -20,16 +20,31 @@
     vm.colourString = lecture.course.colour;
     vm.navTitle = [lecture lectureName];
     vm.subTitle = [NSString stringWithFormat:@"Lecture %@", [lecture lectureNumber]];
-    vm.recordingPath = [lecture recordingPath];
+    
     vm.courseName = [[lecture course] courseName];
     
-    NSString *recordingPath= [NSString stringWithFormat:@"%@_%@_%@",vm.courseName, vm.subTitle, vm.navTitle];
-    vm.recordingPath = [[recordingPath stringByReplacingOccurrencesOfString:@" " withString:@"_"] stringByAppendingPathExtension:FILE_RECORDING_TYPE];
+    vm.recordingPath = [lecture recordingPath];
+    if ([vm.recordingPath length] > 0) {
+        vm.needsRecording = NO;
+        NSLog(@"%@", vm.recordingPath);
+    } else {
+        [vm setInitialRecordingPath];
+        vm.needsRecording = YES;
+    }
     
     return vm;
 }
 
 #pragma mark Recording
+-(void) setInitialRecordingPath
+{
+    NSString *recordingPath= [NSString stringWithFormat:@"%@_%@_%@",self.courseName, self.subTitle, self.navTitle];
+    self.recordingPath = [[recordingPath stringByReplacingOccurrencesOfString:@" " withString:@"_"] stringByAppendingPathExtension:FILE_RECORDING_TYPE];
+    
+    self.lecture.recordingPath = self.recordingPath;
+    [[LECDatabaseService sharedDBService] saveChanges];
+}
+
 -(void)prepareForRecordingAudio
 {
     [[LECAudioService sharedAudioService] setupAudioRecordingForPath:[self recordingPath]];
@@ -46,5 +61,19 @@
 }
 
 #pragma mark Playback
+-(void) prepareForPlayback
+{
+    [[LECAudioService sharedAudioService] setupAudioPlayback:[self recordingPath]];
+}
+
+-(void) startAudioPlayback
+{
+    [[LECAudioService sharedAudioService] startPlayback];
+}
+
+-(void) stopAudioPlayback
+{
+    [[LECAudioService sharedAudioService] stopPlayback];
+}
 
 @end

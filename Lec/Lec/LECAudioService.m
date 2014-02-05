@@ -12,6 +12,7 @@
     AVAudioSession *session;
     NSURL *recordingPath;
     AVAudioRecorder *audioRecorder;
+    AVAudioPlayer *audioPlayer;
 }
 
 static LECAudioService *sharedService;
@@ -29,9 +30,9 @@ static LECAudioService *sharedService;
 {
     session = [AVAudioSession sharedInstance];
     
-    [session setCategory:AVAudioSessionCategoryPlayAndRecord withOptions:AVAudioSessionCategoryOptionDuckOthers error:nil];
-    
     NSError *error;
+    [session setCategory:AVAudioSessionCategoryPlayAndRecord withOptions:AVAudioSessionCategoryOptionDuckOthers error:&error];
+    
     recordingPath = [self recordingPath:path];
     
     audioRecorder = [[AVAudioRecorder alloc] initWithURL:recordingPath settings:[self audioRecordingSettings] error:&error];
@@ -63,7 +64,33 @@ static LECAudioService *sharedService;
 }
 
 #pragma mark Playback
+-(void) setupAudioPlayback:(NSString *)path
+{
+    NSError *error;
+    session = [AVAudioSession sharedInstance];
+    [session setCategory:AVAudioSessionCategoryPlayAndRecord error:&error];
+    
+    recordingPath = [self recordingPath:path];
+    
+    audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:recordingPath error:&error];
+    if (error || !audioPlayer) // if things are not initialised properly
+    {
+        @throw [NSException exceptionWithName:@"Preparing audio for playback" reason:@"Dammit" userInfo:nil];
+    }
+}
 
+-(void) startPlayback
+{
+    if ([audioPlayer prepareToPlay]) [audioPlayer play];
+    else {
+        @throw [NSException exceptionWithName:@"Audio player!" reason:@"Oh no!" userInfo:nil];
+    }
+}
+
+-(void) stopPlayback
+{
+    [audioPlayer stop];
+}
 
 #pragma mark Private
 -(NSURL *)recordingPath:(NSString *)path
