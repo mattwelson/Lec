@@ -17,6 +17,7 @@
     NSString *icon;
     UIBarButtonItem *plusItem;
     LECAddCourseView *addCourseView;
+    BOOL addViewActive;
 }
 
 @end
@@ -48,6 +49,7 @@
 }
 
 -(void)viewDidAppear:(BOOL)animated{
+    addViewActive = FALSE;
     [super viewDidAppear:animated];
     [self navagationTopBar];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];  //sets the status bar to black
@@ -174,6 +176,7 @@
     
     [self.courseTableView reloadData]; // refreshes table view
     [self closeSaveCourse];
+    addViewActive = FALSE;
     //    }
 }
 
@@ -195,7 +198,21 @@
                          [addCourseView removeFromSuperview];
                          
                      }];
+    addViewActive = FALSE;
     
     
+}
+
+//As subclass of tableview will get called when tableview starts scrolling.
+-(void) scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    if (scrollView.contentOffset.y < -120) {
+        scrollView.contentOffset = CGPointMake(0, -120);
+    }
+    NSLog(@"%f", scrollView.contentOffset.y);
+    if (scrollView.contentOffset.y < -115 && !addViewActive) {
+        addViewActive = TRUE;
+        [self addCourse];
+    }
 }
 @end
