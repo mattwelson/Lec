@@ -268,6 +268,8 @@
 			children = (
 				738FB170189DF33D00DBF8F8 /* subject_chem.png */,
 				738FB171189DF33D00DBF8F8 /* subject_chem@2x.png */,
+				C982027518A2FE4500256A7E /* icon_mic.png */,
+				C982027618A2FE4500256A7E /* icon_mic@2x.png */,
 				73CD6EBA1896328600F183C7 /* subject_cs.png */,
 				73CD6EBB1896328600F183C7 /* subject_cs@2x.png */,
 				738FB168189DF33200DBF8F8 /* subject_finance.png */,
@@ -562,6 +564,7 @@
 				C9605CC0188A11D300F3DE57 /* Colours.plist in Resources */,
 				73CD6EBD1896328600F183C7 /* subject_cs@2x.png in Resources */,
 				8BE75829188B508D007B6C02 /* icon_cancel@2x.png in Resources */,
+				C982027718A2FE4500256A7E /* icon_mic.png in Resources */,
 				738FB16C189DF33200DBF8F8 /* subject_finance.png in Resources */,
 				738FB172189DF33D00DBF8F8 /* subject_chem.png in Resources */,
 				8BE75828188B508D007B6C02 /* icon_cancel.png in Resources */,
