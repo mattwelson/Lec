@@ -51,6 +51,8 @@
 		C96BCA1C189C562C00D5E7FD /* PullupTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C96BCA1B189C562C00D5E7FD /* PullupTableViewController.m */; };
 		C96BCA1F189CAC4800D5E7FD /* LECAudioService.m in Sources */ = {isa = PBXBuildFile; fileRef = C96BCA1E189CAC4800D5E7FD /* LECAudioService.m */; };
 		C96BCA21189CACC500D5E7FD /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C96BCA20189CACC500D5E7FD /* AVFoundation.framework */; };
+		C982027718A2FE4500256A7E /* icon_mic.png in Resources */ = {isa = PBXBuildFile; fileRef = C982027518A2FE4500256A7E /* icon_mic.png */; };
+		C982027818A2FE4500256A7E /* icon_mic@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C982027618A2FE4500256A7E /* icon_mic@2x.png */; };
 		C9B0C5DB187FBE7F002D4A63 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9B0C5DA187FBE7F002D4A63 /* Foundation.framework */; };
 		C9B0C5DD187FBE7F002D4A63 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9B0C5DC187FBE7F002D4A63 /* CoreGraphics.framework */; };
 		C9B0C5DF187FBE7F002D4A63 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9B0C5DE187FBE7F002D4A63 /* UIKit.framework */; };
@@ -153,6 +155,8 @@
 		C96BCA1D189CAC4800D5E7FD /* LECAudioService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LECAudioService.h; sourceTree = "<group>"; };
 		C96BCA1E189CAC4800D5E7FD /* LECAudioService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LECAudioService.m; sourceTree = "<group>"; };
 		C96BCA20189CACC500D5E7FD /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		C982027518A2FE4500256A7E /* icon_mic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_mic.png; sourceTree = "<group>"; };
+		C982027618A2FE4500256A7E /* icon_mic@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_mic@2x.png"; sourceTree = "<group>"; };
 		C9B0C5D7187FBE7F002D4A63 /* Lec.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lec.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C9B0C5DA187FBE7F002D4A63 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		C9B0C5DC187FBE7F002D4A63 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -309,20 +313,6 @@
 				C96BCA1B189C562C00D5E7FD /* PullupTableViewController.m */,
 			);
 			name = BaseViewControllers;
-			sourceTree = "<group>";
-		};
-		C96BCA22189CC2E300D5E7FD /* Partial Views */ = {
-			isa = PBXGroup;
-			children = (
-				8BE7581B188B48DD007B6C02 /* LECTableView.h */,
-				8BE7581C188B48DD007B6C02 /* LECTableView.m */,
-				8B523BB4188B2FAE002796A6 /* LECTableViewDataSource.h */,
-				0BA86AB618925F1800805240 /* LECColorCollectionView.h */,
-				0BA86AB718925F1800805240 /* LECColorCollectionView.m */,
-				7318CD9F1898AEFD002E23A0 /* LECHeaderView.h */,
-				7318CDA01898AEFD002E23A0 /* LECHeaderView.m */,
-			);
-			name = "Partial Views";
 			sourceTree = "<group>";
 		};
 		C9A0047E1889EBD200D27A6C /* Test */ = {
@@ -584,6 +574,7 @@
 				8BE7582B188B508D007B6C02 /* icon_checkmark@2x.png in Resources */,
 				C9B0C5F2187FBE7F002D4A63 /* Images.xcassets in Resources */,
 				8BE7582A188B508D007B6C02 /* icon_checkmark.png in Resources */,
+				C982027818A2FE4500256A7E /* icon_mic@2x.png in Resources */,
 				0B6BD59C18891B1E00A7D8F9 /* nav_add_btn@2x.png in Resources */,
 				73CD6EBC1896328600F183C7 /* subject_cs.png in Resources */,
 			);

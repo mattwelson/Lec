@@ -27,6 +27,11 @@
     return self;
 }
 
+-(void) viewDidAppear:(BOOL)animated
+{
+    // TODO: Fix it up so the mic gets swapped to a chevron where appropriate
+}
+
 - (void) navigationTopBar
 {
     [super navigationTopBar];
