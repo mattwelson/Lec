@@ -63,6 +63,8 @@
     courseNameInput.alpha = 0.0;
     [courseNameInput setAutocapitalizationType:UITextAutocapitalizationTypeWords];
     [self addSubview:courseNameInput];
+    [courseNameInput becomeFirstResponder];
+
     
     courseDescriptorInput = [[UITextField alloc]initWithFrame:CGRectMake(60, 10, self.frame.size.width-60,0)];
     courseDescriptorInput.placeholder = @"Course Description";
@@ -177,9 +179,10 @@
                          courseDescriptorInput.alpha = 1.0;
                          colorPickerButton.alpha = 1.0;
                          iconPickerButton.alpha = 1.0;
+                         //[courseNameInput becomeFirstResponder];
                      }
                      completion:^(BOOL finished){
-                         [courseNameInput becomeFirstResponder];
+//                         [courseNameInput becomeFirstResponder];
                      }];
     
 
