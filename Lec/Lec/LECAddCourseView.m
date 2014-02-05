@@ -58,6 +58,8 @@
     
     courseNameInput = [[UITextField alloc]initWithFrame:CGRectMake(60, 10, self.frame.size.width-60, 0)];
     courseNameInput.placeholder = @"Course Name";
+    courseNameInput.tag = 0;
+    courseNameInput.delegate = self;
     [courseNameInput setFont:[UIFont fontWithName:DEFAULTFONT size:COURSENAMEECELLFONTSIZE]];
     [courseNameInput setTextColor:HEADERCOLOR];
     courseNameInput.alpha = 0.0;
@@ -68,6 +70,8 @@
     
     courseDescriptorInput = [[UITextField alloc]initWithFrame:CGRectMake(60, 10, self.frame.size.width-60,0)];
     courseDescriptorInput.placeholder = @"Course Description";
+    courseDescriptorInput.tag = 1;
+    courseDescriptorInput.delegate = self;
     [courseDescriptorInput setFont:[UIFont fontWithName:DEFAULTFONT size:COURSEDESCRIPTIONCELLFONTSIZE]];
     [courseDescriptorInput setTextColor:HEADERCOLOR];
     courseDescriptorInput.alpha = 0.0;
@@ -225,5 +229,18 @@
     [self.saveCourseDelegate saveCourse:courseNameInput.text description:courseDescriptorInput.text colour:selectedColour icon:selectedIcon];
 }
 
-
+#pragma mark UITextField Delegate methods
+-(BOOL)textFieldShouldReturn:(UITextField*)textField{
+    NSInteger nextTag = textField.tag + 1;
+    
+    UIResponder *nextResponder = [textField.superview viewWithTag:nextTag];
+    if (nextResponder) {
+        // Found responder, so set it
+        [nextResponder becomeFirstResponder];
+    } else {
+        // Not found so remove keyboard
+        [textField resignFirstResponder];
+    }
+    return NO;
+}
 @end
