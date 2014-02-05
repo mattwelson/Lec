@@ -22,4 +22,6 @@
 -(void) startPlayback;
 -(void) stopPlayback;
 
+-(NSTimeInterval) getCurrentTime;
+
 @end

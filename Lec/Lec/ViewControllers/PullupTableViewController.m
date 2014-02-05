@@ -63,7 +63,7 @@
     [self.view addSubview:self.tableView];
     
     [self.tableView registerClass:[LectureCell class] forCellReuseIdentifier:CELL_ID_HEADER];
-    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"Cell"];
+    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:CELL_ID_ADD_CELL];
 }
 
 - (void)didReceiveMemoryWarning
@@ -102,7 +102,7 @@
         LECLectureCellViewModel *cellViewModel = [[self tableData] objectAtIndex:indexPath.row];
         [cell populateFor:cellViewModel];
     } else if (indexPath.section == 2) {
-        cell = [[LectureCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"Cell"];
+        cell = [[LectureCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CELL_ID_ADD_CELL];
         cell.backgroundColor = [UIColor whiteColor];
         cell.textLabel.textColor = [UIColor lightGrayColor];
         [cell setUserInteractionEnabled:NO];

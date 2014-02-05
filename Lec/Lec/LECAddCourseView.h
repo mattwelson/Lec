@@ -13,7 +13,7 @@
 //@class LECColorCollectionView;
 //@class LECIconCollectionView;
 
-@protocol AddCourseDelegate <NSObject>
+@protocol AddCourseDelegate <NSObject, UITextFieldDelegate>
 
 -(void) saveCourse:(NSString *)courseNameString description:(NSString *)courseDescriptionString colour:(NSString *)colourString icon:(NSString *)iconString;
 

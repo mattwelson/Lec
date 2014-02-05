@@ -13,6 +13,7 @@
 #define CELL_ID_LECTURE_CELL @"lecturecell"
 #define CELL_ID_COURSE_CELL @"coursecell"
 #define CELL_ID_TAG_CELL @"tagcell"
+#define CELL_ID_ADD_CELL @"addcell"
 
 #define FILE_RECORDING_TYPE @"m4a"
 

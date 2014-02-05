@@ -31,7 +31,7 @@ static LECAudioService *sharedService;
     session = [AVAudioSession sharedInstance];
     
     NSError *error;
-    [session setCategory:AVAudioSessionCategoryPlayAndRecord withOptions:AVAudioSessionCategoryOptionDuckOthers error:&error];
+    [session setCategory:AVAudioSessionCategoryRecord withOptions:AVAudioSessionCategoryOptionDuckOthers error:&error];
     
     recordingPath = [self recordingPath:path];
     
@@ -42,20 +42,18 @@ static LECAudioService *sharedService;
     
     audioRecorder.delegate = self;
     
-    if ([audioRecorder prepareToRecord])
+    if (![audioRecorder prepareToRecord])
     {
-        NSLog(@"Good to roll");
+        @throw [NSException exceptionWithName:@"AudioPlayerNotReady" reason:@"Not sure" userInfo:nil];
     }
 }
 
 -(void) startRecording
 {
-    if ([audioRecorder record])
+    if (![audioRecorder record])
     {
-        NSLog(@"WOOOOO!");
-        return;
+        @throw [NSException exceptionWithName:@"Recording failed to start" reason:@"Reason? Don't know" userInfo:nil];
     }
-    @throw [NSException exceptionWithName:@"Recording failed to start" reason:@"Reason? Don't know" userInfo:nil];
 }
 
 -(void) stopRecording
@@ -68,7 +66,7 @@ static LECAudioService *sharedService;
 {
     NSError *error;
     session = [AVAudioSession sharedInstance];
-    [session setCategory:AVAudioSessionCategoryPlayAndRecord error:&error];
+    [session setCategory:AVAudioSessionCategoryPlayback error:&error];
     
     recordingPath = [self recordingPath:path];
     
@@ -81,13 +79,26 @@ static LECAudioService *sharedService;
 
 -(void) startPlayback
 {
+    [session setActive:YES error:nil];
     if ([audioPlayer prepareToPlay]) {
         [audioPlayer play];
-        assert([audioPlayer isPlaying]); // TODO: Take out?
+        assert([audioPlayer isPlaying]); // TODO: Take out? Once at a production stage
     }
     else {
         @throw [NSException exceptionWithName:@"Audio player!" reason:@"Oh no!" userInfo:nil];
     }
+}
+
+#pragma mark Tag Stuff
+-(NSTimeInterval) getCurrentTime
+{
+    if (audioPlayer && [audioPlayer isPlaying])
+    {
+        return [audioPlayer currentTime];
+    } else if (audioRecorder && [audioRecorder isRecording]) {
+        return [audioRecorder currentTime];
+    }
+    @throw [NSException exceptionWithName:@"WhatTheFuckException" reason:@"Nothing is playing or recording" userInfo:nil];
 }
 
 -(void) stopPlayback
