@@ -83,11 +83,23 @@ static LECAudioService *sharedService;
 {
     if ([audioPlayer prepareToPlay]) {
         [audioPlayer play];
-        assert([audioPlayer isPlaying]); // TODO: Take out?
+        assert([audioPlayer isPlaying]); // TODO: Take out? Once at a production stage
     }
     else {
         @throw [NSException exceptionWithName:@"Audio player!" reason:@"Oh no!" userInfo:nil];
     }
+}
+
+#pragma mark Tag Stuff
+-(NSTimeInterval) getCurrentTime
+{
+    if (audioPlayer && [audioPlayer isPlaying])
+    {
+        return [audioPlayer currentTime];
+    } else if (audioRecorder && [audioRecorder isRecording]) {
+        return [audioRecorder currentTime];
+    }
+    @throw [NSException exceptionWithName:@"WhatTheFuckException" reason:@"Nothing is playing or recording" userInfo:nil];
 }
 
 -(void) stopPlayback
