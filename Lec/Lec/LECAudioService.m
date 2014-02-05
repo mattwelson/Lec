@@ -81,7 +81,10 @@ static LECAudioService *sharedService;
 
 -(void) startPlayback
 {
-    if ([audioPlayer prepareToPlay]) [audioPlayer play];
+    if ([audioPlayer prepareToPlay]) {
+        [audioPlayer play];
+        assert([audioPlayer isPlaying]); // TODO: Take out?
+    }
     else {
         @throw [NSException exceptionWithName:@"Audio player!" reason:@"Oh no!" userInfo:nil];
     }
@@ -90,6 +93,7 @@ static LECAudioService *sharedService;
 -(void) stopPlayback
 {
     [audioPlayer stop];
+    assert(![audioPlayer isPlaying]);
 }
 
 #pragma mark Private

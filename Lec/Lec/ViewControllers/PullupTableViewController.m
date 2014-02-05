@@ -104,9 +104,13 @@
     } else if (indexPath.section == 2) {
         cell = [[LectureCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"Cell"];
         cell.backgroundColor = [UIColor whiteColor];
-        cell.textLabel.text = @"Pull down to add a thing";
         cell.textLabel.textColor = [UIColor lightGrayColor];
         [cell setUserInteractionEnabled:NO];
+        if ([[self tableData] count] > 0){
+            cell.textLabel.text = @"";
+        } else {
+            cell.textLabel.text = @"Pull down to add a thing";
+        }
     }
     else {
         cell = [[LectureCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CELL_ID_HEADER];
@@ -121,8 +125,8 @@
 {
     if ([indexPath section] == 0)
         return 136;
-    if ([indexPath section] == 2 && [[self tableData] count] > 0)
-        return 0;
+//    if ([indexPath section] == 2 && [[self tableData] count] > 0)
+//        return 0;
     else // either empty state cell or a typical cell
         return 75;
 }
@@ -133,6 +137,7 @@
     {
         [self deleteObjectFromViewModel:indexPath.row];
         [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+        [self. tableView reloadData];
     }
 }
 
