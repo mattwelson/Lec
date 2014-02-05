@@ -10,6 +10,7 @@
 #import "LECDefines.h"
 #import "LECDatabaseService.h"
 #import "LECColourService.h"
+#import "LECIconService.h"
 
 @implementation LECAddCourseView{
     UITextField *courseNameInput;
@@ -17,7 +18,9 @@
     UIView *colorButtonView;
     UIView *iconButtonView;
     UIButton *colorPickerButton;
+    UIButton *iconPickerButton;
     NSString *selectedColour;
+    NSString *selectedIcon;
 }
 
 - (id)initWithFrame:(CGRect)frame
@@ -57,13 +60,17 @@
     courseNameInput.placeholder = @"Course Name";
     [courseNameInput setFont:[UIFont fontWithName:DEFAULTFONT size:COURSENAMEECELLFONTSIZE]];
     [courseNameInput setTextColor:HEADERCOLOR];
+    courseNameInput.alpha = 0.0;
     [courseNameInput setAutocapitalizationType:UITextAutocapitalizationTypeWords];
     [self addSubview:courseNameInput];
+    [courseNameInput becomeFirstResponder];
+
     
     courseDescriptorInput = [[UITextField alloc]initWithFrame:CGRectMake(60, 10, self.frame.size.width-60,0)];
     courseDescriptorInput.placeholder = @"Course Description";
     [courseDescriptorInput setFont:[UIFont fontWithName:DEFAULTFONT size:COURSEDESCRIPTIONCELLFONTSIZE]];
     [courseDescriptorInput setTextColor:HEADERCOLOR];
+    courseDescriptorInput.alpha = 0.0;
     [courseDescriptorInput setAutocapitalizationType:UITextAutocapitalizationTypeWords];
     [self addSubview:courseDescriptorInput];
     
@@ -84,11 +91,20 @@
     colorPickerButton.layer.cornerRadius = colorPickerButton.frame.size.width/2;
     colorPickerButton.layer.masksToBounds = YES;
     colorPickerButton.layer.borderWidth = 0;
+    colorPickerButton.alpha = 0.0;
     [colorPickerButton addTarget:Nil action:@selector(colorViewAppear) forControlEvents:UIControlEventTouchDown];
     [colorButtonView addSubview:colorPickerButton];
     
     //Default colour
     selectedColour = @"Red";
+    
+    iconPickerButton = [[UIButton alloc]initWithFrame:CGRectMake(9, 10, 32, 0)];
+    //iconPickerButton.backgroundColor = [UIColor blackColor];
+    iconPickerButton.alpha = 0.0;
+    [iconPickerButton addTarget:Nil action:@selector(iconViewAppear) forControlEvents:UIControlEventTouchDown];
+    [iconButtonView addSubview:iconPickerButton];
+    
+    selectedIcon = @"cs";
 }
 
 - (void) colorViewAppear
@@ -112,9 +128,35 @@
     
 }
 
+- (void) iconViewAppear
+{
+    [self endEditing:YES];
+    self.iconView = [LECIconCollectionView iconCollection];
+    self.iconView.iconPickerDelegate = self;
+    
+    //Creates the array based on the plist
+    
+    [[UIApplication sharedApplication].keyWindow addSubview:self.iconView];
+    
+    [UIView animateWithDuration:0.2
+                          delay:0.0
+                        options: UIViewAnimationOptionCurveEaseIn
+                     animations:^{
+                         self.iconView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.8];
+                     }
+                     completion:^(BOOL finished){
+                     }];
+    
+}
+
 - (void)colourPickerDismissed:(NSString *)colourString {
     selectedColour = colourString;
     [[LECColourService sharedColourService] changeGradientToColour:colourString forView:colorPickerButton];
+}
+
+- (void)iconPickerDismissed:(NSString *)iconString {
+    selectedIcon = iconString;
+    [iconPickerButton setImage:[[LECIconService sharedIconService]iconFor:selectedIcon] forState:UIControlStateNormal];
 }
 
 -(void)animateCourseAddView{
@@ -125,9 +167,24 @@
     colorButtonView.frame = CGRectMake(-1, 0, 50, 52);
     iconButtonView.frame = CGRectMake(-1, 50, 50, 50);
     colorPickerButton.frame = CGRectMake(9, 10, 32, 32);
+    iconPickerButton.frame = CGRectMake(9, 10, 32, 32);
     [[LECColourService sharedColourService] addGradientForColour:selectedColour toView:colorPickerButton];
+    [iconPickerButton setImage:[[LECIconService sharedIconService]iconFor:selectedIcon] forState:UIControlStateNormal];
     
-    [courseNameInput becomeFirstResponder];
+    [UIView animateWithDuration:1.0
+                          delay:0.2
+                        options: UIViewAnimationOptionCurveEaseIn
+                     animations:^{
+                         courseNameInput.alpha = 1.0;
+                         courseDescriptorInput.alpha = 1.0;
+                         colorPickerButton.alpha = 1.0;
+                         iconPickerButton.alpha = 1.0;
+                         //[courseNameInput becomeFirstResponder];
+                     }
+                     completion:^(BOOL finished){
+//                         [courseNameInput becomeFirstResponder];
+                     }];
+    
 
 }
 
@@ -139,13 +196,11 @@
     iconButtonView.frame = CGRectMake(-1, 0, 50, 0);
     colorPickerButton.frame = CGRectMake(9, 10, 32, 0);
     
-    [courseNameInput resignFirstResponder];
 
 }
 
 -(void)retrieveInputs {
-    [self.saveCourseDelegate saveCourse:courseNameInput.text description:courseDescriptorInput.text colour:selectedColour];
-
+    [self.saveCourseDelegate saveCourse:courseNameInput.text description:courseDescriptorInput.text colour:selectedColour icon:selectedIcon];
 }
 
 

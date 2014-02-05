@@ -7,13 +7,14 @@
 //
 
 #import "MainViewController.h"
-#import "LECImportHeader.h"
+#import "LECHeaderView.h"
 
 @interface MainViewController (){
     // UI elements only
     NSString *courseNameText;
     NSString *courseDescriptionText;
     NSString *colour;
+    NSString *icon;
     UIBarButtonItem *plusItem;
     LECAddCourseView *addCourseView;
 }
@@ -38,6 +39,7 @@
     [super viewDidLoad];
     [self courseTableViewSetup];
     [self navagationTopBar];
+
 }
 
 
@@ -143,10 +145,11 @@
                      }];
 }
 
--(void) saveCourse:(NSString *)courseNameString description:(NSString *)courseDescriptionString colour:(NSString *)colourString {
+-(void) saveCourse:(NSString *)courseNameString description:(NSString *)courseDescriptionString colour:(NSString *)colourString icon:(NSString *)iconString{
     courseNameText = courseNameString;
     courseDescriptionText = courseDescriptionString;
     colour = colourString;
+    icon = iconString;
 }
 
 
@@ -161,7 +164,7 @@
     course.courseName = courseNameText;
     course.courseDescription = courseDescriptionText;
     course.colour = colour;
-    course.icon = @"cs";
+    course.icon = icon;
     
     [[LECDatabaseService sharedDBService] saveChanges]; // saves changes made to course scratch pad
     
@@ -182,7 +185,7 @@
     self.courseTableView.userInteractionEnabled = YES; // re-enables course clicking
     
     [UIView animateWithDuration:0.2
-                          delay:0.0
+                          delay:0.2
                         options: UIViewAnimationOptionCurveEaseIn
                      animations:^{
                          self.courseTableView.frame = CGRectMake(0, 0, 320, self.view.frame.size.height);

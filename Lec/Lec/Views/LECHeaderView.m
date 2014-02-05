@@ -25,7 +25,7 @@
         
         subjectImg = [UIImageView new];
         [subjectImg setTintColor:[UIColor whiteColor]];
-        [subjectImg setFrame:CGRectMake(120, 30, 60, 60)];
+        [subjectImg setFrame:CGRectMake(130, 30, 60, 60)];
         [self addSubview:subjectImg];
         
         titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 100, self.frame.size.width, 50)];
