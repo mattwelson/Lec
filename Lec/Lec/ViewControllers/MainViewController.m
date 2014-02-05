@@ -18,6 +18,7 @@
     UIBarButtonItem *plusItem;
     LECAddCourseView *addCourseView;
     BOOL addViewActive;
+    UILabel *pullDownAddReminder;
 }
 
 @end
@@ -40,6 +41,7 @@
     [super viewDidLoad];
     [self courseTableViewSetup];
     [self navagationTopBar];
+    [self pullDownReminderSetup];
 
 }
 
@@ -76,7 +78,14 @@
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:plusImg style:UIBarButtonItemStylePlain target:self action:@selector(addCourse)];
 }
 
-
+-(void) pullDownReminderSetup{
+    pullDownAddReminder = [[UILabel alloc]initWithFrame:CGRectMake(0, 64, self.view.frame.size.width, 0)];
+    [pullDownAddReminder setTextAlignment:NSTextAlignmentCenter];
+    [pullDownAddReminder setFont:[UIFont fontWithName:DEFAULTFONT size:15]];
+    [pullDownAddReminder setTextColor:[UIColor grayColor]];
+    [pullDownAddReminder setText:@"Pull Down to Add Course"];
+    [self.view addSubview:pullDownAddReminder];
+}
 
 - (void) courseTableViewSetup
 {
@@ -206,11 +215,18 @@
 //As subclass of tableview will get called when tableview starts scrolling.
 -(void) scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    if (scrollView.contentOffset.y < -120) {
-        scrollView.contentOffset = CGPointMake(0, -120);
+    pullDownAddReminder.alpha = 1.0;
+    pullDownAddReminder.frame = CGRectMake(0, 64, self.view.frame.size.width, -scrollView.contentOffset.y - 64);
+    if (scrollView.contentOffset.y < -160) {
+        scrollView.contentOffset = CGPointMake(0, -160);
     }
-    NSLog(@"%f", scrollView.contentOffset.y);
-    if (scrollView.contentOffset.y < -115 && !addViewActive) {
+    //NSLog(@"%f", scrollView.contentOffset.y);
+}
+
+-(void) scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+{
+    if (scrollView.contentOffset.y <= -160 && !addViewActive) {
+        pullDownAddReminder.alpha = 0.0;
         addViewActive = TRUE;
         [self addCourse];
     }
