@@ -63,8 +63,7 @@
     UIImage *plusImg = [UIImage imageNamed:@"nav_add_btn.png"];
     self.navigationItem.title = self.viewModel.navTitle;
     self.navigationController.navigationBar.backgroundColor = [UIColor whiteColor];
-    self.navigationController.navigationBar.translucent = NO;
-    
+    [self.navigationController.navigationBar setBackgroundImage:NULL forBarMetrics:UIBarMetricsDefault];
     [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:HEADERCOLOR, NSForegroundColorAttributeName,[UIFont fontWithName:DEFAULTFONT size:HEADERSIZE], NSFontAttributeName, nil]];
     
     self.navigationController.navigationBar.tintColor = NAVTINTCOLOR;
@@ -78,7 +77,7 @@
 - (void) courseTableViewSetup
 {
     // height hack, need to write a method that reloads correctly when the viewDidAppear whne we figure out whats causing it.
-    self.courseTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, self.view.frame.size.height-64)];
+    self.courseTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, self.view.frame.size.height)];
     [self.courseTableView setScrollEnabled:YES];
     [self.courseTableView setNeedsDisplay];
     [self.view addSubview:self.courseTableView];
