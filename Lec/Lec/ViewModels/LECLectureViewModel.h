@@ -15,6 +15,17 @@
 @property NSString *icon;
 @property Lecture *lecture;
 @property NSMutableArray *tags;
-// instance of AVAudio
+@property (nonatomic) NSString *recordingPath;
+@property BOOL needsRecording;
 
+@property NSString *courseName;
+
+// instance of AVAudio or Audio service?
+-(void)prepareForRecordingAudio;
+-(void)startRecordingAudio;
+-(void)stopRecordingAudio;
+
+-(void) prepareForPlayback;
+-(void) startAudioPlayback;
+-(void) stopAudioPlayback;
 @end

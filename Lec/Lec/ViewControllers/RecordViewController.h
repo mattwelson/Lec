@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "Lecture.h"
+#import "PullupTableViewController.h"
 
-@interface RecordViewController : UIViewController
+@interface RecordViewController : PullupTableViewController
 
 -(id)initWithLecture:(Lecture *)lecture;
 

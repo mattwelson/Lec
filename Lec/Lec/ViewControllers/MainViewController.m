@@ -7,13 +7,14 @@
 //
 
 #import "MainViewController.h"
-#import "LECImportHeader.h"
+#import "LECHeaderView.h"
 
 @interface MainViewController (){
     // UI elements only
     NSString *courseNameText;
     NSString *courseDescriptionText;
     NSString *colour;
+    NSString *icon;
     UIBarButtonItem *plusItem;
     LECAddCourseView *addCourseView;
 }
@@ -38,6 +39,7 @@
     [super viewDidLoad];
     [self courseTableViewSetup];
     [self navagationTopBar];
+
 }
 
 
@@ -63,8 +65,7 @@
     UIImage *plusImg = [UIImage imageNamed:@"nav_add_btn.png"];
     self.navigationItem.title = self.viewModel.navTitle;
     self.navigationController.navigationBar.backgroundColor = [UIColor whiteColor];
-    self.navigationController.navigationBar.translucent = NO;
-    
+    [self.navigationController.navigationBar setBackgroundImage:NULL forBarMetrics:UIBarMetricsDefault];
     [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:HEADERCOLOR, NSForegroundColorAttributeName,[UIFont fontWithName:DEFAULTFONT size:HEADERSIZE], NSFontAttributeName, nil]];
     
     self.navigationController.navigationBar.tintColor = NAVTINTCOLOR;
@@ -78,7 +79,7 @@
 - (void) courseTableViewSetup
 {
     // height hack, need to write a method that reloads correctly when the viewDidAppear whne we figure out whats causing it.
-    self.courseTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, self.view.frame.size.height-64)];
+    self.courseTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, self.view.frame.size.height)];
     [self.courseTableView setScrollEnabled:YES];
     [self.courseTableView setNeedsDisplay];
     [self.view addSubview:self.courseTableView];
@@ -144,10 +145,11 @@
                      }];
 }
 
--(void) saveCourse:(NSString *)courseNameString description:(NSString *)courseDescriptionString colour:(NSString *)colourString {
+-(void) saveCourse:(NSString *)courseNameString description:(NSString *)courseDescriptionString colour:(NSString *)colourString icon:(NSString *)iconString{
     courseNameText = courseNameString;
     courseDescriptionText = courseDescriptionString;
     colour = colourString;
+    icon = iconString;
 }
 
 
@@ -162,7 +164,7 @@
     course.courseName = courseNameText;
     course.courseDescription = courseDescriptionText;
     course.colour = colour;
-    course.icon = @"cs";
+    course.icon = icon;
     
     [[LECDatabaseService sharedDBService] saveChanges]; // saves changes made to course scratch pad
     
@@ -183,7 +185,7 @@
     self.courseTableView.userInteractionEnabled = YES; // re-enables course clicking
     
     [UIView animateWithDuration:0.2
-                          delay:0.0
+                          delay:0.2
                         options: UIViewAnimationOptionCurveEaseIn
                      animations:^{
                          self.courseTableView.frame = CGRectMake(0, 0, 320, self.view.frame.size.height);

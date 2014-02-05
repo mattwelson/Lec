@@ -2,7 +2,29 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>music</key>
+	<string>subject_music.png</string>
+	<key>music - 2</key>
+	<string>subject_music.png</string>
+	<key>music - 2 - 2</key>
+	<string>subject_music.png</string>
+	<key>finance</key>
+	<string>subject_finance.png</string>
+	<key>finance - 2</key>
+	<string>subject_finance.png</string>
+	<key>finance - 2 - 2</key>
+	<string>subject_finance.png</string>
+	<key>chem</key>
+	<string>subject_chem.png</string>
+	<key>chem - 2</key>
+	<string>subject_chem.png</string>
+	<key>chem - 2 - 2</key>
+	<string>subject_chem.png</string>
 	<key>cs</key>
+	<string>subject_cs.png</string>
+	<key>cs - 2</key>
+	<string>subject_cs.png</string>
+	<key>cs - 3</key>
 	<string>subject_cs.png</string>
 </dict>
 </plist>

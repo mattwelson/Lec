@@ -11,7 +11,6 @@
 @interface LECColourService : NSObject
 
 @property NSDictionary *colourDictionary;
-@property UIImage *originalHeaderImage;
 
 + (LECColourService *)sharedColourService;
 

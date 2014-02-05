@@ -40,6 +40,7 @@
         self.tintColour = [[LECColourService sharedColourService] baseColourFor:[course colour]];
         self.colourString = [course colour];
         self.navTitle = [course courseName];
+        self.subTitle = [course courseDescription];
         self.icon = [course icon];
     }
     return self;

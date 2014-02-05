@@ -8,18 +8,25 @@
 
 #import <UIKit/UIKit.h>
 #import "LECColorCollectionView.h"
+#import "LECIconCollectionView.h"
 
-@protocol SaveCourseDelegate <NSObject>
+//@class LECColorCollectionView;
+//@class LECIconCollectionView;
 
--(void) saveCourse:(NSString *)courseNameString description:(NSString *)courseDescriptionString colour:(NSString *)colourString;
+@protocol AddCourseDelegate <NSObject>
+
+-(void) saveCourse:(NSString *)courseNameString description:(NSString *)courseDescriptionString colour:(NSString *)colourString icon:(NSString *)iconString;
 
 @end
 
-@interface LECAddCourseView : UIView<ColourPickerDelegate>
+@interface LECAddCourseView : UIView<ColourPickerDelegate, IconPickerDelegate>
+
+@property (nonatomic, assign) id<AddCourseDelegate> saveCourseDelegate;
 
 @property LECColorCollectionView *colorView;
+@property LECIconCollectionView *iconView;
 
-@property (nonatomic, assign) id<SaveCourseDelegate> saveCourseDelegate;
+
 
 +(LECAddCourseView *)createAddCourseView;
 -(void)animateCourseAddView;
@@ -28,3 +35,5 @@
 
 
 @end
+
+

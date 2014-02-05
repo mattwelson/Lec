@@ -22,20 +22,63 @@
     self = [super initWithNibName:@"RecordViewController" bundle:nil];
     if (self) {
         viewModel = [LECLectureViewModel viewModelWithLecture:lecture];
+        
+        if (viewModel.needsRecording){
+            [viewModel prepareForRecordingAudio];
+            [viewModel startRecordingAudio];
+        } else {
+            [viewModel prepareForPlayback];
+            [viewModel startAudioPlayback];
+        }
     }
     return self;
 }
 
-- (void)viewDidLoad
+-(void)viewWillDisappear:(BOOL)animated
 {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    if (viewModel.needsRecording){
+        [viewModel stopRecordingAudio];
+    } else {
+        [viewModel stopAudioPlayback];
+    }
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+}
+
+-(void)courseTableViewSetup
+{
+    [super courseTableViewSetup];
+    // register tag cell for resuse
+}
+
+-(void)createHeaderView
+{
+    self.headerView = [[LECHeaderView alloc] initWithLecture:viewModel];
+    [self.view addSubview:self.headerView];
+}
+
+#pragma mark Abstract methods implemented
+-(void)deleteObjectFromViewModel:(NSInteger)index
+{
+    // delete tag!
+}
+
+-(id) viewModelFromSubclass
+{
+    return viewModel;
+}
+
+-(NSArray *) tableData
+{
+    return viewModel.tableData;
+}
+
+-(void) didSelectCellAt:(NSInteger)index
+{
+    // play tag?
 }
 
 @end
