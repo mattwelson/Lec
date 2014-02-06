@@ -8,6 +8,7 @@
 
 #import "RecordViewController.h"
 #import "LECImportHeader.h"
+#import "LECActionBar.h"
 
 @interface RecordViewController (){
     LECLectureViewModel *viewModel;
@@ -25,7 +26,9 @@
         viewModel = [LECLectureViewModel viewModelWithLecture:lecture];
         [viewModel prepareForRecordingAudio];
         [viewModel startRecordingAudio];
-      
+        
+        contentSection = 1; // the section with table data
+        actionSection = 2; // the section with an action bar
     }
     return self;
 }
@@ -44,6 +47,7 @@
 {
     [super courseTableViewSetup];
     // register tag cell for resuse
+    actionBar = [LECActionBar tagBar];
 }
 
 -(void)createHeaderView
@@ -71,6 +75,11 @@
 -(void) didSelectCellAt:(NSInteger)index
 {
     // play tag?
+}
+
+-(void) actionBarPressed
+{
+    NSLog(@"Push me good");
 }
 
 @end

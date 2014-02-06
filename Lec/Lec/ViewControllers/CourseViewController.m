@@ -107,15 +107,6 @@
     [self savedPressed];
 }
 
-#pragma mark Table Header For Section
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    if (section == 0 || section == 1) // the header or our empty state cell
-        return 1;
-    else
-        return [[self tableData] count];
-}
-
 
 
 @end

@@ -86,6 +86,11 @@
     return 3;
 }
 
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return section == contentSection ? [[self tableData] count] : 1;
+}
+
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     LectureCell *cell;
@@ -167,12 +172,6 @@
 -(void) didSelectCellAt:(NSInteger)index
 {
     [self abstractMethod:@"didSelectCellAt"];
-}
-
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    [self abstractMethod:@"Number of rows in section"];
-    return 0;
 }
 
 -(void) actionBarPressed

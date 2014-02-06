@@ -28,21 +28,33 @@
 {
     LECActionBar *recordBar = [[LECActionBar alloc] initWithFrame:CGRectMake(0, 0, 320, 75)];
     
-    recordBar.colour = [UIColor colorWithRed:0.719 green:0.000 blue:0.008 alpha:1.000];
+    recordBar.colour = [UIColor colorWithRed:0.719 green:0.000 blue:0.008 alpha:1.000]; // TODO: Pass in colour from course
     recordBar.icon = [UIImage imageNamed:@"icon_mic"];
     
     return recordBar;
 }
 
++(id)tagBar
+{
+    LECActionBar *tagBar = [[LECActionBar alloc] initWithFrame:CGRectMake(0, 0, 320, 75)];
+    
+    tagBar.textLabel.text = @"Tag";
+    tagBar.colour = [UIColor colorWithRed:0.719 green:0.000 blue:0.008 alpha:1.000]; // TODO: Pass in colour from course
+    tagBar.textLabel.textColor = tagBar.colour;
+    tagBar.textLabel.textAlignment = NSTextAlignmentCenter;
+    
+    return tagBar;
+}
+
 -(void) setColour:(UIColor *)colour
 {
-    self.backgroundColor = colour;
+    iconView.tintColor = colour; // an icon
     _colour = colour;
 }
 
 -(void) setIcon:(UIImage *)icon
 {
-    [iconView setImage:icon];
+    [iconView setImage:[icon imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
     _icon = icon;
 }
 @end

@@ -14,5 +14,6 @@
 @property (nonatomic) UIColor *colour;
 
 +(id)recordBar;
++(id)tagBar;
 
 @end
