@@ -76,15 +76,8 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self didSelectCellAt:indexPath.row];
-}
-
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    if (section == 0 || section == 2) // the header or our empty state cell
-        return 1;
-    else
-        return [[self tableData] count];
+    if (indexPath.section == actionSection) [self actionBarPressed];
+    else [self didSelectCellAt:indexPath.row];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -97,20 +90,12 @@
 {
     LectureCell *cell;
     
-    if ([indexPath section] == 1) {
+    if ([indexPath section] == contentSection) {
         cell = [[LectureCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CELL_ID_LECTURE_CELL];
         LECLectureCellViewModel *cellViewModel = [[self tableData] objectAtIndex:indexPath.row];
         [cell populateFor:cellViewModel];
-    } else if (indexPath.section == 2) {
-        cell = [[LectureCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CELL_ID_ADD_CELL];
-        cell.backgroundColor = [UIColor whiteColor];
-        cell.textLabel.textColor = [UIColor lightGrayColor];
-        [cell setUserInteractionEnabled:NO];
-        if ([[self tableData] count] > 0){
-            cell.textLabel.text = @"";
-        } else {
-            cell.textLabel.text = @"Pull down to add a thing";
-        }
+    } else if (indexPath.section == actionSection) {
+        return (UITableViewCell *) actionBar;
     }
     else {
         cell = [[LectureCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CELL_ID_HEADER];
@@ -125,9 +110,7 @@
 {
     if ([indexPath section] == 0)
         return 136;
-//    if ([indexPath section] == 2 && [[self tableData] count] > 0)
-//        return 0;
-    else // either empty state cell or a typical cell
+    else
         return 75;
 }
 
@@ -142,9 +125,13 @@
 }
 
 #pragma mark Scrolling Delegates
--(void)scrollViewDidScroll:(UIScrollView *)scrollView{ // change to a different method? Not getting called enough
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView{
     [self.headerView changeAlpha:self.tableView.contentOffset.y];
     [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor colorWithWhite:1.0 alpha:-0.3+(self.tableView.contentOffset.y/100)], NSForegroundColorAttributeName, [UIFont fontWithName:DEFAULTFONT size:HEADERSIZE], NSFontAttributeName, nil]];
+    
+    if (scrollView.contentOffset.y < 0) {
+        scrollView.contentOffset = CGPointMake(0, 0);
+    }
     
 }
 
@@ -182,4 +169,14 @@
     [self abstractMethod:@"didSelectCellAt"];
 }
 
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    [self abstractMethod:@"Number of rows in section"];
+    return 0;
+}
+
+-(void) actionBarPressed
+{
+    [self abstractMethod:@"Action bar pressed"];
+}
 @end

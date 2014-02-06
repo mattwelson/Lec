@@ -8,6 +8,7 @@
 
 #import "CourseViewController.h"
 #import "LectureCell.h"
+#import "LECActionBar.h"
 
 @interface CourseViewController (){
     LECCourseViewModel *viewModel;
@@ -23,6 +24,9 @@
     if (self) {
         viewModel = [[LECCourseViewModel alloc]initWithCourse:course];
         [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent]; //sets the status bar to white
+        
+        contentSection = 2; // the section with table data
+        actionSection = 1; // the section with an action bar
     }
     return self;
 }
@@ -35,8 +39,7 @@
 - (void) navigationTopBar
 {
     [super navigationTopBar];
-    UIImage *plusImg = [UIImage imageNamed:@"nav_add_btn.png"];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:plusImg style:UIBarButtonItemStylePlain target:self action:@selector(savedPressed)];
+    // customise top bar add buttons etc
 }
 
 - (void) courseTableViewSetup
@@ -44,6 +47,8 @@
     [super courseTableViewSetup];
     
     [self.tableView registerClass:[LectureCell class] forCellReuseIdentifier:CELL_ID_LECTURE_CELL];
+    
+    actionBar = [LECActionBar recordBar];
 }
 
 -(void)createHeaderView {
@@ -89,5 +94,21 @@
     Lecture *selectedLecture = [[viewModel.tableData objectAtIndex:index] lecture];
     [self.navigationController pushViewController:[[RecordViewController alloc] initWithLecture:selectedLecture] animated:YES];
 }
+
+-(void) actionBarPressed
+{
+    [self savedPressed];
+}
+
+#pragma mark Table Header For Section
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    if (section == 0 || section == 1) // the header or our empty state cell
+        return 1;
+    else
+        return [[self tableData] count];
+}
+
+
 
 @end

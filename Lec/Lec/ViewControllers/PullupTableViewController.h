@@ -8,8 +8,14 @@
 
 #import <UIKit/UIKit.h>
 @class LECHeaderView;
+@class LECActionBar;
 
 @interface PullupTableViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+{
+    NSInteger contentSection;
+    NSInteger actionSection;
+    LECActionBar *actionBar;
+}
 
 @property UITableView *tableView;
 @property  LECHeaderView *headerView;
