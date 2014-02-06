@@ -190,6 +190,8 @@
                      }
                      completion:^(BOOL finished){
                      }];
+    
+
 }
 
 
@@ -243,9 +245,9 @@
 //As subclass of tableview will get called when tableview starts scrolling.
 -(void) scrollViewDidScroll:(UIScrollView *)scrollView
 {
-//    if (scrollView.contentOffset.y < -65) {
-//        [self pullDownReminderAdd];
-//    }
+    if (self.courseTableView.contentOffset.y < -65) {
+        pullDownAddReminder.alpha = 1.0;
+    }
     
     pullDownAddReminder.frame = CGRectMake(0, 64, self.view.frame.size.width, -scrollView.contentOffset.y - 64);
     
@@ -258,7 +260,7 @@
 -(void) scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
     if (scrollView.contentOffset.y <= -135 && !addViewActive) {
-        [pullDownAddReminder removeFromSuperview];
+        pullDownAddReminder.alpha = 0.0;
         addViewActive = TRUE;
         [self addCoursePullDown];
     }
