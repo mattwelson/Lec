@@ -63,7 +63,7 @@
     courseNameInput.alpha = 0.0;
     [courseNameInput setAutocapitalizationType:UITextAutocapitalizationTypeWords];
     [self addSubview:courseNameInput];
-    [courseNameInput becomeFirstResponder];
+    //[courseNameInput becomeFirstResponder];
 
     
     courseDescriptorInput = [[UITextField alloc]initWithFrame:CGRectMake(60, 10, self.frame.size.width-60,0)];
@@ -171,7 +171,7 @@
     [[LECColourService sharedColourService] addGradientForColour:selectedColour toView:colorPickerButton];
     [iconPickerButton setImage:[[LECIconService sharedIconService]iconFor:selectedIcon] forState:UIControlStateNormal];
     
-    [UIView animateWithDuration:1.0
+    [UIView animateWithDuration:0.2
                           delay:0.2
                         options: UIViewAnimationOptionCurveEaseIn
                      animations:^{
@@ -182,7 +182,7 @@
                          //[courseNameInput becomeFirstResponder];
                      }
                      completion:^(BOOL finished){
-//                         [courseNameInput becomeFirstResponder];
+                         [courseNameInput becomeFirstResponder];
                      }];
     
 
