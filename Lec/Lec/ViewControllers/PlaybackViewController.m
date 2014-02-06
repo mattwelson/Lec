@@ -7,32 +7,69 @@
 //
 
 #import "PlaybackViewController.h"
+#import "LECImportHeader.h"
 
-@interface PlaybackViewController ()
+@interface PlaybackViewController (){
+    LECLectureViewModel *viewModel;
+}
 
 @end
 
 @implementation PlaybackViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (id)initWithLecture:(Lecture *)lecture
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    self = [super initWithNibName:@"PlaybackViewController" bundle:nil];
     if (self) {
-        // Custom initialization
+        NSLog(@"Playback View Controller!");
+        viewModel = [LECLectureViewModel viewModelWithLecture:lecture];
+        [viewModel prepareForPlayback];
+        [viewModel startAudioPlayback];
     }
     return self;
 }
 
-- (void)viewDidLoad
+-(void)viewWillDisappear:(BOOL)animated
 {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    [viewModel stopAudioPlayback];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+}
+
+-(void)courseTableViewSetup
+{
+    [super courseTableViewSetup];
+    // register tag cell for resuse
+}
+
+-(void)createHeaderView
+{
+    self.headerView = [[LECHeaderView alloc] initWithLecture:viewModel];
+    [self.view addSubview:self.headerView];
+}
+
+#pragma mark Abstract methods implemented
+-(void)deleteObjectFromViewModel:(NSInteger)index
+{
+    // delete tag!
+}
+
+-(id) viewModelFromSubclass
+{
+    return viewModel;
+}
+
+-(NSArray *) tableData
+{
+    return viewModel.tableData;
+}
+
+-(void) didSelectCellAt:(NSInteger)index
+{
+    // play tag?
 }
 
 @end
