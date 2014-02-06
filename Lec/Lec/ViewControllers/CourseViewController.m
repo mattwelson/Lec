@@ -91,8 +91,15 @@
 
 -(void) didSelectCellAt:(NSInteger)index
 {
-    Lecture *selectedLecture = [[viewModel.tableData objectAtIndex:index] lecture];
-    [self.navigationController pushViewController:[[RecordViewController alloc] initWithLecture:selectedLecture] animated:YES];
+    LECLectureCellViewModel *lectureCellViewModel = [viewModel.tableData objectAtIndex:index];
+    
+    if (![lectureCellViewModel hasRecording]) {
+       [self.navigationController pushViewController:[[RecordViewController alloc] initWithLecture:lectureCellViewModel.lecture] animated:YES];
+    }
+    else{
+        [self.navigationController pushViewController:[[PlaybackViewController alloc] initWithLecture:lectureCellViewModel.lecture] animated:YES];
+    }
+    
 }
 
 -(void) actionBarPressed

@@ -21,26 +21,18 @@
 {
     self = [super initWithNibName:@"RecordViewController" bundle:nil];
     if (self) {
+        NSLog(@"Recording View Controller!");
         viewModel = [LECLectureViewModel viewModelWithLecture:lecture];
-        
-        if (viewModel.needsRecording){
-            [viewModel prepareForRecordingAudio];
-            [viewModel startRecordingAudio];
-        } else {
-            [viewModel prepareForPlayback];
-            [viewModel startAudioPlayback];
-        }
+        [viewModel prepareForRecordingAudio];
+        [viewModel startRecordingAudio];
+      
     }
     return self;
 }
 
 -(void)viewWillDisappear:(BOOL)animated
 {
-    if (viewModel.needsRecording){
-        [viewModel stopRecordingAudio];
-    } else {
-        [viewModel stopAudioPlayback];
-    }
+    [viewModel stopRecordingAudio];
 }
 
 - (void)didReceiveMemoryWarning

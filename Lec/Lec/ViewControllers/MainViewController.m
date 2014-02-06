@@ -17,6 +17,8 @@
     NSString *icon;
     UIBarButtonItem *plusItem;
     LECAddCourseView *addCourseView;
+    BOOL addViewActive;
+    UILabel *pullDownAddReminder;
 }
 
 @end
@@ -39,6 +41,7 @@
     [super viewDidLoad];
     [self courseTableViewSetup];
     [self navagationTopBar];
+    [self pullDownReminderSetup];
 
 }
 
@@ -48,6 +51,7 @@
 }
 
 -(void)viewDidAppear:(BOOL)animated{
+    addViewActive = FALSE;
     [super viewDidAppear:animated];
     [self navagationTopBar];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];  //sets the status bar to black
@@ -74,7 +78,19 @@
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:plusImg style:UIBarButtonItemStylePlain target:self action:@selector(addCourse)];
 }
 
+-(void) pullDownReminderSetup{
+    pullDownAddReminder = [[UILabel alloc]initWithFrame:CGRectMake(0, 64, self.view.frame.size.width, 0)];
+    [pullDownAddReminder setTextAlignment:NSTextAlignmentCenter];
+    [pullDownAddReminder setFont:[UIFont fontWithName:DEFAULTFONT size:15]];
+    [pullDownAddReminder setTextColor:[UIColor grayColor]];
+    [pullDownAddReminder setText:@"Pull Down to Add Course"];
+    [self pullDownReminderAdd];
+}
 
+-(void)pullDownReminderAdd{
+    [self.view addSubview:pullDownAddReminder];
+
+}
 
 - (void) courseTableViewSetup
 {
@@ -152,6 +168,32 @@
     icon = iconString;
 }
 
+-(void)addCoursePullDown{
+    addCourseView = [LECAddCourseView createAddCourseView];
+    addCourseView.saveCourseDelegate = self;
+    addCourseView.alpha = 0.0;
+    [self.view addSubview:addCourseView];
+    
+    [addCourseView animateCourseAddView];
+
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon_checkmark.png"] style:UIBarButtonItemStylePlain target:self action:@selector(saveCourse)];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon_cancel.png"] style:UIBarButtonItemStylePlain target:self action:@selector(closeSaveCourse)];
+    
+    self.courseTableView.userInteractionEnabled = NO; // disable course clicking
+    [UIView animateWithDuration:0.2
+                          delay:0.0
+                        options: UIViewAnimationOptionCurveEaseIn
+                     animations:^{
+                         addCourseView.alpha = 1.0;
+                         self.courseTableView.frame = CGRectMake(0, 100, 320, self.view.frame.size.height);
+                     }
+                     completion:^(BOOL finished){
+                     }];
+    
+
+}
+
 
 -(void)saveCourse{
 #warning temp fix to stop no input for the course name. Will add warning box later (CODIE!)
@@ -195,7 +237,33 @@
                          [addCourseView removeFromSuperview];
                          
                      }];
+    addViewActive = FALSE;
     
+    
+}
+
+//As subclass of tableview will get called when tableview starts scrolling.
+-(void) scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    if (self.courseTableView.contentOffset.y < -65) {
+        pullDownAddReminder.alpha = 1.0;
+    }
+    
+    pullDownAddReminder.frame = CGRectMake(0, 64, self.view.frame.size.width, -scrollView.contentOffset.y - 64);
+    
+    if (scrollView.contentOffset.y < -135) {
+        scrollView.contentOffset = CGPointMake(0, -135);
+    }
+    //NSLog(@"%f", scrollView.contentOffset.y);
+}
+
+-(void) scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+{
+    if (scrollView.contentOffset.y <= -135 && !addViewActive) {
+        pullDownAddReminder.alpha = 0.0;
+        addViewActive = TRUE;
+        [self addCoursePullDown];
+    }
     
 }
 @end
