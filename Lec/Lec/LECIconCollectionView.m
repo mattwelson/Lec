@@ -19,7 +19,7 @@
         self.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0];
         self.delegate = self;
         self.dataSource = self;
-        [self setScrollEnabled:NO];
+        [self setScrollEnabled:YES];
         
         self.iconArray = [[LECIconService sharedIconService] iconKeys];
     }
@@ -29,9 +29,12 @@
 +(LECIconCollectionView *)iconCollection
 {
     UICollectionViewFlowLayout *layout=[[UICollectionViewFlowLayout alloc] init];
+    layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     layout.sectionInset = UIEdgeInsetsMake(180, 50, 200, 50);
-    layout.minimumLineSpacing = 30.0f;
-    LECIconCollectionView *iview = [[LECIconCollectionView alloc] initWithFrame:[[UIScreen mainScreen] applicationFrame] collectionViewLayout:layout];
+    layout.minimumLineSpacing = 40.0f;
+//    LECIconCollectionView *iview = [[LECIconCollectionView alloc] initWithFrame:[[UIScreen mainScreen] applicationFrame] collectionViewLayout:layout];
+    
+    LECIconCollectionView *iview = [[LECIconCollectionView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height) collectionViewLayout:layout];
     return iview;
 }
 
