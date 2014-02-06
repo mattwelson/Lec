@@ -13,13 +13,13 @@
 //@class LECColorCollectionView;
 //@class LECIconCollectionView;
 
-@protocol AddCourseDelegate <NSObject, UITextFieldDelegate>
+@protocol AddCourseDelegate <NSObject>
 
 -(void) saveCourse:(NSString *)courseNameString description:(NSString *)courseDescriptionString colour:(NSString *)colourString icon:(NSString *)iconString;
 
 @end
 
-@interface LECAddCourseView : UIView<ColourPickerDelegate, IconPickerDelegate>
+@interface LECAddCourseView : UIView<ColourPickerDelegate, IconPickerDelegate, UITextFieldDelegate>
 
 @property (nonatomic, assign) id<AddCourseDelegate> saveCourseDelegate;
 
