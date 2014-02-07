@@ -21,13 +21,13 @@
         self.courseNameLabel.font = [UIFont fontWithName:DEFAULTFONT size:COURSENAMEECELLFONTSIZE];
         [self addSubview:self.courseNameLabel];
         
-        self.courseDescriptionLabel = [[UILabel alloc]initWithFrame:CGRectMake(80, 50, self.frame.size.width-80, 40)];
+        self.courseDescriptionLabel = [[UILabel alloc]initWithFrame:CGRectMake(82, 50, self.frame.size.width-80, 40)];
         self.courseDescriptionLabel.textColor = [UIColor whiteColor];
         self.courseDescriptionLabel.font = [UIFont fontWithName:DEFAULTFONT size:COURSEDESCRIPTIONCELLFONTSIZE];
         [self addSubview:self.courseDescriptionLabel];
 
         CGRect frame = [self frame];
-        frame.size.height = 100;
+        frame.size.height = 101;
         [self setFrame:frame];
         [[self contentView] setFrame:frame];
     }

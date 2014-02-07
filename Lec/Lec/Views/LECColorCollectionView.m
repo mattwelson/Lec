@@ -30,10 +30,11 @@
 +(LECColorCollectionView *)colourCollection
 {
     UICollectionViewFlowLayout *layout=[[UICollectionViewFlowLayout alloc] init];
-    layout.sectionInset = UIEdgeInsetsMake(([UIScreen mainScreen].bounds.size.height/2)-134, 50, ([UIScreen mainScreen].bounds.size.height/2)-134, 50);
+    layout.sectionInset = UIEdgeInsetsMake(([UIScreen mainScreen].bounds.size.height/2)-124, 50, ([UIScreen mainScreen].bounds.size.height/2)-134, 50);
     layout.minimumLineSpacing = 50.0f;
     layout.minimumInteritemSpacing = 30.0f;
-    LECColorCollectionView *cview = [[LECColorCollectionView alloc] initWithFrame:[[UIScreen mainScreen] applicationFrame] collectionViewLayout:layout];
+//    LECColorCollectionView *cview = [[LECColorCollectionView alloc] initWithFrame:[[UIScreen mainScreen] applicationFrame] collectionViewLayout:layout];
+    LECColorCollectionView *cview = [[LECColorCollectionView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height) collectionViewLayout:layout];
     return cview;
 }
 
