@@ -12,6 +12,6 @@
 
 + (LECParallaxService *)sharedParallaxService;
 
--(void)addParallaxToView:(UIView *)view;
+-(void)addParallaxToView:(UIView *)view strength:(int)strength;
 
 @end

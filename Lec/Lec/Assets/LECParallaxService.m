@@ -20,24 +20,48 @@ static LECParallaxService *sharedService;
     return sharedService;
 }
 
--(void)addParallaxToView:(UIView *)view {
+-(void)addParallaxToView:(UIView *)view strength:(int)strength{
+    int parallaxStrength;
+    CGSize shadowStrengthMin;
+    CGSize shadowStrengthMax;
+
     
-    view.layer.shadowColor = [UIColor blackColor].CGColor;
-    view.layer.shadowOpacity = 0.25f;
-    view.layer.shadowRadius = 4.0f;
-    view.layer.shadowOffset = CGSizeMake(0, 0);
+    switch (strength) {
+        case 1:
+            parallaxStrength = 15;
+            view.layer.shadowColor = [UIColor blackColor].CGColor;
+            view.layer.shadowOpacity = 0.25f;
+            view.layer.shadowRadius = 4.0f;
+            view.layer.shadowOffset = CGSizeMake(0, 0);
+            shadowStrengthMin = CGSizeMake(20, 5);
+            shadowStrengthMax = CGSizeMake(-20, 5);
+            break;
+        case 2:
+            parallaxStrength = 20;
+            view.layer.shadowColor = [UIColor blackColor].CGColor;
+            view.layer.shadowOpacity = 0.5f;
+            view.layer.shadowRadius = 4.0f;
+            view.layer.shadowOffset = CGSizeMake(0, 0);
+            shadowStrengthMin = CGSizeMake(40, 5);
+            shadowStrengthMax = CGSizeMake(-40, 5);
+            break;
+        default:
+            parallaxStrength = 15;
+    }
+    
+
     
     UIInterpolatingMotionEffect *verticalMotionEffect = [[UIInterpolatingMotionEffect alloc] initWithKeyPath:@"center.y" type:UIInterpolatingMotionEffectTypeTiltAlongVerticalAxis];
-    verticalMotionEffect.minimumRelativeValue = @(-15);
-    verticalMotionEffect.maximumRelativeValue = @(15);
+    verticalMotionEffect.minimumRelativeValue = @(-parallaxStrength+5);
+    verticalMotionEffect.maximumRelativeValue = @(parallaxStrength-5);
     
     UIInterpolatingMotionEffect *horizontalMotionEffect = [[UIInterpolatingMotionEffect alloc] initWithKeyPath:@"center.x" type:UIInterpolatingMotionEffectTypeTiltAlongHorizontalAxis];
-    horizontalMotionEffect.minimumRelativeValue = @(-15);
-    horizontalMotionEffect.maximumRelativeValue = @(15);
+    horizontalMotionEffect.minimumRelativeValue = @(-parallaxStrength);
+    horizontalMotionEffect.maximumRelativeValue = @(parallaxStrength);
     
     UIInterpolatingMotionEffect *shadowEffect = [[UIInterpolatingMotionEffect alloc] initWithKeyPath:@"layer.shadowOffset" type:UIInterpolatingMotionEffectTypeTiltAlongHorizontalAxis];
-    shadowEffect.minimumRelativeValue = [NSValue valueWithCGSize:CGSizeMake(20, 5)];
-    shadowEffect.maximumRelativeValue = [NSValue valueWithCGSize:CGSizeMake(-20, 5)];
+    shadowEffect.minimumRelativeValue = [NSValue valueWithCGSize:shadowStrengthMin];
+    shadowEffect.maximumRelativeValue = [NSValue valueWithCGSize:shadowStrengthMax];
     
     UIMotionEffectGroup *group = [UIMotionEffectGroup new];
     group.motionEffects = @[horizontalMotionEffect, verticalMotionEffect, shadowEffect];

@@ -38,9 +38,9 @@
         [[self contentView] setFrame:frame];
         
         if(PARALLAX_ON) {
-            [[LECParallaxService sharedParallaxService]addParallaxToView:self.courseNameLabel];
-            [[LECParallaxService sharedParallaxService]addParallaxToView:self.courseDescriptionLabel];
-            [[LECParallaxService sharedParallaxService]addParallaxToView:self.iconImage];
+            [[LECParallaxService sharedParallaxService]addParallaxToView:self.courseNameLabel strength:1];
+            [[LECParallaxService sharedParallaxService]addParallaxToView:self.courseDescriptionLabel strength:1];
+            [[LECParallaxService sharedParallaxService]addParallaxToView:self.iconImage strength:1];
         }
     }
     return self;

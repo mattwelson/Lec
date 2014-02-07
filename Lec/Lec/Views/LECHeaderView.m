@@ -44,12 +44,19 @@
         [self addSubview:descriptionLabel];
         
         if(PARALLAX_ON) {
-            NSArray *subviews = [self subviews];
-            for (UIView *subview in subviews) {
-                [[LECParallaxService sharedParallaxService]addParallaxToView:subview];
+//            NSArray *subviews = [self subviews];
+//            for (UIView *subview in subviews) {
+//                if (subview == titleLabel) {
+//                    [[LECParallaxService sharedParallaxService]addParallaxToView:subview strength:2];
+//                }
+//                else {
+//                    [[LECParallaxService sharedParallaxService]addParallaxToView:subview strength:1];
+//                }
+            [[LECParallaxService sharedParallaxService]addParallaxToView:subjectImg strength:1];
+            [[LECParallaxService sharedParallaxService]addParallaxToView:titleLabel strength:2];
+            [[LECParallaxService sharedParallaxService]addParallaxToView:descriptionLabel strength:1];
+
             }
-        }
-        
     }
     return self;
 }

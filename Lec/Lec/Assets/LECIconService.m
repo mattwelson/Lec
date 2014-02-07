@@ -50,9 +50,9 @@ static LECIconService *sharedService;
         iconImgView.image = [iconImgView.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
         [iconImgView setTintColor:[UIColor whiteColor]];
         
-        if(PARALLAX_ON && [view isKindOfClass:[UIView class]]) {
-            [[LECParallaxService sharedParallaxService]addParallaxToView:iconImgView];
-        }
+//        if(PARALLAX_ON && [view isKindOfClass:[UIView class]]) {
+//            [[LECParallaxService sharedParallaxService]addParallaxToView:iconImgView strength:1];
+//        }
         
         [iconImgView setFrame:CGRectMake(15, 25, 50, 50)];
         [view.layer insertSublayer:iconImgView.layer atIndex:0];
