@@ -20,7 +20,8 @@
         self.delegate = self;
         self.dataSource = self;
         [self setScrollEnabled:YES];
-        
+        [self setShowsHorizontalScrollIndicator:YES];
+        [self setIndicatorStyle:UIScrollViewIndicatorStyleWhite];
         self.iconArray = [[LECIconService sharedIconService] iconKeys];
     }
     return self;
@@ -30,9 +31,10 @@
 {
     UICollectionViewFlowLayout *layout=[[UICollectionViewFlowLayout alloc] init];
     layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-    layout.sectionInset = UIEdgeInsetsMake(180, 50, 200, 50);
-    layout.minimumLineSpacing = 40.0f;
+    layout.sectionInset = UIEdgeInsetsMake(([UIScreen mainScreen].bounds.size.height/2)-134, 50, ([UIScreen mainScreen].bounds.size.height/2)-134, 50);
+    layout.minimumLineSpacing = 30.0f;
 //    LECIconCollectionView *iview = [[LECIconCollectionView alloc] initWithFrame:[[UIScreen mainScreen] applicationFrame] collectionViewLayout:layout];
+    layout.minimumInteritemSpacing = 35.0f;
     
     LECIconCollectionView *iview = [[LECIconCollectionView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height) collectionViewLayout:layout];
     return iview;
