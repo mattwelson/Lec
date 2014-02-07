@@ -38,16 +38,24 @@
     
     self.navigationItem.title = [[self viewModelFromSubclass] navTitle];
     
-    [navBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor colorWithWhite:1.0 alpha:0.0], NSForegroundColorAttributeName,[UIFont fontWithName:DEFAULTFONT size:HEADERSIZE], NSFontAttributeName, nil]];
-    
-    navBar.tintColor = [UIColor whiteColor];
-    
-    [navBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault]; // breaks shit when we go back.
-    navBar.shadowImage = [UIImage new];
-    [navBar setTranslucent:YES]; // what the fuck, it's not there!
-    [navBar setBackgroundColor:[UIColor clearColor]]; // apparently it is!
-    
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
+    
+    [UIView animateWithDuration:0.05
+                          delay:0.0
+                        options: UIViewAnimationOptionTransitionCrossDissolve
+                     animations:^{
+                        [navBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor colorWithWhite:1.0 alpha:0.0], NSForegroundColorAttributeName,[UIFont fontWithName:DEFAULTFONT size:HEADERSIZE], NSFontAttributeName, nil]];
+                        //self.navigationController.navigationBar.alpha = 0.0;
+                          navBar.tintColor = [UIColor whiteColor];
+                         [navBar setBackgroundColor:[UIColor clearColor]]; // apparently it is!
+                         [navBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault]; // breaks shit when we go back.
+
+                     }
+                     completion:^(BOOL finished){
+                         //self.navigationController.navigationBar.alpha = 1.0;
+                         navBar.shadowImage = [UIImage new];
+                     }];
+    
 }
 
 - (void) courseTableViewSetup

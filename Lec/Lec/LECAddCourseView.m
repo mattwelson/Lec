@@ -63,6 +63,7 @@
     [courseNameInput setFont:[UIFont fontWithName:DEFAULTFONT size:COURSENAMEECELLFONTSIZE]];
     [courseNameInput setTextColor:HEADERCOLOR];
     courseNameInput.alpha = 0.0;
+    [courseNameInput setReturnKeyType:UIReturnKeyNext];
     [courseNameInput setAutocapitalizationType:UITextAutocapitalizationTypeWords];
     [self addSubview:courseNameInput];
     //[courseNameInput becomeFirstResponder];
@@ -75,6 +76,7 @@
     [courseDescriptorInput setFont:[UIFont fontWithName:DEFAULTFONT size:COURSEDESCRIPTIONCELLFONTSIZE]];
     [courseDescriptorInput setTextColor:HEADERCOLOR];
     courseDescriptorInput.alpha = 0.0;
+    [courseDescriptorInput setReturnKeyType:UIReturnKeyDone];
     [courseDescriptorInput setAutocapitalizationType:UITextAutocapitalizationTypeWords];
     [self addSubview:courseDescriptorInput];
     
@@ -167,7 +169,7 @@
     self.frame = CGRectMake(0, 64, self.frame.size.width, 100);
     //self.courseTableView.frame = CGRectMake(0, 100, 320, self.frame.size.height);
     courseNameInput.frame = CGRectMake(60, 5, self.frame.size.width-60, 50);
-    courseDescriptorInput.frame = CGRectMake(60, 50, self.frame.size.width-60,50);
+    courseDescriptorInput.frame = CGRectMake(62, 50, self.frame.size.width-60,50);
     colorButtonView.frame = CGRectMake(-1, 0, 50, 52);
     iconButtonView.frame = CGRectMake(-1, 50, 50, 50);
     colorPickerButton.frame = CGRectMake(9, 10, 32, 32);
@@ -243,4 +245,5 @@
     }
     return NO;
 }
+
 @end
