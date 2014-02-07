@@ -15,6 +15,7 @@
 #define CELL_ID_TAG_CELL @"tagcell"
 #define CELL_ID_ADD_CELL @"addcell"
 
+#define PARALLAX_ON YES
 #define FILE_RECORDING_TYPE @"m4a"
 
 #define DEFAULTFONT @"Avenir"

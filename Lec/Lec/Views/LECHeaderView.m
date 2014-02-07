@@ -7,6 +7,8 @@
 //
 
 #import "LECHeaderView.h"
+#import "LECParallaxService.h"
+
 
 @implementation LECHeaderView{
     CGRect startingFrame;
@@ -29,6 +31,7 @@
         [self addSubview:subjectImg];
         
         titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 100, self.frame.size.width, 50)];
+        titleLabel.layer.shadowColor = [UIColor blackColor].CGColor;
         titleLabel.textAlignment = NSTextAlignmentCenter;
         titleLabel.font = [UIFont fontWithName:DEFAULTFONTLIGHT size:40];
         titleLabel.textColor = [UIColor whiteColor];
@@ -39,6 +42,14 @@
         descriptionLabel.font = [UIFont fontWithName:DEFAULTFONTLIGHT size:15];
         descriptionLabel.textColor = [UIColor whiteColor];
         [self addSubview:descriptionLabel];
+        
+        if(PARALLAX_ON) {
+            NSArray *subviews = [self subviews];
+            for (UIView *subview in subviews) {
+                [[LECParallaxService sharedParallaxService]addParallaxToView:subview];
+            }
+        }
+        
     }
     return self;
 }
@@ -48,7 +59,7 @@
     self = [self initWithFrame:CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, 200)];
     if (self) {
         [[LECColourService sharedColourService] addGradientForColour:courseModel.colourString toView:self];
-        subjectImg = [[LECIconService sharedIconService] addIconCourseScreen:courseModel.icon toView:subjectImg];
+        subjectImg = [[LECIconService sharedIconService] retrieveIcon:courseModel.icon toView:subjectImg];
         titleLabel.text = courseModel.navTitle;
         descriptionLabel.text = courseModel.subTitle;
     }
@@ -60,7 +71,7 @@
     self = [self initWithFrame:CGRectMake(0, 0,[[UIScreen mainScreen] bounds].size.width, 200)];
     if (self) {
         [[LECColourService sharedColourService] addGradientForColour:lectureModel.colourString toView:self];
-        subjectImg = [[LECIconService sharedIconService] addIconCourseScreen:lectureModel.icon toView:subjectImg];
+        subjectImg = [[LECIconService sharedIconService] retrieveIcon:lectureModel.icon toView:subjectImg];
         titleLabel.text = lectureModel.navTitle;
         descriptionLabel.text = lectureModel.subTitle;
     }

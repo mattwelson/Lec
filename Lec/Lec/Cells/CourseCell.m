@@ -9,6 +9,7 @@
 #import "CourseCell.h"
 #import "LECDefines.h"
 #import "LECCourseCellViewModel.h"
+#import "LECParallaxService.h"
 
 @implementation CourseCell
 
@@ -25,11 +26,22 @@
         self.courseDescriptionLabel.textColor = [UIColor whiteColor];
         self.courseDescriptionLabel.font = [UIFont fontWithName:DEFAULTFONT size:COURSEDESCRIPTIONCELLFONTSIZE];
         [self addSubview:self.courseDescriptionLabel];
-
+        
+        self.iconImage = [UIImageView new];
+        [self.iconImage setTintColor:[UIColor whiteColor]];
+        [self.iconImage setFrame:CGRectMake(15, 25, 50, 50)];
+        [self addSubview:self.iconImage];
+        
         CGRect frame = [self frame];
         frame.size.height = 101;
         [self setFrame:frame];
         [[self contentView] setFrame:frame];
+        
+        if(PARALLAX_ON) {
+            [[LECParallaxService sharedParallaxService]addParallaxToView:self.courseNameLabel];
+            [[LECParallaxService sharedParallaxService]addParallaxToView:self.courseDescriptionLabel];
+            [[LECParallaxService sharedParallaxService]addParallaxToView:self.iconImage];
+        }
     }
     return self;
 }
@@ -38,7 +50,7 @@
 {
     self.courseNameLabel.text = [vm titleText];
     self.courseDescriptionLabel.text = [vm subText];
-    [[LECIconService sharedIconService] addIcon:[vm icon] toView:[self contentView]];
+    [[LECIconService sharedIconService] retrieveIcon:[vm icon] toView:self.iconImage];
     [[LECColourService sharedColourService] addGradientForColour:[vm colourString] toView:[self contentView]];
 }
 
