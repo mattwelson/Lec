@@ -18,6 +18,10 @@
 #define PARALLAX_ON YES
 #define FILE_RECORDING_TYPE @"m4a"
 
+#define SCREEN_WIDTH [UIScreen mainScreen].bounds.size.width
+#define SCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height
+
+
 #define DEFAULTFONT @"Avenir"
 #define DEFAULTFONTLIGHT @"Avenir-Book"
 

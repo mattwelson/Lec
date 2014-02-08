@@ -41,9 +41,9 @@
 {
     // Do any additional setup after loading the view from its nib.
     [super viewDidLoad];
-    [self pullDownReminderSetup];
     [self courseTableViewSetup];
-
+    [self navagationTopBar];
+    [self pullDownReminderSetup];
 }
 
 
@@ -89,7 +89,7 @@
 }
 
 -(void) pullDownReminderSetup{
-    pullDownAddReminder = [[UILabel alloc]initWithFrame:CGRectMake(0, 64, self.view.frame.size.width, 0)];
+    pullDownAddReminder = [[UILabel alloc]initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, 0)];
     [pullDownAddReminder setTextAlignment:NSTextAlignmentCenter];
     [pullDownAddReminder setFont:[UIFont fontWithName:DEFAULTFONT size:15]];
     [pullDownAddReminder setTextColor:[UIColor grayColor]];
@@ -105,7 +105,7 @@
 - (void) courseTableViewSetup
 {
     // height hack, need to write a method that reloads correctly when the viewDidAppear whne we figure out whats causing it.
-    self.courseTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, 320, self.view.frame.size.height-64)];
+    self.courseTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
     [self.courseTableView setScrollEnabled:YES];
     [self.courseTableView setNeedsDisplay];
     [self.view addSubview:self.courseTableView];
@@ -149,13 +149,13 @@
 //        snapBehaviour.damping = 0.65f;
 //        [self.animator addBehavior:snapBehaviour];
     
-        cell.contentView.frame = CGRectMake(-self.view.frame.size.width, 0, self.view.frame.size.width, 101);
+        cell.contentView.frame = CGRectMake(-SCREEN_WIDTH, 0, SCREEN_WIDTH, 101);
         [UIView animateWithDuration:0.1
                           delay:0.6+(loadedCells*0.1)
                         options: UIViewAnimationOptionTransitionCrossDissolve
                      animations:^{
                          cell.alpha = 1.0;
-                         cell.contentView.frame = CGRectMake(0, 0, self.view.frame.size.width, 101);
+                         cell.contentView.frame = CGRectMake(0, 0, SCREEN_WIDTH, 101);
                      }
                      completion:^(BOOL finished){
                      }];
@@ -195,7 +195,7 @@
                         options: UIViewAnimationOptionCurveEaseIn
                      animations:^{
                          [addCourseView animateCourseAddView];
-                         self.courseTableView.frame = CGRectMake(0, 100, 320, self.view.frame.size.height);
+                         self.courseTableView.frame = CGRectMake(0, 100, SCREEN_WIDTH, SCREEN_HEIGHT);
                      }
                      completion:^(BOOL finished){
                      }];
@@ -226,7 +226,7 @@
                         options: UIViewAnimationOptionCurveEaseIn
                      animations:^{
                          addCourseView.alpha = 1.0;
-                         self.courseTableView.frame = CGRectMake(0, 100, 320, self.view.frame.size.height);
+                         self.courseTableView.frame = CGRectMake(0, 100, SCREEN_WIDTH, SCREEN_HEIGHT);
                      }
                      completion:^(BOOL finished){
                      }];
@@ -270,7 +270,7 @@
                           delay:0.2
                         options: UIViewAnimationOptionCurveEaseIn
                      animations:^{
-                         self.courseTableView.frame = CGRectMake(0, 0, 320, self.view.frame.size.height);
+                         self.courseTableView.frame = CGRectMake(0, 0, SCREEN_WIDTH,SCREEN_HEIGHT);
                          [addCourseView animateViewRemoved];
                      }
                      completion:^(BOOL finished){
@@ -292,7 +292,7 @@
         pullDownAddReminder.alpha = 0.0;
 
     }
-    pullDownAddReminder.frame = CGRectMake(0, 64, self.view.frame.size.width, -scrollView.contentOffset.y - 64);
+    pullDownAddReminder.frame = CGRectMake(0, 64, SCREEN_WIDTH, -scrollView.contentOffset.y - 64);
     
     if (scrollView.contentOffset.y < -135) {
         scrollView.contentOffset = CGPointMake(0, -135);
