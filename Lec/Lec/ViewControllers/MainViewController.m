@@ -19,6 +19,8 @@
     LECAddCourseView *addCourseView;
     BOOL addViewActive;
     UILabel *pullDownAddReminder;
+    NSArray *visibleCells;
+    int loadedCells;
 }
 
 @end
@@ -42,7 +44,7 @@
     [self courseTableViewSetup];
     [self navagationTopBar];
     [self pullDownReminderSetup];
-
+    [self.courseTableView visibleCells];
 }
 
 
@@ -55,7 +57,6 @@
     [super viewDidAppear:animated];
     [self navagationTopBar];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];  //sets the status bar to black
-    
 }
 
 - (void)didReceiveMemoryWarning
@@ -63,6 +64,7 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 
 - (void) navagationTopBar
 {
@@ -117,8 +119,6 @@
 {
     Course *selectedCourse = [[self.viewModel.tableData objectAtIndex:indexPath.row] course];
     [self.navigationController pushViewController:[[CourseViewController alloc] initWithCourse:selectedCourse] animated:YES];
-    
-    
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -134,6 +134,25 @@
     {
         [self.viewModel deleteCourseAtIndex:indexPath.row];
         [self.courseTableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    }
+}
+
+-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (visibleCells == NULL) {
+        visibleCells = [self.courseTableView indexPathsForVisibleRows];
+        NSLog(@"VisibleCells: %@", visibleCells);
+    }
+    if ([visibleCells containsObject:indexPath] && loadedCells < visibleCells.count){
+        cell.alpha = 0.0;
+        [UIView animateWithDuration:0.2
+                          delay:loadedCells*0.2
+                        options: UIViewAnimationOptionCurveEaseIn
+                     animations:^{
+                         cell.alpha = 1.0;
+                     }
+                     completion:^(BOOL finished){
+                     }];
+        loadedCells++;
     }
 }
 
