@@ -20,17 +20,17 @@
         self.courseNameLabel = [[UILabel alloc]initWithFrame:CGRectMake(80, 20, self.frame.size.width-80, 40)];
         self.courseNameLabel.textColor = [UIColor whiteColor];
         self.courseNameLabel.font = [UIFont fontWithName:DEFAULTFONT size:COURSENAMEECELLFONTSIZE];
-        [self addSubview:self.courseNameLabel];
+        [self.contentView addSubview:self.courseNameLabel];
         
         self.courseDescriptionLabel = [[UILabel alloc]initWithFrame:CGRectMake(82, 50, self.frame.size.width-80, 40)];
         self.courseDescriptionLabel.textColor = [UIColor whiteColor];
         self.courseDescriptionLabel.font = [UIFont fontWithName:DEFAULTFONT size:COURSEDESCRIPTIONCELLFONTSIZE];
-        [self addSubview:self.courseDescriptionLabel];
+        [self.contentView addSubview:self.courseDescriptionLabel];
         
         self.iconImage = [UIImageView new];
         [self.iconImage setTintColor:[UIColor whiteColor]];
         [self.iconImage setFrame:CGRectMake(15, 25, 50, 50)];
-        [self addSubview:self.iconImage];
+        [self.contentView addSubview:self.iconImage];
         
         CGRect frame = [self frame];
         frame.size.height = 101;

@@ -140,15 +140,23 @@
 -(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
     if (visibleCells == NULL) {
         visibleCells = [self.courseTableView indexPathsForVisibleRows];
-        NSLog(@"VisibleCells: %@", visibleCells);
     }
+    
     if ([visibleCells containsObject:indexPath] && loadedCells < visibleCells.count){
         cell.alpha = 0.0;
+        
+//        self.animator = [[UIDynamicAnimator alloc] initWithReferenceView:self.courseTableView];
+//        UISnapBehavior *snapBehaviour = [[UISnapBehavior alloc] initWithItem:cell snapToPoint:CGPointMake(0,0)];
+//        snapBehaviour.damping = 0.65f;
+//        [self.animator addBehavior:snapBehaviour];
+    
+        cell.contentView.frame = CGRectMake(-self.view.frame.size.width, 0, self.view.frame.size.width, 101);
         [UIView animateWithDuration:0.2
                           delay:loadedCells*0.2
                         options: UIViewAnimationOptionCurveEaseIn
                      animations:^{
                          cell.alpha = 1.0;
+                         cell.contentView.frame = CGRectMake(0, 0, self.view.frame.size.width, 101);
                      }
                      completion:^(BOOL finished){
                      }];
