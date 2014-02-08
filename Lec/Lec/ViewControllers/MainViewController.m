@@ -144,24 +144,19 @@
     if ([visibleCells containsObject:indexPath] && loadedCells < visibleCells.count){
         cell.alpha = 0.0;
         
-//        self.animator = [[UIDynamicAnimator alloc] initWithReferenceView:self.courseTableView];
-//        UISnapBehavior *snapBehaviour = [[UISnapBehavior alloc] initWithItem:cell snapToPoint:CGPointMake(0,0)];
-//        snapBehaviour.damping = 0.65f;
-//        [self.animator addBehavior:snapBehaviour];
-    
         cell.contentView.frame = CGRectMake(-SCREEN_WIDTH, 0, SCREEN_WIDTH, 101);
-        [UIView animateWithDuration:0.1
-                          delay:0.6+(loadedCells*0.1)
-                        options: UIViewAnimationOptionTransitionCrossDissolve
-                     animations:^{
-                         cell.alpha = 1.0;
-                         cell.contentView.frame = CGRectMake(0, 0, SCREEN_WIDTH, 101);
-                     }
-                     completion:^(BOOL finished){
-                     }];
-        
-
-        
+        [UIView animateWithDuration:1.0
+                              delay:0.6+(loadedCells*0.1)
+             usingSpringWithDamping:0.6
+              initialSpringVelocity:0.1
+                            options:UIViewAnimationOptionLayoutSubviews
+                         animations:^{
+                             cell.alpha = 1.0;
+                             cell.contentView.frame = CGRectMake(0, 0, SCREEN_WIDTH, 101);
+                         }
+                         completion:^(BOOL finished){
+                             NULL;
+                         }];        
         loadedCells++;
     }
 }

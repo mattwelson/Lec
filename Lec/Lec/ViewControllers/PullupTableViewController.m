@@ -40,7 +40,7 @@
     
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     
-    [UIView animateWithDuration:0.05
+    [UIView animateWithDuration:0.1
                           delay:0.0
                         options: UIViewAnimationOptionTransitionCrossDissolve
                      animations:^{
