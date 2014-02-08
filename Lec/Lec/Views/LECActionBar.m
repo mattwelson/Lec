@@ -34,14 +34,20 @@
     return recordBar;
 }
 
-+(id)tagBar
++(id)tagBarWithTarget:(id)target andSelector:(SEL)action
 {
     LECActionBar *tagBar = [[LECActionBar alloc] initWithFrame:CGRectMake(0, 0, 320, 75)];
     
-    tagBar.textLabel.text = @"Tag";
     tagBar.colour = [UIColor colorWithRed:0.719 green:0.000 blue:0.008 alpha:1.000]; // TODO: Pass in colour from course
-    tagBar.textLabel.textColor = tagBar.colour;
-    tagBar.textLabel.textAlignment = NSTextAlignmentCenter;
+    
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    button.frame = tagBar.frame;
+    [button addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
+    
+    [button setTitle:@"Tag" forState:UIControlStateNormal];
+    [button setTitleColor:tagBar.colour forState:UIControlStateNormal];
+    
+    [tagBar addSubview:button];
     
     return tagBar;
 }

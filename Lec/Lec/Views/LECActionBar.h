@@ -14,6 +14,6 @@
 @property (nonatomic) UIColor *colour;
 
 +(id)recordBar;
-+(id)tagBar;
++(id)tagBarWithTarget:(id)target andSelector:(SEL)action;
 
 @end

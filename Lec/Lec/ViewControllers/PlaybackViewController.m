@@ -8,6 +8,7 @@
 
 #import "PlaybackViewController.h"
 #import "LECImportHeader.h"
+#import "LECActionBar.h"
 
 @interface PlaybackViewController (){
     LECLectureViewModel *viewModel;
@@ -25,6 +26,13 @@
         viewModel = [LECLectureViewModel viewModelWithLecture:lecture];
         [viewModel prepareForPlayback];
         [viewModel startAudioPlayback];
+        
+        contentSection = 1; // the section with table data
+        actionSection = 2; // the section with an action bar
+        hasFooter = YES;
+        noSections = 2;
+        
+        actionBar = [LECActionBar tagBarWithTarget:self andSelector:@selector(actionBarPressed)];
     }
     return self;
 }
@@ -70,6 +78,11 @@
 -(void) didSelectCellAt:(NSInteger)index
 {
     // play tag?
+}
+
+-(void) actionBarPressed
+{
+    NSLog(@"Push me good");
 }
 
 @end

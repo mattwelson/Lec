@@ -27,6 +27,8 @@
         
         contentSection = 2; // the section with table data
         actionSection = 1; // the section with an action bar
+        hasFooter = NO; // if there is a footer for the content view
+        noSections = 3;
     }
     return self;
 }
@@ -61,12 +63,6 @@
     
 }
 
-- (void) savedPressed
-{
-    [viewModel addLecture:@"Testing!@#$"];
-    [self.tableView reloadData];
-}
-
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -93,20 +89,21 @@
 {
     LECLectureCellViewModel *lectureCellViewModel = [viewModel.tableData objectAtIndex:index];
     
-    if (![lectureCellViewModel hasRecording]) {
-       [self.navigationController pushViewController:[[RecordViewController alloc] initWithLecture:lectureCellViewModel.lecture] animated:YES];
-    }
-    else{
-        [self.navigationController pushViewController:[[PlaybackViewController alloc] initWithLecture:lectureCellViewModel.lecture] animated:YES];
-    }
+    [self.navigationController pushViewController:[[PlaybackViewController alloc] initWithLecture:lectureCellViewModel.lecture] animated:YES];
     
 }
 
 -(void) actionBarPressed
 {
-    [self savedPressed];
+    [viewModel addLecture:@"An intro to Lec"];
+    [self.tableView reloadData];
+    LECLectureCellViewModel *lectureCellViewModel = [viewModel.tableData objectAtIndex:0];
+    [self.navigationController pushViewController:[[RecordViewController alloc] initWithLecture:lectureCellViewModel.lecture] animated:YES];
 }
 
-
+-(NSInteger) numberOfSections
+{
+    return 3;
+}
 
 @end
