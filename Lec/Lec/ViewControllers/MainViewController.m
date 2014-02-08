@@ -137,27 +137,29 @@
 }
 
 -(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (visibleCells == NULL) {
-        visibleCells = [self.courseTableView indexPathsForVisibleRows];
-    }
-    
-    if ([visibleCells containsObject:indexPath] && loadedCells < visibleCells.count){
-        cell.alpha = 0.0;
-        
-        cell.contentView.frame = CGRectMake(-SCREEN_WIDTH, 0, SCREEN_WIDTH, 101);
-        [UIView animateWithDuration:1.0
-                              delay:0.6+(loadedCells*0.1)
-             usingSpringWithDamping:0.6
-              initialSpringVelocity:0.1
-                            options:UIViewAnimationOptionLayoutSubviews
-                         animations:^{
-                             cell.alpha = 1.0;
-                             cell.contentView.frame = CGRectMake(0, 0, SCREEN_WIDTH, 101);
-                         }
-                         completion:^(BOOL finished){
-                             NULL;
-                         }];        
-        loadedCells++;
+    if (ANIMATIONS_ON) {
+        if (visibleCells == NULL) {
+            visibleCells = [self.courseTableView indexPathsForVisibleRows];
+        }
+        if ([visibleCells containsObject:indexPath] && loadedCells < visibleCells.count){
+            cell.alpha = 0.0;
+            
+            cell.contentView.frame = CGRectMake(-SCREEN_WIDTH, 0, SCREEN_WIDTH, 101);
+            //Leave the 0.6 delay in! The real iPhone loads stuff during the splash screen so we want to start it a little later.
+            [UIView animateWithDuration:1.0
+                                  delay:0.6+(loadedCells*0.1)
+                 usingSpringWithDamping:0.6
+                  initialSpringVelocity:0.1
+                                options:UIViewAnimationOptionLayoutSubviews
+                             animations:^{
+                                 cell.alpha = 1.0;
+                                 cell.contentView.frame = CGRectMake(0, 0, SCREEN_WIDTH, 101);
+                             }
+                             completion:^(BOOL finished){
+                                 NULL;
+                             }];
+            loadedCells++;
+        }
     }
 }
 
