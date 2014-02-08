@@ -42,8 +42,8 @@ static LECParallaxService *sharedService;
             view.layer.shadowOpacity = 0.5f;
             view.layer.shadowRadius = 4.0f;
             view.layer.shadowOffset = CGSizeMake(0, 0);
-            shadowStrengthMin = CGSizeMake(40, 5);
-            shadowStrengthMax = CGSizeMake(-40, 5);
+            shadowStrengthMin = CGSizeMake(30, 5);
+            shadowStrengthMax = CGSizeMake(-30, 5);
             break;
         default:
             parallaxStrength = 15;
@@ -62,6 +62,7 @@ static LECParallaxService *sharedService;
     UIInterpolatingMotionEffect *shadowEffect = [[UIInterpolatingMotionEffect alloc] initWithKeyPath:@"layer.shadowOffset" type:UIInterpolatingMotionEffectTypeTiltAlongHorizontalAxis];
     shadowEffect.minimumRelativeValue = [NSValue valueWithCGSize:shadowStrengthMin];
     shadowEffect.maximumRelativeValue = [NSValue valueWithCGSize:shadowStrengthMax];
+    
     
     UIMotionEffectGroup *group = [UIMotionEffectGroup new];
     group.motionEffects = @[horizontalMotionEffect, verticalMotionEffect, shadowEffect];
