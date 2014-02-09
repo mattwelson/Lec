@@ -208,25 +208,24 @@
 
 - (void)addCourse
 {
-    [self.courseTableView setEditing:YES animated:YES];
-//    addCourseView = [LECAddCourseView createAddCourseView];
-//    addCourseView.saveCourseDelegate = self;
-//    [self.view addSubview:addCourseView];
-//    
-//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon_checkmark.png"] style:UIBarButtonItemStylePlain target:self action:@selector(saveCourse)];
-//    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon_cancel.png"] style:UIBarButtonItemStylePlain target:self action:@selector(closeSaveCourse)];
-//    
-//    self.courseTableView.userInteractionEnabled = NO; // disable course clicking
-//    //This is where we will add Courses to the tableView
-//    [UIView animateWithDuration:0.2
-//                          delay:0.0
-//                        options: UIViewAnimationOptionCurveEaseIn
-//                     animations:^{
-//                         [addCourseView animateCourseAddView];
-//                         self.courseTableView.frame = CGRectMake(0, 100, SCREEN_WIDTH, SCREEN_HEIGHT);
-//                     }
-//                     completion:^(BOOL finished){
-//                     }];
+    addCourseView = [LECAddCourseView createAddCourseView];
+    addCourseView.saveCourseDelegate = self;
+    [self.view addSubview:addCourseView];
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon_checkmark.png"] style:UIBarButtonItemStylePlain target:self action:@selector(saveCourse)];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon_cancel.png"] style:UIBarButtonItemStylePlain target:self action:@selector(closeSaveCourse)];
+    
+    self.courseTableView.userInteractionEnabled = NO; // disable course clicking
+    //This is where we will add Courses to the tableView
+    [UIView animateWithDuration:0.2
+                          delay:0.0
+                        options: UIViewAnimationOptionCurveEaseIn
+                     animations:^{
+                         [addCourseView animateCourseAddView];
+                         self.courseTableView.frame = CGRectMake(0, 100, SCREEN_WIDTH, SCREEN_HEIGHT);
+                     }
+                     completion:^(BOOL finished){
+                     }];
 }
 
 -(void) saveCourse:(NSString *)courseNameString description:(NSString *)courseDescriptionString colour:(NSString *)colourString icon:(NSString *)iconString{
