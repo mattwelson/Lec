@@ -71,11 +71,20 @@
     self.navigationController.navigationBar.backgroundColor = [UIColor whiteColor];
     [self.navigationController.navigationBar setBackgroundImage:NULL forBarMetrics:UIBarMetricsDefault];
     [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:HEADERCOLOR, NSForegroundColorAttributeName,[UIFont fontWithName:DEFAULTFONT size:HEADERSIZE], NSFontAttributeName, nil]];
-    
     self.navigationController.navigationBar.tintColor = NAVTINTCOLOR;
     
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:plusImg style:UIBarButtonItemStylePlain target:self action:@selector(addCourse)];
+    
+    self.navigationController.navigationBar.alpha = 0.0;
+    [UIView animateWithDuration:0.2
+                          delay:0.0
+                        options: UIViewAnimationOptionCurveEaseIn
+                     animations:^{
+                         self.navigationController.navigationBar.alpha = 1.0;
+                     }
+                     completion:^(BOOL finished){
+                     }];
 }
 
 -(void) pullDownReminderSetup{
@@ -108,6 +117,8 @@
 {
     Course *selectedCourse = [[self.viewModel.tableData objectAtIndex:indexPath.row] course];
     [self.navigationController pushViewController:[[CourseViewController alloc] initWithCourse:selectedCourse] animated:YES];
+    
+    
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -128,7 +139,7 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 100;
+    return 101;
 }
 
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -248,7 +259,10 @@
     if (self.courseTableView.contentOffset.y < -65) {
         pullDownAddReminder.alpha = 1.0;
     }
-    
+    else {
+        pullDownAddReminder.alpha = 0.0;
+
+    }
     pullDownAddReminder.frame = CGRectMake(0, 64, self.view.frame.size.width, -scrollView.contentOffset.y - 64);
     
     if (scrollView.contentOffset.y < -135) {
