@@ -67,7 +67,7 @@
     tag.currentTime = [[LECAudioService sharedAudioService] getCurrentTime];
     tag.name = @"Hi, I'm a tag";
     [[LECDatabaseService sharedDBService] saveChanges];
-    NSLog(@"%@", tag.currentTime);
+    [self.tableData addObject:[LECTagCellViewModel tagCellVMWithTag:tag andColour:self.colourString]];
 }
 
 #pragma mark Playback

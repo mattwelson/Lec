@@ -83,6 +83,9 @@
 -(void) actionBarPressed
 {
     [viewModel addTagToCurrentTime];
+    [self.tableView reloadData];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForItem:[viewModel.tableData count]-1 inSection:contentSection];
+    [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
 }
 
 -(NSInteger) numberOfSectionsInTableView:(UITableView *)tableView

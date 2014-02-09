@@ -82,7 +82,6 @@
 
 -(void) actionBarPressed
 {
-    NSLog(@"Push me good");
 }
 
 @end

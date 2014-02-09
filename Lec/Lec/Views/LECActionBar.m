@@ -48,6 +48,7 @@
     [button setTitleColor:tagBar.colour forState:UIControlStateNormal];
     
     [tagBar addSubview:button];
+    [tagBar setBackgroundColor:[UIColor whiteColor]];
     
     return tagBar;
 }
