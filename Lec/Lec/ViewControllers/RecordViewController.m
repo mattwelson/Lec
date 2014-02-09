@@ -8,6 +8,7 @@
 
 #import "RecordViewController.h"
 #import "LECImportHeader.h"
+#import "LECActionBar.h"
 
 @interface RecordViewController (){
     LECLectureViewModel *viewModel;
@@ -21,26 +22,24 @@
 {
     self = [super initWithNibName:@"RecordViewController" bundle:nil];
     if (self) {
+        NSLog(@"Recording View Controller!");
         viewModel = [LECLectureViewModel viewModelWithLecture:lecture];
+        [viewModel prepareForRecordingAudio];
+        [viewModel startRecordingAudio];
         
-        if (viewModel.needsRecording){
-            [viewModel prepareForRecordingAudio];
-            [viewModel startRecordingAudio];
-        } else {
-            [viewModel prepareForPlayback];
-            [viewModel startAudioPlayback];
-        }
+        contentSection = 1; // the section with table data
+        actionSection = 2; // the section with an action bar
+        hasFooter = YES;
+        noSections = 2;
+        
+        actionBar = [LECActionBar tagBarWithTarget:self andSelector:@selector(actionBarPressed)];
     }
     return self;
 }
 
 -(void)viewWillDisappear:(BOOL)animated
 {
-    if (viewModel.needsRecording){
-        [viewModel stopRecordingAudio];
-    } else {
-        [viewModel stopAudioPlayback];
-    }
+    [viewModel stopRecordingAudio];
 }
 
 - (void)didReceiveMemoryWarning
@@ -79,6 +78,16 @@
 -(void) didSelectCellAt:(NSInteger)index
 {
     // play tag?
+}
+
+-(void) actionBarPressed
+{
+    NSLog(@"Push me good");
+}
+
+-(NSInteger) numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 2;
 }
 
 @end

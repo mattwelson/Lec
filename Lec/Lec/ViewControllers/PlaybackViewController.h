@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Lecture.h"
+#import "PullupTableViewController.h"
 
-@interface PlaybackViewController : UIViewController
+@interface PlaybackViewController : PullupTableViewController
+
+-(id)initWithLecture:(Lecture *)lecture;
 
 @end
