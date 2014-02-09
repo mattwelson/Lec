@@ -1,6 +1,7 @@
 Lec - Lecture Recorder
 ===
 ![Sexy icon](Lec/Lec/Images.xcassets/AppIcon.appiconset/iPhone (Retina) 120 x 120@2x.png)
+
 Lecture Recorder to end all lecture recorders! (Fuck Recordium)
 
 #Goal 
