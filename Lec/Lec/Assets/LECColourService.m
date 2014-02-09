@@ -70,9 +70,8 @@ static LECColourService *sharedService;
 
 -(void)changeGradientToColour:(NSString *)colour forView:(UIView *)view
 {
-    for (CALayer *layer in view.layer.sublayers) {
-        [layer removeFromSuperlayer];
-    }
+    [view.layer.sublayers[0] removeFromSuperlayer];
+    
     CAGradientLayer *gradient = [CAGradientLayer layer];
     [gradient setColors:[NSArray arrayWithObjects:
                          (id)[[self highlightColourFor:colour] CGColor],
