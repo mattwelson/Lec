@@ -17,6 +17,11 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
+        
+        self.backgroundView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.frame.size.width, 101)];
+        [self addSubview:self.backgroundView];
+        [self sendSubviewToBack:self.backgroundView];
+        
         self.courseNameLabel = [[UILabel alloc]initWithFrame:CGRectMake(80, 20, self.frame.size.width-80, 40)];
         self.courseNameLabel.textColor = [UIColor whiteColor];
         self.courseNameLabel.font = [UIFont fontWithName:DEFAULTFONT size:COURSENAMEECELLFONTSIZE];
@@ -37,6 +42,7 @@
         [self setFrame:frame];
         [[self contentView] setFrame:frame];
         
+        
         if(PARALLAX_ON) {
             [[LECParallaxService sharedParallaxService]addParallaxToView:self.courseNameLabel strength:1];
             [[LECParallaxService sharedParallaxService]addParallaxToView:self.courseDescriptionLabel strength:1];
@@ -51,7 +57,7 @@
     self.courseNameLabel.text = [vm titleText];
     self.courseDescriptionLabel.text = [vm subText];
     [[LECIconService sharedIconService] retrieveIcon:[vm icon] toView:self.iconImage];
-    [[LECColourService sharedColourService] addGradientForColour:[vm colourString] toView:[self contentView]];
+    [[LECColourService sharedColourService] addGradientForColour:[vm colourString] toView:self.backgroundView];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated

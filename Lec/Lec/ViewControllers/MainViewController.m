@@ -118,12 +118,17 @@
 {
     Course *selectedCourse = [[self.viewModel.tableData objectAtIndex:indexPath.row] course];
     [self.navigationController pushViewController:[[CourseViewController alloc] initWithCourse:selectedCourse] animated:YES];
+    [self.courseTableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     CourseCell *cell = [[CourseCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"Cell"];
     [cell populateFor:[self.viewModel.tableData objectAtIndex:indexPath.row]];
+
+    UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(setEditingMode:)];
+    longPress.minimumPressDuration = 1.0;
+    [cell addGestureRecognizer:longPress];
     return cell;
 }
 
@@ -173,29 +178,55 @@
     return [self.viewModel.tableData count];
 }
 
+#pragma mark Editing cells
+
+-(void)setEditingMode:(UILongPressGestureRecognizer *)gestureRecognizer{
+    if (self.courseTableView.isEditing == NO) {
+        [self.courseTableView setEditing:YES animated:YES];
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon_checkmark.png"] style:UIBarButtonItemStylePlain target:self action:@selector(disableEditingMode)];
+    }
+}
+
+-(void)disableEditingMode{
+    [self.courseTableView setEditing:NO animated:YES];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav_add_btn.png"] style:UIBarButtonItemStylePlain target:self action:@selector(addCourse)];
+}
+
+-(UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return UITableViewCellEditingStyleDelete;
+}
+
+//TODO: Update logic to save the row reordering
+-(void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath{
+    
+}
+
+
+
 #warning Should be moved!
 #pragma mark Methods for that little add course view
 
 - (void)addCourse
 {
-    addCourseView = [LECAddCourseView createAddCourseView];
-    addCourseView.saveCourseDelegate = self;
-    [self.view addSubview:addCourseView];
-    
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon_checkmark.png"] style:UIBarButtonItemStylePlain target:self action:@selector(saveCourse)];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon_cancel.png"] style:UIBarButtonItemStylePlain target:self action:@selector(closeSaveCourse)];
-    
-    self.courseTableView.userInteractionEnabled = NO; // disable course clicking
-    //This is where we will add Courses to the tableView
-    [UIView animateWithDuration:0.2
-                          delay:0.0
-                        options: UIViewAnimationOptionCurveEaseIn
-                     animations:^{
-                         [addCourseView animateCourseAddView];
-                         self.courseTableView.frame = CGRectMake(0, 100, SCREEN_WIDTH, SCREEN_HEIGHT);
-                     }
-                     completion:^(BOOL finished){
-                     }];
+    [self.courseTableView setEditing:YES animated:YES];
+//    addCourseView = [LECAddCourseView createAddCourseView];
+//    addCourseView.saveCourseDelegate = self;
+//    [self.view addSubview:addCourseView];
+//    
+//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon_checkmark.png"] style:UIBarButtonItemStylePlain target:self action:@selector(saveCourse)];
+//    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon_cancel.png"] style:UIBarButtonItemStylePlain target:self action:@selector(closeSaveCourse)];
+//    
+//    self.courseTableView.userInteractionEnabled = NO; // disable course clicking
+//    //This is where we will add Courses to the tableView
+//    [UIView animateWithDuration:0.2
+//                          delay:0.0
+//                        options: UIViewAnimationOptionCurveEaseIn
+//                     animations:^{
+//                         [addCourseView animateCourseAddView];
+//                         self.courseTableView.frame = CGRectMake(0, 100, SCREEN_WIDTH, SCREEN_HEIGHT);
+//                     }
+//                     completion:^(BOOL finished){
+//                     }];
 }
 
 -(void) saveCourse:(NSString *)courseNameString description:(NSString *)courseDescriptionString colour:(NSString *)colourString icon:(NSString *)iconString{
