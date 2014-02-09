@@ -39,6 +39,7 @@
     self.navigationItem.title = [[self viewModelFromSubclass] navTitle];
     
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
+    navBar.shadowImage = [UIImage new];
     
     [UIView animateWithDuration:0.1
                           delay:0.0
@@ -53,7 +54,6 @@
                      }
                      completion:^(BOOL finished){
                          //self.navigationController.navigationBar.alpha = 1.0;
-                         navBar.shadowImage = [UIImage new];
                      }];
     
 }

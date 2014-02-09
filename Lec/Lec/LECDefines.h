@@ -15,8 +15,8 @@
 #define CELL_ID_TAG_CELL @"tagcell"
 #define CELL_ID_ADD_CELL @"addcell"
 
-#define PARALLAX_ON NO
-#define ANIMATIONS_ON NO
+#define PARALLAX_ON YES
+#define ANIMATIONS_ON YES
 #define FILE_RECORDING_TYPE @"m4a"
 
 #define SCREEN_WIDTH [UIScreen mainScreen].bounds.size.width
