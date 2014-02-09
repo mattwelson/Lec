@@ -40,12 +40,8 @@
     self.courseDescriptionLabel.textColor = [[LECColourService sharedColourService] highlightColourFor:vm.colourString];
     self.courseNameLabel.textColor = [[LECColourService sharedColourService] baseColourFor:vm.colourString];
     self.backgroundColor = [UIColor whiteColor];
-    if (!vm.hasRecording)
-    {
-        self.accessoryView = [[UIImageView alloc] initWithImage:vm.accessory];
-    } else {
-        self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    }
+    
+    self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
