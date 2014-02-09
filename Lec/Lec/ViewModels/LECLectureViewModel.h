@@ -21,9 +21,10 @@
 @property NSString *courseName;
 
 // instance of AVAudio or Audio service?
--(void)prepareForRecordingAudio;
--(void)startRecordingAudio;
--(void)stopRecordingAudio;
+-(void) prepareForRecordingAudio;
+-(void) startRecordingAudio;
+-(void) stopRecordingAudio;
+-(void) addTagToCurrentTime;
 
 -(void) prepareForPlayback;
 -(void) startAudioPlayback;

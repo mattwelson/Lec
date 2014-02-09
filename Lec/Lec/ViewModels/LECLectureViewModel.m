@@ -60,6 +60,14 @@
     [[LECAudioService sharedAudioService] stopRecording];
 }
 
+-(void) addTagToCurrentTime
+{
+    Tag *tag = [[LECDatabaseService sharedDBService] newTagForLecture:self.lecture];
+    tag.currentTime = [[LECAudioService sharedAudioService] getCurrentTime];
+    tag.name = @"Hi, I'm a tag";
+    [[LECDatabaseService sharedDBService] saveChanges];
+}
+
 #pragma mark Playback
 -(void) prepareForPlayback
 {

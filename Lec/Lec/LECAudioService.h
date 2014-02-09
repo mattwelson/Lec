@@ -22,6 +22,6 @@
 -(void) startPlayback;
 -(void) stopPlayback;
 
--(NSTimeInterval) getCurrentTime;
+-(NSNumber *) getCurrentTime;
 
 @end
