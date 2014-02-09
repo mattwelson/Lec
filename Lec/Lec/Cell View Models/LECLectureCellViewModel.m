@@ -19,19 +19,8 @@
     cellViewModel.tintColour = [[LECColourService sharedColourService] baseColourFor:[lecture.course colour]];
     cellViewModel.titleText = [NSString stringWithFormat:@"Lecture %@",lecture.lectureNumber];
     cellViewModel.subText = [lecture lectureName];
-    // set accessory and has recorded!
-    cellViewModel.hasRecording = [[lecture recordingPath] length] > 0;
     cellViewModel.colourString = [[lecture course] colour];
-    [cellViewModel accessoryForCell];
     return cellViewModel;
-}
-
--(void) accessoryForCell {
-    UIImage *image;
-    if (!self.hasRecording) {
-        image = [UIImage imageNamed:@"icon_mic"];
-    }
-    self.accessory = image;
 }
 
 @end
