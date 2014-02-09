@@ -16,7 +16,6 @@
 @property Lecture *lecture;
 @property NSMutableArray *tags;
 @property (nonatomic) NSString *recordingPath;
-@property BOOL needsRecording;
 
 @property NSString *courseName;
 

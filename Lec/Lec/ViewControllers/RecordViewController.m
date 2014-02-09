@@ -82,7 +82,7 @@
 
 -(void) actionBarPressed
 {
-    NSLog(@"Push me good");
+    [viewModel addTagToCurrentTime];
 }
 
 -(NSInteger) numberOfSectionsInTableView:(UITableView *)tableView

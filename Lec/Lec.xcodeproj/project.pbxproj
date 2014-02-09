@@ -39,6 +39,7 @@
 		8BE75829188B508D007B6C02 /* icon_cancel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BE75825188B508D007B6C02 /* icon_cancel@2x.png */; };
 		8BE7582A188B508D007B6C02 /* icon_checkmark.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BE75826188B508D007B6C02 /* icon_checkmark.png */; };
 		8BE7582B188B508D007B6C02 /* icon_checkmark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BE75827188B508D007B6C02 /* icon_checkmark@2x.png */; };
+		C9467BAD18A71D46001AB03B /* LECTagCellViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C9467BAC18A71D46001AB03B /* LECTagCellViewModel.m */; };
 		C9605CA21889F3B500F3DE57 /* Course.m in Sources */ = {isa = PBXBuildFile; fileRef = C9605CA11889F3B500F3DE57 /* Course.m */; };
 		C9605CA81889F3B600F3DE57 /* Tag.m in Sources */ = {isa = PBXBuildFile; fileRef = C9605CA71889F3B600F3DE57 /* Tag.m */; };
 		C9605CAB1889F4B800F3DE57 /* LECBaseViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C9605CAA1889F4B800F3DE57 /* LECBaseViewModel.m */; };
@@ -133,6 +134,8 @@
 		8BE75825188B508D007B6C02 /* icon_cancel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_cancel@2x.png"; sourceTree = "<group>"; };
 		8BE75826188B508D007B6C02 /* icon_checkmark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_checkmark.png; sourceTree = "<group>"; };
 		8BE75827188B508D007B6C02 /* icon_checkmark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_checkmark@2x.png"; sourceTree = "<group>"; };
+		C9467BAB18A71D46001AB03B /* LECTagCellViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LECTagCellViewModel.h; path = "Cell View Models/LECTagCellViewModel.h"; sourceTree = "<group>"; };
+		C9467BAC18A71D46001AB03B /* LECTagCellViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LECTagCellViewModel.m; path = "Cell View Models/LECTagCellViewModel.m"; sourceTree = "<group>"; };
 		C9605CA01889F3B500F3DE57 /* Course.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Course.h; path = DataModels/Course.h; sourceTree = "<group>"; };
 		C9605CA11889F3B500F3DE57 /* Course.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Course.m; path = DataModels/Course.m; sourceTree = "<group>"; };
 		C9605CA61889F3B600F3DE57 /* Tag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Tag.h; path = DataModels/Tag.h; sourceTree = "<group>"; };
@@ -307,6 +310,8 @@
 				C9605CB91889F99800F3DE57 /* LECCourseCellViewModel.m */,
 				C9FBD62C1894B26B00D1A7D6 /* LECLectureCellViewModel.h */,
 				C9FBD62D1894B26B00D1A7D6 /* LECLectureCellViewModel.m */,
+				C9467BAB18A71D46001AB03B /* LECTagCellViewModel.h */,
+				C9467BAC18A71D46001AB03B /* LECTagCellViewModel.m */,
 			);
 			name = "Cell View Models";
 			sourceTree = "<group>";
@@ -623,6 +628,7 @@
 				C9605CC4188A179400F3DE57 /* LECColourService.m in Sources */,
 				738FB164189CA1D200DBF8F8 /* LECAddCourseView.m in Sources */,
 				8BE75820188B4EA5007B6C02 /* LECCourseViewModel.m in Sources */,
+				C9467BAD18A71D46001AB03B /* LECTagCellViewModel.m in Sources */,
 				C9FBD62B1894B02100D1A7D6 /* Lecture.m in Sources */,
 				C9605CAE1889F5AD00F3DE57 /* LECHomeViewModel.m in Sources */,
 				C9FBD62E1894B26B00D1A7D6 /* LECLectureCellViewModel.m in Sources */,

@@ -9,6 +9,7 @@
 #import "LECLectureViewModel.h"
 #import "LECAudioService.h"
 #import "LECDefines.h"
+#import "LECTagCellViewModel.h"
 
 @implementation LECLectureViewModel
 
@@ -23,15 +24,15 @@
     
     vm.courseName = [[lecture course] courseName];
     
-    vm.recordingPath = [lecture recordingPath];
-    if ([vm.recordingPath length] > 0) {
-        vm.needsRecording = NO;
-        NSLog(@"%@", vm.recordingPath);
-    } else {
+    vm.recordingPath = [lecture recordingPath] ;
+    if (!vm.recordingPath) {
         [vm setInitialRecordingPath];
-        vm.needsRecording = YES;
     }
     
+    for (Tag *tag in lecture.tags)
+    {
+        [vm.tableData addObject:[LECTagCellViewModel tagCellVMWithTag:tag andColour:vm.colourString]];
+    }
     return vm;
 }
 
@@ -66,6 +67,7 @@
     tag.currentTime = [[LECAudioService sharedAudioService] getCurrentTime];
     tag.name = @"Hi, I'm a tag";
     [[LECDatabaseService sharedDBService] saveChanges];
+    NSLog(@"%@", tag.currentTime);
 }
 
 #pragma mark Playback
