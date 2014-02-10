@@ -15,9 +15,9 @@ End of Feb
 ##Minimum Viable Product
 A lecture _recorder_ where users can organise lectures based on course. 
 - [ ] Record and Playback
-- [ ] Courses can be added 
+- [x] Courses can be added 
 - [ ] Courses can be edited
-- [ ] Lectures can be added 
+- [x] Lectures can be added 
 - [ ] Lectures can be edited
 - [ ] Tags can be added
 - [ ] Tags can be edited
