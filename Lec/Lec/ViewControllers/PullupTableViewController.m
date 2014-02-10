@@ -39,8 +39,9 @@
     self.navigationItem.title = [[self viewModelFromSubclass] navTitle];
     
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
+    navBar.shadowImage = [UIImage new];
     
-    [UIView animateWithDuration:0.05
+    [UIView animateWithDuration:0.1
                           delay:0.0
                         options: UIViewAnimationOptionTransitionCrossDissolve
                      animations:^{
@@ -53,15 +54,14 @@
                      }
                      completion:^(BOOL finished){
                          //self.navigationController.navigationBar.alpha = 1.0;
-                         navBar.shadowImage = [UIImage new];
                      }];
     
 }
 
 - (void) courseTableViewSetup
 {
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, 320, self.view.frame.size.height-64)]; // Codie HATES this bit
-    [self.tableView setContentSize:CGSizeMake(320.0f, self.view.frame.size.height-64)];
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, 320, SCREEN_HEIGHT-64)]; // Codie HATES this bit
+    [self.tableView setContentSize:CGSizeMake(320.0f, SCREEN_HEIGHT-64)];
     [self.tableView setBackgroundColor:[UIColor clearColor]];
     [self.tableView setShowsVerticalScrollIndicator:NO];
     [self.tableView setScrollEnabled:YES];

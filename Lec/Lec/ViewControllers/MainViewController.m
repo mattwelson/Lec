@@ -19,6 +19,8 @@
     LECAddCourseView *addCourseView;
     BOOL addViewActive;
     UILabel *pullDownAddReminder;
+    NSArray *visibleCells;
+    int loadedCells;
 }
 
 @end
@@ -42,7 +44,6 @@
     [self courseTableViewSetup];
     [self navagationTopBar];
     [self pullDownReminderSetup];
-
 }
 
 
@@ -55,7 +56,6 @@
     [super viewDidAppear:animated];
     [self navagationTopBar];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];  //sets the status bar to black
-    
 }
 
 - (void)didReceiveMemoryWarning
@@ -64,11 +64,12 @@
     // Dispose of any resources that can be recreated.
 }
 
+
 - (void) navagationTopBar
 {
     UIImage *plusImg = [UIImage imageNamed:@"nav_add_btn.png"];
     self.navigationItem.title = self.viewModel.navTitle;
-    self.navigationController.navigationBar.backgroundColor = [UIColor whiteColor];
+    //self.navigationController.navigationBar.backgroundColor = [UIColor whiteColor];
     [self.navigationController.navigationBar setBackgroundImage:NULL forBarMetrics:UIBarMetricsDefault];
     [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:HEADERCOLOR, NSForegroundColorAttributeName,[UIFont fontWithName:DEFAULTFONT size:HEADERSIZE], NSFontAttributeName, nil]];
     self.navigationController.navigationBar.tintColor = NAVTINTCOLOR;
@@ -88,7 +89,7 @@
 }
 
 -(void) pullDownReminderSetup{
-    pullDownAddReminder = [[UILabel alloc]initWithFrame:CGRectMake(0, 64, self.view.frame.size.width, 0)];
+    pullDownAddReminder = [[UILabel alloc]initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, 0)];
     [pullDownAddReminder setTextAlignment:NSTextAlignmentCenter];
     [pullDownAddReminder setFont:[UIFont fontWithName:DEFAULTFONT size:15]];
     [pullDownAddReminder setTextColor:[UIColor grayColor]];
@@ -104,7 +105,7 @@
 - (void) courseTableViewSetup
 {
     // height hack, need to write a method that reloads correctly when the viewDidAppear whne we figure out whats causing it.
-    self.courseTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, self.view.frame.size.height)];
+    self.courseTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
     [self.courseTableView setScrollEnabled:YES];
     [self.courseTableView setNeedsDisplay];
     [self.view addSubview:self.courseTableView];
@@ -117,14 +118,17 @@
 {
     Course *selectedCourse = [[self.viewModel.tableData objectAtIndex:indexPath.row] course];
     [self.navigationController pushViewController:[[CourseViewController alloc] initWithCourse:selectedCourse] animated:YES];
-    
-    
+    [self.courseTableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     CourseCell *cell = [[CourseCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"Cell"];
     [cell populateFor:[self.viewModel.tableData objectAtIndex:indexPath.row]];
+
+    UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(setEditingMode:)];
+    longPress.minimumPressDuration = 1.0;
+    [cell addGestureRecognizer:longPress];
     return cell;
 }
 
@@ -134,6 +138,33 @@
     {
         [self.viewModel deleteCourseAtIndex:indexPath.row];
         [self.courseTableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    }
+}
+
+-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (ANIMATIONS_ON) {
+        if (visibleCells == NULL) {
+            visibleCells = [self.courseTableView indexPathsForVisibleRows];
+        }
+        if ([visibleCells containsObject:indexPath] && loadedCells < visibleCells.count){
+            cell.alpha = 0.0;
+            
+            cell.contentView.frame = CGRectMake(-SCREEN_WIDTH, 0, SCREEN_WIDTH, 101);
+            //Leave the 0.6 delay in! The real iPhone loads stuff during the splash screen so we want to start it a little later.
+            [UIView animateWithDuration:1.0
+                                  delay:0.6+(loadedCells*0.1)
+                 usingSpringWithDamping:0.6
+                  initialSpringVelocity:0.1
+                                options:UIViewAnimationOptionLayoutSubviews
+                             animations:^{
+                                 cell.alpha = 1.0;
+                                 cell.contentView.frame = CGRectMake(0, 0, SCREEN_WIDTH, 101);
+                             }
+                             completion:^(BOOL finished){
+                                 NULL;
+                             }];
+            loadedCells++;
+        }
     }
 }
 
@@ -147,11 +178,37 @@
     return [self.viewModel.tableData count];
 }
 
+#pragma mark Editing cells
+
+-(void)setEditingMode:(UILongPressGestureRecognizer *)gestureRecognizer{
+    if (self.courseTableView.isEditing == NO) {
+        [self.courseTableView setEditing:YES animated:YES];
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon_checkmark.png"] style:UIBarButtonItemStylePlain target:self action:@selector(disableEditingMode)];
+    }
+}
+
+-(void)disableEditingMode{
+    [self.courseTableView setEditing:NO animated:YES];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav_add_btn.png"] style:UIBarButtonItemStylePlain target:self action:@selector(addCourse)];
+}
+
+-(UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return UITableViewCellEditingStyleDelete;
+}
+
+//TODO: Update logic to save the row reordering
+-(void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath{
+    
+}
+
+
+
 #warning Should be moved!
 #pragma mark Methods for that little add course view
 
 - (void)addCourse
 {
+    [self.courseTableView scrollToRowAtIndexPath:0 atScrollPosition:0 animated:YES];
     addCourseView = [LECAddCourseView createAddCourseView];
     addCourseView.saveCourseDelegate = self;
     [self.view addSubview:addCourseView];
@@ -166,7 +223,7 @@
                         options: UIViewAnimationOptionCurveEaseIn
                      animations:^{
                          [addCourseView animateCourseAddView];
-                         self.courseTableView.frame = CGRectMake(0, 100, 320, self.view.frame.size.height);
+                         self.courseTableView.frame = CGRectMake(0, 100, SCREEN_WIDTH, SCREEN_HEIGHT);
                      }
                      completion:^(BOOL finished){
                      }];
@@ -180,29 +237,30 @@
 }
 
 -(void)addCoursePullDown{
-    addCourseView = [LECAddCourseView createAddCourseView];
-    addCourseView.saveCourseDelegate = self;
-    addCourseView.alpha = 0.0;
-    [self.view addSubview:addCourseView];
-    
-    [addCourseView animateCourseAddView];
-
-    
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon_checkmark.png"] style:UIBarButtonItemStylePlain target:self action:@selector(saveCourse)];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon_cancel.png"] style:UIBarButtonItemStylePlain target:self action:@selector(closeSaveCourse)];
-    
-    self.courseTableView.userInteractionEnabled = NO; // disable course clicking
-    [UIView animateWithDuration:0.2
-                          delay:0.0
-                        options: UIViewAnimationOptionCurveEaseIn
-                     animations:^{
-                         addCourseView.alpha = 1.0;
-                         self.courseTableView.frame = CGRectMake(0, 100, 320, self.view.frame.size.height);
-                     }
-                     completion:^(BOOL finished){
-                     }];
-    
-
+    if (self.courseTableView.isEditing == NO) {
+        addCourseView = [LECAddCourseView createAddCourseView];
+        addCourseView.saveCourseDelegate = self;
+        addCourseView.alpha = 0.0;
+        [self.view addSubview:addCourseView];
+        
+        [addCourseView animateCourseAddView];
+        
+        
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon_checkmark.png"] style:UIBarButtonItemStylePlain target:self action:@selector(saveCourse)];
+        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon_cancel.png"] style:UIBarButtonItemStylePlain target:self action:@selector(closeSaveCourse)];
+        
+        self.courseTableView.userInteractionEnabled = NO; // disable course clicking
+        [UIView animateWithDuration:0.2
+                              delay:0.0
+                            options: UIViewAnimationOptionCurveEaseIn
+                         animations:^{
+                             addCourseView.alpha = 1.0;
+                             self.courseTableView.frame = CGRectMake(0, 100, SCREEN_WIDTH, SCREEN_HEIGHT);
+                         }
+                         completion:^(BOOL finished){
+                         }];
+        
+    }
 }
 
 
@@ -241,7 +299,7 @@
                           delay:0.2
                         options: UIViewAnimationOptionCurveEaseIn
                      animations:^{
-                         self.courseTableView.frame = CGRectMake(0, 0, 320, self.view.frame.size.height);
+                         self.courseTableView.frame = CGRectMake(0, 0, SCREEN_WIDTH,SCREEN_HEIGHT);
                          [addCourseView animateViewRemoved];
                      }
                      completion:^(BOOL finished){
@@ -256,28 +314,30 @@
 //As subclass of tableview will get called when tableview starts scrolling.
 -(void) scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    if (self.courseTableView.contentOffset.y < -65) {
-        pullDownAddReminder.alpha = 1.0;
+    if (self.courseTableView.isEditing == NO) {
+        if (self.courseTableView.contentOffset.y < -65) {
+            pullDownAddReminder.alpha = 1.0;
+        }
+        else {
+            pullDownAddReminder.alpha = 0.0;
+            
+        }
+        pullDownAddReminder.frame = CGRectMake(0, 64, SCREEN_WIDTH, -scrollView.contentOffset.y - 64);
+        
     }
-    else {
-        pullDownAddReminder.alpha = 0.0;
-
-    }
-    pullDownAddReminder.frame = CGRectMake(0, 64, self.view.frame.size.width, -scrollView.contentOffset.y - 64);
-    
     if (scrollView.contentOffset.y < -135) {
         scrollView.contentOffset = CGPointMake(0, -135);
     }
-    //NSLog(@"%f", scrollView.contentOffset.y);
 }
 
 -(void) scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
-    if (scrollView.contentOffset.y <= -135 && !addViewActive) {
-        pullDownAddReminder.alpha = 0.0;
-        addViewActive = TRUE;
-        [self addCoursePullDown];
+    if (self.courseTableView.isEditing == NO) {
+        if (scrollView.contentOffset.y <= -135 && !addViewActive) {
+            pullDownAddReminder.alpha = 0.0;
+            addViewActive = TRUE;
+            [self addCoursePullDown];
+        }
     }
-    
 }
 @end
