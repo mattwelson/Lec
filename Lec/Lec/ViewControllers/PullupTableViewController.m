@@ -60,8 +60,8 @@
 
 - (void) courseTableViewSetup
 {
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, 320, self.view.frame.size.height-64)]; // Codie HATES this bit
-    [self.tableView setContentSize:CGSizeMake(320.0f, self.view.frame.size.height-64)];
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, 320, SCREEN_HEIGHT-64)]; // Codie HATES this bit
+    [self.tableView setContentSize:CGSizeMake(320.0f, SCREEN_HEIGHT-64)];
     [self.tableView setBackgroundColor:[UIColor clearColor]];
     [self.tableView setShowsVerticalScrollIndicator:NO];
     [self.tableView setScrollEnabled:YES];

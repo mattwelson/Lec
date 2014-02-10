@@ -208,6 +208,7 @@
 
 - (void)addCourse
 {
+    [self.courseTableView scrollToRowAtIndexPath:0 atScrollPosition:0 animated:YES];
     addCourseView = [LECAddCourseView createAddCourseView];
     addCourseView.saveCourseDelegate = self;
     [self.view addSubview:addCourseView];
@@ -236,29 +237,30 @@
 }
 
 -(void)addCoursePullDown{
-    addCourseView = [LECAddCourseView createAddCourseView];
-    addCourseView.saveCourseDelegate = self;
-    addCourseView.alpha = 0.0;
-    [self.view addSubview:addCourseView];
-    
-    [addCourseView animateCourseAddView];
-
-    
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon_checkmark.png"] style:UIBarButtonItemStylePlain target:self action:@selector(saveCourse)];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon_cancel.png"] style:UIBarButtonItemStylePlain target:self action:@selector(closeSaveCourse)];
-    
-    self.courseTableView.userInteractionEnabled = NO; // disable course clicking
-    [UIView animateWithDuration:0.2
-                          delay:0.0
-                        options: UIViewAnimationOptionCurveEaseIn
-                     animations:^{
-                         addCourseView.alpha = 1.0;
-                         self.courseTableView.frame = CGRectMake(0, 100, SCREEN_WIDTH, SCREEN_HEIGHT);
-                     }
-                     completion:^(BOOL finished){
-                     }];
-    
-
+    if (self.courseTableView.isEditing == NO) {
+        addCourseView = [LECAddCourseView createAddCourseView];
+        addCourseView.saveCourseDelegate = self;
+        addCourseView.alpha = 0.0;
+        [self.view addSubview:addCourseView];
+        
+        [addCourseView animateCourseAddView];
+        
+        
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon_checkmark.png"] style:UIBarButtonItemStylePlain target:self action:@selector(saveCourse)];
+        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon_cancel.png"] style:UIBarButtonItemStylePlain target:self action:@selector(closeSaveCourse)];
+        
+        self.courseTableView.userInteractionEnabled = NO; // disable course clicking
+        [UIView animateWithDuration:0.2
+                              delay:0.0
+                            options: UIViewAnimationOptionCurveEaseIn
+                         animations:^{
+                             addCourseView.alpha = 1.0;
+                             self.courseTableView.frame = CGRectMake(0, 100, SCREEN_WIDTH, SCREEN_HEIGHT);
+                         }
+                         completion:^(BOOL finished){
+                         }];
+        
+    }
 }
 
 
@@ -312,28 +314,30 @@
 //As subclass of tableview will get called when tableview starts scrolling.
 -(void) scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    if (self.courseTableView.contentOffset.y < -65) {
-        pullDownAddReminder.alpha = 1.0;
+    if (self.courseTableView.isEditing == NO) {
+        if (self.courseTableView.contentOffset.y < -65) {
+            pullDownAddReminder.alpha = 1.0;
+        }
+        else {
+            pullDownAddReminder.alpha = 0.0;
+            
+        }
+        pullDownAddReminder.frame = CGRectMake(0, 64, SCREEN_WIDTH, -scrollView.contentOffset.y - 64);
+        
     }
-    else {
-        pullDownAddReminder.alpha = 0.0;
-
-    }
-    pullDownAddReminder.frame = CGRectMake(0, 64, SCREEN_WIDTH, -scrollView.contentOffset.y - 64);
-    
     if (scrollView.contentOffset.y < -135) {
         scrollView.contentOffset = CGPointMake(0, -135);
     }
-    //NSLog(@"%f", scrollView.contentOffset.y);
 }
 
 -(void) scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
-    if (scrollView.contentOffset.y <= -135 && !addViewActive) {
-        pullDownAddReminder.alpha = 0.0;
-        addViewActive = TRUE;
-        [self addCoursePullDown];
+    if (self.courseTableView.isEditing == NO) {
+        if (scrollView.contentOffset.y <= -135 && !addViewActive) {
+            pullDownAddReminder.alpha = 0.0;
+            addViewActive = TRUE;
+            [self addCoursePullDown];
+        }
     }
-    
 }
 @end
