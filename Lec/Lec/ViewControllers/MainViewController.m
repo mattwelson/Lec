@@ -361,10 +361,7 @@
 }
 
 -(void)bannerView:(ADBannerView *)banner didFailToReceiveAdWithError:(NSError *)error{
-    //[self.courseTableView setContentInset:UIEdgeInsetsMake(64, 0, 50, 0)];
-    [self.courseTableView setContentInset:UIEdgeInsetsMake(64, 0, 0, 0)];
     adBanner.frame = CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, 0);
-
 }
 
 
