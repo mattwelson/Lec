@@ -21,6 +21,7 @@
     UILabel *pullDownAddReminder;
     NSArray *visibleCells;
     int loadedCells;
+    ADBannerView *adBanner;
 }
 
 @end
@@ -41,10 +42,11 @@
 {
     // Do any additional setup after loading the view from its nib.
     [super viewDidLoad];
-    [self courseTableViewSetup];
     [self navagationTopBar];
+    [self courseTableViewSetup];
     [self pullDownReminderSetup];
     [self adSetUp];
+
 }
 
 
@@ -66,7 +68,10 @@
 }
 
 -(void)adSetUp {
-    self.canDisplayBannerAds = YES;
+ //   self.canDisplayBannerAds = YES;
+    adBanner = [[ADBannerView alloc]initWithAdType:ADAdTypeBanner];
+    adBanner.delegate = self;
+    [self.view addSubview:adBanner];
 }
 
 
@@ -111,8 +116,6 @@
 {
     // height hack, need to write a method that reloads correctly when the viewDidAppear whne we figure out whats causing it.
     self.courseTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
-    //self.courseTableView.contentSize = CGSizeMake(SCREEN_WIDTH, SCREEN_HEIGHT-50);
-    [self.courseTableView setContentInset:UIEdgeInsetsMake(0, 0, 50, 0)];
     [self.courseTableView setScrollEnabled:YES];
     [self.courseTableView setNeedsDisplay];
     [self.view addSubview:self.courseTableView];
@@ -330,8 +333,8 @@
             
         }
         pullDownAddReminder.frame = CGRectMake(0, 64, SCREEN_WIDTH, -scrollView.contentOffset.y - 64);
-        
     }
+    
     if (scrollView.contentOffset.y < -135) {
         scrollView.contentOffset = CGPointMake(0, -135);
     }
@@ -347,4 +350,22 @@
         }
     }
 }
+
+#pragma mark Ad Banner Delegates
+
+
+-(void)bannerViewDidLoadAd:(ADBannerView *)banner{
+    adBanner.frame = CGRectMake(0, SCREEN_HEIGHT-50, SCREEN_WIDTH, 50);
+    [self.courseTableView setContentInset:UIEdgeInsetsMake(64, 0, 50, 0)];
+
+}
+
+-(void)bannerView:(ADBannerView *)banner didFailToReceiveAdWithError:(NSError *)error{
+    //[self.courseTableView setContentInset:UIEdgeInsetsMake(64, 0, 50, 0)];
+    [self.courseTableView setContentInset:UIEdgeInsetsMake(64, 0, 0, 0)];
+    adBanner.frame = CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, 0);
+
+}
+
+
 @end
