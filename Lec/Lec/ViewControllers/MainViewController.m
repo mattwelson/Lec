@@ -44,6 +44,7 @@
     [self courseTableViewSetup];
     [self navagationTopBar];
     [self pullDownReminderSetup];
+    [self adSetUp];
 }
 
 
@@ -62,6 +63,10 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)adSetUp {
+    self.canDisplayBannerAds = YES;
 }
 
 
@@ -106,6 +111,8 @@
 {
     // height hack, need to write a method that reloads correctly when the viewDidAppear whne we figure out whats causing it.
     self.courseTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+    //self.courseTableView.contentSize = CGSizeMake(SCREEN_WIDTH, SCREEN_HEIGHT-50);
+    [self.courseTableView setContentInset:UIEdgeInsetsMake(0, 0, 50, 0)];
     [self.courseTableView setScrollEnabled:YES];
     [self.courseTableView setNeedsDisplay];
     [self.view addSubview:self.courseTableView];

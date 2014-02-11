@@ -9,6 +9,8 @@
 
 
 #import <UIKit/UIKit.h>
+#import <iAd/iAd.h>
+
 #import "LECHomeViewModel.h"
 
 #import "LECAddCourseView.h"
@@ -17,7 +19,7 @@
 //#import "LECIconCollectionView.h"
 
 
-@interface MainViewController : UIViewController<AddCourseDelegate,UITableViewDelegate, UITableViewDataSource,UICollectionViewDelegateFlowLayout>
+@interface MainViewController : UIViewController<AddCourseDelegate,UITableViewDelegate, UITableViewDataSource,UICollectionViewDelegateFlowLayout, ADBannerViewDelegate>
 
 
 @property UITableView *courseTableView;

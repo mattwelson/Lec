@@ -21,6 +21,7 @@
 		0BA86AB818925F1800805240 /* LECColorCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BA86AB718925F1800805240 /* LECColorCollectionView.m */; };
 		730DABD418A500C000DFE3E7 /* LECParallaxService.m in Sources */ = {isa = PBXBuildFile; fileRef = 730DABD318A500C000DFE3E7 /* LECParallaxService.m */; };
 		7318CDA11898AEFD002E23A0 /* LECHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7318CDA01898AEFD002E23A0 /* LECHeaderView.m */; };
+		733C9BC318A9E905007E92B6 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 733C9BC218A9E905007E92B6 /* iAd.framework */; };
 		738FB164189CA1D200DBF8F8 /* LECAddCourseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 738FB163189CA1D200DBF8F8 /* LECAddCourseView.m */; };
 		738FB167189DE05200DBF8F8 /* LECIconCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 738FB166189DE05200DBF8F8 /* LECIconCollectionView.m */; };
 		738FB16C189DF33200DBF8F8 /* subject_finance.png in Resources */ = {isa = PBXBuildFile; fileRef = 738FB168189DF33200DBF8F8 /* subject_finance.png */; };
@@ -110,6 +111,7 @@
 		7318CD9F1898AEFD002E23A0 /* LECHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LECHeaderView.h; path = Views/LECHeaderView.h; sourceTree = "<group>"; };
 		7318CDA01898AEFD002E23A0 /* LECHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LECHeaderView.m; path = Views/LECHeaderView.m; sourceTree = "<group>"; };
 		73275013188BC5D400F5CB04 /* LECDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LECDefines.h; sourceTree = "<group>"; };
+		733C9BC218A9E905007E92B6 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 		738FB162189CA1D200DBF8F8 /* LECAddCourseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LECAddCourseView.h; sourceTree = "<group>"; };
 		738FB163189CA1D200DBF8F8 /* LECAddCourseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LECAddCourseView.m; sourceTree = "<group>"; };
 		738FB165189DE05200DBF8F8 /* LECIconCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LECIconCollectionView.h; sourceTree = "<group>"; };
@@ -196,6 +198,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				733C9BC318A9E905007E92B6 /* iAd.framework in Frameworks */,
 				C96BCA21189CACC500D5E7FD /* AVFoundation.framework in Frameworks */,
 				C9B0C5DD187FBE7F002D4A63 /* CoreGraphics.framework in Frameworks */,
 				C9B0C5E1187FBE7F002D4A63 /* CoreData.framework in Frameworks */,
@@ -399,6 +402,7 @@
 		C9B0C5D9187FBE7F002D4A63 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				733C9BC218A9E905007E92B6 /* iAd.framework */,
 				C96BCA20189CACC500D5E7FD /* AVFoundation.framework */,
 				C9B0C5DA187FBE7F002D4A63 /* Foundation.framework */,
 				C9B0C5DC187FBE7F002D4A63 /* CoreGraphics.framework */,
