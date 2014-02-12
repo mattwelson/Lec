@@ -40,6 +40,7 @@ static LECIconService *sharedService;
 -(UIImage *) iconFor:(NSString *)iconName{
     NSString *iconString = [[self iconDictionary] valueForKey:iconName];
     UIImage *iconImg = [UIImage imageNamed:iconString];
+    iconImg = [iconImg imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     return iconImg;
 }
 

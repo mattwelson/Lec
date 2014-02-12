@@ -107,6 +107,7 @@
     iconPickerButton = [[UIButton alloc]initWithFrame:CGRectMake(9, 10, 32, 0)];
     //iconPickerButton.backgroundColor = [UIColor blackColor];
     iconPickerButton.alpha = 0.0;
+    iconPickerButton.tintColor = [UIColor lightGrayColor];
     [iconPickerButton addTarget:Nil action:@selector(iconViewAppear) forControlEvents:UIControlEventTouchDown];
     [iconButtonView addSubview:iconPickerButton];
     
