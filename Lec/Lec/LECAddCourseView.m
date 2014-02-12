@@ -247,4 +247,9 @@
     return NO;
 }
 
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    
+}
+
 @end

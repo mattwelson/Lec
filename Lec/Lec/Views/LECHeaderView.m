@@ -46,9 +46,9 @@
         
         if(ANIMATIONS_ON) {
             [[LECAnimationService sharedAnimationService] addPop:subjectImg withSpeed:1.0 withDelay:0.0];
-            [[LECAnimationService sharedAnimationService] addAlphaToView:subjectImg withDelay:0.0];
-            [[LECAnimationService sharedAnimationService] addAlphaToView:titleLabel withDelay:0.0];
-            [[LECAnimationService sharedAnimationService] addAlphaToView:descriptionLabel withDelay:0.0];
+            [[LECAnimationService sharedAnimationService] addAlphaToView:subjectImg withSpeed:0.5 withDelay:0.0];
+            [[LECAnimationService sharedAnimationService] addAlphaToView:titleLabel withSpeed:0.5 withDelay:0.1];
+            [[LECAnimationService sharedAnimationService] addAlphaToView:descriptionLabel withSpeed:0.5 withDelay:0.2];
         }
         
         if(PARALLAX_ON) {

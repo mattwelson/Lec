@@ -49,8 +49,8 @@ static LECAnimationService *sharedService;
     
     [UIView animateWithDuration:speed
                           delay:delay
-         usingSpringWithDamping:0.6
-          initialSpringVelocity:0.1
+         usingSpringWithDamping:0.4
+          initialSpringVelocity:0.5
                         options:UIViewAnimationOptionLayoutSubviews
                      animations:^{
                          view.frame = originalFrame;
@@ -61,11 +61,11 @@ static LECAnimationService *sharedService;
     
 }
 
--(void)addAlphaToView:(UIView *)view withDelay:(double)delay{
+-(void)addAlphaToView:(UIView *)view withSpeed:(double)speed withDelay:(double)delay{
     
     view.alpha = 0.0;
     
-    [UIView animateWithDuration:0.5 delay:delay options:UIViewAnimationOptionLayoutSubviews animations:^{
+    [UIView animateWithDuration:speed delay:delay options:UIViewAnimationOptionLayoutSubviews animations:^{
         view.alpha = 1.0;
         
     }completion:^(BOOL finished) {

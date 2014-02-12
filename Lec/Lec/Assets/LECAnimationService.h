@@ -15,7 +15,7 @@
 
 -(void)addSpringAnimationToView:(UIView *)view withSpeed:(double)speed withDelay:(double)delay withDamping:(double)damping withVelocity:(double)velocity withDirectionFromLeft:(BOOL)direction;
 -(void)addPop:(UIView *)view withSpeed:(double)speed withDelay:(double)delay;
--(void)addAlphaToView:(UIView *)view withDelay:(double)delay;
+-(void)addAlphaToView:(UIView *)view withSpeed:(double)speed withDelay:(double)delay;
 -(void)addAnimateHeaderView:(UIView *)view withSpeed:(double)speed;
 
 @end
