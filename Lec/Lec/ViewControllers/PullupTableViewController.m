@@ -8,6 +8,7 @@
 
 #import "PullupTableViewController.h"
 #import "LECImportHeader.h"
+#import "LECAnimationService.h"
 
 @interface PullupTableViewController ()
 
@@ -97,6 +98,20 @@
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return section == contentSection ? [[self tableData] count] : 1;
+}
+
+-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (ANIMATIONS_ON) {
+        if (visibleCells == NULL) {
+            visibleCells = [self.tableView indexPathsForVisibleRows];
+        }
+        if ([visibleCells containsObject:indexPath] && loadedCells < visibleCells.count){
+            double delay = ((loadedCells-1)*0.05);
+            [[LECAnimationService sharedAnimationService] addSpringAnimationToView:cell.contentView withSpeed:0.8 withDelay:delay withDamping:0.7 withVelocity:0.1 withDirectionFromLeft:NO];
+            [[LECAnimationService sharedAnimationService]addAlphaToView:cell.contentView withDelay:delay];
+            loadedCells++;
+        }
+    }
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

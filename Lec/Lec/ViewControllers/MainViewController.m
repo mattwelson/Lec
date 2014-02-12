@@ -150,7 +150,7 @@
         if ([visibleCells containsObject:indexPath] && loadedCells < visibleCells.count){
             double delay = 0.6+(loadedCells*0.1);
             [[LECAnimationService sharedAnimationService] addAlphaToView:cell.backgroundView withDelay:delay];
-            [[LECAnimationService sharedAnimationService] addSpringAnimationToView:cell.contentView withDelay:delay];
+            [[LECAnimationService sharedAnimationService] addSpringAnimationToView:cell.contentView withSpeed:1.0 withDelay:delay withDamping:0.6 withVelocity:0.1 withDirectionFromLeft:YES];
            //delay 0.6+(loadedCells*0.1)
             loadedCells++;
         }

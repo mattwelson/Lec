@@ -8,6 +8,7 @@
 
 #import "LECHeaderView.h"
 #import "LECParallaxService.h"
+#import "LECAnimationService.h"
 
 
 @implementation LECHeaderView{
@@ -43,15 +44,14 @@
         descriptionLabel.textColor = [UIColor whiteColor];
         [self addSubview:descriptionLabel];
         
+        if(ANIMATIONS_ON) {
+            [[LECAnimationService sharedAnimationService] addPop:subjectImg withSpeed:1.0 withDelay:0.0];
+            [[LECAnimationService sharedAnimationService] addAlphaToView:subjectImg withDelay:0.0];
+            [[LECAnimationService sharedAnimationService] addAlphaToView:titleLabel withDelay:0.0];
+            [[LECAnimationService sharedAnimationService] addAlphaToView:descriptionLabel withDelay:0.0];
+        }
+        
         if(PARALLAX_ON) {
-//            NSArray *subviews = [self subviews];
-//            for (UIView *subview in subviews) {
-//                if (subview == titleLabel) {
-//                    [[LECParallaxService sharedParallaxService]addParallaxToView:subview strength:2];
-//                }
-//                else {
-//                    [[LECParallaxService sharedParallaxService]addParallaxToView:subview strength:1];
-//                }
             [[LECParallaxService sharedParallaxService]addParallaxToView:subjectImg strength:1];
             [[LECParallaxService sharedParallaxService]addParallaxToView:titleLabel strength:2];
             [[LECParallaxService sharedParallaxService]addParallaxToView:descriptionLabel strength:1];
