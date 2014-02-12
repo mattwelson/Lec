@@ -21,6 +21,7 @@
 		0BA86AB818925F1800805240 /* LECColorCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BA86AB718925F1800805240 /* LECColorCollectionView.m */; };
 		730DABD418A500C000DFE3E7 /* LECParallaxService.m in Sources */ = {isa = PBXBuildFile; fileRef = 730DABD318A500C000DFE3E7 /* LECParallaxService.m */; };
 		7318CDA11898AEFD002E23A0 /* LECHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7318CDA01898AEFD002E23A0 /* LECHeaderView.m */; };
+		733C9BC618AAEE57007E92B6 /* LECAnimationService.m in Sources */ = {isa = PBXBuildFile; fileRef = 733C9BC518AAEE57007E92B6 /* LECAnimationService.m */; };
 		738FB164189CA1D200DBF8F8 /* LECAddCourseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 738FB163189CA1D200DBF8F8 /* LECAddCourseView.m */; };
 		738FB167189DE05200DBF8F8 /* LECIconCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 738FB166189DE05200DBF8F8 /* LECIconCollectionView.m */; };
 		738FB16C189DF33200DBF8F8 /* subject_finance.png in Resources */ = {isa = PBXBuildFile; fileRef = 738FB168189DF33200DBF8F8 /* subject_finance.png */; };
@@ -110,6 +111,8 @@
 		7318CD9F1898AEFD002E23A0 /* LECHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LECHeaderView.h; path = Views/LECHeaderView.h; sourceTree = "<group>"; };
 		7318CDA01898AEFD002E23A0 /* LECHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LECHeaderView.m; path = Views/LECHeaderView.m; sourceTree = "<group>"; };
 		73275013188BC5D400F5CB04 /* LECDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LECDefines.h; sourceTree = "<group>"; };
+		733C9BC418AAEE57007E92B6 /* LECAnimationService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LECAnimationService.h; path = Assets/LECAnimationService.h; sourceTree = "<group>"; };
+		733C9BC518AAEE57007E92B6 /* LECAnimationService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LECAnimationService.m; path = Assets/LECAnimationService.m; sourceTree = "<group>"; };
 		738FB162189CA1D200DBF8F8 /* LECAddCourseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LECAddCourseView.h; sourceTree = "<group>"; };
 		738FB163189CA1D200DBF8F8 /* LECAddCourseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LECAddCourseView.m; sourceTree = "<group>"; };
 		738FB165189DE05200DBF8F8 /* LECIconCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LECIconCollectionView.h; sourceTree = "<group>"; };
@@ -299,6 +302,8 @@
 				C96BCA1E189CAC4800D5E7FD /* LECAudioService.m */,
 				730DABD218A500C000DFE3E7 /* LECParallaxService.h */,
 				730DABD318A500C000DFE3E7 /* LECParallaxService.m */,
+				733C9BC418AAEE57007E92B6 /* LECAnimationService.h */,
+				733C9BC518AAEE57007E92B6 /* LECAnimationService.m */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -622,6 +627,7 @@
 				C9B0C5E9187FBE7F002D4A63 /* main.m in Sources */,
 				C9B0C5F0187FBE7F002D4A63 /* Lec.xcdatamodeld in Sources */,
 				8BE7581D188B48DD007B6C02 /* LECTableView.m in Sources */,
+				733C9BC618AAEE57007E92B6 /* LECAnimationService.m in Sources */,
 				738FB167189DE05200DBF8F8 /* LECIconCollectionView.m in Sources */,
 				C9605CAB1889F4B800F3DE57 /* LECBaseViewModel.m in Sources */,
 				0B6BD5951889158500A7D8F9 /* PlaybackViewController.m in Sources */,

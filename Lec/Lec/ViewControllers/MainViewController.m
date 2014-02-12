@@ -8,6 +8,7 @@
 
 #import "MainViewController.h"
 #import "LECHeaderView.h"
+#import "LECAnimationService.h"
 
 @interface MainViewController (){
     // UI elements only
@@ -147,22 +148,10 @@
             visibleCells = [self.courseTableView indexPathsForVisibleRows];
         }
         if ([visibleCells containsObject:indexPath] && loadedCells < visibleCells.count){
-            cell.alpha = 0.0;
-            
-            cell.contentView.frame = CGRectMake(-SCREEN_WIDTH, 0, SCREEN_WIDTH, 101);
-            //Leave the 0.6 delay in! The real iPhone loads stuff during the splash screen so we want to start it a little later.
-            [UIView animateWithDuration:1.0
-                                  delay:0.6+(loadedCells*0.1)
-                 usingSpringWithDamping:0.6
-                  initialSpringVelocity:0.1
-                                options:UIViewAnimationOptionLayoutSubviews
-                             animations:^{
-                                 cell.alpha = 1.0;
-                                 cell.contentView.frame = CGRectMake(0, 0, SCREEN_WIDTH, 101);
-                             }
-                             completion:^(BOOL finished){
-                                 NULL;
-                             }];
+            double delay = 0.6+(loadedCells*0.1);
+            [[LECAnimationService sharedAnimationService] addAlphaToView:cell.backgroundView withDelay:delay];
+            [[LECAnimationService sharedAnimationService] addSpringAnimationToView:cell.contentView withDelay:delay];
+           //delay 0.6+(loadedCells*0.1)
             loadedCells++;
         }
     }
