@@ -2,11 +2,12 @@
 //  Course.m
 //  Lec
 //
-//  Created by Matt Welson on 18/01/14.
+//  Created by Julin Le-Ngoc on 14/02/14.
 //  Copyright (c) 2014 South45. All rights reserved.
 //
 
 #import "Course.h"
+#import "Lecture.h"
 
 
 @implementation Course
@@ -15,6 +16,7 @@
 @dynamic courseDescription;
 @dynamic courseName;
 @dynamic icon;
+@dynamic courseIndex;
 @dynamic lectures;
 
 @end

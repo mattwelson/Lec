@@ -149,7 +149,7 @@
         }
         if ([visibleCells containsObject:indexPath] && loadedCells < visibleCells.count){
             double delay = 0.6+(loadedCells*0.1);
-            [[LECAnimationService sharedAnimationService] addAlphaToView:cell.backgroundView withSpeed:0.5 withDelay:delay];
+            [[LECAnimationService sharedAnimationService] addAlphaToView:cell.backgroundView withSpeed:0.35 withDelay:delay];
             [[LECAnimationService sharedAnimationService] addSpringAnimationToView:cell.contentView withSpeed:1.0 withDelay:delay withDamping:0.6 withVelocity:0.1 withDirectionFromLeft:YES];
            //delay 0.6+(loadedCells*0.1)
             loadedCells++;
@@ -187,6 +187,12 @@
 
 //TODO: Update logic to save the row reordering
 -(void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath{
+    Course *course = [self.viewModel.tableData objectAtIndex:sourceIndexPath.row];
+    
+    [self.viewModel.tableData removeObjectAtIndex:sourceIndexPath.row];
+    [self.viewModel.tableData insertObject:course atIndex:destinationIndexPath.row];
+    
+    [self.viewModel updateCourseIndexes];
     
 }
 
@@ -265,6 +271,7 @@
     course.courseDescription = courseDescriptionText;
     course.colour = colour;
     course.icon = icon;
+    course.courseIndex = [NSNumber numberWithInt:[self.viewModel.tableData count]];
     
     [[LECDatabaseService sharedDBService] saveChanges]; // saves changes made to course scratch pad
     
