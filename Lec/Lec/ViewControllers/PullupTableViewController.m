@@ -8,6 +8,7 @@
 
 #import "PullupTableViewController.h"
 #import "LECImportHeader.h"
+#import "LECAnimationService.h"
 
 @interface PullupTableViewController ()
 
@@ -39,8 +40,9 @@
     self.navigationItem.title = [[self viewModelFromSubclass] navTitle];
     
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
+    navBar.shadowImage = [UIImage new];
     
-    [UIView animateWithDuration:0.05
+    [UIView animateWithDuration:0.1
                           delay:0.0
                         options: UIViewAnimationOptionTransitionCrossDissolve
                      animations:^{
@@ -53,15 +55,14 @@
                      }
                      completion:^(BOOL finished){
                          //self.navigationController.navigationBar.alpha = 1.0;
-                         navBar.shadowImage = [UIImage new];
                      }];
     
 }
 
 - (void) courseTableViewSetup
 {
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, 320, self.view.frame.size.height-64)]; // Codie HATES this bit
-    [self.tableView setContentSize:CGSizeMake(320.0f, self.view.frame.size.height-64)];
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, 320, SCREEN_HEIGHT-64)]; // Codie HATES this bit
+    [self.tableView setContentSize:CGSizeMake(320.0f, SCREEN_HEIGHT-64)];
     [self.tableView setBackgroundColor:[UIColor clearColor]];
     [self.tableView setShowsVerticalScrollIndicator:NO];
     [self.tableView setScrollEnabled:YES];
@@ -84,41 +85,45 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self didSelectCellAt:indexPath.row];
-}
-
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    if (section == 0 || section == 2) // the header or our empty state cell
-        return 1;
-    else
-        return [[self tableData] count];
+    if (indexPath.section == actionSection) [self actionBarPressed];
+    else [self didSelectCellAt:indexPath.row];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    return 3;
+    return noSections;
+}
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return section == contentSection ? [[self tableData] count] : 1;
+}
+
+-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (ANIMATIONS_ON) {
+        if (visibleCells == NULL) {
+            visibleCells = [self.tableView indexPathsForVisibleRows];
+        }
+        if ([visibleCells containsObject:indexPath] && loadedCells < visibleCells.count){
+            double delay = ((loadedCells-1)*0.05);
+            [[LECAnimationService sharedAnimationService] addSpringAnimationToView:cell.contentView withSpeed:0.8 withDelay:delay withDamping:0.7 withVelocity:0.1 withDirectionFromLeft:NO];
+            [[LECAnimationService sharedAnimationService]addAlphaToView:cell.contentView withSpeed:0.5 withDelay:delay];
+            loadedCells++;
+        }
+    }
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     LectureCell *cell;
     
-    if ([indexPath section] == 1) {
+    if ([indexPath section] == contentSection) {
         cell = [[LectureCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CELL_ID_LECTURE_CELL];
         LECLectureCellViewModel *cellViewModel = [[self tableData] objectAtIndex:indexPath.row];
         [cell populateFor:cellViewModel];
-    } else if (indexPath.section == 2) {
-        cell = [[LectureCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CELL_ID_ADD_CELL];
-        cell.backgroundColor = [UIColor whiteColor];
-        cell.textLabel.textColor = [UIColor lightGrayColor];
-        [cell setUserInteractionEnabled:NO];
-        if ([[self tableData] count] > 0){
-            cell.textLabel.text = @"";
-        } else {
-            cell.textLabel.text = @"Pull down to add a thing";
-        }
+    } else if (indexPath.section == actionSection) {
+        return (UITableViewCell *) actionBar;
     }
     else {
         cell = [[LectureCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CELL_ID_HEADER];
@@ -133,10 +138,20 @@
 {
     if ([indexPath section] == 0)
         return 136;
-//    if ([indexPath section] == 2 && [[self tableData] count] > 0)
-//        return 0;
-    else // either empty state cell or a typical cell
+    else
         return 75;
+}
+
+-(CGFloat) tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    return hasFooter && section == contentSection ? 75 : 0;
+}
+
+-(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+{
+    if (!(hasFooter && section == contentSection)) return nil;
+    
+    return (UIView *)actionBar;
 }
 
 -(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
@@ -150,9 +165,13 @@
 }
 
 #pragma mark Scrolling Delegates
--(void)scrollViewDidScroll:(UIScrollView *)scrollView{ // change to a different method? Not getting called enough
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView{
     [self.headerView changeAlpha:self.tableView.contentOffset.y];
     [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor colorWithWhite:1.0 alpha:-0.3+(self.tableView.contentOffset.y/100)], NSForegroundColorAttributeName, [UIFont fontWithName:DEFAULTFONT size:HEADERSIZE], NSFontAttributeName, nil]];
+    
+    if (scrollView.contentOffset.y < 0) {
+        scrollView.contentOffset = CGPointMake(0, 0);
+    }
     
 }
 
@@ -190,4 +209,8 @@
     [self abstractMethod:@"didSelectCellAt"];
 }
 
+-(void) actionBarPressed
+{
+    [self abstractMethod:@"Action bar pressed"];
+}
 @end

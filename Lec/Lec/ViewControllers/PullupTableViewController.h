@@ -8,8 +8,19 @@
 
 #import <UIKit/UIKit.h>
 @class LECHeaderView;
+@class LECActionBar;
 
 @interface PullupTableViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+{
+    // Should be over ridden by children
+    NSInteger contentSection;
+    NSInteger actionSection;
+    LECActionBar *actionBar;
+    BOOL hasFooter;
+    NSInteger noSections;
+    NSArray *visibleCells;
+    int loadedCells;
+}
 
 @property UITableView *tableView;
 @property  LECHeaderView *headerView;

@@ -13,9 +13,6 @@
 
 @property Lecture *lecture;
 
-@property BOOL hasRecording;
-@property UIImage *accessory; // to be set to either a microphone or a symbol indicating playback?
-
 +(instancetype)lectureCellVMWithLecture:(Lecture *)lecture; // a view model that represents a lecture
 
 @end

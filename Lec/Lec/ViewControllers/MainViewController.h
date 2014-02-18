@@ -23,5 +23,7 @@
 @property UITableView *courseTableView;
 //@property LECColorCollectionView *colorView;
 @property LECHomeViewModel *viewModel;
+@property (nonatomic, strong) UIDynamicAnimator *animator;
+
 
 @end

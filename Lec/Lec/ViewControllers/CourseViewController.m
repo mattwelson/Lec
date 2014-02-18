@@ -8,6 +8,7 @@
 
 #import "CourseViewController.h"
 #import "LectureCell.h"
+#import "LECActionBar.h"
 
 @interface CourseViewController (){
     LECCourseViewModel *viewModel;
@@ -27,6 +28,11 @@
         currentCourse = course;
         viewModel = [[LECCourseViewModel alloc]initWithCourse:course];
         [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent]; //sets the status bar to white
+        
+        contentSection = 2; // the section with table data
+        actionSection = 1; // the section with an action bar
+        hasFooter = NO; // if there is a footer for the content view
+        noSections = 3;
     }
     return self;
 }
@@ -120,6 +126,8 @@
     [super courseTableViewSetup];
     
     [self.tableView registerClass:[LectureCell class] forCellReuseIdentifier:CELL_ID_LECTURE_CELL];
+    
+    actionBar = [LECActionBar recordBar];
 }
 
 -(void)createHeaderView {
@@ -130,12 +138,6 @@
 - (void) addLectureView
 {
     
-}
-
-- (void) savedPressed
-{
-    [viewModel addLecture:@"Testing!@#$"];
-    [self.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning
@@ -162,8 +164,23 @@
 
 -(void) didSelectCellAt:(NSInteger)index
 {
-    Lecture *selectedLecture = [[viewModel.tableData objectAtIndex:index] lecture];
-    [self.navigationController pushViewController:[[RecordViewController alloc] initWithLecture:selectedLecture] animated:YES];
+    LECLectureCellViewModel *lectureCellViewModel = [viewModel.tableData objectAtIndex:index];
+    
+    [self.navigationController pushViewController:[[PlaybackViewController alloc] initWithLecture:lectureCellViewModel.lecture] animated:YES];
+    
+}
+
+-(void) actionBarPressed
+{
+    [viewModel addLecture:@"An intro to Lec"];
+    [self.tableView reloadData];
+    LECLectureCellViewModel *lectureCellViewModel = [viewModel.tableData objectAtIndex:0];
+    [self.navigationController pushViewController:[[RecordViewController alloc] initWithLecture:lectureCellViewModel.lecture] animated:YES];
+}
+
+-(NSInteger) numberOfSections
+{
+    return 3;
 }
 
 @end

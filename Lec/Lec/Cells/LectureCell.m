@@ -18,12 +18,12 @@
         self.courseNameLabel = [[UILabel alloc]initWithFrame:CGRectMake(20, 10, self.frame.size.width-80, 40)];
         self.courseNameLabel.textColor = [UIColor whiteColor];
         self.courseNameLabel.font = [UIFont fontWithName:DEFAULTFONT size:COURSENAMEECELLFONTSIZE];
-        [self addSubview:self.courseNameLabel];
+        [self.contentView addSubview:self.courseNameLabel];
         
         self.courseDescriptionLabel = [[UILabel alloc]initWithFrame:CGRectMake(20, 35, self.frame.size.width-80, 40)];
         self.courseDescriptionLabel.textColor = [UIColor whiteColor];
         self.courseDescriptionLabel.font = [UIFont fontWithName:DEFAULTFONT size:COURSEDESCRIPTIONCELLFONTSIZE];
-        [self addSubview:self.courseDescriptionLabel];
+        [self.contentView addSubview:self.courseDescriptionLabel];
         
         CGRect frame = [self frame];
         frame.size.height = 75;
@@ -40,12 +40,8 @@
     self.courseDescriptionLabel.textColor = [[LECColourService sharedColourService] highlightColourFor:vm.colourString];
     self.courseNameLabel.textColor = [[LECColourService sharedColourService] baseColourFor:vm.colourString];
     self.backgroundColor = [UIColor whiteColor];
-    if (!vm.hasRecording)
-    {
-        self.accessoryView = [[UIImageView alloc] initWithImage:vm.accessory];
-    } else {
-        self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    }
+    
+    self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
