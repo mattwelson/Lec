@@ -22,7 +22,14 @@
     
     [courseCellModel setColourString:[course colour]];
     
+    [course addObserver:self forKeyPath:@"colour" options:NSKeyValueObservingOptionNew context:nil];
+    
     return courseCellModel;
+}
+
+-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    
 }
 
 @end
