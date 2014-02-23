@@ -31,13 +31,23 @@ static LECDatabaseService *sharedInstance = nil;
     NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"Course" inManagedObjectContext:[self managedObjectContext]];
     [fetchRequest setEntity:entityDescription];
     
+    NSSortDescriptor *sortDescriptor =
+    [[NSSortDescriptor alloc] initWithKey:@"courseIndex"
+                                ascending:NO];
+    
+    NSArray *sortDescriptors = [[NSArray alloc]
+                                initWithObjects:sortDescriptor, nil];
+    [fetchRequest setSortDescriptors:sortDescriptors];
+    
     NSError *error;
     NSArray *courses = [[self managedObjectContext] executeFetchRequest:fetchRequest error:&error];
     if (error)
     {
         [NSException raise:@"Database exception!" format:@"Oh no"];
     }
-    return [NSMutableArray arrayWithArray:[[courses reverseObjectEnumerator] allObjects]];
+    return [NSMutableArray arrayWithArray:courses];
+    
+//  return [NSMutableArray arrayWithArray:[[courses reverseObjectEnumerator] allObjects]];
 }
 
 - (Course *) newCourseForAdding

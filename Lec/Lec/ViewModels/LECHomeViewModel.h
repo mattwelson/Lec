@@ -10,6 +10,7 @@
 
 @interface LECHomeViewModel : LECBaseViewModel
 
+-(void)updateCourseIndexes;
 -(void)deleteCourseAtIndex:(NSInteger)row;
 
 

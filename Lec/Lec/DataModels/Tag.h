@@ -2,7 +2,7 @@
 //  Tag.h
 //  Lec
 //
-//  Created by Matt Welson on 18/01/14.
+//  Created by Julin Le-Ngoc on 14/02/14.
 //  Copyright (c) 2014 South45. All rights reserved.
 //
 

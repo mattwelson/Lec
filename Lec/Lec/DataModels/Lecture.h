@@ -2,7 +2,7 @@
 //  Lecture.h
 //  Lec
 //
-//  Created by Matt Welson on 26/01/14.
+//  Created by Julin Le-Ngoc on 14/02/14.
 //  Copyright (c) 2014 South45. All rights reserved.
 //
 
@@ -13,8 +13,8 @@
 
 @interface Lecture : NSManagedObject
 
-@property (nonatomic, retain) NSNumber * lectureNumber;
 @property (nonatomic, retain) NSString * lectureName;
+@property (nonatomic, retain) NSNumber * lectureNumber;
 @property (nonatomic, retain) NSString * recordingPath;
 @property (nonatomic, retain) NSNumber * totalTime;
 @property (nonatomic, retain) Course *course;
