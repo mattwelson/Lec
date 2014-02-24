@@ -32,18 +32,26 @@ static void * localContext = &localContext;
 #pragma mark - KVO
 -(void) setupObservation
 {
+// observe course name
+// observe course description
     [self.course addObserver:self forKeyPath:NSStringFromSelector(@selector(colour)) options:NSKeyValueObservingOptionNew context:localContext];
+// observe icon
 }
 
 // Updates view model when the managed object changes (edit screen)
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
     if (context != localContext) return;
-    
+    // if course name
+       // update title text
+    // if course description
+       // update sub text
     if ([keyPath isEqualToString:NSStringFromSelector(@selector(colour))])
     {
         self.colourString = change[NSKeyValueChangeNewKey];
     }
+    // if icon
+         // update icon
 }
 
 @end
