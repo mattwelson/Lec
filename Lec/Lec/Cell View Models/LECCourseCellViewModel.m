@@ -10,6 +10,8 @@
 
 @implementation LECCourseCellViewModel
 
+static void * localContext = &localContext;
+
 +(LECCourseCellViewModel *) courseCellWith:(Course *)course
 {
     LECCourseCellViewModel *courseCellModel = [[LECCourseCellViewModel alloc] init];
@@ -22,14 +24,20 @@
     
     [courseCellModel setColourString:[course colour]];
     
-    [course addObserver:self forKeyPath:@"colour" options:NSKeyValueObservingOptionNew context:nil];
+    [course addObserver:courseCellModel forKeyPath:NSStringFromSelector(@selector(colour)) options:NSKeyValueObservingOptionNew context:localContext];
     
     return courseCellModel;
 }
 
+// Updates view model when the managed object changes (edit screen)
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
+    if (context != localContext) return;
     
+    if ([keyPath isEqualToString:NSStringFromSelector(@selector(colour))])
+    {
+        self.colourString = change[NSKeyValueChangeNewKey];
+    }
 }
 
 @end

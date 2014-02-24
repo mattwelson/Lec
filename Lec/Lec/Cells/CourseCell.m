@@ -13,6 +13,8 @@
 
 @implementation CourseCell
 
+static void * localContext = &localContext;
+
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
@@ -58,6 +60,8 @@
     self.courseDescriptionLabel.text = [vm subText];
     [[LECIconService sharedIconService] retrieveIcon:[vm icon] toView:self.iconImage];
     [[LECColourService sharedColourService] addGradientForColour:[vm colourString] toView:self.backgroundView];
+    
+    [vm addObserver:self forKeyPath:NSStringFromSelector(@selector(colourString)) options:NSKeyValueObservingOptionNew context:localContext];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
@@ -66,5 +70,15 @@
     // Configure the view for the selected state
 }
 
+#pragma mark - KVO
+-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    if (context != localContext) return;
+    
+    if ([keyPath isEqualToString:NSStringFromSelector(@selector(colourString))])
+    {
+        [[LECColourService sharedColourService] changeGradientToColour:change[NSKeyValueChangeNewKey] forView:self.backgroundView];
+    }
+}
 
 @end
