@@ -24,9 +24,15 @@ static void * localContext = &localContext;
     
     [courseCellModel setColourString:[course colour]];
     
-    [course addObserver:courseCellModel forKeyPath:NSStringFromSelector(@selector(colour)) options:NSKeyValueObservingOptionNew context:localContext];
+    [courseCellModel setupObservation];
     
     return courseCellModel;
+}
+
+#pragma mark - KVO
+-(void) setupObservation
+{
+    [self.course addObserver:self forKeyPath:NSStringFromSelector(@selector(colour)) options:NSKeyValueObservingOptionNew context:localContext];
 }
 
 // Updates view model when the managed object changes (edit screen)

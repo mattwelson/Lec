@@ -61,9 +61,10 @@ static void * localContext = &localContext;
     [[LECIconService sharedIconService] retrieveIcon:[vm icon] toView:self.iconImage];
     [[LECColourService sharedColourService] addGradientForColour:[vm colourString] toView:self.backgroundView];
     
-    [vm addObserver:self forKeyPath:NSStringFromSelector(@selector(colourString)) options:NSKeyValueObservingOptionNew context:localContext];
+    [self setupObservingOf:vm];
 }
 
+#warning Will delete if we're not using.
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
     [super setSelected:selected animated:animated];
@@ -71,8 +72,15 @@ static void * localContext = &localContext;
 }
 
 #pragma mark - KVO
+// seperated off as it's ugly as shit
+-(void) setupObservingOf:(LECCourseCellViewModel *)vm
+{
+    [vm addObserver:self forKeyPath:NSStringFromSelector(@selector(colourString)) options:NSKeyValueObservingOptionNew context:localContext];
+}
+
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
+    // sanity check to ensure subclassing hasn't screwed us over, best practice
     if (context != localContext) return;
     
     if ([keyPath isEqualToString:NSStringFromSelector(@selector(colourString))])
