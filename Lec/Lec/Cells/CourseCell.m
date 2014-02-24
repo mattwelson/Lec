@@ -75,7 +75,10 @@ static void * localContext = &localContext;
 // seperated off as it's ugly as shit
 -(void) setupObservingOf:(LECCourseCellViewModel *)vm
 {
+// observe titleText
+// observe subText
     [vm addObserver:self forKeyPath:NSStringFromSelector(@selector(colourString)) options:NSKeyValueObservingOptionNew context:localContext];
+// observe icon
 }
 
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
@@ -83,10 +86,13 @@ static void * localContext = &localContext;
     // sanity check to ensure subclassing hasn't screwed us over, best practice
     if (context != localContext) return;
     
+// if titleText then change courseNameLabel.text to match
+// if subText then change courseDescriptionLabel.text to match
     if ([keyPath isEqualToString:NSStringFromSelector(@selector(colourString))])
     {
         [[LECColourService sharedColourService] changeGradientToColour:change[NSKeyValueChangeNewKey] forView:self.backgroundView];
     }
+// if icon then change iconImage to match!
 }
 
 @end
