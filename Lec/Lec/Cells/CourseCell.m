@@ -78,6 +78,7 @@ static void * localContext = &localContext;
 // observe titleText
 // observe subText
     [vm addObserver:self forKeyPath:NSStringFromSelector(@selector(colourString)) options:NSKeyValueObservingOptionNew context:localContext];
+    
 // observe icon
 }
 

@@ -20,6 +20,8 @@
     UITextField *newDescription;
     NSString *newColor;
     NSString *newIcon;
+    UIButton *pastSelectedButton;
+    bool iconMaySelect;
 }
 
 @end
@@ -57,6 +59,7 @@
 
 -(void) courseEdit
 {
+    iconMaySelect = FALSE;
     newIcon = currentCourse.icon;
     editView = [[UIView alloc] initWithFrame:self.view.bounds];
     [[LECColourService sharedColourService] addGradientForColour:[currentCourse colour] toView:editView];
@@ -118,14 +121,17 @@
         tmp = [UIButton buttonWithType:UIButtonTypeCustom];
         tmp.frame = CGRectMake(
                                i*xOffset+lineSpace-20,
-                               yOffset-25,
+                               yOffset,
                                size.width,
                                size.height);
         NSLog(@"%f, %f, %f, %f" , xOffset * (size.width + lineSpace),
               yOffset * (size.height + lineSpace),
               size.width,
               size.height);
-        [[LECIconService sharedIconService] addIcon:iconNames[i] toView:tmp];
+        UIImageView *tmpImageView = [[UIImageView alloc]init];
+        tmpImageView = [[LECIconService sharedIconService] retrieveIcon:iconNames[i] toView:tmpImageView];
+        [tmp setImage:tmpImageView.image forState:UIControlStateNormal];
+        tmp.tintColor = [[UIColor whiteColor] colorWithAlphaComponent:0.5];
         [cButtonArray addObject:tmp];
         tmp.tag = i;
         tmp.showsTouchWhenHighlighted = YES;
@@ -176,9 +182,15 @@
 
 - (IBAction)iconSelected:(id)sender
 {
+    if (iconMaySelect) {
+        pastSelectedButton.tintColor = [[UIColor whiteColor] colorWithAlphaComponent:0.5];
+    }
+    iconMaySelect = TRUE;
     NSInteger i = ((UIButton *)sender).tag;
     NSLog(@"%@",iconNames[i]);
     newIcon = iconNames[i];
+    ((UIButton *)sender).tintColor = [[UIColor whiteColor] colorWithAlphaComponent:1];
+    pastSelectedButton = ((UIButton *)sender);
     
 }
 
