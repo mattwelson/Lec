@@ -166,8 +166,8 @@
 {
     currentCourse.courseName = newCourseName.text;
     currentCourse.courseDescription = newDescription.text;
-    currentCourse.colour = newColor;
-    currentCourse.icon = newIcon;
+    if (newColor)currentCourse.colour = newColor;
+    if (newIcon) currentCourse.icon = newIcon;
     [[LECDatabaseService sharedDBService] saveChanges];
     [editView removeFromSuperview];
     [self.navigationController popViewControllerAnimated:YES];

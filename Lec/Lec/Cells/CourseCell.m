@@ -13,6 +13,8 @@
 
 @implementation CourseCell
 
+static void * localContext = &localContext;
+
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
@@ -58,13 +60,39 @@
     self.courseDescriptionLabel.text = [vm subText];
     [[LECIconService sharedIconService] retrieveIcon:[vm icon] toView:self.iconImage];
     [[LECColourService sharedColourService] addGradientForColour:[vm colourString] toView:self.backgroundView];
+    
+    [self setupObservingOf:vm];
 }
 
+#warning Will delete if we're not using.
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
     [super setSelected:selected animated:animated];
     // Configure the view for the selected state
 }
 
+#pragma mark - KVO
+// seperated off as it's ugly as shit
+-(void) setupObservingOf:(LECCourseCellViewModel *)vm
+{
+// observe titleText
+// observe subText
+    [vm addObserver:self forKeyPath:NSStringFromSelector(@selector(colourString)) options:NSKeyValueObservingOptionNew context:localContext];
+// observe icon
+}
+
+-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    // sanity check to ensure subclassing hasn't screwed us over, best practice
+    if (context != localContext) return;
+    
+// if titleText then change courseNameLabel.text to match
+// if subText then change courseDescriptionLabel.text to match
+    if ([keyPath isEqualToString:NSStringFromSelector(@selector(colourString))])
+    {
+        [[LECColourService sharedColourService] changeGradientToColour:change[NSKeyValueChangeNewKey] forView:self.backgroundView];
+    }
+// if icon then change iconImage to match!
+}
 
 @end
