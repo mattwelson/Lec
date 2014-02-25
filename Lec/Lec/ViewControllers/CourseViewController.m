@@ -50,7 +50,7 @@
 - (void) navigationTopBar
 {
     [super navigationTopBar];
-    UIImage *plusImg = [UIImage imageNamed:@"nav_add_btn.png"];
+    UIImage *plusImg = [UIImage imageNamed:@"nav_settings_btn.png"];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:plusImg style:UIBarButtonItemStylePlain target:self action:@selector(courseEdit)];
 }
 
@@ -74,7 +74,7 @@
     [colorView setContentSize:CGSizeMake(680, 100)];
     
     UIScrollView *iconView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 350, 320, 100)];
-    [iconView setContentSize:CGSizeMake(680, 100)];
+    [iconView setContentSize:CGSizeMake(1000, 100)];
     
     NSLog(@"%f, %f, %f, %f" , colorView.bounds.origin.x, colorView.bounds.origin.y, colorView.bounds.size.width, colorView.bounds.size.height);
     [colorView setBackgroundColor:[[UIColor blackColor] colorWithAlphaComponent:0.5f]];
@@ -107,6 +107,7 @@
         tmp.layer.borderWidth = 0;
         [cButtonArray addObject:tmp];
         tmp.tag = i;
+        tmp.showsTouchWhenHighlighted = YES;
         [tmp addTarget:self action:@selector(colourSelected:) forControlEvents:UIControlEventTouchUpInside];
         
         [colorView addSubview:tmp];
@@ -127,8 +128,8 @@
         [[LECIconService sharedIconService] addIcon:iconNames[i] toView:tmp];
         [cButtonArray addObject:tmp];
         tmp.tag = i;
+        tmp.showsTouchWhenHighlighted = YES;
         [tmp addTarget:self action:@selector(iconSelected:) forControlEvents:UIControlEventTouchUpInside];
-        
         [iconView addSubview:tmp];
     }
     

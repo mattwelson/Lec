@@ -42,8 +42,9 @@
 {
     // Do any additional setup after loading the view from its nib.
     [super viewDidLoad];
-    [self courseTableViewSetup];
     [self navagationTopBar];
+
+    [self courseTableViewSetup];
     [self pullDownReminderSetup];
 }
 
