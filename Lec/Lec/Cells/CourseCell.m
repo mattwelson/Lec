@@ -75,23 +75,39 @@ static void * localContext = &localContext;
 // seperated off as it's ugly as shit
 -(void) setupObservingOf:(LECCourseCellViewModel *)vm
 {
-// observe titleText
-// observe subText
     [vm addObserver:self forKeyPath:NSStringFromSelector(@selector(colourString)) options:NSKeyValueObservingOptionNew context:localContext];
-    
-// observe icon
+    [vm addObserver:self forKeyPath:NSStringFromSelector(@selector(icon)) options:NSKeyValueObservingOptionNew context:localContext];
+    [vm addObserver:self forKeyPath:NSStringFromSelector(@selector(titleText)) options:NSKeyValueObservingOptionNew context:localContext];
+    [vm addObserver:self forKeyPath:NSStringFromSelector(@selector(subText)) options:NSKeyValueObservingOptionNew context:localContext];
+
 }
 
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
     // sanity check to ensure subclassing hasn't screwed us over, best practice
     if (context != localContext) return;
-    
-// if titleText then change courseNameLabel.text to match
-// if subText then change courseDescriptionLabel.text to match
     if ([keyPath isEqualToString:NSStringFromSelector(@selector(colourString))])
     {
         [[LECColourService sharedColourService] changeGradientToColour:change[NSKeyValueChangeNewKey] forView:self.backgroundView];
+
+    }
+    
+    if ([keyPath isEqualToString:NSStringFromSelector(@selector(icon))])
+    {
+        [[LECIconService sharedIconService] retrieveIcon:change[NSKeyValueChangeNewKey] toView:self.iconImage];
+        
+    }
+    
+    if ([keyPath isEqualToString:NSStringFromSelector(@selector(titleText))])
+    {
+        self.courseNameLabel.text = change[NSKeyValueChangeNewKey];
+        [self.courseNameLabel setNeedsDisplay];
+    }
+    
+    if ([keyPath isEqualToString:NSStringFromSelector(@selector(subText))])
+    {
+        self.courseDescriptionLabel.text = change[NSKeyValueChangeNewKey];
+        [self.courseDescriptionLabel setNeedsDisplay];
     }
 // if icon then change iconImage to match!
 }

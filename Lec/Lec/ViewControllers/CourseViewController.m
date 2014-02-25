@@ -173,6 +173,7 @@
 {
     currentCourse.courseName = newCourseName.text;
     currentCourse.courseDescription = newDescription.text;
+    
     if (newColor)currentCourse.colour = newColor;
     if (newIcon) currentCourse.icon = newIcon;
     [[LECDatabaseService sharedDBService] saveChanges];
