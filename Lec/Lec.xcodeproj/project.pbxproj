@@ -41,6 +41,8 @@
 		8BE75829188B508D007B6C02 /* icon_cancel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BE75825188B508D007B6C02 /* icon_cancel@2x.png */; };
 		8BE7582A188B508D007B6C02 /* icon_checkmark.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BE75826188B508D007B6C02 /* icon_checkmark.png */; };
 		8BE7582B188B508D007B6C02 /* icon_checkmark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BE75827188B508D007B6C02 /* icon_checkmark@2x.png */; };
+		BBB5884F18BC34BF00845089 /* nav_settings_btn.png in Resources */ = {isa = PBXBuildFile; fileRef = BBB5884D18BC34BF00845089 /* nav_settings_btn.png */; };
+		BBB5885018BC34BF00845089 /* nav_settings_btn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBB5884E18BC34BF00845089 /* nav_settings_btn@2x.png */; };
 		C9605CA21889F3B500F3DE57 /* Course.m in Sources */ = {isa = PBXBuildFile; fileRef = C9605CA11889F3B500F3DE57 /* Course.m */; };
 		C9605CA81889F3B600F3DE57 /* Tag.m in Sources */ = {isa = PBXBuildFile; fileRef = C9605CA71889F3B600F3DE57 /* Tag.m */; };
 		C9605CAB1889F4B800F3DE57 /* LECBaseViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C9605CAA1889F4B800F3DE57 /* LECBaseViewModel.m */; };
@@ -139,6 +141,8 @@
 		8BE75825188B508D007B6C02 /* icon_cancel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_cancel@2x.png"; sourceTree = "<group>"; };
 		8BE75826188B508D007B6C02 /* icon_checkmark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_checkmark.png; sourceTree = "<group>"; };
 		8BE75827188B508D007B6C02 /* icon_checkmark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_checkmark@2x.png"; sourceTree = "<group>"; };
+		BBB5884D18BC34BF00845089 /* nav_settings_btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = nav_settings_btn.png; path = Lec/nav_settings_btn.png; sourceTree = SOURCE_ROOT; };
+		BBB5884E18BC34BF00845089 /* nav_settings_btn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "nav_settings_btn@2x.png"; path = "Lec/nav_settings_btn@2x.png"; sourceTree = SOURCE_ROOT; };
 		C9605CA01889F3B500F3DE57 /* Course.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Course.h; path = DataModels/Course.h; sourceTree = "<group>"; };
 		C9605CA11889F3B500F3DE57 /* Course.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Course.m; path = DataModels/Course.m; sourceTree = "<group>"; };
 		C9605CA61889F3B600F3DE57 /* Tag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Tag.h; path = DataModels/Tag.h; sourceTree = "<group>"; };
@@ -250,6 +254,8 @@
 		0B6BD59818891B1E00A7D8F9 /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
+				BBB5884D18BC34BF00845089 /* nav_settings_btn.png */,
+				BBB5884E18BC34BF00845089 /* nav_settings_btn@2x.png */,
 				8BE75824188B508D007B6C02 /* icon_cancel.png */,
 				8BE75825188B508D007B6C02 /* icon_cancel@2x.png */,
 				8BE75826188B508D007B6C02 /* icon_checkmark.png */,
@@ -597,11 +603,13 @@
 				0B6BD5961889158500A7D8F9 /* PlaybackViewController.xib in Resources */,
 				738FB16F189DF33200DBF8F8 /* subject_music@2x.png in Resources */,
 				0B6BD587188914B300A7D8F9 /* MainViewController.xib in Resources */,
+				BBB5885018BC34BF00845089 /* nav_settings_btn@2x.png in Resources */,
 				8BE7582B188B508D007B6C02 /* icon_checkmark@2x.png in Resources */,
 				C9B0C5F2187FBE7F002D4A63 /* Images.xcassets in Resources */,
 				8BE7582A188B508D007B6C02 /* icon_checkmark.png in Resources */,
 				C982027818A2FE4500256A7E /* icon_mic@2x.png in Resources */,
 				0B6BD59C18891B1E00A7D8F9 /* nav_add_btn@2x.png in Resources */,
+				BBB5884F18BC34BF00845089 /* nav_settings_btn.png in Resources */,
 				73CD6EBC1896328600F183C7 /* subject_cs.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
