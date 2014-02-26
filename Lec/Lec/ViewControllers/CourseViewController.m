@@ -70,6 +70,14 @@
 }
 
 #pragma mark Abstract methods implemented
+-(UITableViewCell *) cellForIndexRow:(NSInteger)indexRow
+{
+    LectureCell *cell = [[LectureCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CELL_ID_LECTURE_CELL];
+    LECLectureCellViewModel *cellViewModel = [[self tableData] objectAtIndex:indexRow];
+    [cell populateFor:cellViewModel];
+    return (UITableViewCell *)cell;
+}
+
 -(void)deleteObjectFromViewModel:(NSInteger)index
 {
     [viewModel deleteLectureAtIndex:index];

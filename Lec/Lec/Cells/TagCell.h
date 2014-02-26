@@ -7,7 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LECTagCellViewModel.h"
 
 @interface TagCell : UITableViewCell
+
+-(void)populateFor:(LECTagCellViewModel *)vm;
+
+@property UILabel *tagNameLabel;
+@property UILabel *tagDescriptionLabel;
 
 @end

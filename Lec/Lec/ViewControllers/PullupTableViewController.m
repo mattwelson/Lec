@@ -101,12 +101,10 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    LectureCell *cell;
+    UITableViewCell *cell;
     
     if ([indexPath section] == contentSection) {
-        cell = [[LectureCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CELL_ID_LECTURE_CELL];
-        LECLectureCellViewModel *cellViewModel = [[self tableData] objectAtIndex:indexPath.row];
-        [cell populateFor:cellViewModel];
+        cell = [self cellForIndexRow:indexPath.row];
     } else if (indexPath.section == actionSection) {
         return (UITableViewCell *) actionBar;
     }
@@ -197,5 +195,11 @@
 -(void) actionBarPressed
 {
     [self abstractMethod:@"Action bar pressed"];
+}
+
+-(UITableViewCell *) cellForIndexRow:(NSInteger)indexRow
+{
+    [self abstractMethod:@"Cell for index row"];
+    return nil;
 }
 @end

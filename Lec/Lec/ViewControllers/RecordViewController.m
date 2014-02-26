@@ -9,6 +9,8 @@
 #import "RecordViewController.h"
 #import "LECImportHeader.h"
 #import "LECActionBar.h"
+#import "LECDefines.h"
+#import "TagCell.h"
 
 @interface RecordViewController (){
     LECLectureViewModel *viewModel;
@@ -50,7 +52,7 @@
 -(void)courseTableViewSetup
 {
     [super courseTableViewSetup];
-    // register tag cell for resuse
+    [self.tableView registerClass:[TagCell class] forCellReuseIdentifier:CELL_ID_TAG_CELL];
 }
 
 -(void)createHeaderView
@@ -60,6 +62,14 @@
 }
 
 #pragma mark Abstract methods implemented
+-(UITableViewCell *) cellForIndexRow:(NSInteger)indexRow
+{
+    TagCell *cell = [[TagCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CELL_ID_TAG_CELL];
+    LECTagCellViewModel *cellViewModel = [[self tableData] objectAtIndex:indexRow];
+    [cell populateFor:cellViewModel];
+    return (UITableViewCell *)cell;
+}
+
 -(void)deleteObjectFromViewModel:(NSInteger)index
 {
     // delete tag!
