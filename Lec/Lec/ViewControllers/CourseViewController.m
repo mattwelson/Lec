@@ -12,6 +12,16 @@
 
 @interface CourseViewController (){
     LECCourseViewModel *viewModel;
+    Course *currentCourse;
+    UIView *editView;
+    NSArray *colourNames;
+    NSArray *iconNames;
+    UITextField *newCourseName;
+    UITextField *newDescription;
+    NSString *newColor;
+    NSString *newIcon;
+    UIButton *pastSelectedButton;
+    bool iconMaySelect;
 }
 
 @end
@@ -22,6 +32,7 @@
 {
     self = [super initWithNibName:@"CourseViewController" bundle:nil];
     if (self) {
+        currentCourse = course;
         viewModel = [[LECCourseViewModel alloc]initWithCourse:course];
         [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent]; //sets the status bar to white
         
@@ -33,7 +44,7 @@
     return self;
 }
 
--(void) viewDidAppear:(BOOL)animated
+- (void) viewDidAppear:(BOOL)animated
 {
     // TODO: Fix it up so the mic gets swapped to a chevron where appropriate
 }
@@ -41,7 +52,157 @@
 - (void) navigationTopBar
 {
     [super navigationTopBar];
-    // customise top bar add buttons etc
+    UIImage *plusImg = [UIImage imageNamed:@"nav_settings_btn.png"];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:plusImg style:UIBarButtonItemStylePlain target:self action:@selector(courseEdit)];
+}
+
+
+-(void) courseEdit
+{
+    iconMaySelect = FALSE;
+    newIcon = currentCourse.icon;
+    editView = [[UIView alloc] initWithFrame:self.view.bounds];
+    [[LECColourService sharedColourService] addGradientForColour:[currentCourse colour] toView:editView];
+    
+    UILabel *courseName = [[UILabel alloc] initWithFrame:CGRectMake(20, 50, 200, 50)];
+    UILabel *descriptionName = [[UILabel alloc] initWithFrame:CGRectMake(20, 100, 200, 50)];
+    
+    UILabel *colorPicker = [[UILabel alloc] initWithFrame:CGRectMake(20, 150, 200, 50)];
+    UILabel *iconPicker = [[UILabel alloc] initWithFrame:CGRectMake(20, 300, 200, 50)];
+    
+    newCourseName = [[UITextField alloc] initWithFrame:CGRectMake(130, 50, 200, 50)];
+    newDescription = [[UITextField alloc] initWithFrame:CGRectMake(130, 100, 200, 50)];
+    
+    UIScrollView *colorView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 200, 320, 100)];
+    [colorView setContentSize:CGSizeMake(680, 100)];
+    
+    UIScrollView *iconView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 350, 320, 100)];
+    [iconView setContentSize:CGSizeMake(1000, 100)];
+    
+    NSLog(@"%f, %f, %f, %f" , colorView.bounds.origin.x, colorView.bounds.origin.y, colorView.bounds.size.width, colorView.bounds.size.height);
+    [colorView setBackgroundColor:[[UIColor blackColor] colorWithAlphaComponent:0.5f]];
+    [iconView setBackgroundColor:[[UIColor blackColor] colorWithAlphaComponent:0.5f]];
+    
+    colourNames = [[LECColourService sharedColourService] colourKeys];
+    iconNames = [[LECIconService sharedIconService] iconKeys];
+    NSMutableArray *cButtonArray = [NSMutableArray array];
+    UIButton *tmp;
+    CGSize size = CGSizeMake(45, 45);
+    CGFloat xOffset = 70;
+    CGFloat yOffset = 25;
+    CGFloat lineSpace = 30;
+    
+    for (int i = 0; i < colourNames.count; i ++)
+    {
+        tmp = [UIButton buttonWithType:UIButtonTypeCustom];
+        tmp.frame = CGRectMake(
+                               i*xOffset+lineSpace,
+                               yOffset,
+                               size.width,
+                               size.height);
+        NSLog(@"%f, %f, %f, %f" , xOffset * (size.width + lineSpace),
+              yOffset * (size.height + lineSpace),
+              size.width,
+              size.height);
+        [[LECColourService sharedColourService] addGradientForColour:colourNames[i] toView:tmp];
+        tmp.layer.cornerRadius = tmp.frame.size.height/2;
+        tmp.layer.masksToBounds = YES;
+        tmp.layer.borderWidth = 0;
+        [cButtonArray addObject:tmp];
+        tmp.tag = i;
+        tmp.showsTouchWhenHighlighted = YES;
+        [tmp addTarget:self action:@selector(colourSelected:) forControlEvents:UIControlEventTouchUpInside];
+        
+        [colorView addSubview:tmp];
+    }
+    
+    for (int i = 0; i < iconNames.count; i ++)
+    {
+        tmp = [UIButton buttonWithType:UIButtonTypeCustom];
+        tmp.frame = CGRectMake(
+                               i*xOffset+lineSpace-20,
+                               yOffset,
+                               size.width,
+                               size.height);
+        NSLog(@"%f, %f, %f, %f" , xOffset * (size.width + lineSpace),
+              yOffset * (size.height + lineSpace),
+              size.width,
+              size.height);
+        UIImageView *tmpImageView = [[UIImageView alloc]init];
+        tmpImageView = [[LECIconService sharedIconService] retrieveIcon:iconNames[i] toView:tmpImageView];
+        [tmp setImage:tmpImageView.image forState:UIControlStateNormal];
+        tmp.tintColor = [[UIColor whiteColor] colorWithAlphaComponent:0.5];
+        [cButtonArray addObject:tmp];
+        tmp.tag = i;
+        tmp.showsTouchWhenHighlighted = YES;
+        [tmp addTarget:self action:@selector(iconSelected:) forControlEvents:UIControlEventTouchUpInside];
+        [iconView addSubview:tmp];
+    }
+    
+    
+    
+    [courseName setTextColor:[UIColor whiteColor]];
+    [descriptionName setTextColor:[UIColor whiteColor]];
+    [newCourseName setTextColor:[UIColor whiteColor]];
+    [newDescription setTextColor:[UIColor whiteColor]];
+    [colorPicker setTextColor:[UIColor whiteColor]];
+    [iconPicker setTextColor:[UIColor whiteColor]];
+    [colorPicker setText:@"Course Colour: "];
+    [iconPicker setText:@"Course Icon: "];
+    [courseName setText:@"Course: "];
+    [descriptionName setText:@"Description: "];
+    [newCourseName setText:viewModel.navTitle];
+    [newDescription setText:viewModel.subTitle];
+    
+    UIImage *checkImg = [UIImage imageNamed:@"icon_checkmark.png"];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:checkImg style:UIBarButtonItemStylePlain target:self action:@selector(saveEdit)];
+    self.navigationItem.title = nil;
+    
+    [editView addSubview:iconPicker];
+    [editView addSubview:colorPicker];
+    [editView addSubview:courseName];
+    [editView addSubview:descriptionName];
+    [editView addSubview:newCourseName];
+    [editView addSubview:newDescription];
+    [editView addSubview:colorView];
+    [editView addSubview:iconView];
+    [self.view addSubview:editView];
+}
+
+-(void) saveEdit
+{
+    currentCourse.courseName = newCourseName.text;
+    currentCourse.courseDescription = newDescription.text;
+    
+    if (newColor)currentCourse.colour = newColor;
+    if (newIcon) currentCourse.icon = newIcon;
+    [[LECDatabaseService sharedDBService] saveChanges];
+    [editView removeFromSuperview];
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (IBAction)iconSelected:(id)sender
+{
+    if (iconMaySelect) {
+        pastSelectedButton.tintColor = [[UIColor whiteColor] colorWithAlphaComponent:0.5];
+    }
+    iconMaySelect = TRUE;
+    NSInteger i = ((UIButton *)sender).tag;
+    NSLog(@"%@",iconNames[i]);
+    newIcon = iconNames[i];
+    ((UIButton *)sender).tintColor = [[UIColor whiteColor] colorWithAlphaComponent:1];
+    pastSelectedButton = ((UIButton *)sender);
+    
+}
+
+- (IBAction)colourSelected:(id)sender
+{
+    NSInteger i = ((UIButton *)sender).tag;
+    NSLog(@"%@",colourNames[i]);
+    [[LECColourService sharedColourService] changeGradientToColour:colourNames[i] forView:editView];
+    newColor = colourNames[i];
+    
+    
 }
 
 - (void) courseTableViewSetup
@@ -104,6 +265,18 @@
 -(NSInteger) numberOfSections
 {
     return 3;
+}
+
+// Dismissing the Keyboard when touch event is called by touching screen
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+    NSLog(@"Keyboard is being dismissed");
+    [self.view endEditing:YES];
+    [super touchesBegan:touches withEvent:event];
+}
+
+- (BOOL) textFieldShouldReturn:(UITextField *)textField
+{
+    return [self.view endEditing:YES];
 }
 
 @end

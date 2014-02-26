@@ -7,6 +7,9 @@
 //
 
 #import "LECHeaderView.h"
+#import "LECParallaxService.h"
+#import "LECAnimationService.h"
+
 
 @implementation LECHeaderView{
     CGRect startingFrame;
@@ -29,6 +32,7 @@
         [self addSubview:subjectImg];
         
         titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 100, self.frame.size.width, 50)];
+        titleLabel.layer.shadowColor = [UIColor blackColor].CGColor;
         titleLabel.textAlignment = NSTextAlignmentCenter;
         titleLabel.font = [UIFont fontWithName:DEFAULTFONTLIGHT size:40];
         titleLabel.textColor = [UIColor whiteColor];
@@ -39,6 +43,20 @@
         descriptionLabel.font = [UIFont fontWithName:DEFAULTFONTLIGHT size:15];
         descriptionLabel.textColor = [UIColor whiteColor];
         [self addSubview:descriptionLabel];
+        
+        if(ANIMATIONS_ON) {
+            [[LECAnimationService sharedAnimationService] addPop:subjectImg withSpeed:1.0 withDelay:0.0];
+            [[LECAnimationService sharedAnimationService] addAlphaToView:subjectImg withSpeed:0.5 withDelay:0.0];
+            [[LECAnimationService sharedAnimationService] addAlphaToView:titleLabel withSpeed:0.5 withDelay:0.1];
+            [[LECAnimationService sharedAnimationService] addAlphaToView:descriptionLabel withSpeed:0.5 withDelay:0.2];
+        }
+        
+        if(PARALLAX_ON) {
+            [[LECParallaxService sharedParallaxService]addParallaxToView:subjectImg strength:1];
+            [[LECParallaxService sharedParallaxService]addParallaxToView:titleLabel strength:2];
+            [[LECParallaxService sharedParallaxService]addParallaxToView:descriptionLabel strength:1];
+
+            }
     }
     return self;
 }
@@ -48,7 +66,7 @@
     self = [self initWithFrame:CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, 200)];
     if (self) {
         [[LECColourService sharedColourService] addGradientForColour:courseModel.colourString toView:self];
-        subjectImg = [[LECIconService sharedIconService] addIconCourseScreen:courseModel.icon toView:subjectImg];
+        subjectImg = [[LECIconService sharedIconService] retrieveIcon:courseModel.icon toView:subjectImg];
         titleLabel.text = courseModel.navTitle;
         descriptionLabel.text = courseModel.subTitle;
     }
@@ -60,7 +78,7 @@
     self = [self initWithFrame:CGRectMake(0, 0,[[UIScreen mainScreen] bounds].size.width, 200)];
     if (self) {
         [[LECColourService sharedColourService] addGradientForColour:lectureModel.colourString toView:self];
-        subjectImg = [[LECIconService sharedIconService] addIconCourseScreen:lectureModel.icon toView:subjectImg];
+        subjectImg = [[LECIconService sharedIconService] retrieveIcon:lectureModel.icon toView:subjectImg];
         titleLabel.text = lectureModel.navTitle;
         descriptionLabel.text = lectureModel.subTitle;
     }

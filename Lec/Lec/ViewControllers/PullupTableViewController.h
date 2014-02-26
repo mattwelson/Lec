@@ -18,6 +18,8 @@
     LECActionBar *actionBar;
     BOOL hasFooter;
     NSInteger noSections;
+    NSArray *visibleCells;
+    int loadedCells;
 }
 
 @property UITableView *tableView;

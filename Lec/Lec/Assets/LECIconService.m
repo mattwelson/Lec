@@ -7,6 +7,7 @@
 //
 
 #import "LECIconService.h"
+#import "LECParallaxService.h"
 
 @implementation LECIconService
 
@@ -39,6 +40,7 @@ static LECIconService *sharedService;
 -(UIImage *) iconFor:(NSString *)iconName{
     NSString *iconString = [[self iconDictionary] valueForKey:iconName];
     UIImage *iconImg = [UIImage imageNamed:iconString];
+    iconImg = [iconImg imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     return iconImg;
 }
 
@@ -48,13 +50,17 @@ static LECIconService *sharedService;
         UIImageView *iconImgView = [[UIImageView alloc]initWithImage:[self iconFor:icon]];
         iconImgView.image = [iconImgView.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
         [iconImgView setTintColor:[UIColor whiteColor]];
-    
+        
+//        if(PARALLAX_ON && [view isKindOfClass:[UIView class]]) {
+//            [[LECParallaxService sharedParallaxService]addParallaxToView:iconImgView strength:1];
+//        }
+        
         [iconImgView setFrame:CGRectMake(15, 25, 50, 50)];
         [view.layer insertSublayer:iconImgView.layer atIndex:0];
     }
 }
 
--(UIImageView *)addIconCourseScreen:(NSString *)icon toView:(UIImageView *)iconImgView{
+-(UIImageView *)retrieveIcon:(NSString *)icon toView:(UIImageView *)iconImgView{
     if ([self iconFor:icon] != NULL) {
         iconImgView = [iconImgView initWithImage:[self iconFor:icon]];
         iconImgView.image = [iconImgView.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
