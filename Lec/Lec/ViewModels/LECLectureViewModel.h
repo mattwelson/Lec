@@ -28,4 +28,6 @@
 -(void) prepareForPlayback;
 -(void) startAudioPlayback;
 -(void) stopAudioPlayback;
+-(void) goToTag:(NSInteger)index;
+-(void) insertTagAtCurrentTime;
 @end

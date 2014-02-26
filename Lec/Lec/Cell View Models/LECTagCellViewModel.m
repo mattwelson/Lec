@@ -16,6 +16,7 @@
     LECTagCellViewModel *cellViewModel = [[LECTagCellViewModel alloc] init];
     
     cellViewModel.tag = tag;
+    cellViewModel.time = tag.currentTime;
     cellViewModel.colourString = colourString;
     cellViewModel.tintColour = [[LECColourService sharedColourService] baseColourFor:colourString];
     cellViewModel.titleText = [tag name];

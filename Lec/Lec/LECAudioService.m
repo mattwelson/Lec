@@ -96,6 +96,13 @@ static LECAudioService *sharedService;
 }
 
 #pragma mark Tag Stuff
+-(void)goToTime:(NSNumber *)time
+{
+# warning no error handling
+    audioPlayer.currentTime = [time doubleValue];
+    if (!audioPlayer.playing) [audioPlayer play];
+}
+
 -(NSNumber *) getCurrentTime
 {
     if (audioPlayer && [audioPlayer isPlaying])

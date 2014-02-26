@@ -29,7 +29,9 @@
         [vm setInitialRecordingPath];
     }
     
-    for (Tag *tag in lecture.tags)
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:NSStringFromSelector(@selector(currentTime)) ascending:YES];
+    NSArray *sortedTags = [lecture.tags sortedArrayUsingDescriptors:@[sortDescriptor]];
+    for (Tag *tag in sortedTags)
     {
         [vm.tableData addObject:[LECTagCellViewModel tagCellVMWithTag:tag andColour:vm.colourString]];
     }
@@ -84,6 +86,27 @@
 -(void) stopAudioPlayback
 {
     [[LECAudioService sharedAudioService] stopPlayback];
+}
+
+-(void)goToTag:(NSInteger)index
+{
+    LECTagCellViewModel *tagCVM = self.tableData[index];
+    [[LECAudioService sharedAudioService] goToTime:[tagCVM time]];
+}
+
+-(void)insertTagAtCurrentTime
+{
+    Tag *tag = [[LECDatabaseService sharedDBService] newTagForLecture:self.lecture];
+    tag.currentTime = [[LECAudioService sharedAudioService] getCurrentTime];
+    tag.name = @"Hi, I'm a PLAYBACK tag";
+    [[LECDatabaseService sharedDBService] saveChanges];
+    LECTagCellViewModel *tagCVM = [LECTagCellViewModel tagCellVMWithTag:tag andColour:self.colourString];
+
+    NSUInteger newIndex = [self.tableData indexOfObject:tagCVM inSortedRange:NSMakeRange(0, self.tableData.count) options:NSBinarySearchingInsertionIndex usingComparator:^NSComparisonResult(LECTagCellViewModel *obj1, LECTagCellViewModel *obj2) {
+        return [obj1.time compare:obj2.time];
+    }];
+    
+    [self.tableData insertObject:tagCVM atIndex:newIndex];
 }
 
 @end

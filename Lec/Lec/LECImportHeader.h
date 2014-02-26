@@ -23,6 +23,7 @@
 #import "LECLectureCellViewModel.h"
 #import "LECCourseViewModel.h"
 #import "LECLectureViewModel.h"
+#import "LECTagCellViewModel.h"
 
 #import "LECHeaderView.h"
 #import "LECColorCollectionView.h"
