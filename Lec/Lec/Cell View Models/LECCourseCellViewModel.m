@@ -10,6 +10,8 @@
 
 @implementation LECCourseCellViewModel
 
+static void * localContext = &localContext;
+
 +(LECCourseCellViewModel *) courseCellWith:(Course *)course
 {
     LECCourseCellViewModel *courseCellModel = [[LECCourseCellViewModel alloc] init];
@@ -22,7 +24,43 @@
     
     [courseCellModel setColourString:[course colour]];
     
+    [courseCellModel setupObservation];
+    
     return courseCellModel;
+}
+
+#pragma mark - KVO
+-(void) setupObservation
+{
+    [self.course addObserver:self forKeyPath:NSStringFromSelector(@selector(colour)) options:NSKeyValueObservingOptionNew context:localContext];
+    [self.course addObserver:self forKeyPath:NSStringFromSelector(@selector(icon)) options:NSKeyValueObservingOptionNew context:localContext];
+    [self.course addObserver:self forKeyPath:NSStringFromSelector(@selector(courseName)) options:NSKeyValueObservingOptionNew context:localContext];
+    [self.course addObserver:self forKeyPath:NSStringFromSelector(@selector(courseDescription)) options:NSKeyValueObservingOptionNew context:localContext];
+}
+
+// Updates view model when the managed object changes (edit screen)
+-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    if (context != localContext) return;
+    if ([keyPath isEqualToString:NSStringFromSelector(@selector(colour))])
+    {
+        self.colourString = change[NSKeyValueChangeNewKey];
+    }
+    
+    if ([keyPath isEqualToString:NSStringFromSelector(@selector(icon))])
+    {
+        self.icon = change[NSKeyValueChangeNewKey];
+    }
+    
+    if ([keyPath isEqualToString:NSStringFromSelector(@selector(courseName))])
+    {
+        self.titleText = change[NSKeyValueChangeNewKey];
+    }
+    
+    if ([keyPath isEqualToString:NSStringFromSelector(@selector(courseDescription))])
+    {
+        self.subText = change[NSKeyValueChangeNewKey];
+    }
 }
 
 @end

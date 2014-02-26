@@ -13,6 +13,8 @@
 
 @implementation CourseCell
 
+static void * localContext = &localContext;
+
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
@@ -58,13 +60,56 @@
     self.courseDescriptionLabel.text = [vm subText];
     [[LECIconService sharedIconService] retrieveIcon:[vm icon] toView:self.iconImage];
     [[LECColourService sharedColourService] addGradientForColour:[vm colourString] toView:self.backgroundView];
+    
+    [self setupObservingOf:vm];
 }
 
+#warning Will delete if we're not using.
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
     [super setSelected:selected animated:animated];
     // Configure the view for the selected state
 }
 
+#pragma mark - KVO
+// seperated off as it's ugly as shit
+-(void) setupObservingOf:(LECCourseCellViewModel *)vm
+{
+    [vm addObserver:self forKeyPath:NSStringFromSelector(@selector(colourString)) options:NSKeyValueObservingOptionNew context:localContext];
+    [vm addObserver:self forKeyPath:NSStringFromSelector(@selector(icon)) options:NSKeyValueObservingOptionNew context:localContext];
+    [vm addObserver:self forKeyPath:NSStringFromSelector(@selector(titleText)) options:NSKeyValueObservingOptionNew context:localContext];
+    [vm addObserver:self forKeyPath:NSStringFromSelector(@selector(subText)) options:NSKeyValueObservingOptionNew context:localContext];
+
+}
+
+-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    // sanity check to ensure subclassing hasn't screwed us over, best practice
+    if (context != localContext) return;
+    if ([keyPath isEqualToString:NSStringFromSelector(@selector(colourString))])
+    {
+        [[LECColourService sharedColourService] changeGradientToColour:change[NSKeyValueChangeNewKey] forView:self.backgroundView];
+
+    }
+    
+    if ([keyPath isEqualToString:NSStringFromSelector(@selector(icon))])
+    {
+        [[LECIconService sharedIconService] retrieveIcon:change[NSKeyValueChangeNewKey] toView:self.iconImage];
+        
+    }
+    
+    if ([keyPath isEqualToString:NSStringFromSelector(@selector(titleText))])
+    {
+        self.courseNameLabel.text = change[NSKeyValueChangeNewKey];
+        [self.courseNameLabel setNeedsDisplay];
+    }
+    
+    if ([keyPath isEqualToString:NSStringFromSelector(@selector(subText))])
+    {
+        self.courseDescriptionLabel.text = change[NSKeyValueChangeNewKey];
+        [self.courseDescriptionLabel setNeedsDisplay];
+    }
+// if icon then change iconImage to match!
+}
 
 @end

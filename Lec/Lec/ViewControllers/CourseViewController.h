@@ -10,7 +10,7 @@
 #import "LECImportHeader.h"
 #import "PullupTableViewController.h"
 
-@interface CourseViewController : PullupTableViewController
+@interface CourseViewController : PullupTableViewController<UITextFieldDelegate>
 
 @property UITableView *tableView;
 
