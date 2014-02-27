@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <AVFoundation/AVFoundation.h>
 
-@interface LECAudioService : NSObject <AVAudioRecorderDelegate>
+@interface LECAudioService : NSObject <AVAudioRecorderDelegate, AVAudioPlayerDelegate>
 
 + (LECAudioService *)sharedAudioService;
 
@@ -18,7 +18,7 @@
 -(void) startRecording;
 -(void) stopRecording;
 
--(void) setupAudioPlayback:(NSString *)path;
+-(void) setupAudioPlayback:(NSString *)path withCompletion:(void (^)(void))block;
 -(void) startPlayback;
 -(void) stopPlayback;
 

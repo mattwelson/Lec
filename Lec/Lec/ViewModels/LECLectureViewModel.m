@@ -73,9 +73,9 @@
 }
 
 #pragma mark Playback
--(void) prepareForPlayback
+-(void) prepareForPlaybackWithCompletion:(void (^)(void))block
 {
-    [[LECAudioService sharedAudioService] setupAudioPlayback:[self recordingPath]];
+    [[LECAudioService sharedAudioService] setupAudioPlayback:[self recordingPath] withCompletion:block];
 }
 
 -(void) startAudioPlayback

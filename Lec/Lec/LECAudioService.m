@@ -13,6 +13,7 @@
     NSURL *recordingPath;
     AVAudioRecorder *audioRecorder;
     AVAudioPlayer *audioPlayer;
+    void (^playbackFinished)(void);
 }
 
 static LECAudioService *sharedService;
@@ -62,7 +63,7 @@ static LECAudioService *sharedService;
 }
 
 #pragma mark Playback
--(void) setupAudioPlayback:(NSString *)path
+-(void) setupAudioPlayback:(NSString *)path withCompletion:(void (^)(void))block
 {
     NSError *error;
     session = [AVAudioSession sharedInstance];
@@ -71,6 +72,8 @@ static LECAudioService *sharedService;
     recordingPath = [self recordingPath:path];
     
     audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:recordingPath error:&error];
+    audioPlayer.delegate = self;
+    playbackFinished = block;
     if (error || !audioPlayer) // if things are not initialised properly
     {
         @throw [NSException exceptionWithName:@"Preparing audio for playback" reason:@"Dammit" userInfo:nil];
@@ -98,9 +101,8 @@ static LECAudioService *sharedService;
 #pragma mark Tag Stuff
 -(void)goToTime:(NSNumber *)time
 {
-# warning no error handling
-    audioPlayer.currentTime = [time doubleValue];
     if (!audioPlayer.playing) [audioPlayer play];
+    audioPlayer.currentTime = [time doubleValue];
 }
 
 -(NSNumber *) getCurrentTime
@@ -112,6 +114,13 @@ static LECAudioService *sharedService;
         return [NSNumber numberWithDouble:[audioRecorder currentTime]];
     }
     @throw [NSException exceptionWithName:@"WhatTheFuckException" reason:@"Nothing is playing or recording" userInfo:nil];
+}
+
+#pragma mark - Protocol
+#pragma mark - Playback
+-(void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag
+{
+    playbackFinished();
 }
 
 #pragma mark Private

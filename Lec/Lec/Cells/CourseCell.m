@@ -64,13 +64,6 @@ static void * localContext = &localContext;
     [self setupObservingOf:vm];
 }
 
-#warning Will delete if we're not using.
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated
-{
-    [super setSelected:selected animated:animated];
-    // Configure the view for the selected state
-}
-
 #pragma mark - KVO
 // seperated off as it's ugly as shit
 -(void) setupObservingOf:(LECCourseCellViewModel *)vm

@@ -25,7 +25,9 @@
     if (self) {
         NSLog(@"Playback View Controller!");
         viewModel = [LECLectureViewModel viewModelWithLecture:lecture];
-        [viewModel prepareForPlayback];
+        [viewModel prepareForPlaybackWithCompletion:^{
+            [self disableActionBar];
+        }];
         [viewModel startAudioPlayback];
         
         contentSection = 1; // the section with table data
@@ -58,6 +60,11 @@
 {
     self.headerView = [[LECHeaderView alloc] initWithLecture:viewModel];
     [self.view addSubview:self.headerView];
+}
+
+-(void)disableActionBar
+{
+    NSLog(@"Disable the action bar you fools!");
 }
 
 #pragma mark Abstract methods implemented

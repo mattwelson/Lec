@@ -25,7 +25,7 @@
 -(void) stopRecordingAudio;
 -(void) addTagToCurrentTime;
 
--(void) prepareForPlayback;
+-(void) prepareForPlaybackWithCompletion:(void (^)(void))block;
 -(void) startAudioPlayback;
 -(void) stopAudioPlayback;
 -(void) goToTag:(NSInteger)index;
