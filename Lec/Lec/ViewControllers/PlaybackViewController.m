@@ -9,6 +9,7 @@
 #import "PlaybackViewController.h"
 #import "LECImportHeader.h"
 #import "LECActionBar.h"
+#import "TagCell.h"
 
 @interface PlaybackViewController (){
     LECLectureViewModel *viewModel;
@@ -50,7 +51,7 @@
 -(void)courseTableViewSetup
 {
     [super courseTableViewSetup];
-    // register tag cell for resuse
+    [self.tableView registerClass:[TagCell class] forCellReuseIdentifier:CELL_ID_TAG_CELL];
 }
 
 -(void)createHeaderView
@@ -60,6 +61,14 @@
 }
 
 #pragma mark Abstract methods implemented
+-(UITableViewCell *) cellForIndexRow:(NSInteger)indexRow
+{
+    TagCell *cell = [[TagCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CELL_ID_TAG_CELL];
+    LECTagCellViewModel *cellViewModel = [[self tableData] objectAtIndex:indexRow];
+    [cell populateFor:cellViewModel];
+    return (UITableViewCell *)cell;
+}
+
 -(void)deleteObjectFromViewModel:(NSInteger)index
 {
     // delete tag!
@@ -77,12 +86,16 @@
 
 -(void) didSelectCellAt:(NSInteger)index
 {
-    // play tag?
+    [viewModel goToTag:index];
 }
 
 -(void) actionBarPressed
 {
-    NSLog(@"Push me good");
+    [viewModel insertTagAtCurrentTime];
+    [self.tableView reloadData];
+    // scroll to keep new cell at bottom of screen
+    NSIndexPath *indexPath = [NSIndexPath indexPathForItem:[viewModel.tableData count]-1 inSection:contentSection];
+    [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
 }
 
 @end

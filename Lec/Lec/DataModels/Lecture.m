@@ -2,7 +2,7 @@
 //  Lecture.m
 //  Lec
 //
-//  Created by Matt Welson on 26/01/14.
+//  Created by Julin Le-Ngoc on 14/02/14.
 //  Copyright (c) 2014 South45. All rights reserved.
 //
 
@@ -13,8 +13,8 @@
 
 @implementation Lecture
 
-@dynamic lectureNumber;
 @dynamic lectureName;
+@dynamic lectureNumber;
 @dynamic recordingPath;
 @dynamic totalTime;
 @dynamic course;

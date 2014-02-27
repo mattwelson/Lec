@@ -38,6 +38,17 @@ static void * localContext = &localContext;
     [self.course addObserver:self forKeyPath:NSStringFromSelector(@selector(courseDescription)) options:NSKeyValueObservingOptionNew context:localContext];
 }
 
+-(void)deallocObservation
+{
+    @try {
+        [self.course removeObserver:self forKeyPath:NSStringFromSelector(@selector(colour))];
+        [self.course removeObserver:self forKeyPath:NSStringFromSelector(@selector(icon))];
+        [self.course removeObserver:self forKeyPath:NSStringFromSelector(@selector(courseName))];
+        [self.course removeObserver:self forKeyPath:NSStringFromSelector(@selector(courseDescription))];
+    }
+    @catch (NSException * __unused exception) {}
+}
+
 // Updates view model when the managed object changes (edit screen)
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
@@ -61,6 +72,7 @@ static void * localContext = &localContext;
     {
         self.subText = change[NSKeyValueChangeNewKey];
     }
+    if (change[NSKeyValueChangeNewKey] == [NSNull null]) [self deallocObservation];
 }
 
 @end

@@ -82,10 +82,26 @@ static void * localContext = &localContext;
 
 }
 
+-(void)deallocObservation:(LECCourseCellViewModel *)vm;
+{
+    @try {
+        [vm removeObserver:self forKeyPath:NSStringFromSelector(@selector(colourString))];
+        [vm removeObserver:self forKeyPath:NSStringFromSelector(@selector(icon))];
+        [vm removeObserver:self forKeyPath:NSStringFromSelector(@selector(titleText))];
+        [vm removeObserver:self forKeyPath:NSStringFromSelector(@selector(subText))];
+    }
+    @catch (NSException * __unused exception) {}
+}
+
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
     // sanity check to ensure subclassing hasn't screwed us over, best practice
     if (context != localContext) return;
+    if ([NSNull null] == change[NSKeyValueChangeNewKey])
+    {
+        [self deallocObservation:object];
+        return;
+    }
     if ([keyPath isEqualToString:NSStringFromSelector(@selector(colourString))])
     {
         [[LECColourService sharedColourService] changeGradientToColour:change[NSKeyValueChangeNewKey] forView:self.backgroundView];
