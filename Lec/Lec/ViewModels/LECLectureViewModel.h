@@ -16,16 +16,18 @@
 @property Lecture *lecture;
 @property NSMutableArray *tags;
 @property (nonatomic) NSString *recordingPath;
-@property BOOL needsRecording;
 
 @property NSString *courseName;
 
 // instance of AVAudio or Audio service?
--(void)prepareForRecordingAudio;
--(void)startRecordingAudio;
--(void)stopRecordingAudio;
+-(void) prepareForRecordingAudio;
+-(void) startRecordingAudio;
+-(void) stopRecordingAudio;
+-(void) addTagToCurrentTime;
 
 -(void) prepareForPlayback;
 -(void) startAudioPlayback;
 -(void) stopAudioPlayback;
+-(void) goToTag:(NSInteger)index;
+-(void) insertTagAtCurrentTime;
 @end

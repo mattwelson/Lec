@@ -9,6 +9,7 @@
 #import "LECLectureViewModel.h"
 #import "LECAudioService.h"
 #import "LECDefines.h"
+#import "LECTagCellViewModel.h"
 
 @implementation LECLectureViewModel
 
@@ -23,15 +24,17 @@
     
     vm.courseName = [[lecture course] courseName];
     
-    vm.recordingPath = [lecture recordingPath];
-    if ([vm.recordingPath length] > 0) {
-        vm.needsRecording = NO;
-        NSLog(@"%@", vm.recordingPath);
-    } else {
+    vm.recordingPath = [lecture recordingPath] ;
+    if (!vm.recordingPath) {
         [vm setInitialRecordingPath];
-        vm.needsRecording = YES;
     }
     
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:NSStringFromSelector(@selector(currentTime)) ascending:YES];
+    NSArray *sortedTags = [lecture.tags sortedArrayUsingDescriptors:@[sortDescriptor]];
+    for (Tag *tag in sortedTags)
+    {
+        [vm.tableData addObject:[LECTagCellViewModel tagCellVMWithTag:tag andColour:vm.colourString]];
+    }
     return vm;
 }
 
@@ -60,6 +63,15 @@
     [[LECAudioService sharedAudioService] stopRecording];
 }
 
+-(void) addTagToCurrentTime
+{
+    Tag *tag = [[LECDatabaseService sharedDBService] newTagForLecture:self.lecture];
+    tag.currentTime = [[LECAudioService sharedAudioService] getCurrentTime];
+    tag.name = @"Hi, I'm a tag";
+    [[LECDatabaseService sharedDBService] saveChanges];
+    [self.tableData addObject:[LECTagCellViewModel tagCellVMWithTag:tag andColour:self.colourString]];
+}
+
 #pragma mark Playback
 -(void) prepareForPlayback
 {
@@ -74,6 +86,27 @@
 -(void) stopAudioPlayback
 {
     [[LECAudioService sharedAudioService] stopPlayback];
+}
+
+-(void)goToTag:(NSInteger)index
+{
+    LECTagCellViewModel *tagCVM = self.tableData[index];
+    [[LECAudioService sharedAudioService] goToTime:[tagCVM time]];
+}
+
+-(void)insertTagAtCurrentTime
+{
+    Tag *tag = [[LECDatabaseService sharedDBService] newTagForLecture:self.lecture];
+    tag.currentTime = [[LECAudioService sharedAudioService] getCurrentTime];
+    tag.name = @"Hi, I'm a PLAYBACK tag";
+    [[LECDatabaseService sharedDBService] saveChanges];
+    LECTagCellViewModel *tagCVM = [LECTagCellViewModel tagCellVMWithTag:tag andColour:self.colourString];
+
+    NSUInteger newIndex = [self.tableData indexOfObject:tagCVM inSortedRange:NSMakeRange(0, self.tableData.count) options:NSBinarySearchingInsertionIndex usingComparator:^NSComparisonResult(LECTagCellViewModel *obj1, LECTagCellViewModel *obj2) {
+        return [obj1.time compare:obj2.time];
+    }];
+    
+    [self.tableData insertObject:tagCVM atIndex:newIndex];
 }
 
 @end

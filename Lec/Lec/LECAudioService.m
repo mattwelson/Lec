@@ -89,22 +89,29 @@ static LECAudioService *sharedService;
     }
 }
 
-#pragma mark Tag Stuff
--(NSTimeInterval) getCurrentTime
-{
-    if (audioPlayer && [audioPlayer isPlaying])
-    {
-        return [audioPlayer currentTime];
-    } else if (audioRecorder && [audioRecorder isRecording]) {
-        return [audioRecorder currentTime];
-    }
-    @throw [NSException exceptionWithName:@"WhatTheFuckException" reason:@"Nothing is playing or recording" userInfo:nil];
-}
-
 -(void) stopPlayback
 {
     [audioPlayer stop];
     assert(![audioPlayer isPlaying]);
+}
+
+#pragma mark Tag Stuff
+-(void)goToTime:(NSNumber *)time
+{
+# warning no error handling
+    audioPlayer.currentTime = [time doubleValue];
+    if (!audioPlayer.playing) [audioPlayer play];
+}
+
+-(NSNumber *) getCurrentTime
+{
+    if (audioPlayer && [audioPlayer isPlaying])
+    {
+        return [NSNumber numberWithDouble:[audioPlayer currentTime]];
+    } else if (audioRecorder && [audioRecorder isRecording]) {
+        return [NSNumber numberWithDouble:[audioRecorder currentTime]];
+    }
+    @throw [NSException exceptionWithName:@"WhatTheFuckException" reason:@"Nothing is playing or recording" userInfo:nil];
 }
 
 #pragma mark Private

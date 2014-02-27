@@ -76,6 +76,7 @@
 		C9B0C5FC187FBE7F002D4A63 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9B0C5E0187FBE7F002D4A63 /* CoreData.framework */; };
 		C9B0C604187FBE7F002D4A63 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C9B0C602187FBE7F002D4A63 /* InfoPlist.strings */; };
 		C9B0C606187FBE7F002D4A63 /* LecTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C9B0C605187FBE7F002D4A63 /* LecTests.m */; };
+		C9B55BCB18BDDB6D00E7C52A /* TagCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C9B55BCA18BDDB6D00E7C52A /* TagCell.m */; };
 		C9CA77E01896596900980310 /* LectureCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C9CA77DF1896596900980310 /* LectureCell.m */; };
 		C9FBD6281894A2B700D1A7D6 /* Example.m in Sources */ = {isa = PBXBuildFile; fileRef = C9FBD6271894A2B700D1A7D6 /* Example.m */; };
 		C9FBD62E1894B26B00D1A7D6 /* LECLectureCellViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C9FBD62D1894B26B00D1A7D6 /* LECLectureCellViewModel.m */; };
@@ -196,6 +197,8 @@
 		C9B0C601187FBE7F002D4A63 /* LecTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "LecTests-Info.plist"; sourceTree = "<group>"; };
 		C9B0C603187FBE7F002D4A63 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		C9B0C605187FBE7F002D4A63 /* LecTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LecTests.m; sourceTree = "<group>"; };
+		C9B55BC918BDDB6D00E7C52A /* TagCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TagCell.h; path = Cells/TagCell.h; sourceTree = "<group>"; };
+		C9B55BCA18BDDB6D00E7C52A /* TagCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TagCell.m; path = Cells/TagCell.m; sourceTree = "<group>"; };
 		C9CA77DE1896596900980310 /* LectureCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LectureCell.h; path = Cells/LectureCell.h; sourceTree = "<group>"; };
 		C9CA77DF1896596900980310 /* LectureCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LectureCell.m; path = Cells/LectureCell.m; sourceTree = "<group>"; };
 		C9FBD6261894A2B700D1A7D6 /* Example.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Example.h; path = Test/Example.h; sourceTree = "<group>"; };
@@ -280,6 +283,8 @@
 				0B6BD59F18891FB300A7D8F9 /* CourseCell.m */,
 				C9CA77DE1896596900980310 /* LectureCell.h */,
 				C9CA77DF1896596900980310 /* LectureCell.m */,
+				C9B55BC918BDDB6D00E7C52A /* TagCell.h */,
+				C9B55BCA18BDDB6D00E7C52A /* TagCell.m */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -329,6 +334,8 @@
 				C9605CB91889F99800F3DE57 /* LECCourseCellViewModel.m */,
 				C9FBD62C1894B26B00D1A7D6 /* LECLectureCellViewModel.h */,
 				C9FBD62D1894B26B00D1A7D6 /* LECLectureCellViewModel.m */,
+				C9467BAB18A71D46001AB03B /* LECTagCellViewModel.h */,
+				C9467BAC18A71D46001AB03B /* LECTagCellViewModel.m */,
 			);
 			name = "Cell View Models";
 			sourceTree = "<group>";
@@ -655,6 +662,7 @@
 				C9605CBA1889F99800F3DE57 /* LECCourseCellViewModel.m in Sources */,
 				8BE75823188B4F23007B6C02 /* LECLectureViewModel.m in Sources */,
 				7318CDA11898AEFD002E23A0 /* LECHeaderView.m in Sources */,
+				C9B55BCB18BDDB6D00E7C52A /* TagCell.m in Sources */,
 				73CD6EB21895F06400F183C7 /* LECIconService.m in Sources */,
 				733C9BD218AE0423007E92B6 /* Lecture.m in Sources */,
 				C9B0C5ED187FBE7F002D4A63 /* LECAppDelegate.m in Sources */,
