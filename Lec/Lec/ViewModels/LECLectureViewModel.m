@@ -88,6 +88,11 @@
     [[LECAudioService sharedAudioService] stopPlayback];
 }
 
+-(BOOL) audioIsPlaying
+{
+    return [[LECAudioService sharedAudioService] isAudioPlaying];
+}
+
 -(void)goToTag:(NSInteger)index
 {
     LECTagCellViewModel *tagCVM = self.tableData[index];

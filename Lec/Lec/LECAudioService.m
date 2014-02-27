@@ -98,6 +98,11 @@ static LECAudioService *sharedService;
     assert(![audioPlayer isPlaying]);
 }
 
+-(BOOL) isAudioPlaying
+{
+    return [audioPlayer isPlaying];
+}
+
 #pragma mark Tag Stuff
 -(void)goToTime:(NSNumber *)time
 {
