@@ -23,10 +23,11 @@
 {
     self = [super initWithNibName:@"PlaybackViewController" bundle:nil];
     if (self) {
-        NSLog(@"Playback View Controller!");
         viewModel = [LECLectureViewModel viewModelWithLecture:lecture];
+        
         [viewModel prepareForPlaybackWithCompletion:^{
             [self disableActionBar];
+            viewModel.canTag = NO;
         }];
         [viewModel startAudioPlayback];
         
@@ -64,7 +65,7 @@
 
 -(void)disableActionBar
 {
-    NSLog(@"Disable the action bar you fools!");
+    [actionBar setBackgroundColor:[UIColor lightGrayColor]];
 }
 
 #pragma mark Abstract methods implemented
@@ -98,8 +99,7 @@
 
 -(void) actionBarPressed
 {
-    if ([viewModel audioIsPlaying]){
-        [viewModel insertTagAtCurrentTime];
+    if ([viewModel insertTagAtCurrentTime]){
         [self.tableView reloadData];
         // scroll to keep new cell at bottom of screen
         NSIndexPath *indexPath = [NSIndexPath indexPathForItem:[viewModel.tableData count]-1 inSection:contentSection];

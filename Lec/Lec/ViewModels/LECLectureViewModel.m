@@ -35,6 +35,8 @@
     {
         [vm.tableData addObject:[LECTagCellViewModel tagCellVMWithTag:tag andColour:vm.colourString]];
     }
+    
+    vm.canTag = YES;
     return vm;
 }
 
@@ -95,12 +97,15 @@
 
 -(void)goToTag:(NSInteger)index
 {
+    self.canTag = YES;
     LECTagCellViewModel *tagCVM = self.tableData[index];
     [[LECAudioService sharedAudioService] goToTime:[tagCVM time]];
 }
 
--(void)insertTagAtCurrentTime
+-(BOOL)insertTagAtCurrentTime
 {
+    if (!self.canTag) return NO;
+    
     Tag *tag = [[LECDatabaseService sharedDBService] newTagForLecture:self.lecture];
     tag.currentTime = [[LECAudioService sharedAudioService] getCurrentTime];
     tag.name = @"Hi, I'm a PLAYBACK tag";
@@ -112,6 +117,7 @@
     }];
     
     [self.tableData insertObject:tagCVM atIndex:newIndex];
+    return YES;
 }
 
 @end

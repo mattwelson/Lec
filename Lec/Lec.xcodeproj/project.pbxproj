@@ -47,8 +47,6 @@
 		BBB5884F18BC34BF00845089 /* nav_settings_btn.png in Resources */ = {isa = PBXBuildFile; fileRef = BBB5884D18BC34BF00845089 /* nav_settings_btn.png */; };
 		BBB5885018BC34BF00845089 /* nav_settings_btn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBB5884E18BC34BF00845089 /* nav_settings_btn@2x.png */; };
 		C9467BAD18A71D46001AB03B /* LECTagCellViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C9467BAC18A71D46001AB03B /* LECTagCellViewModel.m */; };
-		C9605CA21889F3B500F3DE57 /* Course.m in Sources */ = {isa = PBXBuildFile; fileRef = C9605CA11889F3B500F3DE57 /* Course.m */; };
-		C9605CA81889F3B600F3DE57 /* Tag.m in Sources */ = {isa = PBXBuildFile; fileRef = C9605CA71889F3B600F3DE57 /* Tag.m */; };
 		C9605CAB1889F4B800F3DE57 /* LECBaseViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C9605CAA1889F4B800F3DE57 /* LECBaseViewModel.m */; };
 		C9605CAE1889F5AD00F3DE57 /* LECHomeViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C9605CAD1889F5AD00F3DE57 /* LECHomeViewModel.m */; };
 		C9605CB21889F6CC00F3DE57 /* LECBaseCellViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C9605CB11889F6CC00F3DE57 /* LECBaseCellViewModel.m */; };
@@ -155,10 +153,6 @@
 		BBB5884E18BC34BF00845089 /* nav_settings_btn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "nav_settings_btn@2x.png"; path = "Lec/nav_settings_btn@2x.png"; sourceTree = SOURCE_ROOT; };
 		C9467BAB18A71D46001AB03B /* LECTagCellViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LECTagCellViewModel.h; path = "Cell View Models/LECTagCellViewModel.h"; sourceTree = "<group>"; };
 		C9467BAC18A71D46001AB03B /* LECTagCellViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LECTagCellViewModel.m; path = "Cell View Models/LECTagCellViewModel.m"; sourceTree = "<group>"; };
-		C9605CA01889F3B500F3DE57 /* Course.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Course.h; path = DataModels/Course.h; sourceTree = "<group>"; };
-		C9605CA11889F3B500F3DE57 /* Course.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Course.m; path = DataModels/Course.m; sourceTree = "<group>"; };
-		C9605CA61889F3B600F3DE57 /* Tag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Tag.h; path = DataModels/Tag.h; sourceTree = "<group>"; };
-		C9605CA71889F3B600F3DE57 /* Tag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Tag.m; path = DataModels/Tag.m; sourceTree = "<group>"; };
 		C9605CA91889F4B800F3DE57 /* LECBaseViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LECBaseViewModel.h; path = ViewModels/LECBaseViewModel.h; sourceTree = "<group>"; };
 		C9605CAA1889F4B800F3DE57 /* LECBaseViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LECBaseViewModel.m; path = ViewModels/LECBaseViewModel.m; sourceTree = "<group>"; };
 		C9605CAC1889F5AD00F3DE57 /* LECHomeViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LECHomeViewModel.h; path = ViewModels/LECHomeViewModel.h; sourceTree = "<group>"; };
@@ -312,18 +306,18 @@
 		8BE7582C188B876E007B6C02 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				C9605CC2188A179400F3DE57 /* LECColourService.h */,
-				C9605CC3188A179400F3DE57 /* LECColourService.m */,
-				73CD6EB01895F06400F183C7 /* LECIconService.h */,
-				73CD6EB11895F06400F183C7 /* LECIconService.m */,
-				C9605CC6188A311100F3DE57 /* LECDatabaseService.h */,
-				C9605CC7188A311100F3DE57 /* LECDatabaseService.m */,
-				C96BCA1D189CAC4800D5E7FD /* LECAudioService.h */,
-				C96BCA1E189CAC4800D5E7FD /* LECAudioService.m */,
-				730DABD218A500C000DFE3E7 /* LECParallaxService.h */,
-				730DABD318A500C000DFE3E7 /* LECParallaxService.m */,
 				733C9BC418AAEE57007E92B6 /* LECAnimationService.h */,
 				733C9BC518AAEE57007E92B6 /* LECAnimationService.m */,
+				C96BCA1D189CAC4800D5E7FD /* LECAudioService.h */,
+				C96BCA1E189CAC4800D5E7FD /* LECAudioService.m */,
+				C9605CC2188A179400F3DE57 /* LECColourService.h */,
+				C9605CC3188A179400F3DE57 /* LECColourService.m */,
+				C9605CC6188A311100F3DE57 /* LECDatabaseService.h */,
+				C9605CC7188A311100F3DE57 /* LECDatabaseService.m */,
+				73CD6EB01895F06400F183C7 /* LECIconService.h */,
+				73CD6EB11895F06400F183C7 /* LECIconService.m */,
+				730DABD218A500C000DFE3E7 /* LECParallaxService.h */,
+				730DABD318A500C000DFE3E7 /* LECParallaxService.m */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -660,7 +654,6 @@
 				8BE75820188B4EA5007B6C02 /* LECCourseViewModel.m in Sources */,
 				730DABD418A500C000DFE3E7 /* LECParallaxService.m in Sources */,
 				C9467BAD18A71D46001AB03B /* LECTagCellViewModel.m in Sources */,
-				C9FBD62B1894B02100D1A7D6 /* Lecture.m in Sources */,
 				C9605CAE1889F5AD00F3DE57 /* LECHomeViewModel.m in Sources */,
 				C9FBD62E1894B26B00D1A7D6 /* LECLectureCellViewModel.m in Sources */,
 				C9605CB21889F6CC00F3DE57 /* LECBaseCellViewModel.m in Sources */,

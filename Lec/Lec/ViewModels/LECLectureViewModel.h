@@ -16,6 +16,7 @@
 @property Lecture *lecture;
 @property NSMutableArray *tags;
 @property (nonatomic) NSString *recordingPath;
+@property BOOL canTag;
 
 @property NSString *courseName;
 
@@ -31,5 +32,5 @@
 
 -(BOOL) audioIsPlaying;
 -(void) goToTag:(NSInteger)index;
--(void) insertTagAtCurrentTime;
+-(BOOL) insertTagAtCurrentTime;
 @end
