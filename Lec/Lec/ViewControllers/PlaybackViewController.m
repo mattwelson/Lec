@@ -26,8 +26,8 @@
         viewModel = [LECLectureViewModel viewModelWithLecture:lecture];
         
         [viewModel prepareForPlaybackWithCompletion:^{
-            [self disableActionBar];
             viewModel.canTag = NO;
+            [self.tableView reloadData];
         }];
         [viewModel startAudioPlayback];
         
@@ -37,6 +37,7 @@
         noSections = 2;
         
         actionBar = [LECActionBar tagBarWithTarget:self andSelector:@selector(actionBarPressed)];
+        [viewModel addObserver:actionBar forKeyPath:NSStringFromSelector(@selector(canTag)) options:NSKeyValueObservingOptionNew context:NULL];
     }
     return self;
 }
@@ -63,17 +64,13 @@
     [self.view addSubview:self.headerView];
 }
 
--(void)disableActionBar
-{
-    [actionBar setBackgroundColor:[UIColor lightGrayColor]];
-}
-
 #pragma mark Abstract methods implemented
 -(UITableViewCell *) cellForIndexRow:(NSInteger)indexRow
 {
     TagCell *cell = [[TagCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CELL_ID_TAG_CELL];
     LECTagCellViewModel *cellViewModel = [[self tableData] objectAtIndex:indexRow];
     [cell populateFor:cellViewModel];
+    [cell renderProgressBar:cellViewModel.progressPercentage];
     return (UITableViewCell *)cell;
 }
 
@@ -95,6 +92,7 @@
 -(void) didSelectCellAt:(NSInteger)index
 {
     [viewModel goToTag:index];
+    [self.tableView reloadData];
 }
 
 -(void) actionBarPressed

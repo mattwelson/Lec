@@ -100,6 +100,19 @@
     self.canTag = YES;
     LECTagCellViewModel *tagCVM = self.tableData[index];
     [[LECAudioService sharedAudioService] goToTime:[tagCVM time]];
+    
+    for (int i = 0; i < [self.tableData count]; i ++)
+    {
+        if (i < index)
+        {
+            ((LECTagCellViewModel *)self.tableData[i]).playState = hasPlayed;
+        }
+        else
+        {
+            ((LECTagCellViewModel *)self.tableData[i]).playState = notPlayed;
+        }
+        // needs third to set is playing later
+    }
 }
 
 -(BOOL)insertTagAtCurrentTime
