@@ -21,6 +21,10 @@
 		0BA86AB818925F1800805240 /* LECColorCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BA86AB718925F1800805240 /* LECColorCollectionView.m */; };
 		730DABD418A500C000DFE3E7 /* LECParallaxService.m in Sources */ = {isa = PBXBuildFile; fileRef = 730DABD318A500C000DFE3E7 /* LECParallaxService.m */; };
 		7318CDA11898AEFD002E23A0 /* LECHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7318CDA01898AEFD002E23A0 /* LECHeaderView.m */; };
+		73331E0F18DDA705006E6D3C /* icon_cancel.png in Resources */ = {isa = PBXBuildFile; fileRef = 73331E0D18DDA705006E6D3C /* icon_cancel.png */; };
+		73331E1018DDA705006E6D3C /* icon_cancel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 73331E0E18DDA705006E6D3C /* icon_cancel@2x.png */; };
+		73331E1318DDA72B006E6D3C /* icon_checkmark.png in Resources */ = {isa = PBXBuildFile; fileRef = 73331E1118DDA72B006E6D3C /* icon_checkmark.png */; };
+		73331E1418DDA72B006E6D3C /* icon_checkmark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 73331E1218DDA72B006E6D3C /* icon_checkmark@2x.png */; };
 		733C9BC618AAEE57007E92B6 /* LECAnimationService.m in Sources */ = {isa = PBXBuildFile; fileRef = 733C9BC518AAEE57007E92B6 /* LECAnimationService.m */; };
 		733C9BD218AE0423007E92B6 /* Lecture.m in Sources */ = {isa = PBXBuildFile; fileRef = 733C9BD118AE0423007E92B6 /* Lecture.m */; };
 		733C9BD518AE0424007E92B6 /* Tag.m in Sources */ = {isa = PBXBuildFile; fileRef = 733C9BD418AE0424007E92B6 /* Tag.m */; };
@@ -40,15 +44,9 @@
 		8BE7581D188B48DD007B6C02 /* LECTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BE7581C188B48DD007B6C02 /* LECTableView.m */; };
 		8BE75820188B4EA5007B6C02 /* LECCourseViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BE7581F188B4EA5007B6C02 /* LECCourseViewModel.m */; };
 		8BE75823188B4F23007B6C02 /* LECLectureViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BE75822188B4F23007B6C02 /* LECLectureViewModel.m */; };
-		8BE75828188B508D007B6C02 /* icon_cancel.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BE75824188B508D007B6C02 /* icon_cancel.png */; };
-		8BE75829188B508D007B6C02 /* icon_cancel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BE75825188B508D007B6C02 /* icon_cancel@2x.png */; };
-		8BE7582A188B508D007B6C02 /* icon_checkmark.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BE75826188B508D007B6C02 /* icon_checkmark.png */; };
-		8BE7582B188B508D007B6C02 /* icon_checkmark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BE75827188B508D007B6C02 /* icon_checkmark@2x.png */; };
 		BBB5884F18BC34BF00845089 /* nav_settings_btn.png in Resources */ = {isa = PBXBuildFile; fileRef = BBB5884D18BC34BF00845089 /* nav_settings_btn.png */; };
 		BBB5885018BC34BF00845089 /* nav_settings_btn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBB5884E18BC34BF00845089 /* nav_settings_btn@2x.png */; };
 		C9467BAD18A71D46001AB03B /* LECTagCellViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C9467BAC18A71D46001AB03B /* LECTagCellViewModel.m */; };
-		C9605CA21889F3B500F3DE57 /* Course.m in Sources */ = {isa = PBXBuildFile; fileRef = C9605CA11889F3B500F3DE57 /* Course.m */; };
-		C9605CA81889F3B600F3DE57 /* Tag.m in Sources */ = {isa = PBXBuildFile; fileRef = C9605CA71889F3B600F3DE57 /* Tag.m */; };
 		C9605CAB1889F4B800F3DE57 /* LECBaseViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C9605CAA1889F4B800F3DE57 /* LECBaseViewModel.m */; };
 		C9605CAE1889F5AD00F3DE57 /* LECHomeViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C9605CAD1889F5AD00F3DE57 /* LECHomeViewModel.m */; };
 		C9605CB21889F6CC00F3DE57 /* LECBaseCellViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C9605CB11889F6CC00F3DE57 /* LECBaseCellViewModel.m */; };
@@ -117,6 +115,10 @@
 		7318CD9F1898AEFD002E23A0 /* LECHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LECHeaderView.h; path = Views/LECHeaderView.h; sourceTree = "<group>"; };
 		7318CDA01898AEFD002E23A0 /* LECHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LECHeaderView.m; path = Views/LECHeaderView.m; sourceTree = "<group>"; };
 		73275013188BC5D400F5CB04 /* LECDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LECDefines.h; sourceTree = "<group>"; };
+		73331E0D18DDA705006E6D3C /* icon_cancel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_cancel.png; sourceTree = "<group>"; };
+		73331E0E18DDA705006E6D3C /* icon_cancel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_cancel@2x.png"; sourceTree = "<group>"; };
+		73331E1118DDA72B006E6D3C /* icon_checkmark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_checkmark.png; sourceTree = "<group>"; };
+		73331E1218DDA72B006E6D3C /* icon_checkmark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_checkmark@2x.png"; sourceTree = "<group>"; };
 		733C9BC418AAEE57007E92B6 /* LECAnimationService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LECAnimationService.h; path = Assets/LECAnimationService.h; sourceTree = "<group>"; };
 		733C9BC518AAEE57007E92B6 /* LECAnimationService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LECAnimationService.m; path = Assets/LECAnimationService.m; sourceTree = "<group>"; };
 		733C9BD018AE0423007E92B6 /* Lecture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Lecture.h; path = DataModels/Lecture.h; sourceTree = "<group>"; };
@@ -147,18 +149,10 @@
 		8BE7581F188B4EA5007B6C02 /* LECCourseViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LECCourseViewModel.m; path = ViewModels/LECCourseViewModel.m; sourceTree = "<group>"; };
 		8BE75821188B4F23007B6C02 /* LECLectureViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LECLectureViewModel.h; path = ViewModels/LECLectureViewModel.h; sourceTree = "<group>"; };
 		8BE75822188B4F23007B6C02 /* LECLectureViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LECLectureViewModel.m; path = ViewModels/LECLectureViewModel.m; sourceTree = "<group>"; };
-		8BE75824188B508D007B6C02 /* icon_cancel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_cancel.png; sourceTree = "<group>"; };
-		8BE75825188B508D007B6C02 /* icon_cancel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_cancel@2x.png"; sourceTree = "<group>"; };
-		8BE75826188B508D007B6C02 /* icon_checkmark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_checkmark.png; sourceTree = "<group>"; };
-		8BE75827188B508D007B6C02 /* icon_checkmark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_checkmark@2x.png"; sourceTree = "<group>"; };
 		BBB5884D18BC34BF00845089 /* nav_settings_btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = nav_settings_btn.png; path = Lec/nav_settings_btn.png; sourceTree = SOURCE_ROOT; };
 		BBB5884E18BC34BF00845089 /* nav_settings_btn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "nav_settings_btn@2x.png"; path = "Lec/nav_settings_btn@2x.png"; sourceTree = SOURCE_ROOT; };
 		C9467BAB18A71D46001AB03B /* LECTagCellViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LECTagCellViewModel.h; path = "Cell View Models/LECTagCellViewModel.h"; sourceTree = "<group>"; };
 		C9467BAC18A71D46001AB03B /* LECTagCellViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LECTagCellViewModel.m; path = "Cell View Models/LECTagCellViewModel.m"; sourceTree = "<group>"; };
-		C9605CA01889F3B500F3DE57 /* Course.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Course.h; path = DataModels/Course.h; sourceTree = "<group>"; };
-		C9605CA11889F3B500F3DE57 /* Course.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Course.m; path = DataModels/Course.m; sourceTree = "<group>"; };
-		C9605CA61889F3B600F3DE57 /* Tag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Tag.h; path = DataModels/Tag.h; sourceTree = "<group>"; };
-		C9605CA71889F3B600F3DE57 /* Tag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Tag.m; path = DataModels/Tag.m; sourceTree = "<group>"; };
 		C9605CA91889F4B800F3DE57 /* LECBaseViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LECBaseViewModel.h; path = ViewModels/LECBaseViewModel.h; sourceTree = "<group>"; };
 		C9605CAA1889F4B800F3DE57 /* LECBaseViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LECBaseViewModel.m; path = ViewModels/LECBaseViewModel.m; sourceTree = "<group>"; };
 		C9605CAC1889F5AD00F3DE57 /* LECHomeViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LECHomeViewModel.h; path = ViewModels/LECHomeViewModel.h; sourceTree = "<group>"; };
@@ -268,10 +262,10 @@
 			children = (
 				BBB5884D18BC34BF00845089 /* nav_settings_btn.png */,
 				BBB5884E18BC34BF00845089 /* nav_settings_btn@2x.png */,
-				8BE75824188B508D007B6C02 /* icon_cancel.png */,
-				8BE75825188B508D007B6C02 /* icon_cancel@2x.png */,
-				8BE75826188B508D007B6C02 /* icon_checkmark.png */,
-				8BE75827188B508D007B6C02 /* icon_checkmark@2x.png */,
+				73331E0D18DDA705006E6D3C /* icon_cancel.png */,
+				73331E0E18DDA705006E6D3C /* icon_cancel@2x.png */,
+				73331E1118DDA72B006E6D3C /* icon_checkmark.png */,
+				73331E1218DDA72B006E6D3C /* icon_checkmark@2x.png */,
 				0B6BD59918891B1E00A7D8F9 /* nav_add_btn.png */,
 				0B6BD59A18891B1E00A7D8F9 /* nav_add_btn@2x.png */,
 			);
@@ -608,23 +602,23 @@
 				73CD6EB918961B6900F183C7 /* Icons.plist in Resources */,
 				C9605CC0188A11D300F3DE57 /* Colours.plist in Resources */,
 				73CD6EBD1896328600F183C7 /* subject_cs@2x.png in Resources */,
-				8BE75829188B508D007B6C02 /* icon_cancel@2x.png in Resources */,
 				C982027718A2FE4500256A7E /* icon_mic.png in Resources */,
 				738FB16C189DF33200DBF8F8 /* subject_finance.png in Resources */,
+				73331E1418DDA72B006E6D3C /* icon_checkmark@2x.png in Resources */,
 				738FB172189DF33D00DBF8F8 /* subject_chem.png in Resources */,
-				8BE75828188B508D007B6C02 /* icon_cancel.png in Resources */,
 				0B6BD59B18891B1E00A7D8F9 /* nav_add_btn.png in Resources */,
 				0B6BD5911889157000A7D8F9 /* RecordViewController.xib in Resources */,
 				0B6BD58C1889155A00A7D8F9 /* CourseViewController.xib in Resources */,
 				0B6BD5961889158500A7D8F9 /* PlaybackViewController.xib in Resources */,
 				738FB16F189DF33200DBF8F8 /* subject_music@2x.png in Resources */,
+				73331E1318DDA72B006E6D3C /* icon_checkmark.png in Resources */,
 				0B6BD587188914B300A7D8F9 /* MainViewController.xib in Resources */,
 				BBB5885018BC34BF00845089 /* nav_settings_btn@2x.png in Resources */,
-				8BE7582B188B508D007B6C02 /* icon_checkmark@2x.png in Resources */,
 				C9B0C5F2187FBE7F002D4A63 /* Images.xcassets in Resources */,
-				8BE7582A188B508D007B6C02 /* icon_checkmark.png in Resources */,
 				C982027818A2FE4500256A7E /* icon_mic@2x.png in Resources */,
 				0B6BD59C18891B1E00A7D8F9 /* nav_add_btn@2x.png in Resources */,
+				73331E0F18DDA705006E6D3C /* icon_cancel.png in Resources */,
+				73331E1018DDA705006E6D3C /* icon_cancel@2x.png in Resources */,
 				BBB5884F18BC34BF00845089 /* nav_settings_btn.png in Resources */,
 				73CD6EBC1896328600F183C7 /* subject_cs.png in Resources */,
 			);
@@ -660,7 +654,6 @@
 				8BE75820188B4EA5007B6C02 /* LECCourseViewModel.m in Sources */,
 				730DABD418A500C000DFE3E7 /* LECParallaxService.m in Sources */,
 				C9467BAD18A71D46001AB03B /* LECTagCellViewModel.m in Sources */,
-				C9FBD62B1894B02100D1A7D6 /* Lecture.m in Sources */,
 				C9605CAE1889F5AD00F3DE57 /* LECHomeViewModel.m in Sources */,
 				C9FBD62E1894B26B00D1A7D6 /* LECLectureCellViewModel.m in Sources */,
 				C9605CB21889F6CC00F3DE57 /* LECBaseCellViewModel.m in Sources */,

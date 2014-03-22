@@ -96,12 +96,7 @@
     [pullDownAddReminder setFont:[UIFont fontWithName:DEFAULTFONT size:15]];
     [pullDownAddReminder setTextColor:[UIColor grayColor]];
     [pullDownAddReminder setText:@"Pull Down to Add Course"];
-    [self pullDownReminderAdd];
-}
-
--(void)pullDownReminderAdd{
     [self.view addSubview:pullDownAddReminder];
-
 }
 
 - (void) courseTableViewSetup
@@ -317,13 +312,15 @@
         }
         else {
             pullDownAddReminder.alpha = 0.0;
-            
         }
         pullDownAddReminder.frame = CGRectMake(0, 64, SCREEN_WIDTH, -scrollView.contentOffset.y - 64);
-        
     }
     if (scrollView.contentOffset.y < -135) {
         scrollView.contentOffset = CGPointMake(0, -135);
+        [pullDownAddReminder setText:@"Release to Add Course"];
+    }
+    else {
+        [pullDownAddReminder setText:@"Pull Down to Add Course"];
     }
 }
 

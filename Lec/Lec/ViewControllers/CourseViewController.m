@@ -47,6 +47,8 @@
 - (void) viewDidAppear:(BOOL)animated
 {
     // TODO: Fix it up so the mic gets swapped to a chevron where appropriate
+//    CGPoint point = CGPointZero;
+//    [self.tableView setContentOffset:point animated:YES];
 }
 
 - (void) navigationTopBar
