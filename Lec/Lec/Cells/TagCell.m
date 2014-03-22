@@ -83,7 +83,7 @@ static void * localContext = &localContext;
     [vm addObserver:self forKeyPath:NSStringFromSelector(@selector(name)) options:NSKeyValueObservingOptionNew context:localContext];
 }
 
--(void)deallocObservation:(LECTagCellViewModel *)vm;
+-(void)deallocObservation:(LECTagCellViewModel *)vm
 {
     @try {
         [vm removeObserver:self forKeyPath:NSStringFromSelector(@selector(name))];
