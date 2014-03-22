@@ -19,9 +19,11 @@ static void * localContext = &localContext;
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         // Initialization code
-        self.tagNameLabel = [[UITextField alloc]initWithFrame:CGRectMake(20, 10, self.frame.size.width-80, 40)];
+        self.tagNameLabel = [[UITextField alloc]initWithFrame:CGRectMake(20, 8, self.frame.size.width-30, 40)];
         self.tagNameLabel.textColor = [UIColor whiteColor];
         [self.tagNameLabel setDelegate:self];
+        [self.tagNameLabel adjustsFontSizeToFitWidth];
+        self.tagNameLabel.clearButtonMode = UITextFieldViewModeWhileEditing;
         self.tagNameLabel.enabled = NO;
         self.tagNameLabel.font = [UIFont fontWithName:DEFAULTFONT size:COURSENAMEECELLFONTSIZE];
         [self addSubview:self.tagNameLabel];
