@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "Lecture.h"
 #import "PullupTableViewController.h"
+#import "TagCell.h"
 
-@interface PlaybackViewController : PullupTableViewController
+@interface PlaybackViewController : PullupTableViewController<RenameTagDelegate>
 
 -(id)initWithLecture:(Lecture *)lecture;
 

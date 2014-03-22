@@ -81,12 +81,15 @@
     // Dispose of any resources that can be recreated.
 }
 
+
 #pragma mark TableView stuff!
+
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == actionSection) [self actionBarPressed];
-    else [self didSelectCellAt:indexPath.row];
+    else [self didSelectCellAt:indexPath.row]; [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -167,9 +170,9 @@
     [self.headerView changeAlpha:self.tableView.contentOffset.y];
     [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor colorWithWhite:1.0 alpha:-0.3+(self.tableView.contentOffset.y/100)], NSForegroundColorAttributeName, [UIFont fontWithName:DEFAULTFONT size:HEADERSIZE], NSFontAttributeName, nil]];
     
-    if (scrollView.contentOffset.y < 0) {
-        scrollView.contentOffset = CGPointMake(0, 0);
-    }
+//    if (scrollView.contentOffset.y < 0) {
+//        scrollView.contentOffset = CGPointMake(0, 0);
+//    }
     
 }
 
@@ -201,6 +204,7 @@
 {
     [self abstractMethod:@"createHeaderView"];
 }
+
 
 -(void) didSelectCellAt:(NSInteger)index
 {

@@ -9,7 +9,6 @@
 #import "PlaybackViewController.h"
 #import "LECImportHeader.h"
 #import "LECActionBar.h"
-#import "TagCell.h"
 
 @interface PlaybackViewController (){
     LECLectureViewModel *viewModel;
@@ -67,13 +66,48 @@
     NSLog(@"Disable the action bar you fools!");
 }
 
+#pragma mark Rename Tag Delegate
+
+-(void) keyboardEndEditing:(NSString *)newTagDescription currentTag:(NSInteger)currentTag{
+    [viewModel editTagName:newTagDescription tagNumber:currentTag];
+}
+
 #pragma mark Abstract methods implemented
 -(UITableViewCell *) cellForIndexRow:(NSInteger)indexRow
 {
     TagCell *cell = [[TagCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CELL_ID_TAG_CELL];
     LECTagCellViewModel *cellViewModel = [[self tableData] objectAtIndex:indexRow];
     [cell populateFor:cellViewModel];
+    
+    UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(didEditCellAt:)];
+    longPress.minimumPressDuration = 1.0;
+    [cell addGestureRecognizer:longPress];
+    
     return (UITableViewCell *)cell;
+}
+
+
+-(void)didEditCellAt:(UILongPressGestureRecognizer *)gestureRecognizer
+{
+    if (gestureRecognizer.state != UIGestureRecognizerStateChanged) {
+        gestureRecognizer.enabled = NO; // Prevent any more state updates so you only get this one
+        
+        CGPoint p = [gestureRecognizer locationInView:self.tableView];
+        
+        NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:p];
+        [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
+        
+        if (indexPath == nil){
+            NSLog(@"couldn't find index path");
+        } else {
+            // get the cell at indexPath (the one you long pressed)
+            TagCell *tagCell = (TagCell*)[self.tableView cellForRowAtIndexPath:indexPath];
+            tagCell.renameTagDelegate = self;
+            [tagCell editDescription:indexPath.row];
+        }
+        gestureRecognizer.enabled = YES; // reenable the gesture recognizer for the next long press
+        return;
+    }
 }
 
 -(void)deleteObjectFromViewModel:(NSInteger)index

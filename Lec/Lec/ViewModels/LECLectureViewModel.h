@@ -28,6 +28,7 @@
 -(void) prepareForPlaybackWithCompletion:(void (^)(void))block;
 -(void) startAudioPlayback;
 -(void) stopAudioPlayback;
+-(void)editTagName:(NSString *)tagName tagNumber:(NSInteger)index;
 -(void) goToTag:(NSInteger)index;
 -(void) insertTagAtCurrentTime;
 @end

@@ -9,11 +9,21 @@
 #import <UIKit/UIKit.h>
 #import "LECTagCellViewModel.h"
 
-@interface TagCell : UITableViewCell
+@protocol RenameTagDelegate <NSObject>
+
+-(void) keyboardEndEditing:(NSString *)newTagDescription currentTag:(NSInteger)currentTag;
+
+@end
+
+@interface TagCell : UITableViewCell <UITextFieldDelegate>
+
+@property (nonatomic, assign) id<RenameTagDelegate> renameTagDelegate;
 
 -(void)populateFor:(LECTagCellViewModel *)vm;
+-(NSString *)editDescription:(NSInteger)tagNum;
 
-@property UILabel *tagNameLabel;
+@property UITextField *tagNameLabel;
 @property UILabel *tagDescriptionLabel;
+@property NSInteger currentEditTag;
 
 @end

@@ -67,9 +67,14 @@
 {
     Tag *tag = [[LECDatabaseService sharedDBService] newTagForLecture:self.lecture];
     tag.currentTime = [[LECAudioService sharedAudioService] getCurrentTime];
-    tag.name = @"Hi, I'm a tag";
+    NSString *tagString = [NSString stringWithFormat:@"Tag %lu", (unsigned long)self.tableData.count+1];
+    tag.name = tagString;
     [[LECDatabaseService sharedDBService] saveChanges];
     [self.tableData addObject:[LECTagCellViewModel tagCellVMWithTag:tag andColour:self.colourString]];
+}
+
+-(void)editTagName{
+    
 }
 
 #pragma mark Playback
@@ -86,6 +91,12 @@
 -(void) stopAudioPlayback
 {
     [[LECAudioService sharedAudioService] stopPlayback];
+}
+
+-(void)editTagName:(NSString *)tagName tagNumber:(NSInteger)index{
+    LECTagCellViewModel *tagCVM = self.tableData[index];
+    [tagCVM.tag setName:tagName];
+    [[LECDatabaseService sharedDBService] saveChanges];
 }
 
 -(void)goToTag:(NSInteger)index
