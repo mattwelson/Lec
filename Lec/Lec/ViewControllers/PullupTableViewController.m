@@ -159,8 +159,10 @@
     if (editingStyle == UITableViewCellEditingStyleDelete)
     {
         [self deleteObjectFromViewModel:indexPath.row];
-        [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-        [self. tableView reloadData];
+        //[self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+        [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+#warning If we remove the reload data, the animation works, not sure what implications it may have though
+        //[self.tableView reloadData];
     }
 }
 

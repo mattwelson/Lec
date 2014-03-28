@@ -44,11 +44,13 @@
     return self;
 }
 
-- (void) viewDidAppear:(BOOL)animated
+- (void) viewWillAppear:(BOOL)animated
 {
     // TODO: Fix it up so the mic gets swapped to a chevron where appropriate
-//    CGPoint point = CGPointZero;
-//    [self.tableView setContentOffset:point animated:YES];
+    
+    //Hacked this so it moves the tableview slightly, when going to it, this forces it to scroll, hence recalculates the titlebar
+    CGPoint point = CGPointMake(0, self.tableView.contentOffset.y-1);
+    [self.tableView setContentOffset:point animated:YES];
     
 }
 

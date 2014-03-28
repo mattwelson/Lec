@@ -42,6 +42,12 @@
     return self;
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    //Make sure it moves to top, to get rid of the awkward nav bar positioning sometimes
+    CGPoint point = CGPointMake(0, 1);
+    [self.tableView setContentOffset:point animated:YES];
+}
+
 -(void)viewWillDisappear:(BOOL)animated
 {
     [viewModel stopAudioPlayback];
