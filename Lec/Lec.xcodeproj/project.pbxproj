@@ -41,6 +41,7 @@
 		73CD6EB918961B6900F183C7 /* Icons.plist in Resources */ = {isa = PBXBuildFile; fileRef = 73CD6EB818961B6900F183C7 /* Icons.plist */; };
 		73CD6EBC1896328600F183C7 /* subject_cs.png in Resources */ = {isa = PBXBuildFile; fileRef = 73CD6EBA1896328600F183C7 /* subject_cs.png */; };
 		73CD6EBD1896328600F183C7 /* subject_cs@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 73CD6EBB1896328600F183C7 /* subject_cs@2x.png */; };
+		73F86B0818E53DA800BAD7B8 /* LECPlaybackControls.m in Sources */ = {isa = PBXBuildFile; fileRef = 73F86B0718E53DA800BAD7B8 /* LECPlaybackControls.m */; };
 		8BE7581D188B48DD007B6C02 /* LECTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BE7581C188B48DD007B6C02 /* LECTableView.m */; };
 		8BE75820188B4EA5007B6C02 /* LECCourseViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BE7581F188B4EA5007B6C02 /* LECCourseViewModel.m */; };
 		8BE75823188B4F23007B6C02 /* LECLectureViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BE75822188B4F23007B6C02 /* LECLectureViewModel.m */; };
@@ -142,6 +143,8 @@
 		73CD6EB818961B6900F183C7 /* Icons.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Icons.plist; path = Assets/Icons.plist; sourceTree = "<group>"; };
 		73CD6EBA1896328600F183C7 /* subject_cs.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = subject_cs.png; sourceTree = "<group>"; };
 		73CD6EBB1896328600F183C7 /* subject_cs@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "subject_cs@2x.png"; sourceTree = "<group>"; };
+		73F86B0618E53DA800BAD7B8 /* LECPlaybackControls.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LECPlaybackControls.h; path = Views/LECPlaybackControls.h; sourceTree = "<group>"; };
+		73F86B0718E53DA800BAD7B8 /* LECPlaybackControls.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LECPlaybackControls.m; path = Views/LECPlaybackControls.m; sourceTree = "<group>"; };
 		8B523BB4188B2FAE002796A6 /* LECTableViewDataSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = LECTableViewDataSource.h; path = ViewModels/LECTableViewDataSource.h; sourceTree = "<group>"; };
 		8BE7581B188B48DD007B6C02 /* LECTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LECTableView.h; path = Views/LECTableView.h; sourceTree = "<group>"; };
 		8BE7581C188B48DD007B6C02 /* LECTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LECTableView.m; path = Views/LECTableView.m; sourceTree = "<group>"; };
@@ -362,6 +365,8 @@
 				7318CDA01898AEFD002E23A0 /* LECHeaderView.m */,
 				C982027A18A32B2100256A7E /* LECActionBar.h */,
 				C982027B18A32B2100256A7E /* LECActionBar.m */,
+				73F86B0618E53DA800BAD7B8 /* LECPlaybackControls.h */,
+				73F86B0718E53DA800BAD7B8 /* LECPlaybackControls.m */,
 			);
 			name = Partials;
 			sourceTree = "<group>";
@@ -642,6 +647,7 @@
 				733C9BD518AE0424007E92B6 /* Tag.m in Sources */,
 				0B6BD5A018891FB300A7D8F9 /* CourseCell.m in Sources */,
 				C9FBD6281894A2B700D1A7D6 /* Example.m in Sources */,
+				73F86B0818E53DA800BAD7B8 /* LECPlaybackControls.m in Sources */,
 				C9B0C5E9187FBE7F002D4A63 /* main.m in Sources */,
 				C9B0C5F0187FBE7F002D4A63 /* Lec.xcdatamodeld in Sources */,
 				8BE7581D188B48DD007B6C02 /* LECTableView.m in Sources */,

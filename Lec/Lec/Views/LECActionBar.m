@@ -50,6 +50,16 @@
     [tagBar addSubview:button];
     [tagBar setBackgroundColor:[UIColor whiteColor]];
     
+    CALayer *topBorder = [CALayer layer];
+    topBorder.frame = CGRectMake(0.0f, 0.0f, tagBar.frame.size.width, 1.0f);
+    topBorder.backgroundColor = [UIColor lightGrayColor].CGColor;
+    [tagBar.layer addSublayer:topBorder];
+    
+    CALayer *bottomBorder = [CALayer layer];
+    bottomBorder.frame = CGRectMake(0.0f, tagBar.frame.size.height, tagBar.frame.size.width, 1.0f);
+    bottomBorder.backgroundColor = [UIColor lightGrayColor].CGColor;
+    [tagBar.layer addSublayer:bottomBorder];
+    
     return tagBar;
 }
 

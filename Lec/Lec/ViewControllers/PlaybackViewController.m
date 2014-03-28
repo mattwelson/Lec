@@ -36,6 +36,8 @@
         noSections = 2;
         
         actionBar = [LECActionBar tagBarWithTarget:self andSelector:@selector(actionBarPressed)];
+        playbackBar = [[LECPlaybackControls alloc]initWithFrame:CGRectMake(0, SCREEN_HEIGHT-40, SCREEN_WIDTH, 40)];
+        [self.view addSubview:playbackBar];
     }
     return self;
 }

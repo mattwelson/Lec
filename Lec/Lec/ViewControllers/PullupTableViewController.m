@@ -86,7 +86,10 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == actionSection) [self actionBarPressed];
-    else [self didSelectCellAt:indexPath.row];
+    else {
+        [self didSelectCellAt:indexPath.row];
+        [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+    }
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -142,13 +145,12 @@
 
 -(CGFloat) tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-    return hasFooter && section == contentSection ? 75 : 0;
+    return hasFooter && section == contentSection ? 85 : 0;
 }
 
 -(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
     if (!(hasFooter && section == contentSection)) return nil;
-    
     return (UIView *)actionBar;
 }
 
@@ -167,9 +169,9 @@
     [self.headerView changeAlpha:self.tableView.contentOffset.y];
     [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor colorWithWhite:1.0 alpha:-0.3+(self.tableView.contentOffset.y/100)], NSForegroundColorAttributeName, [UIFont fontWithName:DEFAULTFONT size:HEADERSIZE], NSFontAttributeName, nil]];
     
-    if (scrollView.contentOffset.y < 0) {
-        scrollView.contentOffset = CGPointMake(0, 0);
-    }
+//    if (scrollView.contentOffset.y < 0) {
+//        scrollView.contentOffset = CGPointMake(0, 0);
+//    }
     
 }
 

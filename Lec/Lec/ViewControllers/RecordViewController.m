@@ -39,9 +39,19 @@
     return self;
 }
 
+-(void)viewDidAppear:(BOOL)animated{
+    self.navigationController.navigationBar.backIndicatorImage = [UIImage imageNamed:@"icon_cancel.png"];
+    self.navigationController.navigationBar.backIndicatorTransitionMaskImage = [UIImage imageNamed:@"icon_cancel.png"];
+    self.navigationController.interactivePopGestureRecognizer.enabled = NO;
+}
+
+
 -(void)viewWillDisappear:(BOOL)animated
 {
     [viewModel stopRecordingAudio];
+    self.navigationController.navigationBar.backIndicatorImage = NULL;
+    self.navigationController.navigationBar.backIndicatorTransitionMaskImage = NULL;
+    self.navigationController.interactivePopGestureRecognizer.enabled = YES;
 }
 
 - (void)didReceiveMemoryWarning

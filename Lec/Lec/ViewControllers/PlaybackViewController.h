@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "Lecture.h"
 #import "PullupTableViewController.h"
+#import "LECPlaybackControls.h"
 
 @interface PlaybackViewController : PullupTableViewController
 

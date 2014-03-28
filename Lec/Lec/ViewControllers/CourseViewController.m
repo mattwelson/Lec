@@ -49,6 +49,7 @@
     // TODO: Fix it up so the mic gets swapped to a chevron where appropriate
 //    CGPoint point = CGPointZero;
 //    [self.tableView setContentOffset:point animated:YES];
+    
 }
 
 - (void) navigationTopBar
@@ -140,8 +141,6 @@
         [tmp addTarget:self action:@selector(iconSelected:) forControlEvents:UIControlEventTouchUpInside];
         [iconView addSubview:tmp];
     }
-    
-    
     
     [courseName setTextColor:[UIColor whiteColor]];
     [descriptionName setTextColor:[UIColor whiteColor]];
