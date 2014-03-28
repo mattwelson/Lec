@@ -86,7 +86,6 @@
 }
 
 -(void)changeAlpha:(CGFloat) tableOffset{
-    NSLog(@"Offset: %f", tableOffset);
     if (tableOffset > 0 && tableOffset < 140) {
         subjectImg.alpha = 1-(tableOffset/50); // different to be more dynamic
         titleLabel.alpha = 1-(tableOffset/75);
