@@ -44,7 +44,6 @@ static void * localContext = &localContext;
         [self setFrame:frame];
         [[self contentView] setFrame:frame];
         
-        
         if(PARALLAX_ON) {
             [[LECParallaxService sharedParallaxService]addParallaxToView:self.courseNameLabel strength:1];
             [[LECParallaxService sharedParallaxService]addParallaxToView:self.courseDescriptionLabel strength:1];
@@ -60,6 +59,10 @@ static void * localContext = &localContext;
     self.courseDescriptionLabel.text = [vm subText];
     [[LECIconService sharedIconService] retrieveIcon:[vm icon] toView:self.iconImage];
     [[LECColourService sharedColourService] addGradientForColour:[vm colourString] toView:self.backgroundView];
+    
+    self.selectedView = [[UIView alloc]init];
+    self.selectedView.backgroundColor = [[LECColourService sharedColourService]highlightColourFor:[vm colourString]];
+    self.selectedBackgroundView = self.selectedView;
     
     [self setupObservingOf:vm];
 }
@@ -98,7 +101,6 @@ static void * localContext = &localContext;
     if ([keyPath isEqualToString:NSStringFromSelector(@selector(colourString))])
     {
         [[LECColourService sharedColourService] changeGradientToColour:change[NSKeyValueChangeNewKey] forView:self.backgroundView];
-
     }
     
     if ([keyPath isEqualToString:NSStringFromSelector(@selector(icon))])
