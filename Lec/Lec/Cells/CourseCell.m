@@ -101,6 +101,8 @@ static void * localContext = &localContext;
     if ([keyPath isEqualToString:NSStringFromSelector(@selector(colourString))])
     {
         [[LECColourService sharedColourService] changeGradientToColour:change[NSKeyValueChangeNewKey] forView:self.backgroundView];
+        self.selectedView.backgroundColor = [[LECColourService sharedColourService]highlightColourFor:change[NSKeyValueChangeNewKey]];
+        self.selectedBackgroundView = self.selectedView;
     }
     
     if ([keyPath isEqualToString:NSStringFromSelector(@selector(icon))])
