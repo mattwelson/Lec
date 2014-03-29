@@ -11,6 +11,11 @@
 
 @interface LECPlaybackControls : UIView
 
+@property UIButton *playPauseButton;
+@property UIButton *fastForwardButton;
+@property UIButton *rewindButton;
+@property UIButton *twoTimesForwardButton;
+
 +(id)playbackControlSetup;
 
 @end

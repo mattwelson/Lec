@@ -144,7 +144,7 @@
             visibleCells = [self.courseTableView indexPathsForVisibleRows];
         }
         if ([visibleCells containsObject:indexPath] && loadedCells < visibleCells.count){
-            double delay = 0.6+(loadedCells*0.1);
+            double delay = 0.5+(loadedCells*0.1);
             [[LECAnimationService sharedAnimationService] addAlphaToView:cell.backgroundView withSpeed:0.35 withDelay:delay];
             [[LECAnimationService sharedAnimationService] addSpringAnimationToView:cell.contentView withSpeed:1.0 withDelay:delay withDamping:0.6 withVelocity:0.1 withDirectionFromLeft:YES];
            //delay 0.6+(loadedCells*0.1)
