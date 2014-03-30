@@ -52,12 +52,12 @@
     
     CALayer *topBorder = [CALayer layer];
     topBorder.frame = CGRectMake(0.0f, 0.0f, tagBar.frame.size.width, 1.0f);
-    topBorder.backgroundColor = [UIColor lightGrayColor].CGColor;
+    topBorder.backgroundColor = [UIColor colorWithWhite:0.848 alpha:1.000].CGColor;
     [tagBar.layer addSublayer:topBorder];
     
     CALayer *bottomBorder = [CALayer layer];
     bottomBorder.frame = CGRectMake(0.0f, tagBar.frame.size.height, tagBar.frame.size.width, 1.0f);
-    bottomBorder.backgroundColor = [UIColor lightGrayColor].CGColor;
+    bottomBorder.backgroundColor = [UIColor colorWithWhite:0.848 alpha:1.000].CGColor;
     [tagBar.layer addSublayer:bottomBorder];
     
     return tagBar;

@@ -8,14 +8,18 @@
 
 #import <UIKit/UIKit.h>
 #import "LECDefines.h"
+#import "LECLectureViewModel.h"
 
 @interface LECPlaybackControls : UIView
+
+@property LECLectureViewModel *viewModel;
 
 @property UIButton *playPauseButton;
 @property UIButton *fastForwardButton;
 @property UIButton *rewindButton;
 @property UIButton *twoTimesForwardButton;
 
+- (id)initWithFrame:(CGRect)frame andWithViewModel:(LECLectureViewModel *)vm;
 +(id)playbackControlSetup;
 
 @end
