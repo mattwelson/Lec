@@ -98,6 +98,23 @@ static LECAudioService *sharedService;
     assert(![audioPlayer isPlaying]);
 }
 
+-(void)pausePlayback{
+    [audioPlayer pause];
+}
+
+-(void)resumePlayback{
+    [audioPlayer play];
+}
+
+-(BOOL)isPlaying{
+    if ([audioPlayer isPlaying]) {
+        return YES;
+    }
+    else {
+        return NO;
+    }
+}
+
 #pragma mark Tag Stuff
 -(void)goToTime:(NSNumber *)time
 {

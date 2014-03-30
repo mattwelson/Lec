@@ -8,6 +8,7 @@
 
 #import "LECPlaybackControls.h"
 #import "LECColourService.h"
+#import "LECAudioService.h"
 
 @implementation LECPlaybackControls
 
@@ -40,8 +41,14 @@
     
     self.playPauseButton = [UIButton buttonWithType:UIButtonTypeCustom];
     self.playPauseButton.frame = CGRectMake(110, 5, 30, 30);
-    [self.playPauseButton setImage:[[UIImage imageNamed:@"playback_play_btn.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
+    if ([[LECAudioService sharedAudioService]isPlaying]) {
+        [self.playPauseButton setImage:[[UIImage imageNamed:@"playback_pause_btn.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
+    }
+    else {
+        [self.playPauseButton setImage:[[UIImage imageNamed:@"playback_play_btn.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
+    }
     [self.playPauseButton setTintColor:[[LECColourService sharedColourService] baseColourFor:[self.viewModel colourString]]];
+    [self.playPauseButton addTarget:self action:@selector(playPauseButtonPressed:) forControlEvents:UIControlEventTouchDown];
     //[self.playPauseButton setTintColor:[UIColor whiteColor]];
     [self addSubview:self.playPauseButton];
     
@@ -60,6 +67,19 @@
 
     //[self.twoTimesForwardButton setImage:[UIImage imageNamed:@"playback_fastforward_btn.png"] forState:UIControlStateNormal];
     [self addSubview:self.twoTimesForwardButton];
+}
+
+//TODO: add the delegate for when playback finishes to change the button
+-(void)playPauseButtonPressed:(id)sender{
+    if ([[LECAudioService sharedAudioService]isPlaying]) {
+        [[LECAudioService sharedAudioService]pausePlayback];
+        [self.playPauseButton setImage:[[UIImage imageNamed:@"playback_play_btn.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
+    }
+    else {
+        [[LECAudioService sharedAudioService]resumePlayback];
+        [self.playPauseButton setImage:[[UIImage imageNamed:@"playback_pause_btn.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
+    }
+    
 }
 
 +(id)playbackControlSetup

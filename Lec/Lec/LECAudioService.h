@@ -21,6 +21,9 @@
 -(void) setupAudioPlayback:(NSString *)path withCompletion:(void (^)(void))block;
 -(void) startPlayback;
 -(void) stopPlayback;
+-(void) pausePlayback;
+-(void) resumePlayback;
+-(BOOL) isPlaying;
 
 -(void) goToTime:(NSNumber *)time;
 -(NSNumber *) getCurrentTime;
