@@ -7,6 +7,7 @@
 //
 
 #import "LECAudioService.h"
+#import "LECDefines.h"
 
 @implementation LECAudioService {
     AVAudioSession *session;
@@ -85,6 +86,7 @@ static LECAudioService *sharedService;
     [session setActive:YES error:nil];
     if ([audioPlayer prepareToPlay]) {
         [audioPlayer play];
+        [[NSNotificationCenter defaultCenter] postNotificationName:kPlayerNotification object:self];
         assert([audioPlayer isPlaying]); // TODO: Take out? Once at a production stage
     }
     else {
@@ -100,11 +102,9 @@ static LECAudioService *sharedService;
 
 -(void)pausePlayback{
     [audioPlayer pause];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kPlayerNotification object:self];
 }
 
--(void)resumePlayback{
-    [audioPlayer play];
-}
 
 -(BOOL)isPlaying{
     if ([audioPlayer isPlaying]) {
@@ -118,7 +118,7 @@ static LECAudioService *sharedService;
 #pragma mark Tag Stuff
 -(void)goToTime:(NSNumber *)time
 {
-    if (!audioPlayer.playing) [audioPlayer play];
+    if (!audioPlayer.playing) [self startPlayback];
     audioPlayer.currentTime = [time doubleValue];
 }
 

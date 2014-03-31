@@ -25,9 +25,19 @@
         topBorder.backgroundColor = [[LECColourService sharedColourService] baseColourFor:[self.viewModel colourString]].CGColor;
         [self.layer addSublayer:topBorder];
         
+        [self.viewModel prepareForPlaybackWithCompletion:^{
+            [self updateButtonImage];
+        }];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateButtonImage) name:kPlayerNotification object:[LECAudioService sharedAudioService]];
+        
         [self setupButtons];
     }
     return self;
+}
+
+-(void)dealloc{
+    [[NSNotificationCenter defaultCenter]removeObserver:self];
 }
 
 -(void)setupButtons
@@ -73,13 +83,19 @@
 -(void)playPauseButtonPressed:(id)sender{
     if ([[LECAudioService sharedAudioService]isPlaying]) {
         [[LECAudioService sharedAudioService]pausePlayback];
-        [self.playPauseButton setImage:[[UIImage imageNamed:@"playback_play_btn.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
     }
     else {
-        [[LECAudioService sharedAudioService]resumePlayback];
+        [[LECAudioService sharedAudioService]startPlayback];
+    }
+}
+
+-(void)updateButtonImage{
+    if ([[LECAudioService sharedAudioService]isPlaying]) {
         [self.playPauseButton setImage:[[UIImage imageNamed:@"playback_pause_btn.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
     }
-    
+    else {
+        [self.playPauseButton setImage:[[UIImage imageNamed:@"playback_play_btn.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
+    }
 }
 
 +(id)playbackControlSetup
