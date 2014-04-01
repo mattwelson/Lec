@@ -70,7 +70,7 @@
 
 -(void)createHeaderView
 {
-    self.headerView = [[LECHeaderView alloc] initWithLecture:viewModel];
+    self.headerView = [[LECHeaderView alloc] initWithLecture:viewModel andIsRecording:YES];
     [self.view addSubview:self.headerView];
 }
 

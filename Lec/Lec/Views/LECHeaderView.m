@@ -73,7 +73,7 @@
     return self;
 }
 
--(id)initWithLecture:(LECLectureViewModel *)lectureModel
+-(id)initWithLecture:(LECLectureViewModel *)lectureModel andIsRecording:(BOOL)isRecording
 {
     self = [self initWithFrame:CGRectMake(0, 0,[[UIScreen mainScreen] bounds].size.width, 200)];
     if (self) {

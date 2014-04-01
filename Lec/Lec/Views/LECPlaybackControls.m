@@ -9,6 +9,7 @@
 #import "LECPlaybackControls.h"
 #import "LECColourService.h"
 #import "LECAudioService.h"
+#import "LECAnimationService.h"
 
 @implementation LECPlaybackControls
 
@@ -43,7 +44,7 @@
 -(void)setupButtons
 {
     self.rewindButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.rewindButton.frame = CGRectMake(20, 5, 30, 30);
+    self.rewindButton.frame = CGRectMake(20, self.frame.size.height/2-20, 40, 40);
     [self.rewindButton setImage:[[UIImage imageNamed:@"playback_rewind_btn.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
     [self.rewindButton setTintColor:[[LECColourService sharedColourService] baseColourFor:[self.viewModel colourString]]];
     UILongPressGestureRecognizer *rwLongPress = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(rewind:)];
@@ -53,7 +54,7 @@
     [self addSubview:self.rewindButton];
     
     self.playPauseButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.playPauseButton.frame = CGRectMake(110, 5, 30, 30);
+    self.playPauseButton.frame = CGRectMake(110, self.frame.size.height/2-20, 40, 40);
     if ([[LECAudioService sharedAudioService]isPlaying]) {
         [self.playPauseButton setImage:[[UIImage imageNamed:@"playback_pause_btn.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
     }
@@ -66,7 +67,7 @@
     [self addSubview:self.playPauseButton];
     
     self.fastForwardButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.fastForwardButton.frame = CGRectMake(200, 5, 30, 30);
+    self.fastForwardButton.frame = CGRectMake(200, self.frame.size.height/2-20, 40, 40);
     [self.fastForwardButton setImage:[[UIImage imageNamed:@"playback_fastforward_btn.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
     [self.fastForwardButton setTintColor:[[LECColourService sharedColourService] baseColourFor:[self.viewModel colourString]]];
     UILongPressGestureRecognizer *ffLongPress = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(fastForward:)];
@@ -76,7 +77,7 @@
     [self addSubview:self.fastForwardButton];
     
     self.twoTimesForwardButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.twoTimesForwardButton.frame = CGRectMake(280, 5, 30, 30);
+    self.twoTimesForwardButton.frame = CGRectMake(280, self.frame.size.height/2-20, 40, 40);
     [self.twoTimesForwardButton setTitle:@"2x" forState:UIControlStateNormal];
     [self.twoTimesForwardButton.titleLabel setFont:[UIFont fontWithName:DEFAULTFONT size:18]];
     [self.twoTimesForwardButton.titleLabel setTextColor:[[LECColourService sharedColourService] baseColourFor:[self.viewModel colourString]]];
@@ -96,18 +97,22 @@
 }
 
 -(void)updateButtonImage{
-    self.playPauseButton.transform = CGAffineTransformMakeScale(1.5, 1.5);
-    [UIView animateWithDuration:0.2 animations:^{
-        if ([[LECAudioService sharedAudioService]isPlaying]) {
-            [self.playPauseButton setImage:[[UIImage imageNamed:@"playback_pause_btn.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
-            self.playPauseButton.transform = CGAffineTransformMakeScale(1, 1);
-        }
-        else {
-            [self.playPauseButton setImage:[[UIImage imageNamed:@"playback_play_btn.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
-            self.playPauseButton.transform = CGAffineTransformMakeScale(1, 1);
-        }
+    [UIView animateWithDuration:0.05 animations:^{
+        self.playPauseButton.transform = CGAffineTransformMakeScale(1.2, 1.2);
+    }completion:^(BOOL finished){
+        [UIView animateWithDuration:0.2 animations:^{
+            if ([[LECAudioService sharedAudioService]isPlaying]) {
+                [self.playPauseButton setImage:[[UIImage imageNamed:@"playback_pause_btn.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
+                self.playPauseButton.transform = CGAffineTransformMakeScale(1, 1);
+            }
+            else {
+                [self.playPauseButton setImage:[[UIImage imageNamed:@"playback_play_btn.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
+                self.playPauseButton.transform = CGAffineTransformMakeScale(1, 1);
+            }
+        }];
     }];
 }
+
 
 -(void)fastForward:(UILongPressGestureRecognizer *)sender{
     

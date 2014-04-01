@@ -35,8 +35,9 @@
         hasFooter = YES;
         noSections = 2;
         
-        actionBar = [LECActionBar tagBarWithTarget:self andSelector:@selector(actionBarPressed)];
-        playbackBar = [[LECPlaybackControls alloc]initWithFrame:CGRectMake(0, SCREEN_HEIGHT-40, SCREEN_WIDTH, 40) andWithViewModel:viewModel];
+        //actionBar = [LECActionBar tagBarWithTarget:self andSelector:@selector(actionBarPressed)];
+        
+        playbackBar = [[LECPlaybackControls alloc]initWithFrame:CGRectMake(0, SCREEN_HEIGHT-45, SCREEN_WIDTH, 45) andWithViewModel:viewModel];
         [self.view addSubview:playbackBar];
     }
     return self;
@@ -66,7 +67,7 @@
 
 -(void)createHeaderView
 {
-    self.headerView = [[LECHeaderView alloc] initWithLecture:viewModel];
+    self.headerView = [[LECHeaderView alloc] initWithLecture:viewModel andIsRecording:NO];
     [self.view addSubview:self.headerView];
 }
 

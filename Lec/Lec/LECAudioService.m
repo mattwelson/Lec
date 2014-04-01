@@ -179,7 +179,7 @@ static LECAudioService *sharedService;
 
 -(NSDictionary *)audioRecordingSettings {
     return @{
-             AVFormatIDKey: @(kAudioFormatAppleLossless),
+             AVFormatIDKey: @(kAudioFormatMPEG4AAC),
              AVSampleRateKey: @(44100.0f),
              AVNumberOfChannelsKey: @1,
              AVEncoderAudioQualityKey: @(AVAudioQualityLow)
