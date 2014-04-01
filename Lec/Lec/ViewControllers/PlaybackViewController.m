@@ -38,6 +38,7 @@
         //actionBar = [LECActionBar tagBarWithTarget:self andSelector:@selector(actionBarPressed)];
         
         playbackBar = [[LECPlaybackControls alloc]initWithFrame:CGRectMake(0, SCREEN_HEIGHT-45, SCREEN_WIDTH, 45) andWithViewModel:viewModel];
+        playbackBar.playbackDelegate = self;
         [self.view addSubview:playbackBar];
     }
     return self;
@@ -103,6 +104,11 @@
 -(void) didSelectCellAt:(NSInteger)index
 {
     [viewModel goToTag:index];
+}
+
+-(void)tagButtonPressed
+{
+    [self actionBarPressed];
 }
 
 -(void) actionBarPressed
