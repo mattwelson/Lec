@@ -47,9 +47,10 @@
     //-------------Split tag button-------------
     self.splitTagButton = [UIButton buttonWithType:UIButtonTypeCustom];
     self.splitTagButton.frame = CGRectMake(20, self.frame.size.height/2-20, 40, 40);
-    [self.splitTagButton setTitle:@"2x" forState:UIControlStateNormal];
+    [self.splitTagButton setTitle:@"Spl" forState:UIControlStateNormal];
     [self.splitTagButton.titleLabel setFont:[UIFont fontWithName:DEFAULTFONT size:18]];
     [self.splitTagButton.titleLabel setTextColor:[[LECColourService sharedColourService] baseColourFor:[self.viewModel colourString]]];
+    [self.splitTagButton addTarget:self action:@selector(splitTagButtonPressed:) forControlEvents:UIControlEventTouchDown];
     [self addSubview:self.splitTagButton];
     
     //-------------Rewind button-------------
