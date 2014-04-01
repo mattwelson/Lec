@@ -132,8 +132,6 @@
         [iconView addSubview:tmp];
     }
     
-    [courseName setTextColor:[UIColor whiteColor]];
-    [descriptionName setTextColor:[UIColor whiteColor]];
     [newCourseName setTextColor:[UIColor whiteColor]];
     newCourseName.textAlignment = NSTextAlignmentCenter;
     [newCourseName setFont:[UIFont fontWithName:DEFAULTFONT size:40]];
