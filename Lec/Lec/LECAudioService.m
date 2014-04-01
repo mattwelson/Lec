@@ -85,6 +85,7 @@ static LECAudioService *sharedService;
 {
     [session setActive:YES error:nil];
     if ([audioPlayer prepareToPlay]) {
+        audioPlayer.enableRate = YES;
         [audioPlayer play];
         [[NSNotificationCenter defaultCenter] postNotificationName:kPlayerNotification object:self];
         assert([audioPlayer isPlaying]); // TODO: Take out? Once at a production stage
@@ -105,6 +106,30 @@ static LECAudioService *sharedService;
     [[NSNotificationCenter defaultCenter] postNotificationName:kPlayerNotification object:self];
 }
 
+
+-(void)speedUpPlaybackRate{
+    [audioPlayer setRate:2.0];
+    if (!audioPlayer.isPlaying) {
+        [self startPlayback];
+    }
+    else [audioPlayer play];
+}
+
+-(void)normalPlaybackRate{
+    [audioPlayer setRate:1.0];
+    if (!audioPlayer.isPlaying) {
+        [self startPlayback];
+    }
+    else [audioPlayer play];
+}
+
+-(void)rewindPlaybackRate{
+    [audioPlayer setRate:-1.0];
+    if (!audioPlayer.isPlaying) {
+        [self startPlayback];
+    }
+    else [audioPlayer play];
+}
 
 -(BOOL)isPlaying{
     if ([audioPlayer isPlaying]) {

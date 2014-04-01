@@ -46,6 +46,9 @@
     self.rewindButton.frame = CGRectMake(20, 5, 30, 30);
     [self.rewindButton setImage:[[UIImage imageNamed:@"playback_rewind_btn.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
     [self.rewindButton setTintColor:[[LECColourService sharedColourService] baseColourFor:[self.viewModel colourString]]];
+    UILongPressGestureRecognizer *rwLongPress = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(rewind:)];
+    rwLongPress.minimumPressDuration = 0.0;
+    [self.rewindButton addGestureRecognizer:rwLongPress];
     //[self.rewindButton setTintColor:[UIColor whiteColor]];
     [self addSubview:self.rewindButton];
     
@@ -66,6 +69,9 @@
     self.fastForwardButton.frame = CGRectMake(200, 5, 30, 30);
     [self.fastForwardButton setImage:[[UIImage imageNamed:@"playback_fastforward_btn.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
     [self.fastForwardButton setTintColor:[[LECColourService sharedColourService] baseColourFor:[self.viewModel colourString]]];
+    UILongPressGestureRecognizer *ffLongPress = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(fastForward:)];
+    ffLongPress.minimumPressDuration = 0.0;
+    [self.fastForwardButton addGestureRecognizer:ffLongPress];
     //[self.fastForwardButton setTintColor:[UIColor whiteColor]];
     [self addSubview:self.fastForwardButton];
     
@@ -90,11 +96,40 @@
 }
 
 -(void)updateButtonImage{
-    if ([[LECAudioService sharedAudioService]isPlaying]) {
-        [self.playPauseButton setImage:[[UIImage imageNamed:@"playback_pause_btn.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
+    self.playPauseButton.transform = CGAffineTransformMakeScale(1.5, 1.5);
+    [UIView animateWithDuration:0.2 animations:^{
+        if ([[LECAudioService sharedAudioService]isPlaying]) {
+            [self.playPauseButton setImage:[[UIImage imageNamed:@"playback_pause_btn.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
+            self.playPauseButton.transform = CGAffineTransformMakeScale(1, 1);
+        }
+        else {
+            [self.playPauseButton setImage:[[UIImage imageNamed:@"playback_play_btn.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
+            self.playPauseButton.transform = CGAffineTransformMakeScale(1, 1);
+        }
+    }];
+}
+
+-(void)fastForward:(UILongPressGestureRecognizer *)sender{
+    
+    if (sender.state == UIGestureRecognizerStateBegan) {
+        [[LECAudioService sharedAudioService]speedUpPlaybackRate];
+        self.fastForwardButton.transform = CGAffineTransformMakeScale(1.75, 1.75);
+
     }
-    else {
-        [self.playPauseButton setImage:[[UIImage imageNamed:@"playback_play_btn.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
+    
+    if (sender.state == UIGestureRecognizerStateEnded) {
+        [[LECAudioService sharedAudioService]normalPlaybackRate];
+        self.fastForwardButton.transform = CGAffineTransformMakeScale(1, 1);
+
+    }
+}
+
+-(void)rewind:(UILongPressGestureRecognizer *)sender{
+    if (sender.state == UIGestureRecognizerStateBegan) {
+        [[LECAudioService sharedAudioService]rewindPlaybackRate];
+    }
+    if (sender.state == UIGestureRecognizerStateEnded) {
+        [[LECAudioService sharedAudioService]normalPlaybackRate];
     }
 }
 

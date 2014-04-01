@@ -22,6 +22,9 @@
 -(void) startPlayback;
 -(void) stopPlayback;
 -(void) pausePlayback;
+-(void) speedUpPlaybackRate;
+-(void) normalPlaybackRate;
+-(void) rewindPlaybackRate;
 -(BOOL) isPlaying;
 
 -(void) goToTime:(NSNumber *)time;
