@@ -27,15 +27,6 @@ static LECParallaxService *sharedService;
 
     
     switch (strength) {
-        case 1:
-            parallaxStrength = 15;
-            view.layer.shadowColor = [UIColor blackColor].CGColor;
-            view.layer.shadowOpacity = 0.25f;
-            view.layer.shadowRadius = 4.0f;
-            view.layer.shadowOffset = CGSizeMake(0, 0);
-            shadowStrengthMin = CGSizeMake(20, 5);
-            shadowStrengthMax = CGSizeMake(-20, 5);
-            break;
         case 2:
             parallaxStrength = 20;
             view.layer.shadowColor = [UIColor blackColor].CGColor;
@@ -45,8 +36,16 @@ static LECParallaxService *sharedService;
             shadowStrengthMin = CGSizeMake(30, 5);
             shadowStrengthMax = CGSizeMake(-30, 5);
             break;
+        case 1:
         default:
             parallaxStrength = 15;
+            view.layer.shadowColor = [UIColor blackColor].CGColor;
+            view.layer.shadowOpacity = 0.25f;
+            view.layer.shadowRadius = 4.0f;
+            view.layer.shadowOffset = CGSizeMake(0, 0);
+            shadowStrengthMin = CGSizeMake(20, 5);
+            shadowStrengthMax = CGSizeMake(-20, 5);
+            break;
     }
     
 
