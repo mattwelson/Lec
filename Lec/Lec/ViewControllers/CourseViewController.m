@@ -70,14 +70,10 @@
     editView = [[UIView alloc] initWithFrame:self.view.bounds];
     [[LECColourService sharedColourService] addGradientForColour:[currentCourse colour] toView:editView];
     
-    UILabel *courseName = [[UILabel alloc] initWithFrame:CGRectMake(20, 50, 200, 50)];
-    UILabel *descriptionName = [[UILabel alloc] initWithFrame:CGRectMake(20, 100, 200, 50)];
     
-    UILabel *colorPicker = [[UILabel alloc] initWithFrame:CGRectMake(20, 150, 200, 50)];
-    UILabel *iconPicker = [[UILabel alloc] initWithFrame:CGRectMake(20, 300, 200, 50)];
+    newCourseName = [[UITextField alloc] initWithFrame:CGRectMake(0, 75, SCREEN_WIDTH, 50)];
+    newDescription = [[UITextField alloc] initWithFrame:CGRectMake(0, 125, SCREEN_WIDTH, 50)];
     
-    newCourseName = [[UITextField alloc] initWithFrame:CGRectMake(130, 50, 200, 50)];
-    newDescription = [[UITextField alloc] initWithFrame:CGRectMake(130, 100, 200, 50)];
     
     UIScrollView *colorView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 200, 320, 100)];
     [colorView setContentSize:CGSizeMake(680, 100)];
@@ -139,13 +135,15 @@
     [courseName setTextColor:[UIColor whiteColor]];
     [descriptionName setTextColor:[UIColor whiteColor]];
     [newCourseName setTextColor:[UIColor whiteColor]];
+    newCourseName.textAlignment = NSTextAlignmentCenter;
+    [newCourseName setFont:[UIFont fontWithName:DEFAULTFONT size:40]];
+    newCourseName.placeholder = @"Course Name";
+    newCourseName.clearButtonMode = UITextFieldViewModeWhileEditing;
     [newDescription setTextColor:[UIColor whiteColor]];
-    [colorPicker setTextColor:[UIColor whiteColor]];
-    [iconPicker setTextColor:[UIColor whiteColor]];
-    [colorPicker setText:@"Course Colour: "];
-    [iconPicker setText:@"Course Icon: "];
-    [courseName setText:@"Course: "];
-    [descriptionName setText:@"Description: "];
+    newDescription.textAlignment = NSTextAlignmentCenter;
+    [newDescription setFont:[UIFont fontWithName:DEFAULTFONT size:25]];
+    newDescription.placeholder = @"Description";
+    newDescription.clearButtonMode = UITextFieldViewModeWhileEditing;
     [newCourseName setText:viewModel.navTitle];
     [newDescription setText:viewModel.subTitle];
     
@@ -163,10 +161,6 @@
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:crossImg style:UIBarButtonItemStylePlain target:self action:@selector(closeEdit)];
     self.navigationItem.title = nil;
     
-    [editView addSubview:iconPicker];
-    [editView addSubview:colorPicker];
-    [editView addSubview:courseName];
-    [editView addSubview:descriptionName];
     [editView addSubview:newCourseName];
     [editView addSubview:newDescription];
     [editView addSubview:colorView];

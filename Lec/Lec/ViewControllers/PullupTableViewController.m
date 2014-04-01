@@ -73,7 +73,7 @@
     
     [self.tableView registerClass:[LectureCell class] forCellReuseIdentifier:CELL_ID_HEADER];
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:CELL_ID_ADD_CELL];
-}
+} 
 
 - (void)didReceiveMemoryWarning
 {
