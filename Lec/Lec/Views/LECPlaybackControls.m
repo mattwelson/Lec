@@ -46,16 +46,15 @@
     
     //-------------Split tag button-------------
     self.splitTagButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.splitTagButton.frame = CGRectMake(20, self.frame.size.height/2-20, 40, 40);
-    [self.splitTagButton setTitle:@"Spl" forState:UIControlStateNormal];
-    [self.splitTagButton.titleLabel setFont:[UIFont fontWithName:DEFAULTFONT size:18]];
-    [self.splitTagButton.titleLabel setTextColor:[[LECColourService sharedColourService] baseColourFor:[self.viewModel colourString]]];
+    self.splitTagButton.frame = CGRectMake(10, self.frame.size.height/2-22, 44, 44);
+    [self.splitTagButton setImage:[[UIImage imageNamed:@"icon_bar_tag.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
+    [self.splitTagButton setTintColor:[[LECColourService sharedColourService] baseColourFor:[self.viewModel colourString]]];
     [self.splitTagButton addTarget:self action:@selector(splitTagButtonPressed:) forControlEvents:UIControlEventTouchDown];
     [self addSubview:self.splitTagButton];
     
     //-------------Rewind button-------------
     self.rewindButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.rewindButton.frame = CGRectMake(70, self.frame.size.height/2-20, 40, 40);
+    self.rewindButton.frame = CGRectMake(70, self.frame.size.height/2-22, 44, 44);
     [self.rewindButton setImage:[[UIImage imageNamed:@"playback_rewind_btn.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
     [self.rewindButton setTintColor:[[LECColourService sharedColourService] baseColourFor:[self.viewModel colourString]]];
     UILongPressGestureRecognizer *rwLongPress = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(rewind:)];
@@ -66,7 +65,7 @@
     
     //-------------Play/pause button-------------
     self.playPauseButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.playPauseButton.frame = CGRectMake(140, self.frame.size.height/2-20, 40, 40);
+    self.playPauseButton.frame = CGRectMake(140, self.frame.size.height/2-22, 44, 44);
     if ([[LECAudioService sharedAudioService]isPlaying]) {
         [self.playPauseButton setImage:[[UIImage imageNamed:@"playback_pause_btn.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
     }
@@ -80,7 +79,7 @@
     
     //-------------Fast Forward Button-------------
     self.fastForwardButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.fastForwardButton.frame = CGRectMake(210, self.frame.size.height/2-20, 40, 40);
+    self.fastForwardButton.frame = CGRectMake(210, self.frame.size.height/2-22, 44, 44);
     [self.fastForwardButton setImage:[[UIImage imageNamed:@"playback_fastforward_btn.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
     [self.fastForwardButton setTintColor:[[LECColourService sharedColourService] baseColourFor:[self.viewModel colourString]]];
     UILongPressGestureRecognizer *ffLongPress = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(fastForward:)];
@@ -91,7 +90,7 @@
     
     //-------------Two times forward button-------------
     self.twoTimesForwardButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.twoTimesForwardButton.frame = CGRectMake(280, self.frame.size.height/2-20, 40, 40);
+    self.twoTimesForwardButton.frame = CGRectMake(280, self.frame.size.height/2-22, 44, 44);
     [self.twoTimesForwardButton setTitle:@"2x" forState:UIControlStateNormal];
     [self.twoTimesForwardButton.titleLabel setFont:[UIFont fontWithName:DEFAULTFONT size:18]];
     [self.twoTimesForwardButton.titleLabel setTextColor:[[LECColourService sharedColourService] baseColourFor:[self.viewModel colourString]]];

@@ -145,8 +145,8 @@
 
 -(CGFloat) tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-    //NO IDEA WHY IT'S 45...
-    return hasFooter && section == contentSection ? 45 : 0;
+    // Is 50 for the bottom bar
+    return hasFooter && section == contentSection ? 50 : 0;
 }
 
 -(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section

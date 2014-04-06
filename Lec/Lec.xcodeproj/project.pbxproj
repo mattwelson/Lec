@@ -81,6 +81,8 @@
 		73BBDE4D18EA77F400D7E397 /* icon_subject_physics@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 73BBDE1F18EA77F400D7E397 /* icon_subject_physics@2x.png */; };
 		73BBDE4E18EA77F400D7E397 /* icon_subject_politics.png in Resources */ = {isa = PBXBuildFile; fileRef = 73BBDE2018EA77F400D7E397 /* icon_subject_politics.png */; };
 		73BBDE4F18EA77F400D7E397 /* icon_subject_politics@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 73BBDE2118EA77F400D7E397 /* icon_subject_politics@2x.png */; };
+		73BBDE5218EA7B1300D7E397 /* icon_bar_tag.png in Resources */ = {isa = PBXBuildFile; fileRef = 73BBDE5018EA7B1300D7E397 /* icon_bar_tag.png */; };
+		73BBDE5318EA7B1300D7E397 /* icon_bar_tag@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 73BBDE5118EA7B1300D7E397 /* icon_bar_tag@2x.png */; };
 		73C476F018E66C8200AAB8C8 /* playback_fastforward_btn.png in Resources */ = {isa = PBXBuildFile; fileRef = 73C476E718E66C8200AAB8C8 /* playback_fastforward_btn.png */; };
 		73C476F118E66C8200AAB8C8 /* playback_fastforward_btn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 73C476E818E66C8200AAB8C8 /* playback_fastforward_btn@2x.png */; };
 		73C476F218E66C8200AAB8C8 /* playback_pause_btn.png in Resources */ = {isa = PBXBuildFile; fileRef = 73C476E918E66C8200AAB8C8 /* playback_pause_btn.png */; };
@@ -231,6 +233,8 @@
 		73BBDE1F18EA77F400D7E397 /* icon_subject_physics@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_subject_physics@2x.png"; sourceTree = "<group>"; };
 		73BBDE2018EA77F400D7E397 /* icon_subject_politics.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_subject_politics.png; sourceTree = "<group>"; };
 		73BBDE2118EA77F400D7E397 /* icon_subject_politics@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_subject_politics@2x.png"; sourceTree = "<group>"; };
+		73BBDE5018EA7B1300D7E397 /* icon_bar_tag.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_bar_tag.png; sourceTree = "<group>"; };
+		73BBDE5118EA7B1300D7E397 /* icon_bar_tag@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_bar_tag@2x.png"; sourceTree = "<group>"; };
 		73C476E718E66C8200AAB8C8 /* playback_fastforward_btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playback_fastforward_btn.png; sourceTree = "<group>"; };
 		73C476E818E66C8200AAB8C8 /* playback_fastforward_btn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "playback_fastforward_btn@2x.png"; sourceTree = "<group>"; };
 		73C476E918E66C8200AAB8C8 /* playback_pause_btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playback_pause_btn.png; sourceTree = "<group>"; };
@@ -407,6 +411,8 @@
 		73CD6EB718961B4600F183C7 /* Icons */ = {
 			isa = PBXGroup;
 			children = (
+				73BBDE5018EA7B1300D7E397 /* icon_bar_tag.png */,
+				73BBDE5118EA7B1300D7E397 /* icon_bar_tag@2x.png */,
 				73BBDDF418EA77F400D7E397 /* icon_mic.png */,
 				73BBDDF518EA77F400D7E397 /* icon_mic@2x.png */,
 				73BBDDF618EA77F400D7E397 /* icon_subject_balance.png */,
@@ -818,6 +824,8 @@
 				73BBDE4A18EA77F400D7E397 /* icon_subject_physcology.png in Resources */,
 				73BBDE3718EA77F400D7E397 /* icon_subject_engineering2@2x.png in Resources */,
 				73C476F318E66C8200AAB8C8 /* playback_pause_btn@2x.png in Resources */,
+				73BBDE5218EA7B1300D7E397 /* icon_bar_tag.png in Resources */,
+				73BBDE5318EA7B1300D7E397 /* icon_bar_tag@2x.png in Resources */,
 				73C476F218E66C8200AAB8C8 /* playback_pause_btn.png in Resources */,
 				C9B0C5F2187FBE7F002D4A63 /* Images.xcassets in Resources */,
 				73BBDE3618EA77F400D7E397 /* icon_subject_engineering2.png in Resources */,
