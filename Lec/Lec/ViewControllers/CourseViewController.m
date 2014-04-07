@@ -287,23 +287,43 @@
 
 -(void) actionBarPressed
 {
-    preScreen = [[LECPreRecordScreen alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) withViewModel:viewModel];
+    preScreen = [[LECPreRecordScreen alloc]initWithFrame:CGRectMake(0, 20, SCREEN_WIDTH, SCREEN_HEIGHT-20) withViewModel:viewModel];
     preScreen.preRecordDelegate = self;
     [self.view addSubview:preScreen];
-    [[LECAnimationService sharedAnimationService]addAlphaToView:preScreen withSpeed:0.2 withDelay:0.0];
+    [[self navigationController] setNavigationBarHidden:YES animated:YES];
+    self.navigationController.interactivePopGestureRecognizer.enabled = NO;
+
+    //[[LECAnimationService sharedAnimationService]addAlphaToView:preScreen withSpeed:0.2 withDelay:0.0];
     
-//    [viewModel addLecture:@"An intro to Lec"];
-//    [self.tableView reloadData];
-//    LECLectureCellViewModel *lectureCellViewModel = [viewModel.tableData objectAtIndex:0];
-//    [self.navigationController pushViewController:[[RecordViewController alloc] initWithLecture:lectureCellViewModel.lecture] animated:YES];
+    CGRect finalFrame = preScreen.frame;
+    preScreen.frame = CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, 0);
+//    [UIView animateWithDuration:0.2 animations:^{
+//        preScreen.frame = finalFrame;
+//    }completion:^(BOOL finished){
+//        
+//    }];
+    
+    [UIView animateWithDuration:0.75 delay:0.0 usingSpringWithDamping:0.6 initialSpringVelocity:0.1 options:UIViewAnimationOptionCurveEaseOut animations:^{
+        preScreen.frame = finalFrame;
+    }completion:^(BOOL completion){
+        
+    }];
 }
 
 #pragma mark Delegate from the pre recording screen to head into recording
+-(void) preRecordCancelled{
+    [[self navigationController] setNavigationBarHidden:NO animated:YES];
+    self.navigationController.interactivePopGestureRecognizer.enabled = YES;
+}
+
 -(void) readyToRecord:(NSInteger)lectureNumber withName:(NSString *)lectureName{
     [viewModel addLecture:lectureName withLectureNumber:lectureNumber];
     [self.tableView reloadData];
     LECLectureCellViewModel *lectureCellViewModel = [viewModel.tableData objectAtIndex:0];
     [self.navigationController pushViewController:[[RecordViewController alloc] initWithLecture:lectureCellViewModel.lecture] animated:YES];
+    [[self navigationController] setNavigationBarHidden:NO animated:YES];
+    self.navigationController.interactivePopGestureRecognizer.enabled = YES;
+
 }
 
 -(NSInteger) numberOfSections
@@ -313,7 +333,6 @@
 
 // Dismissing the Keyboard when touch event is called by touching screen
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
-    NSLog(@"Keyboard is being dismissed");
     [self.view endEditing:YES];
     [super touchesBegan:touches withEvent:event];
 }

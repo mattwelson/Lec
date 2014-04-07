@@ -12,6 +12,7 @@
 @protocol PreRecordDelegate <NSObject>
 
 -(void) readyToRecord:(NSInteger)lectureNumber withName:(NSString *)lectureName;
+-(void) preRecordCancelled;
 
 @end
 

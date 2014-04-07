@@ -22,17 +22,26 @@
         self.viewModel = vm;
         self.backgroundColor = [UIColor colorWithWhite:0.99 alpha:0.99];
         
-        self.layer.cornerRadius = 10;
+        self.layer.cornerRadius = 15;
         self.layer.masksToBounds = YES;
-        self.layer.borderWidth = 0;
+//        self.layer.borderWidth = 1;
+//        self.layer.borderColor = [[LECColourService sharedColourService]highlightColourFor:[self.viewModel colourString]].CGColor;
         
         [self setupSubviews];
+        
     }
     return self;
 }
 
 -(void)setupSubviews{
     self.lectureNumber = self.viewModel.i+1;
+    
+    UIButton *closeButton = [[UIButton alloc]initWithFrame:CGRectMake(10, 20, 40, 40)];
+    [closeButton setImage:[[UIImage imageNamed:@"icon_cancel.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
+    [closeButton setTintColor:[[LECColourService sharedColourService]highlightColourFor:[self.viewModel colourString]]];
+    [closeButton addTarget:self action:@selector(dismissScreen) forControlEvents:UIControlEventTouchDown];
+    [self addSubview:closeButton];
+    [self bringSubviewToFront:closeButton];
     
     self.lectureNumberLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 20, SCREEN_WIDTH, 50)];
     self.lectureNumberLabel.text = [NSString stringWithFormat:@"Lecture %ld", (long)self.lectureNumber];
@@ -57,28 +66,43 @@
     [self.lectureNameField setReturnKeyType: UIReturnKeyDone];
     self.lectureNameField.textColor = [UIColor lightGrayColor];
     [self addSubview:self.lectureNameField];
+    //[self.lectureNameField becomeFirstResponder];
     
-    self.startRecordingButton = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_WIDTH/2-20, 350, 40, 40)];
-    [self.startRecordingButton setImage:[UIImage imageNamed:@"icon_mic.png"] forState:UIControlStateNormal];
+    self.startRecordingButton = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_WIDTH/2-30, 350, 60, 60)];
+    [self.startRecordingButton setImage:[[UIImage imageNamed:@"icon_mic.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
+    [self.startRecordingButton setTintColor:[[LECColourService sharedColourService]highlightColourFor:[self.viewModel colourString]]];
     [self.startRecordingButton addTarget:self action:@selector(startRecording) forControlEvents:UIControlEventTouchUpInside];
+    self.startRecordingButton.layer.cornerRadius = self.startRecordingButton.frame.size.height/2;
+    self.startRecordingButton.layer.borderWidth = 1.0;
+    self.startRecordingButton.layer.borderColor = [[LECColourService sharedColourService]highlightColourFor:[self.viewModel colourString]].CGColor;
     [self addSubview:self.startRecordingButton];
     
-    UIButton *closeButton = [[UIButton alloc]initWithFrame:CGRectMake(10, 200, 40, 40)];
-    [closeButton setImage:[UIImage imageNamed:@"icon_cancel.png"] forState:UIControlStateNormal];
-    [closeButton addTarget:self action:@selector(dismissScreen) forControlEvents:UIControlEventTouchDown];
-    [self addSubview:closeButton];
-    [self bringSubviewToFront:closeButton];
 }
 
 -(void)dismissScreen
 {
-    [self removeFromSuperview];
+//    [UIView animateWithDuration:0.2 animations:^{
+//        self.alpha = 0.0;
+//    }completion:^(BOOL finished){
+//        
+//    }];
+    [self.preRecordDelegate preRecordCancelled];
+    [UIView animateWithDuration:0.8 delay:0.0 usingSpringWithDamping:0.8 initialSpringVelocity:0.1 options:UIViewAnimationOptionCurveEaseIn animations:^{
+        self.frame = CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, 0);
+    }completion:^(BOOL completion){
+        [self.lectureNameField resignFirstResponder];
+        [self removeFromSuperview];
+    }];
 }
 
 -(void)startRecording
 {
-    [self.preRecordDelegate readyToRecord:self.lectureNumber withName:self.lectureNameField.text];
-    [self removeFromSuperview];
+    [UIView animateWithDuration:0.8 delay:0.0 usingSpringWithDamping:0.8 initialSpringVelocity:0.1 options:UIViewAnimationOptionCurveEaseIn animations:^{
+        //self.frame = CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, 0);
+        [self.preRecordDelegate readyToRecord:self.lectureNumber withName:self.lectureNameField.text];
+    }completion:^(BOOL completion){
+        [self removeFromSuperview];
+    }];
 }
 
 #pragma mark UITextView Delegate methods

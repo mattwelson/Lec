@@ -85,11 +85,14 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == actionSection) [self actionBarPressed];
+    if (indexPath.section == actionSection) {
+        [self actionBarPressed];
+    }
     else {
         [self didSelectCellAt:indexPath.row];
-        [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
     }
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
