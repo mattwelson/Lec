@@ -10,6 +10,7 @@
 #import "RecordViewController.h"
 #import "LECImportHeader.h"
 #import "LECActionBar.h"
+#import "LECPreRecordScreen.h"
 #import "LECDefines.h"
 #import "TagCell.h"
 

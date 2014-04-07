@@ -14,6 +14,7 @@
 @interface CourseViewController (){
     LECCourseViewModel *viewModel;
     Course *currentCourse;
+    LECPreRecordScreen *preScreen;
     UIView *editView;
     NSArray *colourNames;
     NSArray *iconNames;
@@ -286,7 +287,20 @@
 
 -(void) actionBarPressed
 {
-    [viewModel addLecture:@"An intro to Lec"];
+    preScreen = [[LECPreRecordScreen alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) withViewModel:viewModel];
+    preScreen.preRecordDelegate = self;
+    [self.view addSubview:preScreen];
+    [[LECAnimationService sharedAnimationService]addAlphaToView:preScreen withSpeed:0.2 withDelay:0.0];
+    
+//    [viewModel addLecture:@"An intro to Lec"];
+//    [self.tableView reloadData];
+//    LECLectureCellViewModel *lectureCellViewModel = [viewModel.tableData objectAtIndex:0];
+//    [self.navigationController pushViewController:[[RecordViewController alloc] initWithLecture:lectureCellViewModel.lecture] animated:YES];
+}
+
+#pragma mark Delegate from the pre recording screen to head into recording
+-(void) readyToRecord:(NSInteger)lectureNumber withName:(NSString *)lectureName{
+    [viewModel addLecture:lectureName withLectureNumber:lectureNumber];
     [self.tableView reloadData];
     LECLectureCellViewModel *lectureCellViewModel = [viewModel.tableData objectAtIndex:0];
     [self.navigationController pushViewController:[[RecordViewController alloc] initWithLecture:lectureCellViewModel.lecture] animated:YES];
