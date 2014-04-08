@@ -18,7 +18,7 @@
 
 @interface LECPreRecordScreen : UIView<UITextViewDelegate>
 
-- (id)initWithFrame:(CGRect)frame withViewModel:(LECCourseViewModel *)vm;
+- (id)initWithFrame:(CGRect)frame withCourseViewModel:(LECCourseViewModel *)vm;
 
 @property LECCourseViewModel *viewModel;
 @property NSInteger lectureNumber;

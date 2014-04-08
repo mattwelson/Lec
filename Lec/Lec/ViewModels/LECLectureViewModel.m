@@ -19,8 +19,8 @@
     vm.lecture = lecture;
     vm.icon = lecture.course.icon;
     vm.colourString = lecture.course.colour;
-    vm.navTitle = [lecture lectureName];
-    vm.subTitle = [NSString stringWithFormat:@"Lecture %@", [lecture lectureNumber]];
+    vm.subTitle = [lecture lectureName];
+    vm.navTitle = [NSString stringWithFormat:@"Lecture %@", [lecture lectureNumber]];
     
     vm.courseName = [[lecture course] courseName];
     

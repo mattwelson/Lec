@@ -68,7 +68,7 @@
 {
     iconMaySelect = FALSE;
     newIcon = currentCourse.icon;
-    editView = [[UIView alloc] initWithFrame:self.view.bounds];
+    editView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
     [[LECColourService sharedColourService] addGradientForColour:[currentCourse colour] toView:editView];
     
     UILabel *courseName = [[UILabel alloc] initWithFrame:CGRectMake(20, 50, 200, 50)];
@@ -287,7 +287,7 @@
 
 -(void) actionBarPressed
 {
-    preScreen = [[LECPreRecordScreen alloc]initWithFrame:CGRectMake(0, 20, SCREEN_WIDTH, SCREEN_HEIGHT-20) withViewModel:viewModel];
+    preScreen = [[LECPreRecordScreen alloc]initWithFrame:CGRectMake(0, 20, SCREEN_WIDTH, SCREEN_HEIGHT-20) withCourseViewModel:viewModel];
     preScreen.preRecordDelegate = self;
     [self.view addSubview:preScreen];
     [[self navigationController] setNavigationBarHidden:YES animated:YES];

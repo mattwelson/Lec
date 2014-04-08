@@ -14,7 +14,7 @@
 
 @implementation LECPreRecordScreen
 
-- (id)initWithFrame:(CGRect)frame withViewModel:(LECCourseViewModel *)vm
+- (id)initWithFrame:(CGRect)frame withCourseViewModel:(LECCourseViewModel *)vm
 {
     self = [super initWithFrame:frame];
     if (self) {
@@ -86,6 +86,7 @@
 //    }completion:^(BOOL finished){
 //        
 //    }];
+    [self.lectureNameField resignFirstResponder];
     [self.preRecordDelegate preRecordCancelled];
     [UIView animateWithDuration:0.8 delay:0.0 usingSpringWithDamping:0.8 initialSpringVelocity:0.1 options:UIViewAnimationOptionCurveEaseIn animations:^{
         self.frame = CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, 0);
@@ -97,6 +98,7 @@
 
 -(void)startRecording
 {
+    [self.lectureNameField resignFirstResponder];
     [UIView animateWithDuration:0.8 delay:0.0 usingSpringWithDamping:0.8 initialSpringVelocity:0.1 options:UIViewAnimationOptionCurveEaseIn animations:^{
         //self.frame = CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, 0);
         [self.preRecordDelegate readyToRecord:self.lectureNumber withName:self.lectureNameField.text];
