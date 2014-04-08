@@ -128,7 +128,7 @@
                           delay:0.0
                         options: UIViewAnimationOptionCurveEaseIn
                      animations:^{
-                         self.colorView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.8];
+                         self.colorView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.9];
                      }
                      completion:^(BOOL finished){
                      }];
@@ -149,7 +149,7 @@
                           delay:0.0
                         options: UIViewAnimationOptionCurveEaseIn
                      animations:^{
-                         self.iconView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.8];
+                         self.iconView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.9];
                      }
                      completion:^(BOOL finished){
                      }];

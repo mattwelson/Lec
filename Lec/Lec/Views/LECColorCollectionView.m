@@ -62,10 +62,17 @@
     //selectedColor = [[[LECColourService sharedColourService] colourKeys] objectAtIndex:indexPath.row];
     //[[LECColourService sharedColourService] changeGradientToColour:selectedColor forView:colorPickerButton];
     
+    for(UICollectionView *cell in collectionView.visibleCells){
+        [UIView animateWithDuration:0.1 animations:^{
+            cell.alpha = 0.0;
+        }];
+    }
+    
     [UIView animateWithDuration:0.2
                           delay:0.0
                         options: UIViewAnimationOptionCurveEaseIn
                      animations:^{
+
                          self.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.0];
                      }
                      completion:^(BOOL finished){
@@ -77,5 +84,6 @@
 {
     return CGSizeMake(45, 45);
 }
+
 
 @end

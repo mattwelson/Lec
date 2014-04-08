@@ -20,7 +20,7 @@
     if (self) {
         // Initialization code
         self.viewModel = vm;
-        self.backgroundColor = [UIColor colorWithWhite:0.99 alpha:0.99];
+        self.backgroundColor = [UIColor colorWithWhite:0.99 alpha:0.97];
         
         self.layer.cornerRadius = 15;
         self.layer.masksToBounds = YES;
@@ -68,7 +68,7 @@
     [self addSubview:self.lectureNameField];
     //[self.lectureNameField becomeFirstResponder];
     
-    self.startRecordingButton = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_WIDTH/2-30, 350, 60, 60)];
+    self.startRecordingButton = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_WIDTH/2-30, 320, 60, 60)];
     [self.startRecordingButton setImage:[[UIImage imageNamed:@"icon_mic.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
     [self.startRecordingButton setTintColor:[[LECColourService sharedColourService]highlightColourFor:[self.viewModel colourString]]];
     [self.startRecordingButton addTarget:self action:@selector(startRecording) forControlEvents:UIControlEventTouchUpInside];
