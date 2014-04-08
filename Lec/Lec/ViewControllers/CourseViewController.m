@@ -297,11 +297,6 @@
     
     CGRect finalFrame = preScreen.frame;
     preScreen.frame = CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, 0);
-//    [UIView animateWithDuration:0.2 animations:^{
-//        preScreen.frame = finalFrame;
-//    }completion:^(BOOL finished){
-//        
-//    }];
     
     [UIView animateWithDuration:0.75 delay:0.0 usingSpringWithDamping:0.6 initialSpringVelocity:0.1 options:UIViewAnimationOptionCurveEaseOut animations:^{
         preScreen.frame = finalFrame;
@@ -311,12 +306,14 @@
 }
 
 #pragma mark Delegate from the pre recording screen to head into recording
--(void) preRecordCancelled{
+-(void) preRecordCancelled
+{
     [[self navigationController] setNavigationBarHidden:NO animated:YES];
     self.navigationController.interactivePopGestureRecognizer.enabled = YES;
 }
 
--(void) readyToRecord:(NSInteger)lectureNumber withName:(NSString *)lectureName{
+-(void) confirmChanges:(NSInteger)lectureNumber withName:(NSString *)lectureName
+{
     [viewModel addLecture:lectureName withLectureNumber:lectureNumber];
     [self.tableView reloadData];
     LECLectureCellViewModel *lectureCellViewModel = [viewModel.tableData objectAtIndex:0];

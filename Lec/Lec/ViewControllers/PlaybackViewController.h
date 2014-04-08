@@ -10,8 +10,9 @@
 #import "Lecture.h"
 #import "PullupTableViewController.h"
 #import "LECPlaybackControls.h"
+#import "LECPreRecordScreen.h"
 
-@interface PlaybackViewController : PullupTableViewController
+@interface PlaybackViewController : PullupTableViewController<PreRecordDelegate>
 
 -(id)initWithLecture:(Lecture *)lecture;
 

@@ -59,7 +59,7 @@
     LECDatabaseService *dbService = [LECDatabaseService sharedDBService];
     newLecture = [dbService newLectureForCourse:self.currentCourse];
     newLecture.lectureName = name;
-    newLecture.lectureNumber = [NSNumber numberWithInt:number];
+    newLecture.lectureNumber = [NSNumber numberWithInteger:number];
     [dbService saveChanges];
     [self.tableData insertObject:[LECLectureCellViewModel lectureCellVMWithLecture:newLecture] atIndex:0];
 }

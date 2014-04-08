@@ -8,10 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "LECCourseViewModel.h"
+#import "LECLectureViewModel.h"
 
 @protocol PreRecordDelegate <NSObject>
 
--(void) readyToRecord:(NSInteger)lectureNumber withName:(NSString *)lectureName;
+-(void) confirmChanges:(NSInteger)lectureNumber withName:(NSString *)lectureName;
 -(void) preRecordCancelled;
 
 @end
@@ -19,8 +20,10 @@
 @interface LECPreRecordScreen : UIView<UITextViewDelegate>
 
 - (id)initWithFrame:(CGRect)frame withCourseViewModel:(LECCourseViewModel *)vm;
+- (id)initWithFrame:(CGRect)frame withLectureViewModel:(LECLectureViewModel *)vm;
 
-@property LECCourseViewModel *viewModel;
+@property LECCourseViewModel *courseViewModel;
+@property LECLectureViewModel *lectureViewModel;
 @property NSInteger lectureNumber;
 @property UILabel *lectureNumberLabel;
 @property UIStepper *lectureNumberStepper;
