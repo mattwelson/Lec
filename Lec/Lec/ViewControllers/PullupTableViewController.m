@@ -141,7 +141,8 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if ([indexPath section] == 0)
-        return 136;
+        //return 136;
+        return self.headerView.frame.size.height-64;
     else
         return 75;
 }
@@ -171,13 +172,25 @@
 
 #pragma mark Scrolling Delegates
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    [self courseScroll:scrollView.contentOffset.y];
     [self.headerView changeAlpha:self.tableView.contentOffset.y];
     [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor colorWithWhite:1.0 alpha:-0.3+(self.tableView.contentOffset.y/100)], NSForegroundColorAttributeName, [UIFont fontWithName:DEFAULTFONT size:HEADERSIZE], NSFontAttributeName, nil]];
+    
+    if (scrollView.contentOffset.y < -85) {
+        scrollView.contentOffset = CGPointMake(0, -85);
+        //[pullDownAddReminder setText:@"Release to Add Course"];
+    }
     
 //    if (scrollView.contentOffset.y < 0) {
 //        scrollView.contentOffset = CGPointMake(0, 0);
 //    }
-    
+}
+
+-(void) scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+{
+    if (scrollView.contentOffset.y <= -85) {
+        [self quickRecord];
+    }
 }
 
 #pragma mark Abstract methods
@@ -212,6 +225,16 @@
 -(void) didSelectCellAt:(NSInteger)index
 {
     [self abstractMethod:@"didSelectCellAt"];
+}
+
+-(void) courseScroll:(CGFloat)scrollOffset
+{
+    [self abstractMethod:@"scrollingTable"];
+}
+
+-(void)quickRecord
+{
+    [self abstractMethod:@"quickRecord"];
 }
 
 -(void) actionBarPressed

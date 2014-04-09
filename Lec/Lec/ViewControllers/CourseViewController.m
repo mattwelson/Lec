@@ -24,6 +24,8 @@
     NSString *newIcon;
     UIButton *pastSelectedButton;
     bool iconMaySelect;
+    UIView *quickRecordView;
+    UILabel *quickRecordLabel;
 }
 
 @end
@@ -46,6 +48,7 @@
     return self;
 }
 
+
 - (void) viewWillAppear:(BOOL)animated
 {
     // TODO: Fix it up so the mic gets swapped to a chevron where appropriate
@@ -61,6 +64,15 @@
     [super navigationTopBar];
     UIImage *plusImg = [UIImage imageNamed:@"nav_settings_btn.png"];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:plusImg style:UIBarButtonItemStylePlain target:self action:@selector(courseEdit)];
+    
+    quickRecordView = [[UIView alloc]initWithFrame:CGRectMake(0, self.tableView.frame.size.height, SCREEN_WIDTH, 0)];
+    quickRecordView.backgroundColor = [[LECColourService sharedColourService]baseColourFor:viewModel.colourString];
+    quickRecordLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, quickRecordView.frame.size.height/2, SCREEN_WIDTH, 50)];
+    quickRecordLabel.textColor = [UIColor whiteColor];
+    quickRecordLabel.textAlignment = NSTextAlignmentCenter;
+    quickRecordLabel.text = @"Quick Record";
+    [quickRecordView addSubview:quickRecordLabel];
+    [self.view addSubview:quickRecordView];
 }
 
 
@@ -247,6 +259,7 @@
     
 }
 
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -282,7 +295,26 @@
     LECLectureCellViewModel *lectureCellViewModel = [viewModel.tableData objectAtIndex:index];
     
     [self.navigationController pushViewController:[[PlaybackViewController alloc] initWithLecture:lectureCellViewModel.lecture] animated:YES];
-    
+}
+
+-(void) courseScroll:(CGFloat)scrollOffset
+{    
+    if (scrollOffset < 0) {
+        [self.view addSubview:quickRecordView];
+        quickRecordView.frame = CGRectMake(0, self.headerView.frame.size.height, SCREEN_WIDTH, -scrollOffset);
+        quickRecordLabel.font = [UIFont fontWithName:DEFAULTFONT size:15-scrollOffset/16];
+        quickRecordLabel.alpha = -scrollOffset/80;
+    }
+    else {
+        [quickRecordView removeFromSuperview];
+    }
+}
+
+
+-(void) quickRecord
+{
+    //[viewModel addLecture:@"Quick Record" withLectureNumber:viewModel.i];
+    [self confirmChanges:viewModel.i+1 withName:@"(Quick Record)"];
 }
 
 -(void) actionBarPressed
@@ -298,7 +330,7 @@
     CGRect finalFrame = preScreen.frame;
     preScreen.frame = CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, 0);
     
-    [UIView animateWithDuration:0.75 delay:0.0 usingSpringWithDamping:0.6 initialSpringVelocity:0.1 options:UIViewAnimationOptionCurveEaseOut animations:^{
+    [UIView animateWithDuration:0.75 delay:0.0 usingSpringWithDamping:0.65 initialSpringVelocity:0.15 options:UIViewAnimationOptionCurveEaseIn animations:^{
         preScreen.frame = finalFrame;
     }completion:^(BOOL completion){
         
@@ -338,5 +370,6 @@
 {
     return [self.view endEditing:YES];
 }
+
 
 @end

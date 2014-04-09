@@ -94,7 +94,7 @@
     CGRect finalFrame = preScreen.frame;
     preScreen.frame = CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, 0);
     
-    [UIView animateWithDuration:0.75 delay:0.0 usingSpringWithDamping:0.6 initialSpringVelocity:0.1 options:UIViewAnimationOptionCurveEaseOut animations:^{
+    [UIView animateWithDuration:0.75 delay:0.0 usingSpringWithDamping:0.65 initialSpringVelocity:0.15 options:UIViewAnimationOptionCurveEaseIn animations:^{
         preScreen.frame = finalFrame;
     }completion:^(BOOL completion){
         
@@ -146,6 +146,17 @@
 -(void) didSelectCellAt:(NSInteger)index
 {
     [viewModel goToTag:index];
+}
+
+//Need to refactor
+-(void)quickRecord
+{
+    
+}
+
+-(void) courseScroll:(CGFloat)scrollOffset
+{
+    
 }
 
 -(void) actionBarPressed
