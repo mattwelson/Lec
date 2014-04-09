@@ -88,7 +88,7 @@
     [self.lectureNumberStepper setTintColor:[[LECColourService sharedColourService]baseColourFor:[viewModel colourString]]];
     [self addSubview:self.lectureNumberStepper];
     
-    self.lectureNameField = [[UITextView alloc]initWithFrame:CGRectMake(60, 150, 200, 150)];
+    self.lectureNameField = [[UITextView alloc]initWithFrame:CGRectMake(40, 150, 240, 150)];
     self.lectureNameField.delegate = self;
     self.lectureNameField.backgroundColor = [UIColor clearColor];
     if([viewModel isKindOfClass:[LECCourseViewModel class]]){
@@ -97,9 +97,10 @@
     else {
         self.lectureNameField.text = self.lectureViewModel.lecture.lectureName;
     }
+    self.lectureNameField.autocapitalizationType = UITextAutocapitalizationTypeWords;
     self.lectureNameField.textAlignment = NSTextAlignmentCenter;
     self.lectureNameField.font = [UIFont fontWithName:DEFAULTFONT size:30];
-    [self.lectureNameField setReturnKeyType: UIReturnKeyDone];
+    [self.lectureNameField setReturnKeyType: UIReturnKeyGo];
     if([viewModel isKindOfClass:[LECCourseViewModel class]]){
         self.lectureNameField.textColor = [UIColor lightGrayColor];
     }
@@ -107,18 +108,19 @@
         self.lectureNameField.textColor = [[LECColourService sharedColourService]highlightColourFor:[self.lectureViewModel colourString]];
     }
     [self addSubview:self.lectureNameField];
-    //[self.lectureNameField becomeFirstResponder];
+    [self.lectureNameField becomeFirstResponder];
     
-    if([viewModel isKindOfClass:[LECCourseViewModel class]]){
-        self.startRecordingButton = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_WIDTH/2-30, 320, 60, 60)];
-        [self.startRecordingButton setImage:[[UIImage imageNamed:@"icon_mic.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
-        [self.startRecordingButton setTintColor:[[LECColourService sharedColourService]highlightColourFor:[viewModel colourString]]];
-        [self.startRecordingButton addTarget:self action:@selector(confirmDetails) forControlEvents:UIControlEventTouchUpInside];
-        self.startRecordingButton.layer.cornerRadius = self.startRecordingButton.frame.size.height/2;
-        self.startRecordingButton.layer.borderWidth = 1.0;
-        self.startRecordingButton.layer.borderColor = [[LECColourService sharedColourService]highlightColourFor:[viewModel colourString]].CGColor;
-        [self addSubview:self.startRecordingButton];
-    }
+    //This is the little record button
+//    if([viewModel isKindOfClass:[LECCourseViewModel class]]){
+//        self.startRecordingButton = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_WIDTH/2-30, 320, 60, 60)];
+//        [self.startRecordingButton setImage:[[UIImage imageNamed:@"icon_mic.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
+//        [self.startRecordingButton setTintColor:[[LECColourService sharedColourService]highlightColourFor:[viewModel colourString]]];
+//        [self.startRecordingButton addTarget:self action:@selector(confirmDetails) forControlEvents:UIControlEventTouchUpInside];
+//        self.startRecordingButton.layer.cornerRadius = self.startRecordingButton.frame.size.height/2;
+//        self.startRecordingButton.layer.borderWidth = 1.0;
+//        self.startRecordingButton.layer.borderColor = [[LECColourService sharedColourService]highlightColourFor:[viewModel colourString]].CGColor;
+//        [self addSubview:self.startRecordingButton];
+//    }
     
 }
 
@@ -142,9 +144,9 @@
 -(void)confirmDetails
 {
     [self.lectureNameField resignFirstResponder];
+    [self.preRecordDelegate confirmChanges:self.lectureNumber withName:self.lectureNameField.text];
     [UIView animateWithDuration:0.8 delay:0.0 usingSpringWithDamping:0.8 initialSpringVelocity:0.1 options:UIViewAnimationOptionCurveEaseIn animations:^{
-        //self.frame = CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, 0);
-        [self.preRecordDelegate confirmChanges:self.lectureNumber withName:self.lectureNameField.text];
+        self.frame = CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, 0);
     }completion:^(BOOL completion){
         [self removeFromSuperview];
     }];
@@ -156,6 +158,7 @@
     
     if([text isEqualToString:@"\n"]) {
         [textView resignFirstResponder];
+        [self confirmDetails];
         return NO;
     }
     
@@ -179,6 +182,7 @@
     }
     [textView resignFirstResponder];
 }
+
 
 #pragma mark Stepper Delegates
 
