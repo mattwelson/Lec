@@ -37,7 +37,7 @@
 		738FB16F189DF33200DBF8F8 /* icon_subject_music2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 738FB16B189DF33200DBF8F8 /* icon_subject_music2@2x.png */; };
 		738FB172189DF33D00DBF8F8 /* icon_subject_chemistry2.png in Resources */ = {isa = PBXBuildFile; fileRef = 738FB170189DF33D00DBF8F8 /* icon_subject_chemistry2.png */; };
 		738FB173189DF33D00DBF8F8 /* icon_subject_chemistry2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 738FB171189DF33D00DBF8F8 /* icon_subject_chemistry2@2x.png */; };
-		73BBDE5F18F2691500D7E397 /* LECPreRecordScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 73BBDE5E18F2691500D7E397 /* LECPreRecordScreen.m */; };
+		73BBDE5F18F2691500D7E397 /* LECLectureEditScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 73BBDE5E18F2691500D7E397 /* LECLectureEditScreen.m */; };
 		73C476F018E66C8200AAB8C8 /* playback_fastforward_btn.png in Resources */ = {isa = PBXBuildFile; fileRef = 73C476E718E66C8200AAB8C8 /* playback_fastforward_btn.png */; };
 		73C476F118E66C8200AAB8C8 /* playback_fastforward_btn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 73C476E818E66C8200AAB8C8 /* playback_fastforward_btn@2x.png */; };
 		73C476F218E66C8200AAB8C8 /* playback_pause_btn.png in Resources */ = {isa = PBXBuildFile; fileRef = 73C476E918E66C8200AAB8C8 /* playback_pause_btn.png */; };
@@ -190,8 +190,8 @@
 		738FB16B189DF33200DBF8F8 /* icon_subject_music2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_subject_music2@2x.png"; sourceTree = "<group>"; };
 		738FB170189DF33D00DBF8F8 /* icon_subject_chemistry2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_subject_chemistry2.png; sourceTree = "<group>"; };
 		738FB171189DF33D00DBF8F8 /* icon_subject_chemistry2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_subject_chemistry2@2x.png"; sourceTree = "<group>"; };
-		73BBDE5D18F2691500D7E397 /* LECPreRecordScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LECPreRecordScreen.h; path = Views/LECPreRecordScreen.h; sourceTree = "<group>"; };
-		73BBDE5E18F2691500D7E397 /* LECPreRecordScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LECPreRecordScreen.m; path = Views/LECPreRecordScreen.m; sourceTree = "<group>"; };
+		73BBDE5D18F2691500D7E397 /* LECLectureEditScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LECLectureEditScreen.h; path = Views/LECLectureEditScreen.h; sourceTree = "<group>"; };
+		73BBDE5E18F2691500D7E397 /* LECLectureEditScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LECLectureEditScreen.m; path = Views/LECLectureEditScreen.m; sourceTree = "<group>"; };
 		73C476E718E66C8200AAB8C8 /* playback_fastforward_btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playback_fastforward_btn.png; sourceTree = "<group>"; };
 		73C476E818E66C8200AAB8C8 /* playback_fastforward_btn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "playback_fastforward_btn@2x.png"; sourceTree = "<group>"; };
 		73C476E918E66C8200AAB8C8 /* playback_pause_btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playback_pause_btn.png; sourceTree = "<group>"; };
@@ -529,8 +529,8 @@
 				7318CDA01898AEFD002E23A0 /* LECHeaderView.m */,
 				C982027A18A32B2100256A7E /* LECActionBar.h */,
 				C982027B18A32B2100256A7E /* LECActionBar.m */,
-				73BBDE5D18F2691500D7E397 /* LECPreRecordScreen.h */,
-				73BBDE5E18F2691500D7E397 /* LECPreRecordScreen.m */,
+				73BBDE5D18F2691500D7E397 /* LECLectureEditScreen.h */,
+				73BBDE5E18F2691500D7E397 /* LECLectureEditScreen.m */,
 				73F86B0618E53DA800BAD7B8 /* LECPlaybackControls.h */,
 				73F86B0718E53DA800BAD7B8 /* LECPlaybackControls.m */,
 			);
@@ -866,7 +866,7 @@
 				C9FBD6281894A2B700D1A7D6 /* Example.m in Sources */,
 				73F86B0818E53DA800BAD7B8 /* LECPlaybackControls.m in Sources */,
 				C9B0C5E9187FBE7F002D4A63 /* main.m in Sources */,
-				73BBDE5F18F2691500D7E397 /* LECPreRecordScreen.m in Sources */,
+				73BBDE5F18F2691500D7E397 /* LECLectureEditScreen.m in Sources */,
 				C9B0C5F0187FBE7F002D4A63 /* Lec.xcdatamodeld in Sources */,
 				8BE7581D188B48DD007B6C02 /* LECTableView.m in Sources */,
 				733C9BC618AAEE57007E92B6 /* LECAnimationService.m in Sources */,

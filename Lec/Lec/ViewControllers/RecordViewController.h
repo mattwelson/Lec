@@ -8,9 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "Lecture.h"
+#import "LECLectureEditScreen.h"
 #import "PullupTableViewController.h"
 
-@interface RecordViewController : PullupTableViewController
+@interface RecordViewController : PullupTableViewController<PreRecordDelegate>
 
 -(id)initWithLecture:(Lecture *)lecture;
 

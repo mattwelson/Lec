@@ -17,7 +17,7 @@
 
 @end
 
-@interface LECPreRecordScreen : UIView<UITextViewDelegate>
+@interface LECLectureEditScreen : UIView<UITextViewDelegate>
 
 - (id)initWithFrame:(CGRect)frame withCourseViewModel:(LECCourseViewModel *)vm;
 - (id)initWithFrame:(CGRect)frame withLectureViewModel:(LECLectureViewModel *)vm;

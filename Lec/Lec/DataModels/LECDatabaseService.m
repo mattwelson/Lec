@@ -63,6 +63,7 @@ static LECDatabaseService *sharedInstance = nil;
     return dbLecture;
 }
 
+
 -(Tag *)newTagForLecture:(Lecture *)lecture
 {
     Tag *dbTag = [NSEntityDescription insertNewObjectForEntityForName:@"Tag" inManagedObjectContext:self.managedObjectContext];
@@ -80,8 +81,37 @@ static LECDatabaseService *sharedInstance = nil;
 
 -(void)deleteObject:(NSManagedObject *)object
 {
+    if ([object isKindOfClass:[Lecture class]]) {
+        [self deleteLectureFile:(Lecture *)object];
+    }
     [self.managedObjectContext deleteObject:object];
     [self saveChanges];
 }
+
+-(void) deleteLectureFile:(Lecture *)lecture
+{
+//    NSFileManager* fileManager = [NSFileManager defaultManager];
+//    NSError *error;
+//
+//    NSURL *documentFolderURL = [fileManager URLForDirectory:NSDocumentDirectory inDomain:NSUserDomainMask appropriateForURL:Nil create:NO error:&error];
+//    NSURL *fileURL = [documentFolderURL URLByAppendingPathComponent:lecture.recordingPath];
+//    NSString *filePath = [fileURL absoluteString];
+//    NSLog(@"FIle path %@", filePath);
+//    if ([fileManager fileExistsAtPath:filePath]) {
+//        NSError* deletionError;
+//        [fileManager removeItemAtPath:filePath error:&deletionError];
+//    }
+    
+    NSFileManager* fileManager = [NSFileManager defaultManager];
+    NSError *error;
+    
+    NSURL *documentFolderURL = [fileManager URLForDirectory:NSDocumentDirectory inDomain:NSUserDomainMask appropriateForURL:Nil create:NO error:&error];
+    NSURL *fileURL = [documentFolderURL URLByAppendingPathComponent:lecture.recordingPath];
+    if ([fileURL checkResourceIsReachableAndReturnError:&error]) {
+        NSError* deletionError;
+        [fileManager removeItemAtURL:fileURL error:&deletionError];
+    }
+}
+
 
 @end

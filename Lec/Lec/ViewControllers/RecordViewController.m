@@ -10,13 +10,13 @@
 #import "RecordViewController.h"
 #import "LECImportHeader.h"
 #import "LECActionBar.h"
-#import "LECPreRecordScreen.h"
+#import "LECLectureEditScreen.h"
 #import "LECDefines.h"
 #import "TagCell.h"
 
 @interface RecordViewController (){
     LECLectureViewModel *viewModel;
-    LECPreRecordScreen *preScreen;
+    LECLectureEditScreen *preScreen;
 }
 
 @end
@@ -85,7 +85,7 @@
 
 -(void)lectureEdit
 {
-    preScreen = [[LECPreRecordScreen alloc]initWithFrame:CGRectMake(0, 20, SCREEN_WIDTH, SCREEN_HEIGHT-20) withLectureViewModel:viewModel];
+    preScreen = [[LECLectureEditScreen alloc]initWithFrame:CGRectMake(0, 20, SCREEN_WIDTH, SCREEN_HEIGHT-20) withLectureViewModel:viewModel];
     preScreen.preRecordDelegate = self;
     [self.view addSubview:preScreen];
     [[self navigationController] setNavigationBarHidden:YES animated:YES];

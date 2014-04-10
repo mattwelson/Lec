@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "LECImportHeader.h"
-#import "LECPreRecordScreen.h"
+#import "LECLectureEditScreen.h"
 #import "PullupTableViewController.h"
 
 @interface CourseViewController : PullupTableViewController<UITextFieldDelegate, PreRecordDelegate>

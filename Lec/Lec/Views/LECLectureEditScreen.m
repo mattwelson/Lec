@@ -6,13 +6,13 @@
 //  Copyright (c) 2014 South45. All rights reserved.
 //
 
-#import "LECPreRecordScreen.h"
+#import "LECLectureEditScreen.h"
 #import "LECColourService.h"
 #import "LECDefines.h"
 
 #define kPLACEHOLDERNAME @"Type your lecture name here"
 
-@implementation LECPreRecordScreen
+@implementation LECLectureEditScreen
 
 - (id)initWithFrame:(CGRect)frame withCourseViewModel:(LECCourseViewModel *)vm
 {
@@ -88,7 +88,7 @@
     [self.lectureNumberStepper setTintColor:[[LECColourService sharedColourService]baseColourFor:[viewModel colourString]]];
     [self addSubview:self.lectureNumberStepper];
     
-    self.lectureNameField = [[UITextView alloc]initWithFrame:CGRectMake(40, 150, 240, 150)];
+    self.lectureNameField = [[UITextView alloc]initWithFrame:CGRectMake(40, 120, 240, 120)];
     self.lectureNameField.delegate = self;
     self.lectureNameField.backgroundColor = [UIColor clearColor];
     if([viewModel isKindOfClass:[LECCourseViewModel class]]){

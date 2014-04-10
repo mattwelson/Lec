@@ -14,7 +14,7 @@
 @interface CourseViewController (){
     LECCourseViewModel *viewModel;
     Course *currentCourse;
-    LECPreRecordScreen *preScreen;
+    LECLectureEditScreen *preScreen;
     UIView *editView;
     NSArray *colourNames;
     NSArray *iconNames;
@@ -319,7 +319,7 @@
 
 -(void) actionBarPressed
 {
-    preScreen = [[LECPreRecordScreen alloc]initWithFrame:CGRectMake(0, 20, SCREEN_WIDTH, SCREEN_HEIGHT-20) withCourseViewModel:viewModel];
+    preScreen = [[LECLectureEditScreen alloc]initWithFrame:CGRectMake(0, 20, SCREEN_WIDTH, SCREEN_HEIGHT-20) withCourseViewModel:viewModel];
     preScreen.preRecordDelegate = self;
     [self.view addSubview:preScreen];
     [[self navigationController] setNavigationBarHidden:YES animated:YES];

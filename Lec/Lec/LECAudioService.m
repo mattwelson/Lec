@@ -70,7 +70,7 @@ static LECAudioService *sharedService;
     [session setCategory:AVAudioSessionCategoryPlayback error:&error];
     
     recordingPath = [self recordingPath:path];
-    
+    NSLog(@"File path %@", recordingPath);
     audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:recordingPath error:&error];
     audioPlayer.delegate = self;
     playbackFinished = block;
