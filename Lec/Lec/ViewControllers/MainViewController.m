@@ -22,6 +22,7 @@
     UILabel *pullDownAddReminder;
     NSArray *visibleCells;
     int loadedCells;
+    NSIndexPath *deleteIndexPath;
 }
 
 @end
@@ -129,12 +130,31 @@
     return cell;
 }
 
+#pragma mark AlertView methods for deletion of course
+
 -(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    deleteIndexPath = indexPath;
     if (editingStyle == UITableViewCellEditingStyleDelete)
     {
-        [self.viewModel deleteCourseAtIndex:indexPath.row];
-        [self.courseTableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+        NSString *deleteTitle = [@"Delete " stringByAppendingString:[[[self.viewModel.tableData objectAtIndex:indexPath.row] course]courseName]];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:deleteTitle
+                                                        message:@"Are you sure you want to delete this course and all the lectures inside?"
+                                                       delegate:self
+                                              cancelButtonTitle:@"Delete"
+                                              otherButtonTitles:@"Cancel", nil];
+        [alert show];
+    }
+}
+
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 0) {
+        [self.viewModel deleteCourseAtIndex:deleteIndexPath.row];
+        [self.courseTableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:deleteIndexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    }
+    else {
+        [alertView removeFromSuperview];
     }
 }
 
@@ -191,7 +211,6 @@
     [self.viewModel updateCourseIndexes];
     
 }
-
 
 
 #warning Should be moved!

@@ -162,11 +162,25 @@
 {
     if (editingStyle == UITableViewCellEditingStyleDelete)
     {
-        [self deleteObjectFromViewModel:indexPath.row];
-        //[self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-        [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-#warning If we remove the reload data, the animation works, not sure what implications it may have though
-        //[self.tableView reloadData];
+        deleteIndexPath = indexPath;
+//        NSString *deleteTitle = [@"Delete " stringByAppendingString:[[[self.viewModel.tableData objectAtIndex:indexPath.row] course]courseName]];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Delete"
+                                                        message:@"Are you sure you want to delete this?"
+                                                       delegate:self
+                                              cancelButtonTitle:@"Delete"
+                                              otherButtonTitles:@"Cancel", nil];
+        [alert show];
+    }
+}
+
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 0) {
+        [self deleteObjectFromViewModel:deleteIndexPath.row];
+        [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:deleteIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+    }
+    else {
+        [alertView removeFromSuperview];
     }
 }
 

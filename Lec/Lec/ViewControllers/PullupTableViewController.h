@@ -22,6 +22,7 @@
     NSInteger noSections;
     NSArray *visibleCells;
     int loadedCells;
+    NSIndexPath *deleteIndexPath;
 }
 
 @property UITableView *tableView;
