@@ -1,14 +1,14 @@
 //
-//  LECPreRecordScreen.h
+//  LECLecturePrepareView.h
 //  Lec
 //
-//  Created by Julin Le-Ngoc on 7/04/14.
+//  Created by Julin Le-Ngoc on 12/04/14.
 //  Copyright (c) 2014 South45. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 #import "LECCourseViewModel.h"
-#import "LECLectureViewModel.h"
+#import "LECDefines.h"
 
 @protocol PreRecordDelegate <NSObject>
 
@@ -17,16 +17,17 @@
 
 @end
 
-@interface LECLectureEditScreen : UIView<UITextViewDelegate>
+@interface LECLecturePrepareView : UIView<UITextFieldDelegate>
 
-- (id)initWithFrame:(CGRect)frame withLectureViewModel:(LECLectureViewModel *)vm;
+- (id)initWithFrame:(CGRect)frame withCourseViewModel:(LECCourseViewModel *)vm;
+- (void)animateEntry;
+- (void)dismissScreen;
 
-@property LECLectureViewModel *lectureViewModel;
+@property LECCourseViewModel *courseViewModel;
 @property NSInteger lectureNumber;
 @property UILabel *lectureNumberLabel;
 @property UIStepper *lectureNumberStepper;
 @property UITextField *lectureNameField;
-@property UITextView *lectureNameView;
 @property UIButton *startRecordingButton;
 @property (nonatomic, assign) id<PreRecordDelegate> preRecordDelegate;
 

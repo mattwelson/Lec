@@ -14,7 +14,7 @@
 @interface CourseViewController (){
     LECCourseViewModel *viewModel;
     Course *currentCourse;
-    LECLectureEditScreen *preScreen;
+    LECLecturePrepareView *preScreen;
     UIView *editView;
     NSArray *colourNames;
     NSArray *iconNames;
@@ -26,6 +26,8 @@
     bool iconMaySelect;
     UIView *quickRecordView;
     UILabel *quickRecordLabel;
+    BOOL addViewActive;
+    
 }
 
 @end
@@ -66,11 +68,11 @@
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:plusImg style:UIBarButtonItemStylePlain target:self action:@selector(courseEdit)];
     
     quickRecordView = [[UIView alloc]initWithFrame:CGRectMake(0, self.tableView.frame.size.height, SCREEN_WIDTH, 0)];
-    quickRecordView.backgroundColor = [[LECColourService sharedColourService]baseColourFor:viewModel.colourString];
+    quickRecordView.backgroundColor = [UIColor whiteColor];
     quickRecordLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, quickRecordView.frame.size.height/2, SCREEN_WIDTH, 50)];
-    quickRecordLabel.textColor = [UIColor whiteColor];
+    quickRecordLabel.textColor = HEADERCOLOR;
     quickRecordLabel.textAlignment = NSTextAlignmentCenter;
-    quickRecordLabel.text = @"Quick Record";
+    quickRecordLabel.text = @"Pull down to add a recording";
     [quickRecordView addSubview:quickRecordLabel];
     [self.view addSubview:quickRecordView];
 }
@@ -163,12 +165,12 @@
     [newDescription setText:viewModel.subTitle];
     
     UIImage *checkImg = [UIImage imageNamed:@"icon_checkmark.png"];
-//    checkImg = [checkImg imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-//    UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
-//    rightButton.frame = CGRectMake(SCREEN_WIDTH - 40, 30, 30, 30);
-//    [rightButton setBackgroundImage:checkImg forState:UIControlStateNormal];
-//    [rightButton.imageView setTintColor:[UIColor whiteColor]];
-//    [rightButton addTarget:self action:@selector(saveEdit) forControlEvents:UIControlEventTouchDown];
+    //    checkImg = [checkImg imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    //    UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    //    rightButton.frame = CGRectMake(SCREEN_WIDTH - 40, 30, 30, 30);
+    //    [rightButton setBackgroundImage:checkImg forState:UIControlStateNormal];
+    //    [rightButton.imageView setTintColor:[UIColor whiteColor]];
+    //    [rightButton addTarget:self action:@selector(saveEdit) forControlEvents:UIControlEventTouchDown];
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:checkImg style:UIBarButtonItemStylePlain target:self action:@selector(saveEdit)];
     
@@ -209,7 +211,7 @@
     //self.navigationController.navigationBar.hidden = NO;
     self.navigationItem.leftBarButtonItem = NULL;
     //[editView removeFromSuperview];
-
+    
 }
 
 - (IBAction)iconSelected:(id)sender
@@ -231,10 +233,10 @@
     NSLog(@"%@",colourNames[i]);
     [UIView transitionWithView:self.view duration:0.2 options:UIViewAnimationOptionTransitionCrossDissolve animations:
      ^{
-        [[LECColourService sharedColourService] changeGradientToColour:colourNames[i] forView:editView];
-    }completion:^(BOOL finished){
-        nil;
-    }];
+         [[LECColourService sharedColourService] changeGradientToColour:colourNames[i] forView:editView];
+     }completion:^(BOOL finished){
+         nil;
+     }];
     newColor = colourNames[i];
     
     
@@ -298,11 +300,11 @@
 }
 
 -(void) courseScroll:(CGFloat)scrollOffset
-{    
+{
     if (scrollOffset < 0) {
         [self.view addSubview:quickRecordView];
         quickRecordView.frame = CGRectMake(0, self.headerView.frame.size.height, SCREEN_WIDTH, -scrollOffset);
-        quickRecordLabel.font = [UIFont fontWithName:DEFAULTFONT size:15-scrollOffset/16];
+        quickRecordLabel.font = [UIFont fontWithName:DEFAULTFONT size:10-scrollOffset/16];
         quickRecordLabel.alpha = -scrollOffset/80;
     }
     else {
@@ -314,27 +316,77 @@
 -(void) quickRecord
 {
     //[viewModel addLecture:@"Quick Record" withLectureNumber:viewModel.i];
-    [self confirmChanges:viewModel.i+1 withName:@"(Quick Record)"];
+    //[self confirmChanges:viewModel.i+1 withName:@"(Quick Record)"];
+    //    preScreen = [[LECLecturePrepareView alloc]initWithFrame:CGRectMake(0, self.headerView.frame.size.height, SCREEN_WIDTH, 75) withCourseViewModel:viewModel];
+    //    preScreen.preRecordDelegate = self;
+    //    [self.view addSubview:preScreen];
+    [self addLecturePullDown];
+}
+
+
+-(void)addLecturePullDown{
+    preScreen = [[LECLecturePrepareView alloc]initWithFrame:CGRectMake(0, 200, SCREEN_WIDTH, 75) withCourseViewModel:viewModel];
+    preScreen.preRecordDelegate = self;
+    //preScreen.alpha = 0.0;
+    [self.view addSubview:preScreen];
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon_checkmark.png"] style:UIBarButtonItemStylePlain target:self action:@selector(confirmChanges:withName:)];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon_cancel.png"] style:UIBarButtonItemStylePlain target:self action:@selector(closeSaveLecture)];
+    
+    [preScreen animateEntry];
+    self.tableView.userInteractionEnabled = NO; // disable course clicking
+    [UIView animateWithDuration:0.2
+                          delay:0.0
+                        options: UIViewAnimationOptionCurveEaseIn
+                     animations:^{
+                         //preScreen.frame.size.height = 75;
+                         //preScreen.alpha = 1.0;
+                         self.tableView.frame = CGRectMake(0, 64+75, SCREEN_WIDTH, SCREEN_HEIGHT-64);
+                     }
+                     completion:^(BOOL finished){
+                     }];
+    addViewActive = TRUE;
+    
+}
+
+-(void)closeSaveLecture{
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav_settings_btn.png"] style:UIBarButtonItemStylePlain target:self action:@selector(courseEdit)];
+    
+    self.navigationItem.leftBarButtonItem = nil;
+    self.tableView.userInteractionEnabled = YES; // re-enables course clicking
+    
+    [UIView animateWithDuration:0.2
+                          delay:0.2
+                        options: UIViewAnimationOptionCurveEaseIn
+                     animations:^{
+                         self.tableView.frame = CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT-64);
+                         [preScreen dismissScreen];
+                     }
+                     completion:^(BOOL finished){
+                         [preScreen removeFromSuperview];
+                         
+                     }];
+    addViewActive = FALSE;
+    
+    
 }
 
 -(void) actionBarPressed
 {
-    preScreen = [[LECLectureEditScreen alloc]initWithFrame:CGRectMake(0, 20, SCREEN_WIDTH, SCREEN_HEIGHT-20) withCourseViewModel:viewModel];
-    preScreen.preRecordDelegate = self;
-    [self.view addSubview:preScreen];
-    [[self navigationController] setNavigationBarHidden:YES animated:YES];
-    self.navigationController.interactivePopGestureRecognizer.enabled = NO;
-
-    //[[LECAnimationService sharedAnimationService]addAlphaToView:preScreen withSpeed:0.2 withDelay:0.0];
+    //    preScreen = [[LECLectureEditScreen alloc]initWithFrame:CGRectMake(0, 20, SCREEN_WIDTH, SCREEN_HEIGHT-20) withCourseViewModel:viewModel];
+    //    preScreen.preRecordDelegate = self;
+    //    [self.view addSubview:preScreen];
+    //    [[self navigationController] setNavigationBarHidden:YES animated:YES];
+    //    self.navigationController.interactivePopGestureRecognizer.enabled = NO;
     
-    CGRect finalFrame = preScreen.frame;
-    preScreen.frame = CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, 0);
-    
-    [UIView animateWithDuration:0.75 delay:0.0 usingSpringWithDamping:0.65 initialSpringVelocity:0.15 options:UIViewAnimationOptionCurveEaseIn animations:^{
-        preScreen.frame = finalFrame;
-    }completion:^(BOOL completion){
-        
-    }];
+    //    CGRect finalFrame = preScreen.frame;
+    //    preScreen.frame = CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, 0);
+    //
+    //    [UIView animateWithDuration:0.75 delay:0.0 usingSpringWithDamping:0.65 initialSpringVelocity:0.15 options:UIViewAnimationOptionCurveEaseIn animations:^{
+    //        preScreen.frame = finalFrame;
+    //    }completion:^(BOOL completion){
+    //
+    //    }];
 }
 
 #pragma mark Delegate from the pre recording screen to head into recording
@@ -346,13 +398,14 @@
 
 -(void) confirmChanges:(NSInteger)lectureNumber withName:(NSString *)lectureName
 {
+    [self closeSaveLecture];
     [viewModel addLecture:lectureName withLectureNumber:lectureNumber];
     [self.tableView reloadData];
     LECLectureCellViewModel *lectureCellViewModel = [viewModel.tableData objectAtIndex:0];
     [self.navigationController pushViewController:[[RecordViewController alloc] initWithLecture:lectureCellViewModel.lecture] animated:YES];
     [[self navigationController] setNavigationBarHidden:NO animated:YES];
     self.navigationController.interactivePopGestureRecognizer.enabled = YES;
-
+    
 }
 
 -(NSInteger) numberOfSections

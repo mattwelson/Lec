@@ -14,24 +14,6 @@
 
 @implementation LECLectureEditScreen
 
-- (id)initWithFrame:(CGRect)frame withCourseViewModel:(LECCourseViewModel *)vm
-{
-    self = [super initWithFrame:frame];
-    if (self) {
-        // Initialization code
-        self.courseViewModel = vm;
-        self.backgroundColor = [UIColor colorWithWhite:0.99 alpha:0.97];
-        
-        self.layer.cornerRadius = 15;
-        self.layer.masksToBounds = YES;
-//        self.layer.borderWidth = 1;
-//        self.layer.borderColor = [[LECColourService sharedColourService]highlightColourFor:[self.viewModel colourString]].CGColor;
-        
-        [self setupSubviews:vm];
-        
-    }
-    return self;
-}
 
 - (id)initWithFrame:(CGRect)frame withLectureViewModel:(LECLectureViewModel *)vm
 {
@@ -43,22 +25,19 @@
         
         self.layer.cornerRadius = 15;
         self.layer.masksToBounds = YES;
+        
         //        self.layer.borderWidth = 1;
         //        self.layer.borderColor = [[LECColourService sharedColourService]highlightColourFor:[self.viewModel colourString]].CGColor;
         
-        [self setupSubviews:vm];
+        [self setupEditSubviews:vm];
         
     }
     return self;
 }
 
--(void)setupSubviews:(id)viewModel{
-    if([viewModel isKindOfClass:[LECCourseViewModel class]]){
-        self.lectureNumber = self.courseViewModel.i+1;
-    }
-    else {
-        self.lectureNumber = [self.lectureViewModel.lecture.lectureNumber integerValue];
-    }
+
+-(void)setupEditSubviews:(id)viewModel{
+    self.lectureNumber = [self.lectureViewModel.lecture.lectureNumber integerValue];
 
     UIButton *closeButton = [[UIButton alloc]initWithFrame:CGRectMake(10, 25, 40, 40)];
     [closeButton setImage:[[UIImage imageNamed:@"icon_cancel.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
@@ -88,27 +67,27 @@
     [self.lectureNumberStepper setTintColor:[[LECColourService sharedColourService]baseColourFor:[viewModel colourString]]];
     [self addSubview:self.lectureNumberStepper];
     
-    self.lectureNameField = [[UITextView alloc]initWithFrame:CGRectMake(40, 120, 240, 120)];
-    self.lectureNameField.delegate = self;
-    self.lectureNameField.backgroundColor = [UIColor clearColor];
+    self.lectureNameView = [[UITextView alloc]initWithFrame:CGRectMake(40, 120, 240, 120)];
+    self.lectureNameView.delegate = self;
+    self.lectureNameView.backgroundColor = [UIColor clearColor];
     if([viewModel isKindOfClass:[LECCourseViewModel class]]){
-        self.lectureNameField.text = kPLACEHOLDERNAME;
+        self.lectureNameView.text = kPLACEHOLDERNAME;
     }
     else {
-        self.lectureNameField.text = self.lectureViewModel.lecture.lectureName;
+        self.lectureNameView.text = self.lectureViewModel.lecture.lectureName;
     }
-    self.lectureNameField.autocapitalizationType = UITextAutocapitalizationTypeWords;
-    self.lectureNameField.textAlignment = NSTextAlignmentCenter;
-    self.lectureNameField.font = [UIFont fontWithName:DEFAULTFONT size:30];
-    [self.lectureNameField setReturnKeyType: UIReturnKeyGo];
+    self.lectureNameView.autocapitalizationType = UITextAutocapitalizationTypeWords;
+    self.lectureNameView.textAlignment = NSTextAlignmentCenter;
+    self.lectureNameView.font = [UIFont fontWithName:DEFAULTFONT size:30];
+    [self.lectureNameView setReturnKeyType: UIReturnKeyGo];
     if([viewModel isKindOfClass:[LECCourseViewModel class]]){
-        self.lectureNameField.textColor = [UIColor lightGrayColor];
+        self.lectureNameView.textColor = [UIColor lightGrayColor];
     }
     else {
-        self.lectureNameField.textColor = [[LECColourService sharedColourService]highlightColourFor:[self.lectureViewModel colourString]];
+        self.lectureNameView.textColor = [[LECColourService sharedColourService]highlightColourFor:[self.lectureViewModel colourString]];
     }
-    [self addSubview:self.lectureNameField];
-    [self.lectureNameField becomeFirstResponder];
+    [self addSubview:self.lectureNameView];
+    [self.lectureNameView becomeFirstResponder];
     
     //This is the little record button
 //    if([viewModel isKindOfClass:[LECCourseViewModel class]]){
@@ -131,20 +110,20 @@
 //    }completion:^(BOOL finished){
 //        
 //    }];
-    [self.lectureNameField resignFirstResponder];
+    [self.lectureNameView resignFirstResponder];
     [self.preRecordDelegate preRecordCancelled];
     [UIView animateWithDuration:0.8 delay:0.0 usingSpringWithDamping:0.8 initialSpringVelocity:0.1 options:UIViewAnimationOptionCurveEaseIn animations:^{
         self.frame = CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, 0);
     }completion:^(BOOL completion){
-        [self.lectureNameField resignFirstResponder];
+        [self.lectureNameView resignFirstResponder];
         [self removeFromSuperview];
     }];
 }
 
 -(void)confirmDetails
 {
-    [self.lectureNameField resignFirstResponder];
-    [self.preRecordDelegate confirmChanges:self.lectureNumber withName:self.lectureNameField.text];
+    [self.lectureNameView resignFirstResponder];
+    [self.preRecordDelegate confirmChanges:self.lectureNumber withName:self.lectureNameView.text];
     [UIView animateWithDuration:0.8 delay:0.0 usingSpringWithDamping:0.8 initialSpringVelocity:0.1 options:UIViewAnimationOptionCurveEaseIn animations:^{
         self.frame = CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, 0);
     }completion:^(BOOL completion){
@@ -169,7 +148,7 @@
 {
     if ([textView.text isEqualToString:kPLACEHOLDERNAME]) {
         textView.text = @"";
-        textView.textColor = [[LECColourService sharedColourService]highlightColourFor:[self.courseViewModel colourString]];
+        textView.textColor = [[LECColourService sharedColourService]highlightColourFor:[self.lectureViewModel colourString]];
     }
     [textView becomeFirstResponder];
 }

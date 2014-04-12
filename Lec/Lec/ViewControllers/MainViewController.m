@@ -154,6 +154,7 @@
         [self.courseTableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:deleteIndexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
     }
     else {
+        [self.courseTableView setEditing:NO];
         [alertView removeFromSuperview];
     }
 }
@@ -218,6 +219,8 @@
 
 - (void)addCourse
 {
+    if (self.courseTableView.isEditing == NO) {
+
     [self.courseTableView scrollToRowAtIndexPath:0 atScrollPosition:0 animated:YES];
     addCourseView = [LECAddCourseView createAddCourseView];
     addCourseView.saveCourseDelegate = self;
@@ -237,6 +240,7 @@
                      }
                      completion:^(BOOL finished){
                      }];
+    }
 }
 
 -(void) saveCourse:(NSString *)courseNameString description:(NSString *)courseDescriptionString colour:(NSString *)colourString icon:(NSString *)iconString{

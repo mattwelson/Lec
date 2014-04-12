@@ -180,6 +180,7 @@
         [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:deleteIndexPath] withRowAnimation:UITableViewRowAnimationFade];
     }
     else {
+        [self.tableView setEditing:NO];
         [alertView removeFromSuperview];
     }
 }
@@ -190,8 +191,8 @@
     [self.headerView changeAlpha:self.tableView.contentOffset.y];
     [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor colorWithWhite:1.0 alpha:-0.3+(self.tableView.contentOffset.y/100)], NSForegroundColorAttributeName, [UIFont fontWithName:DEFAULTFONT size:HEADERSIZE], NSFontAttributeName, nil]];
     
-    if (scrollView.contentOffset.y < -85) {
-        scrollView.contentOffset = CGPointMake(0, -85);
+    if (scrollView.contentOffset.y < -65) {
+        scrollView.contentOffset = CGPointMake(0, -65);
         //[pullDownAddReminder setText:@"Release to Add Course"];
     }
     
@@ -202,7 +203,7 @@
 
 -(void) scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
-    if (scrollView.contentOffset.y <= -85) {
+    if (scrollView.contentOffset.y <= -65) {
         [self quickRecord];
     }
 }
