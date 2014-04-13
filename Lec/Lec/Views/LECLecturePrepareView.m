@@ -20,6 +20,7 @@
         self.courseViewModel = vm;
         self.backgroundColor = [UIColor colorWithWhite:1.00 alpha:1.00];
         
+        
         [self setupNewSubviews:vm];
         
     }
@@ -27,7 +28,7 @@
 }
 
 -(void)layoutSubviews
-{
+{    
     bottomBorder = [CALayer layer];
     bottomBorder.frame = CGRectMake(0.0f, self.frame.size.height, self.frame.size.width, 1.0f);
     bottomBorder.backgroundColor = [UIColor colorWithWhite:0.848 alpha:1.000].CGColor;
@@ -114,10 +115,13 @@
                          self.lectureNameField.alpha = 0.0;
                          self.lectureNumberField.alpha = 0.0;
                          self.startRecordingButton.alpha = 0.0;
-                         self.alpha = 0.0;
+                         
                      }
                      completion:^(BOOL finished){
                          [self.lectureNameField resignFirstResponder];
+                         [UIView animateWithDuration:0.2 animations:^{
+                             self.alpha = 0.0;
+                         }];
                      }];
     
 //    [UIView animateWithDuration:1.0
