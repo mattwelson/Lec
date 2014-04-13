@@ -111,7 +111,7 @@
 //        
 //    }];
     [self.lectureNameView resignFirstResponder];
-    [self.preRecordDelegate preRecordCancelled];
+    [self.lectureEditDelegate preRecordCancelled];
     [UIView animateWithDuration:0.8 delay:0.0 usingSpringWithDamping:0.8 initialSpringVelocity:0.1 options:UIViewAnimationOptionCurveEaseIn animations:^{
         self.frame = CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, 0);
     }completion:^(BOOL completion){
@@ -123,7 +123,7 @@
 -(void)confirmDetails
 {
     [self.lectureNameView resignFirstResponder];
-    [self.preRecordDelegate confirmChanges:self.lectureNumber withName:self.lectureNameView.text];
+    [self.lectureEditDelegate confirmChanges:self.lectureNumber withName:self.lectureNameView.text];
     [UIView animateWithDuration:0.8 delay:0.0 usingSpringWithDamping:0.8 initialSpringVelocity:0.1 options:UIViewAnimationOptionCurveEaseIn animations:^{
         self.frame = CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, 0);
     }completion:^(BOOL completion){

@@ -16,6 +16,8 @@
 
 @implementation LECCourseViewModel
 
+static void * localContext = &localContext;
+
 -(instancetype)initWithCourse:(Course *) course
 {
     self = [super init];
@@ -41,8 +43,15 @@
         self.navTitle = [course courseName];
         self.subTitle = [course courseDescription];
         self.icon = [course icon];
+        
+        [self setupObservation];
     }
     return self;
+}
+
+-(void) dealloc
+{
+    [self deallocObservation];
 }
 
 -(void)deleteLectureAtIndex:(NSInteger)index
@@ -62,6 +71,52 @@
     newLecture.lectureNumber = [NSNumber numberWithInteger:number];
     [dbService saveChanges];
     [self.tableData insertObject:[LECLectureCellViewModel lectureCellVMWithLecture:newLecture] atIndex:0];
+}
+
+#pragma mark - KVO
+-(void) setupObservation
+{
+    [self.currentCourse addObserver:self forKeyPath:NSStringFromSelector(@selector(colour)) options:NSKeyValueObservingOptionNew context:localContext];
+    [self.currentCourse addObserver:self forKeyPath:NSStringFromSelector(@selector(icon)) options:NSKeyValueObservingOptionNew context:localContext];
+    [self.currentCourse addObserver:self forKeyPath:NSStringFromSelector(@selector(courseName)) options:NSKeyValueObservingOptionNew context:localContext];
+    [self.currentCourse addObserver:self forKeyPath:NSStringFromSelector(@selector(courseDescription)) options:NSKeyValueObservingOptionNew context:localContext];
+}
+
+-(void)deallocObservation
+{
+    @try {
+        [self.currentCourse removeObserver:self forKeyPath:NSStringFromSelector(@selector(colour))];
+        [self.currentCourse removeObserver:self forKeyPath:NSStringFromSelector(@selector(icon))];
+        [self.currentCourse removeObserver:self forKeyPath:NSStringFromSelector(@selector(courseName))];
+        [self.currentCourse removeObserver:self forKeyPath:NSStringFromSelector(@selector(courseDescription))];
+    }
+    @catch (NSException * __unused exception) {}
+}
+
+// Updates view model when the managed object changes (edit screen)
+-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    if (context != localContext) return;
+    if ([keyPath isEqualToString:NSStringFromSelector(@selector(colour))])
+    {
+        self.colourString = change[NSKeyValueChangeNewKey];
+    }
+    
+    if ([keyPath isEqualToString:NSStringFromSelector(@selector(icon))])
+    {
+        self.icon = change[NSKeyValueChangeNewKey];
+    }
+    
+    if ([keyPath isEqualToString:NSStringFromSelector(@selector(courseName))])
+    {
+        self.navTitle = change[NSKeyValueChangeNewKey];
+    }
+    
+    if ([keyPath isEqualToString:NSStringFromSelector(@selector(courseDescription))])
+    {
+        self.subTitle = change[NSKeyValueChangeNewKey];
+    }
+    if (change[NSKeyValueChangeNewKey] == [NSNull null]) [self deallocObservation];
 }
 
 @end

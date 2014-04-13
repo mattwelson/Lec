@@ -88,7 +88,7 @@
 -(void)lectureEdit
 {
     preScreen = [[LECLectureEditScreen alloc]initWithFrame:CGRectMake(0, 20, SCREEN_WIDTH, SCREEN_HEIGHT-20) withLectureViewModel:viewModel];
-    preScreen.preRecordDelegate = self;
+    preScreen.lectureEditDelegate = self;
     [self.view addSubview:preScreen];
     [[self navigationController] setNavigationBarHidden:YES animated:YES];
     self.navigationController.interactivePopGestureRecognizer.enabled = NO;
@@ -117,6 +117,7 @@
     [[LECDatabaseService sharedDBService]saveChanges];
     [[self navigationController] setNavigationBarHidden:NO animated:YES];
     self.navigationController.interactivePopGestureRecognizer.enabled = YES;
+    self.navigationItem.title = [[self viewModelFromSubclass] navTitle];
 
 }
 

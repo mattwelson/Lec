@@ -28,6 +28,6 @@
 @property UITextField *lectureNameField;
 @property UITextView *lectureNameView;
 @property UIButton *startRecordingButton;
-@property (nonatomic, assign) id<LectureEditDelegate> preRecordDelegate;
+@property (nonatomic, assign) id<LectureEditDelegate> lectureEditDelegate;
 
 @end

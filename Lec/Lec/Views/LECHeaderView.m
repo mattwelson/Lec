@@ -69,12 +69,14 @@ static void * localContext = &localContext;
 
 - (id)initWithCourse:(LECCourseViewModel *)courseModel
 {
+    self.currentViewModel = courseModel;
     self = [self initWithFrame:CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, 200)];
     if (self) {
         [[LECColourService sharedColourService] addGradientForColour:courseModel.colourString toView:self];
         subjectImg = [[LECIconService sharedIconService] retrieveIcon:courseModel.icon toView:subjectImg];
         titleLabel.text = courseModel.navTitle;
         descriptionLabel.text = courseModel.subTitle;
+        [self setupObservingOf:courseModel];
     }
     return self;
 }
@@ -113,15 +115,24 @@ static void * localContext = &localContext;
 
 #pragma mark - KVO
 // seperated off as it's ugly as shit
--(void) setupObservingOf:(LECLectureViewModel *)vm
+-(void) setupObservingOf:(id)vm
 {
+    if ([vm isKindOfClass:[LECCourseViewModel class]]) {
+        [vm addObserver:self forKeyPath:NSStringFromSelector(@selector(colourString)) options:NSKeyValueObservingOptionNew context:localContext];
+        [vm addObserver:self forKeyPath:NSStringFromSelector(@selector(icon)) options:NSKeyValueObservingOptionNew context:localContext];
+    }
     [vm addObserver:self forKeyPath:NSStringFromSelector(@selector(subTitle)) options:NSKeyValueObservingOptionNew context:localContext];
     [vm addObserver:self forKeyPath:NSStringFromSelector(@selector(navTitle)) options:NSKeyValueObservingOptionNew context:localContext];
 }
 
--(void)deallocObservation:(LECLectureViewModel *)vm;
+
+-(void)deallocObservation:(id)vm;
 {
     @try {
+        if ([vm isKindOfClass:[LECCourseViewModel class]]) {
+            [vm removeObserver:self forKeyPath:NSStringFromSelector(@selector(colourString))];
+            [vm removeObserver:self forKeyPath:NSStringFromSelector(@selector(icon))];
+        }
         [vm removeObserver:self forKeyPath:NSStringFromSelector(@selector(subTitle))];
         [vm removeObserver:self forKeyPath:NSStringFromSelector(@selector(navTitle))];
     }
@@ -146,6 +157,28 @@ static void * localContext = &localContext;
         navTitle.text = change[NSKeyValueChangeNewKey];
         titleLabel.text = change[NSKeyValueChangeNewKey];
     }
+    if ([keyPath isEqualToString:NSStringFromSelector(@selector(colourString))])
+    {
+        [[LECColourService sharedColourService] changeGradientToColour:change[NSKeyValueChangeNewKey] forView:self];
+    }
+    
+    if ([keyPath isEqualToString:NSStringFromSelector(@selector(icon))])
+    {
+        [[LECIconService sharedIconService] retrieveIcon:change[NSKeyValueChangeNewKey] toView:subjectImg];
+    }
+//    if ([keyPath isEqualToString:NSStringFromSelector(@selector(titleText))])
+//    {
+//        navTitle.text = change[NSKeyValueChangeNewKey];
+//        [navTitle setNeedsDisplay];
+//        titleLabel.text = change[NSKeyValueChangeNewKey];
+//        [titleLabel setNeedsDisplay];
+//    }
+//    
+//    if ([keyPath isEqualToString:NSStringFromSelector(@selector(subText))])
+//    {
+//        descriptionLabel.text = change[NSKeyValueChangeNewKey];
+//        [descriptionLabel setNeedsDisplay];
+//    }
 }
 
 @end

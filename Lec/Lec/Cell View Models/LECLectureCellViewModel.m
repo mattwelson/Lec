@@ -26,6 +26,11 @@ static void * localContext = &localContext;
     return cellViewModel;
 }
 
+-(void)dealloc
+{
+    [self deallocObservation];
+}
+
 #pragma mark - KVO
 -(void) setupObservation
 {

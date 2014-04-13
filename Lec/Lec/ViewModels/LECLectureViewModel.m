@@ -41,6 +41,11 @@ static void * localContext = &localContext;
     return vm;
 }
 
+-(void) dealloc
+{
+    [self deallocObservation];
+}
+
 #pragma mark Recording
 -(void) setInitialRecordingPath
 {
@@ -131,7 +136,9 @@ static void * localContext = &localContext;
 // Updates view model when the managed object changes (edit screen)
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
-    if (context != localContext) return;
+    if (context != localContext) {
+        return;
+    }
     if ([keyPath isEqualToString:NSStringFromSelector(@selector(lectureName))])
     {
         self.subTitle = change[NSKeyValueChangeNewKey];

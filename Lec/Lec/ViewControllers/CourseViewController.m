@@ -58,7 +58,6 @@
     //Hacked this so it moves the tableview slightly, when going to it, this forces it to scroll, hence recalculates the titlebar
     CGPoint point = CGPointMake(0, self.tableView.contentOffset.y-1);
     [self.tableView setContentOffset:point animated:YES];
-    
 }
 
 - (void) navigationTopBar
@@ -199,10 +198,19 @@
 
 -(void)closeEdit
 {
-    [self.navigationController popViewControllerAnimated:YES];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav_settings_btn.png"] style:UIBarButtonItemStylePlain target:self action:@selector(courseEdit)];
+    [UIView animateWithDuration:0.2 animations:^{
+        editView.alpha = 0.0;
+    } completion:^(BOOL finished){
+        [editView removeFromSuperview];
+    }];
+    //[self.navigationController popViewControllerAnimated:YES];
     //self.navigationController.navigationBar.hidden = NO;
     self.navigationItem.leftBarButtonItem = NULL;
     //[editView removeFromSuperview];
+    viewModel = [[LECCourseViewModel alloc]initWithCourse:currentCourse];
+    [self.tableView reloadData];
+    self.navigationItem.title = [[self viewModelFromSubclass] navTitle];
     
 }
 

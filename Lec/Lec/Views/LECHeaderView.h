@@ -11,7 +11,7 @@
 
 @interface LECHeaderView : UIView
 
-@property LECLectureViewModel *currentViewModel;
+@property id currentViewModel;
 
 - (id)initWithCourse:(LECCourseViewModel *)course;
 -(id)initWithLecture:(LECLectureViewModel *)lectureModel andIsRecording:(BOOL)isRecording;
