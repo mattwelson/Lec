@@ -10,8 +10,6 @@
 #import "LECParallaxService.h"
 #import "LECAnimationService.h"
 
-static void * localContext = &localContext;
-
 @implementation LECHeaderView{
     CGRect startingFrame;
     UIImageView *subjectImg;
@@ -19,6 +17,8 @@ static void * localContext = &localContext;
     UILabel *titleLabel;
     UILabel *descriptionLabel;
 }
+
+static void * localContext = &localContext;
 
 - (id)initWithFrame:(CGRect)frame
 {

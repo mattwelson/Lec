@@ -11,9 +11,8 @@
 #import "LECDefines.h"
 #import "LECTagCellViewModel.h"
 
-static void * localContext = &localContext;
-
 @implementation LECLectureViewModel
+static void * localContext = &localContext;
 
 +(LECLectureViewModel *)viewModelWithLecture:(Lecture *)lecture
 {
