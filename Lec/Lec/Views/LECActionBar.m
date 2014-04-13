@@ -56,8 +56,20 @@
     [tagBar.layer addSublayer:topBorder];
     
     CALayer *bottomBorder = [CALayer layer];
-    bottomBorder.frame = CGRectMake(0.0f, tagBar.frame.size.height, tagBar.frame.size.width, 1.0f);
-    bottomBorder.backgroundColor = [UIColor colorWithWhite:0.848 alpha:1.000].CGColor;
+    bottomBorder.frame = CGRectMake(0.0f, tagBar.frame.size.height-2, tagBar.frame.size.width, 2.0f);
+    //bottomBorder.backgroundColor = [UIColor colorWithWhite:0.848 alpha:1.000].CGColor;
+    bottomBorder.backgroundColor = [UIColor redColor].CGColor;
+    
+    CABasicAnimation *theAnimation;
+    
+    theAnimation=[CABasicAnimation animationWithKeyPath:@"opacity"];
+    theAnimation.duration=2.0;
+    theAnimation.repeatCount=100000000;
+    theAnimation.autoreverses=YES;
+    theAnimation.fromValue=[NSNumber numberWithFloat:1.0];
+    theAnimation.toValue=[NSNumber numberWithFloat:0.05];
+    [bottomBorder addAnimation:theAnimation forKey:@"animateOpacity"];
+    
     [tagBar.layer addSublayer:bottomBorder];
     
     return tagBar;

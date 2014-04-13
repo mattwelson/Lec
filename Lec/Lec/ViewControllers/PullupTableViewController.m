@@ -73,7 +73,7 @@
     
     [self.tableView registerClass:[LectureCell class] forCellReuseIdentifier:CELL_ID_HEADER];
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:CELL_ID_ADD_CELL];
-}
+} 
 
 - (void)didReceiveMemoryWarning
 {
@@ -149,7 +149,8 @@
 
 -(CGFloat) tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-    return hasFooter && section == contentSection ? 85 : 0;
+    // Is 50 for the bottom bar
+    return hasFooter && section == contentSection ? 50 : 0;
 }
 
 -(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
