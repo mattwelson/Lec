@@ -11,6 +11,8 @@
 #import "LECDefines.h"
 #import "LECTagCellViewModel.h"
 
+static void * localContext = &localContext;
+
 @implementation LECLectureViewModel
 
 +(LECLectureViewModel *)viewModelWithLecture:(Lecture *)lecture
@@ -28,6 +30,8 @@
     if (!vm.recordingPath) {
         [vm setInitialRecordingPath];
     }
+    [vm setupObservation];
+
     
     NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:NSStringFromSelector(@selector(currentTime)) ascending:YES];
     NSArray *sortedTags = [lecture.tags sortedArrayUsingDescriptors:@[sortDescriptor]];
@@ -107,6 +111,40 @@
     }];
     
     [self.tableData insertObject:tagCVM atIndex:newIndex];
+}
+
+#pragma mark - KVO
+-(void) setupObservation
+{
+    [self.lecture addObserver:self forKeyPath:NSStringFromSelector(@selector(lectureName)) options:NSKeyValueObservingOptionNew context:localContext];
+    [self.lecture addObserver:self forKeyPath:NSStringFromSelector(@selector(lectureNumber)) options:NSKeyValueObservingOptionNew context:localContext];
+}
+
+-(void)deallocObservation
+{
+    @try {
+        [self.lecture removeObserver:self forKeyPath:NSStringFromSelector(@selector(lectureName))];
+        [self.lecture removeObserver:self forKeyPath:NSStringFromSelector(@selector(lectureNumber))];
+    }
+    @catch (NSException * __unused exception) {}
+}
+
+// Updates view model when the managed object changes (edit screen)
+-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    if (context != localContext) return;
+    if ([keyPath isEqualToString:NSStringFromSelector(@selector(lectureName))])
+    {
+        self.subTitle = change[NSKeyValueChangeNewKey];
+    }
+    if ([keyPath isEqualToString:NSStringFromSelector(@selector(lectureNumber))])
+    {
+        self.navTitle = [NSString stringWithFormat:@"Lecture %@", change[NSKeyValueChangeNewKey]];
+    }
+    if (change[NSKeyValueChangeNewKey] == [NSNull null]){
+        [self deallocObservation];
+        return;
+    }
 }
 
 @end

@@ -10,6 +10,7 @@
 #import "LECParallaxService.h"
 #import "LECAnimationService.h"
 
+static void * localContext = &localContext;
 
 @implementation LECHeaderView{
     CGRect startingFrame;
@@ -61,6 +62,11 @@
     return self;
 }
 
+- (void)dealloc
+{
+    [self deallocObservation:self.currentViewModel];
+}
+
 - (id)initWithCourse:(LECCourseViewModel *)courseModel
 {
     self = [self initWithFrame:CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, 200)];
@@ -75,12 +81,14 @@
 
 -(id)initWithLecture:(LECLectureViewModel *)lectureModel andIsRecording:(BOOL)isRecording
 {
+    self.currentViewModel = lectureModel;
     self = [self initWithFrame:CGRectMake(0, 0,[[UIScreen mainScreen] bounds].size.width, 200)];
     if (self) {
         [[LECColourService sharedColourService] addGradientForColour:lectureModel.colourString toView:self];
         subjectImg = [[LECIconService sharedIconService] retrieveIcon:lectureModel.icon toView:subjectImg];
         titleLabel.text = lectureModel.navTitle;
         descriptionLabel.text = lectureModel.subTitle;
+        [self setupObservingOf:lectureModel];
     }
     return self;
 }
@@ -100,6 +108,43 @@
         descriptionLabel.alpha = 1;
         navTitle.alpha = 0.0;
         self.frame = startingFrame;
+    }
+}
+
+#pragma mark - KVO
+// seperated off as it's ugly as shit
+-(void) setupObservingOf:(LECLectureViewModel *)vm
+{
+    [vm addObserver:self forKeyPath:NSStringFromSelector(@selector(subTitle)) options:NSKeyValueObservingOptionNew context:localContext];
+    [vm addObserver:self forKeyPath:NSStringFromSelector(@selector(navTitle)) options:NSKeyValueObservingOptionNew context:localContext];
+}
+
+-(void)deallocObservation:(LECLectureViewModel *)vm;
+{
+    @try {
+        [vm removeObserver:self forKeyPath:NSStringFromSelector(@selector(subTitle))];
+        [vm removeObserver:self forKeyPath:NSStringFromSelector(@selector(navTitle))];
+    }
+    @catch (NSException * __unused exception) {}
+}
+
+-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    // sanity check to ensure subclassing hasn't screwed us over, best practice
+    if (context != localContext) return;
+    if ([NSNull null] == change[NSKeyValueChangeNewKey])
+    {
+        [self deallocObservation:object];
+        return;
+    }
+    if ([keyPath isEqualToString:NSStringFromSelector(@selector(subTitle))])
+    {
+        descriptionLabel.text = change[NSKeyValueChangeNewKey];
+    }
+    if ([keyPath isEqualToString:NSStringFromSelector(@selector(navTitle))])
+    {
+        navTitle.text = change[NSKeyValueChangeNewKey];
+        titleLabel.text = change[NSKeyValueChangeNewKey];
     }
 }
 
