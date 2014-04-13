@@ -41,7 +41,7 @@ static void * localContext = &localContext;
         
         descriptionLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 140, self.frame.size.width, 50)];
         descriptionLabel.textAlignment = NSTextAlignmentCenter;
-        descriptionLabel.font = [UIFont fontWithName:DEFAULTFONTLIGHT size:15];
+        descriptionLabel.font = [UIFont fontWithName:DEFAULTFONTLIGHT size:17];
         descriptionLabel.textColor = [UIColor whiteColor];
         [self addSubview:descriptionLabel];
         

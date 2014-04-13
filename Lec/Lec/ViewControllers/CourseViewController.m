@@ -68,6 +68,7 @@
     
     quickRecordView = [[UIView alloc]initWithFrame:CGRectMake(0, self.tableView.frame.size.height, SCREEN_WIDTH, 0)];
     quickRecordView.backgroundColor = [UIColor whiteColor];
+//    quickRecordView.backgroundColor = [[LECColourService sharedColourService]baseColourFor:[viewModel colourString]];
     quickRecordLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, quickRecordView.frame.size.height/2, SCREEN_WIDTH, 50)];
     quickRecordLabel.textColor = HEADERCOLOR;
     quickRecordLabel.textAlignment = NSTextAlignmentCenter;
@@ -332,8 +333,8 @@
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon_checkmark.png"] style:UIBarButtonItemStylePlain target:self action:@selector(confirmChanges:withName:)];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon_cancel.png"] style:UIBarButtonItemStylePlain target:self action:@selector(closeSaveLecture)];
-    
     [preScreen animateEntry];
+
     self.tableView.userInteractionEnabled = NO; // disable course clicking
     [UIView animateWithDuration:0.2
                           delay:0.0
@@ -341,6 +342,7 @@
                      animations:^{
                          //preScreen.frame.size.height = 75;
                          //preScreen.alpha = 1.0;
+                         preScreen.frame = CGRectMake(0, 150, SCREEN_WIDTH, 125);
                          self.tableView.frame = CGRectMake(0, 64+75, SCREEN_WIDTH, SCREEN_HEIGHT-64);
                      }
                      completion:^(BOOL finished){
@@ -355,16 +357,20 @@
     self.navigationItem.leftBarButtonItem = nil;
     self.tableView.userInteractionEnabled = YES; // re-enables course clicking
     
+    [preScreen dismissScreen];
+
     [UIView animateWithDuration:0.2
-                          delay:0.2
+                          delay:0.0
                         options: UIViewAnimationOptionCurveEaseIn
                      animations:^{
-                         self.tableView.frame = CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT-64);
-                         [preScreen dismissScreen];
+                         preScreen.frame = CGRectMake(0, 200, SCREEN_WIDTH, 75);
                      }
                      completion:^(BOOL finished){
-                         [preScreen removeFromSuperview];
-                         
+                         [UIView animateWithDuration:0.2 animations:^{
+                            self.tableView.frame = CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT-64);
+                         } completion:^(BOOL finished) {
+                             [preScreen removeFromSuperview];
+                         }];
                      }];
     addViewActive = FALSE;
     
