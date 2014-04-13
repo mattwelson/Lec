@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "Lecture.h"
 #import "PullupTableViewController.h"
+#import "LECLectureViewModel.h"
 
-@interface PlaybackViewController : PullupTableViewController
+@interface PlaybackViewController : PullupTableViewController <PlaybackViewDelegate>
 
 -(id)initWithLecture:(Lecture *)lecture;
 

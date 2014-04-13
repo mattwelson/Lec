@@ -9,10 +9,17 @@
 #import "LECBaseViewModel.h"
 #import "LECAudioService.h"
 
+@protocol PlaybackViewDelegate <NSObject>
+
+-(void)reloadTable;
+
+@end
+
 @interface LECLectureViewModel : LECBaseViewModel <AudioServicePlaybackDelegate>
 
 +(LECLectureViewModel *)viewModelWithLecture:(Lecture *)lecture;
 
+@property id<PlaybackViewDelegate> delegate;
 @property NSString *icon;
 @property Lecture *lecture;
 @property NSMutableArray *tags;

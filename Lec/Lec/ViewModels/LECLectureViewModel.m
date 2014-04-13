@@ -82,6 +82,7 @@
 {
     [[LECAudioService sharedAudioService] setupAudioPlayback:[self recordingPath] withCompletion:block];
     currentTag = 0;
+    ((LECTagCellViewModel *)self.tableData[currentTag]).playState = isPlaying;
 }
 
 -(void) startAudioPlayback
@@ -149,11 +150,13 @@
     // forward only for now
     CGFloat progress = time / [[LECAudioService sharedAudioService] getRecordingLength];
     [self setCurrentTagProgress:progress];
+    NSLog(@"%f", progress);
 }
 
 -(void)setCurrentTagProgress:(CGFloat)progress
 {
     [(LECTagCellViewModel *)[self.tableData objectAtIndex:currentTag] setProgress:progress];
+    [self.delegate reloadTable];
 }
 
 @end

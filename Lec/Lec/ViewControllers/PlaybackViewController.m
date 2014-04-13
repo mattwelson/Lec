@@ -24,6 +24,7 @@
     self = [super initWithNibName:@"PlaybackViewController" bundle:nil];
     if (self) {
         viewModel = [LECLectureViewModel viewModelWithLecture:lecture];
+        [viewModel setDelegate:self];
         
         [viewModel prepareForPlaybackWithCompletion:^{
             viewModel.canTag = NO;
@@ -103,6 +104,11 @@
         NSIndexPath *indexPath = [NSIndexPath indexPathForItem:[viewModel.tableData count]-1 inSection:contentSection];
         [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
     }
+}
+
+-(void)reloadTable
+{
+    [self.tableView reloadData];
 }
 
 @end
