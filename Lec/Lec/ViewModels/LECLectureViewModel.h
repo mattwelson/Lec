@@ -7,8 +7,9 @@
 //
 
 #import "LECBaseViewModel.h"
+#import "LECAudioService.h"
 
-@interface LECLectureViewModel : LECBaseViewModel
+@interface LECLectureViewModel : LECBaseViewModel <AudioServicePlaybackDelegate>
 
 +(LECLectureViewModel *)viewModelWithLecture:(Lecture *)lecture;
 

@@ -14,6 +14,7 @@
     AVAudioRecorder *audioRecorder;
     AVAudioPlayer *audioPlayer;
     void (^playbackFinished)(void);
+    NSTimer *timer;
 }
 
 static LECAudioService *sharedService;
@@ -86,6 +87,11 @@ static LECAudioService *sharedService;
     if ([audioPlayer prepareToPlay]) {
         [audioPlayer play];
         assert([audioPlayer isPlaying]); // TODO: Take out? Once at a production stage
+        timer = [NSTimer scheduledTimerWithTimeInterval:0.25
+                                                      target:self
+                                                    selector:@selector(updateProgress)
+                                                    userInfo:nil
+                                                     repeats:YES];
     }
     else {
         @throw [NSException exceptionWithName:@"Audio player!" reason:@"Oh no!" userInfo:nil];
@@ -96,6 +102,11 @@ static LECAudioService *sharedService;
 {
     [audioPlayer stop];
     assert(![audioPlayer isPlaying]);
+}
+
+-(void)updateProgress
+{
+    [self.delegate playbackIsAtTime:[audioPlayer currentTime]];
 }
 
 -(BOOL) isAudioPlaying
@@ -121,11 +132,16 @@ static LECAudioService *sharedService;
     @throw [NSException exceptionWithName:@"WhatTheFuckException" reason:@"Nothing is playing or recording" userInfo:nil];
 }
 
-#pragma mark - Protocol
+-(double)getRecordingLength
+{
+    return [audioPlayer duration];
+}
+
 #pragma mark - Playback
 -(void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag
 {
-    playbackFinished();
+    playbackFinished(); // this is a black, that was pretty confusing!
+    [timer invalidate];
 }
 
 #pragma mark Private

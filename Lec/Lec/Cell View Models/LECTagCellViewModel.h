@@ -22,6 +22,7 @@ typedef enum {
 @property Tag *tag;
 @property NSNumber *time;
 @property PlayStateType playState;
+@property CGFloat progress;
 
 +(instancetype)tagCellVMWithTag:(Tag *)tag andColour:(NSString *)colourString;
 -(CGFloat)progressPercentage;

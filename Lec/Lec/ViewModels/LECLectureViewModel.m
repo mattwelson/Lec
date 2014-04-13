@@ -12,6 +12,9 @@
 #import "LECTagCellViewModel.h"
 
 @implementation LECLectureViewModel
+{
+    NSInteger currentTag;
+}
 
 +(LECLectureViewModel *)viewModelWithLecture:(Lecture *)lecture
 {
@@ -78,10 +81,12 @@
 -(void) prepareForPlaybackWithCompletion:(void (^)(void))block
 {
     [[LECAudioService sharedAudioService] setupAudioPlayback:[self recordingPath] withCompletion:block];
+    currentTag = 0;
 }
 
 -(void) startAudioPlayback
 {
+    [[LECAudioService sharedAudioService] setDelegate:self];
     [[LECAudioService sharedAudioService] startPlayback];
 }
 
@@ -107,11 +112,16 @@
         {
             ((LECTagCellViewModel *)self.tableData[i]).playState = hasPlayed;
         }
-        else
+        else if (i > index)
         {
             ((LECTagCellViewModel *)self.tableData[i]).playState = notPlayed;
         }
-        // needs third to set is playing later
+        else
+        {
+            ((LECTagCellViewModel *)self.tableData[i]).playState = isPlaying;
+            ((LECTagCellViewModel *)self.tableData[i]).progress = 0;
+            currentTag = index;
+        }
     }
 }
 
@@ -131,6 +141,19 @@
     
     [self.tableData insertObject:tagCVM atIndex:newIndex];
     return YES;
+}
+
+#pragma mark - Crazy tag shit
+-(void)playbackIsAtTime:(double)time
+{
+    // forward only for now
+    CGFloat progress = time / [[LECAudioService sharedAudioService] getRecordingLength];
+    [self setCurrentTagProgress:progress];
+}
+
+-(void)setCurrentTagProgress:(CGFloat)progress
+{
+    [(LECTagCellViewModel *)[self.tableData objectAtIndex:currentTag] setProgress:progress];
 }
 
 @end

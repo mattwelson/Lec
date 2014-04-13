@@ -36,7 +36,8 @@
             return 0.0f; // nothing
             break;
         case isPlaying:
-            // should figure out a percentage!
+            return [self progress];
+            break;
         default:
             return -1;
     }

@@ -64,6 +64,11 @@
     [self.view addSubview:self.headerView];
 }
 
+-(void)setTag:(NSInteger)tag toProgress:(CGFloat)progress
+{
+    
+}
+
 #pragma mark Abstract methods implemented
 -(UITableViewCell *) cellForIndexRow:(NSInteger)indexRow
 {
@@ -72,11 +77,6 @@
     [cell populateFor:cellViewModel];
     [cell renderProgressBar:cellViewModel.progressPercentage];
     return (UITableViewCell *)cell;
-}
-
--(void)deleteObjectFromViewModel:(NSInteger)index
-{
-    // delete tag!
 }
 
 -(id) viewModelFromSubclass
