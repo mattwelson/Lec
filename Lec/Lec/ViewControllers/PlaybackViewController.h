@@ -12,8 +12,7 @@
 #import "LECPlaybackControls.h"
 #import "LECLectureEditScreen.h"
 
-@interface PlaybackViewController : PullupTableViewController<PreRecordDelegate>
-
+@interface PlaybackViewController : PullupTableViewController<LectureEditDelegate,PlaybackControlDelegate>
 -(id)initWithLecture:(Lecture *)lecture;
 
 @end

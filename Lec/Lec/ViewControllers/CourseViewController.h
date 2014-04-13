@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "LECImportHeader.h"
-#import "LECLectureEditScreen.h"
 #import "PullupTableViewController.h"
 #import "LECLecturePrepareView.h"
 

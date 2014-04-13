@@ -11,7 +11,7 @@
 #import "LECLectureEditScreen.h"
 #import "PullupTableViewController.h"
 
-@interface RecordViewController : PullupTableViewController<PreRecordDelegate>
+@interface RecordViewController : PullupTableViewController<LectureEditDelegate>
 
 -(id)initWithLecture:(Lecture *)lecture;
 

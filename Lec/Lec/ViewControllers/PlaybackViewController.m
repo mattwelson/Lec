@@ -161,7 +161,8 @@
     
 }
 
--(void) actionBarPressed
+//TODO: Get the scroll to move to the right place
+- (void)tagButtonPressed
 {
     [viewModel insertTagAtCurrentTime];
     [self.tableView reloadData];
@@ -169,6 +170,10 @@
     NSIndexPath *indexPath = [NSIndexPath indexPathForItem:[viewModel.tableData count]-1 inSection:contentSection];
     [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
 }
+
+//-(void) actionBarPressed
+//{
+//}
 
 
 @end

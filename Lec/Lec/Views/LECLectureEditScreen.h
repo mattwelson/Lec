@@ -10,7 +10,7 @@
 #import "LECCourseViewModel.h"
 #import "LECLectureViewModel.h"
 
-@protocol PreRecordDelegate <NSObject>
+@protocol LectureEditDelegate <NSObject>
 
 -(void) confirmChanges:(NSInteger)lectureNumber withName:(NSString *)lectureName;
 -(void) preRecordCancelled;
@@ -28,6 +28,6 @@
 @property UITextField *lectureNameField;
 @property UITextView *lectureNameView;
 @property UIButton *startRecordingButton;
-@property (nonatomic, assign) id<PreRecordDelegate> preRecordDelegate;
+@property (nonatomic, assign) id<LectureEditDelegate> preRecordDelegate;
 
 @end
