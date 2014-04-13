@@ -25,8 +25,12 @@ static NSString *const kPlayerNotification = @"PlayerNotification";
 #define SCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height
 
 
-#define DEFAULTFONT @"Avenir"
-#define DEFAULTFONTLIGHT @"Avenir-Book"
+//#define DEFAULTFONT @"Avenir"
+//#define DEFAULTFONTLIGHT @"Avenir-Book"
+
+#define DEFAULTFONT @"ChalkboardSE-Regular"
+#define DEFAULTFONTLIGHT @"ChalkboardSE-Light"
+
 
 #define HEADERSIZE 22
 #define HEADERCOLOR [UIColor colorWithRed:44/255. green:62/255. blue:80/255. alpha:1.0]

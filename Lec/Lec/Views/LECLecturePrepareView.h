@@ -25,7 +25,7 @@
 
 @property LECCourseViewModel *courseViewModel;
 @property NSInteger lectureNumber;
-@property UILabel *lectureNumberLabel;
+@property UITextField *lectureNumberField;
 @property UIStepper *lectureNumberStepper;
 @property UITextField *lectureNameField;
 @property UIButton *startRecordingButton;

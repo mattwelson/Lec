@@ -37,21 +37,27 @@
 -(void)setupNewSubviews:(id)viewModel{
     self.lectureNumber = self.courseViewModel.i+1;
     
-    self.lectureNumberLabel = [[UILabel alloc]initWithFrame:CGRectMake(20, 20, SCREEN_WIDTH-20, 35)];
-    self.lectureNumberLabel.text = [NSString stringWithFormat:@"Lecture %ld", (long)self.lectureNumber];
-    self.lectureNumberLabel.textAlignment = NSTextAlignmentLeft;
-    self.lectureNumberLabel.font = [UIFont fontWithName:DEFAULTFONT size:25];
-    self.lectureNumberLabel.textColor = [UIColor lightGrayColor];
-    [self addSubview:self.lectureNumberLabel];
+    self.lectureNumberField = [[UITextField alloc]initWithFrame:CGRectMake(20, 15, SCREEN_WIDTH-20, 35)];
+    self.lectureNumberField.text = [NSString stringWithFormat:@"Lecture %ld", (long)self.lectureNumber];
+    self.lectureNumberField.delegate = self;
+    self.lectureNumberField.placeholder = @"Lecture Number";
+    self.lectureNumberField.tag = 1;
+    self.lectureNumberField.clearsOnBeginEditing = YES;
+    self.lectureNumberField.keyboardType = UIKeyboardTypeDecimalPad;
+    self.lectureNumberField.textAlignment = NSTextAlignmentLeft;
+    self.lectureNumberField.font = [UIFont fontWithName:DEFAULTFONT size:25];
+    self.lectureNumberField.textColor = [UIColor lightGrayColor];
+    [self addSubview:self.lectureNumberField];
     
     self.lectureNameField = [[UITextField alloc]initWithFrame:CGRectMake(20, 55, 200, 60)];
     self.lectureNameField.delegate = self;
+    self.lectureNameField.tag = 0;
     self.lectureNameField.backgroundColor = [UIColor clearColor];
     self.lectureNameField.placeholder = @"Lecture Name";
     self.lectureNameField.autocapitalizationType = UITextAutocapitalizationTypeWords;
-    //self.lectureNameField.textAlignment = NSTextAlignmentLeft;
+    self.lectureNameField.textAlignment = NSTextAlignmentLeft;
     self.lectureNameField.font = [UIFont fontWithName:DEFAULTFONT size:30];
-    [self.lectureNameField setReturnKeyType: UIReturnKeyGo];
+    [self.lectureNameField setReturnKeyType: UIReturnKeyDone];
     self.lectureNameField.textColor = [[LECColourService sharedColourService]baseColourFor:[self.courseViewModel colourString]];
     [self addSubview:self.lectureNameField];
     [self.lectureNameField becomeFirstResponder];
@@ -71,7 +77,7 @@
 -(void)animateEntry
 {
     //self.frame = CGRectMake(0, 200, SCREEN_WIDTH, 75);
-    self.lectureNumberLabel.alpha = 0.0;
+    self.lectureNumberField.alpha = 0.0;
     self.lectureNameField.alpha = 0.0;
     self.startRecordingButton.alpha = 0.0;
     bottomBorder.opacity = 0.0;
@@ -80,7 +86,7 @@
                         options: UIViewAnimationOptionCurveEaseIn
                      animations:^{
                          self.lectureNameField.alpha = 1.0;
-                         self.lectureNumberLabel.alpha = 1.0;
+                         self.lectureNumberField.alpha = 1.0;
                          self.startRecordingButton.alpha = 1.0;
                      }
                      completion:^(BOOL finished){
@@ -106,7 +112,7 @@
                         options: UIViewAnimationOptionCurveEaseIn
                      animations:^{
                          self.lectureNameField.alpha = 0.0;
-                         self.lectureNumberLabel.alpha = 0.0;
+                         self.lectureNumberField.alpha = 0.0;
                          self.startRecordingButton.alpha = 0.0;
                          self.alpha = 0.0;
                      }
@@ -133,6 +139,15 @@
 }
 
 #pragma mark UITextField Delegate methods
+-(void)textFieldDidEndEditing:(UITextField *)textField{
+    if(textField.tag == 1) {
+        if (textField.text.length !=0) {
+            self.lectureNumber = [self.lectureNumberField.text integerValue];
+        }
+        self.lectureNumberField.text = [NSString stringWithFormat:@"Lecture %ld", (long)self.lectureNumber];
+    }
+}
+
 -(BOOL)textFieldShouldReturn:(UITextField*)textField{
     [self confirmDetails];
     return [textField resignFirstResponder];
