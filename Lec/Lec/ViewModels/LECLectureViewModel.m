@@ -61,6 +61,7 @@
 -(void)startRecordingAudio
 {
     [[LECAudioService sharedAudioService] startRecording];
+    [self insertTagAtStart];
 }
 
 -(void)stopRecordingAudio
@@ -124,6 +125,22 @@
             currentTag = index;
         }
     }
+}
+
+-(BOOL)insertTagAtStart
+{
+    Tag *tag = [[LECDatabaseService sharedDBService] newTagForLecture:self.lecture];
+    tag.currentTime = @0;
+    tag.name = @"Intro";
+    [[LECDatabaseService sharedDBService] saveChanges];
+    LECTagCellViewModel *tagCVM = [LECTagCellViewModel tagCellVMWithTag:tag andColour:self.colourString];
+    
+    NSUInteger newIndex = [self.tableData indexOfObject:tagCVM inSortedRange:NSMakeRange(0, self.tableData.count) options:NSBinarySearchingInsertionIndex usingComparator:^NSComparisonResult(LECTagCellViewModel *obj1, LECTagCellViewModel *obj2) {
+        return [obj1.time compare:obj2.time];
+    }];
+    
+    [self.tableData insertObject:tagCVM atIndex:newIndex];
+    return YES;
 }
 
 -(BOOL)insertTagAtCurrentTime
