@@ -126,8 +126,8 @@
     
     if ([indexPath section] == contentSection) {
         cell = [self cellForIndexRow:indexPath.row];
-    } else if (indexPath.section == actionSection) {
-        return (UITableViewCell *) actionBar;
+//    } else if (indexPath.section == actionSection) {
+//        return (UITableViewCell *) actionBar;
     }
     else {
         cell = [[LectureCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CELL_ID_HEADER];

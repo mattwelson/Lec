@@ -22,7 +22,7 @@ static void * localContext = &localContext;
         self.courseNameLabel.font = [UIFont fontWithName:DEFAULTFONT size:COURSENAMEECELLFONTSIZE];
         [self.contentView addSubview:self.courseNameLabel];
         
-        self.courseDescriptionLabel = [[UILabel alloc]initWithFrame:CGRectMake(20, 35, self.frame.size.width-80, 40)];
+        self.courseDescriptionLabel = [[UILabel alloc]initWithFrame:CGRectMake(20, 35, self.frame.size.width-60, 40)];
         self.courseDescriptionLabel.textColor = [UIColor whiteColor];
         self.courseDescriptionLabel.font = [UIFont fontWithName:DEFAULTFONT size:COURSEDESCRIPTIONCELLFONTSIZE];
         [self.contentView addSubview:self.courseDescriptionLabel];

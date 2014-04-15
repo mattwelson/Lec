@@ -42,10 +42,10 @@
         viewModel = [[LECCourseViewModel alloc]initWithCourse:course];
         [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent]; //sets the status bar to white
         
-        contentSection = 2; // the section with table data
-        actionSection = 1; // the section with an action bar
+        contentSection = 1; // the section with table data
+        actionSection = -1; // the section with an action bar
         hasFooter = NO; // if there is a footer for the content view
-        noSections = 3;
+        noSections = 2;
     }
     return self;
 }
@@ -249,7 +249,7 @@
     
     [self.tableView registerClass:[LectureCell class] forCellReuseIdentifier:CELL_ID_LECTURE_CELL];
     
-    actionBar = [LECActionBar recordBar];
+    //actionBar = [LECActionBar recordBar];
 }
 
 -(void)createHeaderView {
@@ -306,7 +306,7 @@
         [self.view addSubview:quickRecordView];
         quickRecordView.frame = CGRectMake(0, self.headerView.frame.size.height, SCREEN_WIDTH, -scrollOffset);
         quickRecordLabel.font = [UIFont fontWithName:DEFAULTFONT size:10-scrollOffset/16];
-        quickRecordLabel.alpha = -scrollOffset/80;
+        quickRecordLabel.alpha = (-20-scrollOffset)/40;
     }
     else {
         [quickRecordView removeFromSuperview];

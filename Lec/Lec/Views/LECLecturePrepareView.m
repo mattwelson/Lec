@@ -9,7 +9,7 @@
 #import "LECLecturePrepareView.h"
 
 @implementation LECLecturePrepareView{
-    CALayer *bottomBorder;
+    UIView *bottomBorder;
 }
 
 - (id)initWithFrame:(CGRect)frame withCourseViewModel:(LECCourseViewModel *)vm
@@ -20,19 +20,20 @@
         self.courseViewModel = vm;
         self.backgroundColor = [UIColor colorWithWhite:1.00 alpha:1.00];
         
-        
         [self setupNewSubviews:vm];
         
     }
     return self;
 }
 
+//TODO: Move!
 -(void)layoutSubviews
 {    
-    bottomBorder = [CALayer layer];
-    bottomBorder.frame = CGRectMake(0.0f, self.frame.size.height, self.frame.size.width, 1.0f);
-    bottomBorder.backgroundColor = [UIColor colorWithWhite:0.848 alpha:1.000].CGColor;
-    [self.layer addSublayer:bottomBorder];
+//    bottomBorder = [CALayer layer];
+//    bottomBorder.frame = CGRectMake(0.0f, self.frame.size.height, self.frame.size.width, 1.0f);
+//    bottomBorder.backgroundColor = [UIColor colorWithWhite:0.848 alpha:1.000].CGColor;
+//    [self.layer addSublayer:bottomBorder];
+    
 }
 
 -(void)setupNewSubviews:(id)viewModel{
@@ -81,7 +82,6 @@
     self.lectureNumberField.alpha = 0.0;
     self.lectureNameField.alpha = 0.0;
     self.startRecordingButton.alpha = 0.0;
-    bottomBorder.opacity = 0.0;
     [UIView animateWithDuration:0.2
                           delay:0.4
                         options: UIViewAnimationOptionCurveEaseIn
@@ -92,13 +92,15 @@
                      }
                      completion:^(BOOL finished){
                          [self.lectureNameField becomeFirstResponder];
-                         bottomBorder.opacity = 1.0;
+                         bottomBorder = [[UIView alloc]initWithFrame:CGRectMake(0, self.frame.size.height, SCREEN_WIDTH, 1)];
+                         bottomBorder.backgroundColor = [UIColor colorWithWhite:0.848 alpha:1.000];
+                         [self addSubview:bottomBorder];
                      }];
 }
 
 -(void)dismissScreen
 {
-
+    bottomBorder.alpha = 0.0;
     [self.lectureNameField resignFirstResponder];
     [self.preRecordDelegate preRecordCancelled];
 //    [UIView animateWithDuration:0.8 delay:0.0 usingSpringWithDamping:0.8 initialSpringVelocity:0.1 options:UIViewAnimationOptionCurveEaseIn animations:^{
@@ -107,7 +109,6 @@
 //        [self.lectureNameField resignFirstResponder];
 //        [self removeFromSuperview];
 //    }];
-    bottomBorder.opacity = 0.0;
     [UIView animateWithDuration:0.2
                           delay:0.0
                         options: UIViewAnimationOptionCurveEaseIn
