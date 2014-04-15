@@ -165,7 +165,11 @@
 -(void)playbackIsAtTime:(double)time
 {
     // forward only for now
-    CGFloat progress = time / [[LECAudioService sharedAudioService] getRecordingLength];
+    CGFloat progress;
+    //if (time > self.currentTagStartTime && time < self.currentTagFinishTime) {
+    progress = self.currentTagStartTime - time / self.currentTagFinishTime;
+    //}
+    //CGFloat progress = time / [[LECAudioService sharedAudioService] getRecordingLength];
     [self setCurrentTagProgress:progress];
     NSLog(@"%f", progress);
 }
@@ -176,4 +180,20 @@
     [self.delegate reloadTable];
 }
 
+-(void)setCurrentTag:(NSInteger)tag
+{
+    currentTag = tag;
+    
+    self.currentTagStartTime = [[(LECTagCellViewModel *)[self.tableData objectAtIndex:currentTag] time] doubleValue];
+    if (currentTag != self.tableData.count) {
+        self.currentTagFinishTime = [[(LECTagCellViewModel *)[self.tableData objectAtIndex:currentTag+1] time] doubleValue];
+    } else {
+        self.currentTagFinishTime = [[LECAudioService sharedAudioService] getRecordingLength];
+    }
+}
+
+-(NSInteger)getCurrentTag
+{
+    return currentTag;
+}
 @end
