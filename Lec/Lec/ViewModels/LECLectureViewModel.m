@@ -14,6 +14,7 @@
 @implementation LECLectureViewModel
 {
     long cTag; // HACK because wouldn't build with _currentTag :(
+    NSMutableArray *tagTimes;
 }
 
 +(LECLectureViewModel *)viewModelWithLecture:(Lecture *)lecture
@@ -83,12 +84,15 @@
 {
     [[LECAudioService sharedAudioService] setupAudioPlayback:[self recordingPath] withCompletion:block];
     self.currentTag = 0;
-    ((LECTagCellViewModel *)self.tableData[self.currentTag]).playState = isPlaying;
+    [[LECAudioService sharedAudioService] setDelegate:self];
+    tagTimes = [NSMutableArray array];
+    [self.tableData enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop){
+        [tagTimes addObject:[(LECTagCellViewModel *)obj time]];
+    }];
 }
 
 -(void) startAudioPlayback
 {
-    [[LECAudioService sharedAudioService] setDelegate:self];
     [[LECAudioService sharedAudioService] startPlayback];
 }
 
@@ -172,7 +176,10 @@
 {
     // check if time is outside the current tags boundaries.
     if (time < self.currentTagStartTime || time > self.currentTagFinishTime) {
-        self.currentTag = self.currentTag + 1;
+        self.currentTag =
+        [tagTimes indexOfObject:@(time) inSortedRange:NSMakeRange(0, tagTimes.count) options:NSBinarySearchingInsertionIndex usingComparator:^(NSNumber *obj1, NSNumber *obj2){
+            return [obj1 compare:obj2];
+        }] - 1;
     }
     CGFloat progress = (time - self.currentTagStartTime) / (self.currentTagFinishTime - self.currentTagStartTime);
 
