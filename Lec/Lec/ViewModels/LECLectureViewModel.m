@@ -107,7 +107,12 @@
     self.canTag = YES;
     LECTagCellViewModel *tagCVM = self.tableData[index];
     [[LECAudioService sharedAudioService] goToTime:[tagCVM time]];
-    
+
+    self.currentTag = index;
+}
+
+-(void)goToTagVisually:(NSInteger)index
+{
     for (int i = 0; i < [self.tableData count]; i ++)
     {
         if (i < index)
@@ -125,7 +130,6 @@
         }
     }
     
-    self.currentTag = index;
 }
 
 -(BOOL)insertTagAtStart
@@ -166,12 +170,12 @@
 #pragma mark - Crazy tag shit
 -(void)playbackIsAtTime:(double)time
 {
-    // forward only for now
-    CGFloat progress = 0;
-    if (time > self.currentTagStartTime && time < self.currentTagFinishTime) {
-        progress = (time - self.currentTagStartTime) / (self.currentTagFinishTime - self.currentTagStartTime);
+    // check if time is outside the current tags boundaries.
+    if (time < self.currentTagStartTime || time > self.currentTagFinishTime) {
+        self.currentTag = self.currentTag + 1;
     }
-    //CGFloat progress = time / [[LECAudioService sharedAudioService] getRecordingLength];
+    CGFloat progress = (time - self.currentTagStartTime) / (self.currentTagFinishTime - self.currentTagStartTime);
+
     [self setCurrentTagProgress:progress];
     NSLog(@"%f", progress);
 }
@@ -186,11 +190,13 @@
 {
     cTag = currentTag;
     self.currentTagStartTime = [[(LECTagCellViewModel *)[self.tableData objectAtIndex:self.currentTag] time] doubleValue];
-    if (self.currentTag != self.tableData.count) {
+    if (self.currentTag < self.tableData.count - 1 ) { // is not the last tag
         self.currentTagFinishTime = [[(LECTagCellViewModel *)[self.tableData objectAtIndex:self.currentTag+1] time] doubleValue];
     } else {
         self.currentTagFinishTime = [[LECAudioService sharedAudioService] getRecordingLength];
     }
+    
+    [self goToTagVisually:currentTag];
 }
 
 -(long)currentTag
