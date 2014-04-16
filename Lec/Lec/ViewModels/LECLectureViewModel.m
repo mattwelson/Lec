@@ -13,7 +13,7 @@
 
 @implementation LECLectureViewModel
 {
-    NSInteger currentTag;
+    long cTag; // HACK because wouldn't build with _currentTag :(
 }
 
 +(LECLectureViewModel *)viewModelWithLecture:(Lecture *)lecture
@@ -82,8 +82,8 @@
 -(void) prepareForPlaybackWithCompletion:(void (^)(void))block
 {
     [[LECAudioService sharedAudioService] setupAudioPlayback:[self recordingPath] withCompletion:block];
-    currentTag = 0;
-    ((LECTagCellViewModel *)self.tableData[currentTag]).playState = isPlaying;
+    self.currentTag = 0;
+    ((LECTagCellViewModel *)self.tableData[self.currentTag]).playState = isPlaying;
 }
 
 -(void) startAudioPlayback
@@ -122,9 +122,10 @@
         {
             ((LECTagCellViewModel *)self.tableData[i]).playState = isPlaying;
             ((LECTagCellViewModel *)self.tableData[i]).progress = 0;
-            currentTag = index;
         }
     }
+    
+    self.currentTag = index;
 }
 
 -(BOOL)insertTagAtStart
@@ -158,6 +159,7 @@
     }];
     
     [self.tableData insertObject:tagCVM atIndex:newIndex];
+    self.currentTag = self.currentTag + 1;
     return YES;
 }
 
@@ -165,10 +167,10 @@
 -(void)playbackIsAtTime:(double)time
 {
     // forward only for now
-    CGFloat progress;
-    //if (time > self.currentTagStartTime && time < self.currentTagFinishTime) {
-    progress = self.currentTagStartTime - time / self.currentTagFinishTime;
-    //}
+    CGFloat progress = 0;
+    if (time > self.currentTagStartTime && time < self.currentTagFinishTime) {
+        progress = (time - self.currentTagStartTime) / (self.currentTagFinishTime - self.currentTagStartTime);
+    }
     //CGFloat progress = time / [[LECAudioService sharedAudioService] getRecordingLength];
     [self setCurrentTagProgress:progress];
     NSLog(@"%f", progress);
@@ -176,24 +178,23 @@
 
 -(void)setCurrentTagProgress:(CGFloat)progress
 {
-    [(LECTagCellViewModel *)[self.tableData objectAtIndex:currentTag] setProgress:progress];
+    [(LECTagCellViewModel *)[self.tableData objectAtIndex:self.currentTag] setProgress:progress];
     [self.delegate reloadTable];
 }
 
--(void)setCurrentTag:(NSInteger)tag
+-(void)setCurrentTag:(long)currentTag
 {
-    currentTag = tag;
-    
-    self.currentTagStartTime = [[(LECTagCellViewModel *)[self.tableData objectAtIndex:currentTag] time] doubleValue];
-    if (currentTag != self.tableData.count) {
-        self.currentTagFinishTime = [[(LECTagCellViewModel *)[self.tableData objectAtIndex:currentTag+1] time] doubleValue];
+    cTag = currentTag;
+    self.currentTagStartTime = [[(LECTagCellViewModel *)[self.tableData objectAtIndex:self.currentTag] time] doubleValue];
+    if (self.currentTag != self.tableData.count) {
+        self.currentTagFinishTime = [[(LECTagCellViewModel *)[self.tableData objectAtIndex:self.currentTag+1] time] doubleValue];
     } else {
         self.currentTagFinishTime = [[LECAudioService sharedAudioService] getRecordingLength];
     }
 }
 
--(NSInteger)getCurrentTag
+-(long)currentTag
 {
-    return currentTag;
+    return cTag;
 }
 @end

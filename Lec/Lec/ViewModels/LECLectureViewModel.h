@@ -25,6 +25,7 @@
 @property NSMutableArray *tags;
 @property (nonatomic) NSString *recordingPath;
 @property BOOL canTag;
+@property long currentTag;
 @property double currentTagStartTime;
 @property double currentTagFinishTime;
 
