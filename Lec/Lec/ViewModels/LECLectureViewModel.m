@@ -184,13 +184,13 @@
     CGFloat progress = (time - self.currentTagStartTime) / (self.currentTagFinishTime - self.currentTagStartTime);
 
     [self setCurrentTagProgress:progress];
-    NSLog(@"%f", progress);
+    //NSLog(@"%f", progress);
 }
 
 -(void)setCurrentTagProgress:(CGFloat)progress
 {
     [(LECTagCellViewModel *)[self.tableData objectAtIndex:self.currentTag] setProgress:progress];
-    [self.delegate reloadTable];
+    [self.delegate reloadCellAtIndex:self.currentTag];
 }
 
 -(void)setCurrentTag:(long)currentTag

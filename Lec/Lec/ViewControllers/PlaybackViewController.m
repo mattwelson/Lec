@@ -106,9 +106,13 @@
     }
 }
 
--(void)reloadTable
+-(void)reloadCellAtIndex:(NSInteger)index
 {
-    [self.tableView reloadData];
+    //[self.tableView reloadData];
+    NSIndexPath *path = [NSIndexPath indexPathForRow:index inSection:1];
+    NSLog(@"Index path: %ld", (long)path.row);
+    [self.tableView reloadRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationNone];
+
 }
 
 @end

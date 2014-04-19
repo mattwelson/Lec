@@ -11,7 +11,7 @@
 
 @protocol PlaybackViewDelegate <NSObject>
 
--(void)reloadTable;
+-(void)reloadCellAtIndex:(NSInteger)index;
 
 @end
 

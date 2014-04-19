@@ -92,6 +92,7 @@ static LECAudioService *sharedService;
                                                     selector:@selector(updateProgress)
                                                     userInfo:nil
                                                      repeats:YES];
+        [[NSRunLoop mainRunLoop]addTimer:timer forMode:NSRunLoopCommonModes];
     }
     else {
         @throw [NSException exceptionWithName:@"Audio player!" reason:@"Oh no!" userInfo:nil];
@@ -117,7 +118,9 @@ static LECAudioService *sharedService;
 #pragma mark Tag Stuff
 -(void)goToTime:(NSNumber *)time
 {
-    if (!audioPlayer.playing) [audioPlayer play];
+//    if (!audioPlayer.playing) [audioPlayer play];
+    if (!audioPlayer.playing) [self startPlayback];
+
     audioPlayer.currentTime = [time doubleValue];
 }
 
