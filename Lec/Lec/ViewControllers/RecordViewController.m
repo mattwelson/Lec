@@ -36,6 +36,7 @@
         actionSection = 2; // the section with an action bar
         hasFooter = YES;
         noSections = 2;
+        isRecordingScreen = YES;
         
         actionBar = [LECActionBar tagBarWithTarget:self andSelector:@selector(actionBarPressed)];
     }

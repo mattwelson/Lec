@@ -7,6 +7,7 @@
 //
 
 #import "MainViewController.h"
+#import "LECPullDownReminder.h"
 #import "LECHeaderView.h"
 #import "LECAnimationService.h"
 
@@ -19,7 +20,8 @@
     UIBarButtonItem *plusItem;
     LECAddCourseView *addCourseView;
     BOOL addViewActive;
-    UILabel *pullDownAddReminder;
+    UILabel *pullDownAddBar;
+    LECPullDownReminder *reminderView;
     NSArray *visibleCells;
     int loadedCells;
     NSIndexPath *deleteIndexPath;
@@ -47,6 +49,7 @@
 
     [self courseTableViewSetup];
     [self pullDownReminderSetup];
+    
 }
 
 
@@ -92,12 +95,12 @@
 }
 
 -(void) pullDownReminderSetup{
-    pullDownAddReminder = [[UILabel alloc]initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, 0)];
-    [pullDownAddReminder setTextAlignment:NSTextAlignmentCenter];
-    [pullDownAddReminder setFont:[UIFont fontWithName:DEFAULTFONT size:15]];
-    [pullDownAddReminder setTextColor:[UIColor grayColor]];
-    [pullDownAddReminder setText:@"Pull Down to Add Course"];
-    [self.view addSubview:pullDownAddReminder];
+    pullDownAddBar = [[UILabel alloc]initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, 0)];
+    [pullDownAddBar setTextAlignment:NSTextAlignmentCenter];
+    [pullDownAddBar setFont:[UIFont fontWithName:DEFAULTFONT size:15]];
+    [pullDownAddBar setTextColor:[UIColor grayColor]];
+    [pullDownAddBar setText:@"Pull Down to Add Course"];
+    [self.view addSubview:pullDownAddBar];
 }
 
 - (void) courseTableViewSetup
@@ -109,6 +112,7 @@
     [self.view addSubview:self.courseTableView];
     self.courseTableView.delegate = self;
     self.courseTableView.dataSource = self;
+    self.courseTableView.backgroundColor = [UIColor clearColor];
     [[self courseTableView] setSeparatorStyle:UITableViewCellSeparatorStyleNone];
 }
 
@@ -181,6 +185,14 @@
 
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    if (self.viewModel.tableData.count == 0) {
+        reminderView = [LECPullDownReminder createReminderViewMainScreen];
+        [self.courseTableView addSubview:reminderView];
+        [self.courseTableView sendSubviewToBack:reminderView];
+    }
+    else {
+        [reminderView removeFromSuperview];
+    }
     return [self.viewModel.tableData count];
 }
 
@@ -237,6 +249,7 @@
                      animations:^{
                          [addCourseView animateCourseAddView];
                          self.courseTableView.frame = CGRectMake(0, 100, SCREEN_WIDTH, SCREEN_HEIGHT);
+                         reminderView.alpha = 0.0;
                      }
                      completion:^(BOOL finished){
                      }];
@@ -259,7 +272,6 @@
         
         [addCourseView animateCourseAddView];
         
-        
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon_checkmark.png"] style:UIBarButtonItemStylePlain target:self action:@selector(saveCourse)];
         self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon_cancel.png"] style:UIBarButtonItemStylePlain target:self action:@selector(closeSaveCourse)];
         
@@ -270,6 +282,7 @@
                          animations:^{
                              addCourseView.alpha = 1.0;
                              self.courseTableView.frame = CGRectMake(0, 100, SCREEN_WIDTH, SCREEN_HEIGHT);
+                             reminderView.alpha = 0.0;
                          }
                          completion:^(BOOL finished){
                          }];
@@ -316,6 +329,7 @@
                      animations:^{
                          self.courseTableView.frame = CGRectMake(0, 0, SCREEN_WIDTH,SCREEN_HEIGHT);
                          [addCourseView animateViewRemoved];
+                         reminderView.alpha = 1.0;
                      }
                      completion:^(BOOL finished){
                          [addCourseView removeFromSuperview];
@@ -331,19 +345,19 @@
 {
     if (self.courseTableView.isEditing == NO) {
         if (self.courseTableView.contentOffset.y < -65) {
-            pullDownAddReminder.alpha = 1.0;
+            pullDownAddBar.alpha = 1.0;
         }
         else {
-            pullDownAddReminder.alpha = 0.0;
+            pullDownAddBar.alpha = 0.0;
         }
-        pullDownAddReminder.frame = CGRectMake(0, 64, SCREEN_WIDTH, -scrollView.contentOffset.y - 64);
+        pullDownAddBar.frame = CGRectMake(0, 64, SCREEN_WIDTH, -scrollView.contentOffset.y - 64);
     }
     if (scrollView.contentOffset.y < -135) {
         scrollView.contentOffset = CGPointMake(0, -135);
-        [pullDownAddReminder setText:@"Release to Add Course"];
+        [pullDownAddBar setText:@"Release to Add Course"];
     }
     else {
-        [pullDownAddReminder setText:@"Pull Down to Add Course"];
+        [pullDownAddBar setText:@"Pull Down to Add Course"];
     }
 }
 
@@ -351,7 +365,7 @@
 {
     if (self.courseTableView.isEditing == NO) {
         if (scrollView.contentOffset.y <= -135 && !addViewActive) {
-            pullDownAddReminder.alpha = 0.0;
+            pullDownAddBar.alpha = 0.0;
             addViewActive = TRUE;
             [self addCoursePullDown];
         }

@@ -45,6 +45,7 @@
         contentSection = 1; // the section with table data
         actionSection = -1; // the section with an action bar
         hasFooter = NO; // if there is a footer for the content view
+        isRecordingScreen = NO;
         noSections = 2;
     }
     return self;
@@ -88,7 +89,8 @@
     
     newCourseName = [[UITextField alloc] initWithFrame:CGRectMake(0, 75, SCREEN_WIDTH, 50)];
     newDescription = [[UITextField alloc] initWithFrame:CGRectMake(0, 125, SCREEN_WIDTH, 50)];
-    
+    newCourseName.delegate = self;
+    newDescription.delegate = self;
     
     UIScrollView *colorView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 200, 320, 100)];
     [colorView setContentSize:CGSizeMake(680, 100)];
@@ -212,7 +214,6 @@
     viewModel = [[LECCourseViewModel alloc]initWithCourse:currentCourse];
     [self.tableView reloadData];
     self.navigationItem.title = [[self viewModelFromSubclass] navTitle];
-    
 }
 
 - (IBAction)iconSelected:(id)sender
@@ -414,20 +415,21 @@
     
 }
 
+
 -(NSInteger) numberOfSections
 {
     return 3;
 }
 
-// Dismissing the Keyboard when touch event is called by touching screen
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
-    [self.view endEditing:YES];
-    [super touchesBegan:touches withEvent:event];
-}
+//// Dismissing the Keyboard when touch event is called by touching screen
+//- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+//    [self.view endEditing:YES];
+//    [super touchesBegan:touches withEvent:event];
+//}
 
 - (BOOL) textFieldShouldReturn:(UITextField *)textField
 {
-    return [self.view endEditing:YES];
+    return [textField resignFirstResponder];
 }
 
 

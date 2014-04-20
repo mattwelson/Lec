@@ -31,6 +31,7 @@
 		733C9BD218AE0423007E92B6 /* Lecture.m in Sources */ = {isa = PBXBuildFile; fileRef = 733C9BD118AE0423007E92B6 /* Lecture.m */; };
 		733C9BD518AE0424007E92B6 /* Tag.m in Sources */ = {isa = PBXBuildFile; fileRef = 733C9BD418AE0424007E92B6 /* Tag.m */; };
 		733C9BD818AE0424007E92B6 /* Course.m in Sources */ = {isa = PBXBuildFile; fileRef = 733C9BD718AE0424007E92B6 /* Course.m */; };
+		73539A9919037D5D0018CFCD /* LECPullDownReminder.m in Sources */ = {isa = PBXBuildFile; fileRef = 73539A9819037D5D0018CFCD /* LECPullDownReminder.m */; };
 		738FB164189CA1D200DBF8F8 /* LECAddCourseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 738FB163189CA1D200DBF8F8 /* LECAddCourseView.m */; };
 		738FB167189DE05200DBF8F8 /* LECIconCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 738FB166189DE05200DBF8F8 /* LECIconCollectionView.m */; };
 		738FB16C189DF33200DBF8F8 /* icon_subject_finance.png in Resources */ = {isa = PBXBuildFile; fileRef = 738FB168189DF33200DBF8F8 /* icon_subject_finance.png */; };
@@ -185,6 +186,8 @@
 		733C9BD418AE0424007E92B6 /* Tag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Tag.m; path = DataModels/Tag.m; sourceTree = "<group>"; };
 		733C9BD618AE0424007E92B6 /* Course.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Course.h; path = DataModels/Course.h; sourceTree = "<group>"; };
 		733C9BD718AE0424007E92B6 /* Course.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Course.m; path = DataModels/Course.m; sourceTree = "<group>"; };
+		73539A9719037D5D0018CFCD /* LECPullDownReminder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LECPullDownReminder.h; path = Views/LECPullDownReminder.h; sourceTree = "<group>"; };
+		73539A9819037D5D0018CFCD /* LECPullDownReminder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LECPullDownReminder.m; path = Views/LECPullDownReminder.m; sourceTree = "<group>"; };
 		738FB162189CA1D200DBF8F8 /* LECAddCourseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LECAddCourseView.h; sourceTree = "<group>"; };
 		738FB163189CA1D200DBF8F8 /* LECAddCourseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LECAddCourseView.m; sourceTree = "<group>"; };
 		738FB165189DE05200DBF8F8 /* LECIconCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LECIconCollectionView.h; sourceTree = "<group>"; };
@@ -532,6 +535,8 @@
 				7318CDA01898AEFD002E23A0 /* LECHeaderView.m */,
 				C982027A18A32B2100256A7E /* LECActionBar.h */,
 				C982027B18A32B2100256A7E /* LECActionBar.m */,
+				73539A9719037D5D0018CFCD /* LECPullDownReminder.h */,
+				73539A9819037D5D0018CFCD /* LECPullDownReminder.m */,
 				7317E33F18F8EA0700D82DF2 /* LECLecturePrepareView.h */,
 				7317E34018F8EA0700D82DF2 /* LECLecturePrepareView.m */,
 				731199FB18FA0CC700A0F810 /* LECLectureEditScreen.h */,
@@ -884,6 +889,7 @@
 				C9467BAD18A71D46001AB03B /* LECTagCellViewModel.m in Sources */,
 				C9605CAE1889F5AD00F3DE57 /* LECHomeViewModel.m in Sources */,
 				C9FBD62E1894B26B00D1A7D6 /* LECLectureCellViewModel.m in Sources */,
+				73539A9919037D5D0018CFCD /* LECPullDownReminder.m in Sources */,
 				C9605CB21889F6CC00F3DE57 /* LECBaseCellViewModel.m in Sources */,
 				C9605CBA1889F99800F3DE57 /* LECCourseCellViewModel.m in Sources */,
 				8BE75823188B4F23007B6C02 /* LECLectureViewModel.m in Sources */,
@@ -1025,6 +1031,7 @@
 				GCC_PREFIX_HEADER = "Lec/Lec-Prefix.pch";
 				INFOPLIST_FILE = "Lec/Lec-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1039,6 +1046,7 @@
 				GCC_PREFIX_HEADER = "Lec/Lec-Prefix.pch";
 				INFOPLIST_FILE = "Lec/Lec-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

@@ -7,6 +7,8 @@
 // The controller for our custom header table view!
 
 #import <UIKit/UIKit.h>
+#import "LECPullDownReminder.h"
+
 @class LECHeaderView;
 @class LECPlaybackControls;
 @class LECActionBar;
@@ -19,10 +21,12 @@
     LECActionBar *actionBar;
     LECPlaybackControls *playbackBar;
     BOOL hasFooter;
+    BOOL isRecordingScreen;
     NSInteger noSections;
     NSArray *visibleCells;
     int loadedCells;
     NSIndexPath *deleteIndexPath;
+    LECPullDownReminder *reminderView;
 }
 
 @property UITableView *tableView;

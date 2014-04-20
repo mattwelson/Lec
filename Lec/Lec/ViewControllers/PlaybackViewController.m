@@ -32,9 +32,10 @@
         [viewModel startAudioPlayback];
         
         contentSection = 1; // the section with table data
-        actionSection = 2; // the section with an action bar
-        hasFooter = YES;
-        noSections = 2;
+        actionSection = -1; // the section with an action bar
+        hasFooter = NO;
+        isRecordingScreen = NO;
+        noSections = 1;
         
         //actionBar = [LECActionBar tagBarWithTarget:self andSelector:@selector(actionBarPressed)];
         
@@ -71,6 +72,7 @@
 -(void)courseTableViewSetup
 {
     [super courseTableViewSetup];
+    [self.tableView setContentInset:UIEdgeInsetsMake(0, 0, playbackBar.frame.size.height, 0)];
     [self.tableView registerClass:[TagCell class] forCellReuseIdentifier:CELL_ID_TAG_CELL];
 }
 
@@ -175,6 +177,10 @@
 //-(void) actionBarPressed
 //{
 //}
+-(NSInteger) numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 2;
+}
 
 
 @end

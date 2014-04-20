@@ -73,7 +73,8 @@
     
     [self.tableView registerClass:[LectureCell class] forCellReuseIdentifier:CELL_ID_HEADER];
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:CELL_ID_ADD_CELL];
-} 
+
+}
 
 - (void)didReceiveMemoryWarning
 {
@@ -103,6 +104,15 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    if (section == contentSection && [self tableData].count == 0) {
+        [reminderView removeFromSuperview];
+        reminderView = [LECPullDownReminder createReminderViewCourseScreen];
+        [self.tableView addSubview:reminderView];
+        [self.tableView sendSubviewToBack:reminderView];
+    }
+    else if (isRecordingScreen || ((section == contentSection) && [self tableData].count > 0)) {
+        [reminderView removeFromSuperview];
+    }
     return section == contentSection ? [[self tableData] count] : 1;
 }
 
@@ -140,11 +150,17 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if ([indexPath section] == 0)
-        //return 136;
-        return self.headerView.frame.size.height-64;
-    else
+    if ([indexPath section] == 0){
+        if ([self tableData].count == 0 && isRecordingScreen == NO) {
+            return SCREEN_HEIGHT-64;
+        }
+        else {
+            return self.headerView.frame.size.height-64;
+        }
+    }
+    else {
         return 75;
+    }
 }
 
 -(CGFloat) tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
