@@ -22,6 +22,7 @@
     LECPlaybackControls *playbackBar;
     BOOL hasFooter;
     BOOL isRecordingScreen;
+    BOOL isPlaybackScreen;
     NSInteger noSections;
     NSArray *visibleCells;
     int loadedCells;

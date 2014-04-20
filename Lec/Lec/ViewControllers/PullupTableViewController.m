@@ -110,7 +110,7 @@
         [self.tableView addSubview:reminderView];
         [self.tableView sendSubviewToBack:reminderView];
     }
-    else if (isRecordingScreen || ((section == contentSection) && [self tableData].count > 0)) {
+    else if (isRecordingScreen || isPlaybackScreen || ((section == contentSection) && [self tableData].count > 0)) {
         [reminderView removeFromSuperview];
     }
     return section == contentSection ? [[self tableData] count] : 1;
