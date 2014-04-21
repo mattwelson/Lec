@@ -92,17 +92,19 @@
     newCourseName.delegate = self;
     newDescription.delegate = self;
     
-    UIScrollView *colorView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 200, 320, 100)];
-    [colorView setContentSize:CGSizeMake(680, 100)];
+    colourNames = [[LECColourService sharedColourService] colourKeys];
+    iconNames = [[LECIconService sharedIconService] iconKeys];
     
+    
+    UIScrollView *colorView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 200, 320, 100)];
+    //[colorView setContentSize:CGSizeMake(680, 100)];
+    [colorView setContentSize:CGSizeMake(75*colourNames.count, 100)];
     UIScrollView *iconView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 350, 320, 100)];
-    [iconView setContentSize:CGSizeMake(1000, 100)];
+    //[iconView setContentSize:CGSizeMake(1680, 100)];
+    [iconView setContentSize:CGSizeMake(70*iconNames.count, 100)];
     
     [colorView setBackgroundColor:[[UIColor blackColor] colorWithAlphaComponent:0.5f]];
     [iconView setBackgroundColor:[[UIColor blackColor] colorWithAlphaComponent:0.5f]];
-    
-    colourNames = [[LECColourService sharedColourService] colourKeys];
-    iconNames = [[LECIconService sharedIconService] iconKeys];
     NSMutableArray *cButtonArray = [NSMutableArray array];
     UIButton *tmp;
     CGSize size = CGSizeMake(45, 45);

@@ -70,20 +70,20 @@
 		<key>HighlightColour</key>
 		<dict>
 			<key>RValue</key>
-			<integer>173</integer>
+			<integer>61</integer>
 			<key>GValue</key>
-			<integer>234</integer>
+			<integer>207</integer>
 			<key>BValue</key>
-			<integer>20</integer>
+			<integer>50</integer>
 		</dict>
 		<key>BaseColour</key>
 		<dict>
 			<key>RValue</key>
-			<integer>36</integer>
+			<integer>6</integer>
 			<key>GValue</key>
-			<integer>209</integer>
+			<integer>190</integer>
 			<key>BValue</key>
-			<integer>20</integer>
+			<integer>128</integer>
 		</dict>
 	</dict>
 	<key>Jewel</key>
