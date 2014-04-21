@@ -73,6 +73,7 @@
 -(void)courseTableViewSetup
 {
     [super courseTableViewSetup];
+    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     [self.tableView setContentInset:UIEdgeInsetsMake(0, 0, playbackBar.frame.size.height, 0)];
     [self.tableView registerClass:[TagCell class] forCellReuseIdentifier:CELL_ID_TAG_CELL];
 }
