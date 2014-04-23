@@ -13,9 +13,11 @@
 @property Course *currentCourse;
 
 @property NSString *icon; // the image that represents the course
+@property unsigned long i; //the Lecture Number
+
 
 -(instancetype)initWithCourse:(Course *) course;
 -(void)deleteLectureAtIndex:(NSInteger)index;
--(void)addLecture:(NSString *)name;
+-(void)addLecture:(NSString *)name withLectureNumber:(NSInteger)number;
 
 @end

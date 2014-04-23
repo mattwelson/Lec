@@ -7,12 +7,14 @@
 //
 
 #import "CourseViewController.h"
+#import "LECAnimationService.h"
 #import "LectureCell.h"
 #import "LECActionBar.h"
 
 @interface CourseViewController (){
     LECCourseViewModel *viewModel;
     Course *currentCourse;
+    LECLectureEditScreen *preScreen;
     UIView *editView;
     NSArray *colourNames;
     NSArray *iconNames;
@@ -22,6 +24,8 @@
     NSString *newIcon;
     UIButton *pastSelectedButton;
     bool iconMaySelect;
+    UIView *quickRecordView;
+    UILabel *quickRecordLabel;
 }
 
 @end
@@ -44,9 +48,15 @@
     return self;
 }
 
-- (void) viewDidAppear:(BOOL)animated
+
+- (void) viewWillAppear:(BOOL)animated
 {
     // TODO: Fix it up so the mic gets swapped to a chevron where appropriate
+    
+    //Hacked this so it moves the tableview slightly, when going to it, this forces it to scroll, hence recalculates the titlebar
+    CGPoint point = CGPointMake(0, self.tableView.contentOffset.y-1);
+    [self.tableView setContentOffset:point animated:YES];
+    
 }
 
 - (void) navigationTopBar
@@ -54,6 +64,15 @@
     [super navigationTopBar];
     UIImage *plusImg = [UIImage imageNamed:@"nav_settings_btn.png"];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:plusImg style:UIBarButtonItemStylePlain target:self action:@selector(courseEdit)];
+    
+    quickRecordView = [[UIView alloc]initWithFrame:CGRectMake(0, self.tableView.frame.size.height, SCREEN_WIDTH, 0)];
+    quickRecordView.backgroundColor = [[LECColourService sharedColourService]baseColourFor:viewModel.colourString];
+    quickRecordLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, quickRecordView.frame.size.height/2, SCREEN_WIDTH, 50)];
+    quickRecordLabel.textColor = [UIColor whiteColor];
+    quickRecordLabel.textAlignment = NSTextAlignmentCenter;
+    quickRecordLabel.text = @"Quick Record";
+    [quickRecordView addSubview:quickRecordLabel];
+    [self.view addSubview:quickRecordView];
 }
 
 
@@ -61,7 +80,7 @@
 {
     iconMaySelect = FALSE;
     newIcon = currentCourse.icon;
-    editView = [[UIView alloc] initWithFrame:self.view.bounds];
+    editView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
     [[LECColourService sharedColourService] addGradientForColour:[currentCourse colour] toView:editView];
     
     UILabel *courseName = [[UILabel alloc] initWithFrame:CGRectMake(20, 50, 200, 50)];
@@ -79,7 +98,6 @@
     UIScrollView *iconView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 350, 320, 100)];
     [iconView setContentSize:CGSizeMake(1000, 100)];
     
-    NSLog(@"%f, %f, %f, %f" , colorView.bounds.origin.x, colorView.bounds.origin.y, colorView.bounds.size.width, colorView.bounds.size.height);
     [colorView setBackgroundColor:[[UIColor blackColor] colorWithAlphaComponent:0.5f]];
     [iconView setBackgroundColor:[[UIColor blackColor] colorWithAlphaComponent:0.5f]];
     
@@ -100,10 +118,6 @@
                                yOffset,
                                size.width,
                                size.height);
-        NSLog(@"%f, %f, %f, %f" , xOffset * (size.width + lineSpace),
-              yOffset * (size.height + lineSpace),
-              size.width,
-              size.height);
         [[LECColourService sharedColourService] addGradientForColour:colourNames[i] toView:tmp];
         tmp.layer.cornerRadius = tmp.frame.size.height/2;
         tmp.layer.masksToBounds = YES;
@@ -124,10 +138,6 @@
                                yOffset,
                                size.width,
                                size.height);
-        NSLog(@"%f, %f, %f, %f" , xOffset * (size.width + lineSpace),
-              yOffset * (size.height + lineSpace),
-              size.width,
-              size.height);
         UIImageView *tmpImageView = [[UIImageView alloc]init];
         tmpImageView = [[LECIconService sharedIconService] retrieveIcon:iconNames[i] toView:tmpImageView];
         [tmp setImage:tmpImageView.image forState:UIControlStateNormal];
@@ -138,8 +148,6 @@
         [tmp addTarget:self action:@selector(iconSelected:) forControlEvents:UIControlEventTouchUpInside];
         [iconView addSubview:tmp];
     }
-    
-    
     
     [courseName setTextColor:[UIColor whiteColor]];
     [descriptionName setTextColor:[UIColor whiteColor]];
@@ -155,7 +163,17 @@
     [newDescription setText:viewModel.subTitle];
     
     UIImage *checkImg = [UIImage imageNamed:@"icon_checkmark.png"];
+//    checkImg = [checkImg imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+//    UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
+//    rightButton.frame = CGRectMake(SCREEN_WIDTH - 40, 30, 30, 30);
+//    [rightButton setBackgroundImage:checkImg forState:UIControlStateNormal];
+//    [rightButton.imageView setTintColor:[UIColor whiteColor]];
+//    [rightButton addTarget:self action:@selector(saveEdit) forControlEvents:UIControlEventTouchDown];
+    
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:checkImg style:UIBarButtonItemStylePlain target:self action:@selector(saveEdit)];
+    
+    UIImage *crossImg = [UIImage imageNamed:@"icon_cancel.png"];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:crossImg style:UIBarButtonItemStylePlain target:self action:@selector(closeEdit)];
     self.navigationItem.title = nil;
     
     [editView addSubview:iconPicker];
@@ -166,7 +184,12 @@
     [editView addSubview:newDescription];
     [editView addSubview:colorView];
     [editView addSubview:iconView];
+    //[editView addSubview:rightButton];
     [self.view addSubview:editView];
+    
+    //self.navigationController.navigationBar.hidden = YES;
+    
+    [[LECAnimationService sharedAnimationService]addAlphaToView:editView withSpeed:0.2 withDelay:0.0];
 }
 
 -(void) saveEdit
@@ -177,8 +200,16 @@
     if (newColor)currentCourse.colour = newColor;
     if (newIcon) currentCourse.icon = newIcon;
     [[LECDatabaseService sharedDBService] saveChanges];
-    [editView removeFromSuperview];
+    [self closeEdit];
+}
+
+-(void)closeEdit
+{
     [self.navigationController popViewControllerAnimated:YES];
+    //self.navigationController.navigationBar.hidden = NO;
+    self.navigationItem.leftBarButtonItem = NULL;
+    //[editView removeFromSuperview];
+
 }
 
 - (IBAction)iconSelected:(id)sender
@@ -188,7 +219,6 @@
     }
     iconMaySelect = TRUE;
     NSInteger i = ((UIButton *)sender).tag;
-    NSLog(@"%@",iconNames[i]);
     newIcon = iconNames[i];
     ((UIButton *)sender).tintColor = [[UIColor whiteColor] colorWithAlphaComponent:1];
     pastSelectedButton = ((UIButton *)sender);
@@ -199,7 +229,12 @@
 {
     NSInteger i = ((UIButton *)sender).tag;
     NSLog(@"%@",colourNames[i]);
-    [[LECColourService sharedColourService] changeGradientToColour:colourNames[i] forView:editView];
+    [UIView transitionWithView:self.view duration:0.2 options:UIViewAnimationOptionTransitionCrossDissolve animations:
+     ^{
+        [[LECColourService sharedColourService] changeGradientToColour:colourNames[i] forView:editView];
+    }completion:^(BOOL finished){
+        nil;
+    }];
     newColor = colourNames[i];
     
     
@@ -223,6 +258,7 @@
 {
     
 }
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -259,15 +295,64 @@
     LECLectureCellViewModel *lectureCellViewModel = [viewModel.tableData objectAtIndex:index];
     
     [self.navigationController pushViewController:[[PlaybackViewController alloc] initWithLecture:lectureCellViewModel.lecture] animated:YES];
-    
+}
+
+-(void) courseScroll:(CGFloat)scrollOffset
+{    
+    if (scrollOffset < 0) {
+        [self.view addSubview:quickRecordView];
+        quickRecordView.frame = CGRectMake(0, self.headerView.frame.size.height, SCREEN_WIDTH, -scrollOffset);
+        quickRecordLabel.font = [UIFont fontWithName:DEFAULTFONT size:15-scrollOffset/16];
+        quickRecordLabel.alpha = -scrollOffset/80;
+    }
+    else {
+        [quickRecordView removeFromSuperview];
+    }
+}
+
+
+-(void) quickRecord
+{
+    //[viewModel addLecture:@"Quick Record" withLectureNumber:viewModel.i];
+    [self confirmChanges:viewModel.i+1 withName:@"(Quick Record)"];
 }
 
 -(void) actionBarPressed
 {
-    [viewModel addLecture:@"An intro to Lec"];
+    preScreen = [[LECLectureEditScreen alloc]initWithFrame:CGRectMake(0, 20, SCREEN_WIDTH, SCREEN_HEIGHT-20) withCourseViewModel:viewModel];
+    preScreen.preRecordDelegate = self;
+    [self.view addSubview:preScreen];
+    [[self navigationController] setNavigationBarHidden:YES animated:YES];
+    self.navigationController.interactivePopGestureRecognizer.enabled = NO;
+
+    //[[LECAnimationService sharedAnimationService]addAlphaToView:preScreen withSpeed:0.2 withDelay:0.0];
+    
+    CGRect finalFrame = preScreen.frame;
+    preScreen.frame = CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, 0);
+    
+    [UIView animateWithDuration:0.75 delay:0.0 usingSpringWithDamping:0.65 initialSpringVelocity:0.15 options:UIViewAnimationOptionCurveEaseIn animations:^{
+        preScreen.frame = finalFrame;
+    }completion:^(BOOL completion){
+        
+    }];
+}
+
+#pragma mark Delegate from the pre recording screen to head into recording
+-(void) preRecordCancelled
+{
+    [[self navigationController] setNavigationBarHidden:NO animated:YES];
+    self.navigationController.interactivePopGestureRecognizer.enabled = YES;
+}
+
+-(void) confirmChanges:(NSInteger)lectureNumber withName:(NSString *)lectureName
+{
+    [viewModel addLecture:lectureName withLectureNumber:lectureNumber];
     [self.tableView reloadData];
     LECLectureCellViewModel *lectureCellViewModel = [viewModel.tableData objectAtIndex:0];
     [self.navigationController pushViewController:[[RecordViewController alloc] initWithLecture:lectureCellViewModel.lecture] animated:YES];
+    [[self navigationController] setNavigationBarHidden:NO animated:YES];
+    self.navigationController.interactivePopGestureRecognizer.enabled = YES;
+
 }
 
 -(NSInteger) numberOfSections
@@ -277,7 +362,6 @@
 
 // Dismissing the Keyboard when touch event is called by touching screen
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
-    NSLog(@"Keyboard is being dismissed");
     [self.view endEditing:YES];
     [super touchesBegan:touches withEvent:event];
 }
@@ -286,5 +370,6 @@
 {
     return [self.view endEditing:YES];
 }
+
 
 @end

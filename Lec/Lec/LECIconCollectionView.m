@@ -68,6 +68,12 @@
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     [self.iconPickerDelegate iconPickerDismissed:[[[LECIconService sharedIconService] iconKeys] objectAtIndex:indexPath.row]];
     
+    for(UICollectionView *cell in collectionView.visibleCells){
+        [UIView animateWithDuration:0.1 animations:^{
+            cell.alpha = 0.0;
+        }];
+    }
+    
     [UIView animateWithDuration:0.2
                           delay:0.0
                         options: UIViewAnimationOptionCurveEaseIn
@@ -83,5 +89,6 @@
 {
     return CGSizeMake(50, 50);
 }
+
 
 @end

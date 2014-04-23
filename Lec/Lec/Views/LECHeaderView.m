@@ -25,7 +25,7 @@
     if(self)
     {
         startingFrame = frame;
-        
+
         subjectImg = [UIImageView new];
         [subjectImg setTintColor:[UIColor whiteColor]];
         [subjectImg setFrame:CGRectMake(130, 30, 60, 60)];
@@ -86,12 +86,11 @@
 }
 
 -(void)changeAlpha:(CGFloat) tableOffset{
-    
     if (tableOffset > 0 && tableOffset < 140) {
         subjectImg.alpha = 1-(tableOffset/50); // different to be more dynamic
         titleLabel.alpha = 1-(tableOffset/75);
         descriptionLabel.alpha = 1-(tableOffset/75);
-        self.frame = CGRectMake(0, 0-tableOffset/3, self.frame.size.width, 200);
+        self.frame = CGRectMake(0, 0-tableOffset/3, SCREEN_WIDTH, 200);
         navTitle.alpha = -0.9 + (tableOffset/50);
     }
     
@@ -101,7 +100,6 @@
         descriptionLabel.alpha = 1;
         navTitle.alpha = 0.0;
         self.frame = startingFrame;
-
     }
 }
 

@@ -96,12 +96,7 @@
     [pullDownAddReminder setFont:[UIFont fontWithName:DEFAULTFONT size:15]];
     [pullDownAddReminder setTextColor:[UIColor grayColor]];
     [pullDownAddReminder setText:@"Pull Down to Add Course"];
-    [self pullDownReminderAdd];
-}
-
--(void)pullDownReminderAdd{
     [self.view addSubview:pullDownAddReminder];
-
 }
 
 - (void) courseTableViewSetup
@@ -149,7 +144,7 @@
             visibleCells = [self.courseTableView indexPathsForVisibleRows];
         }
         if ([visibleCells containsObject:indexPath] && loadedCells < visibleCells.count){
-            double delay = 0.6+(loadedCells*0.1);
+            double delay = 0.5+(loadedCells*0.1);
             [[LECAnimationService sharedAnimationService] addAlphaToView:cell.backgroundView withSpeed:0.35 withDelay:delay];
             [[LECAnimationService sharedAnimationService] addSpringAnimationToView:cell.contentView withSpeed:1.0 withDelay:delay withDamping:0.6 withVelocity:0.1 withDirectionFromLeft:YES];
            //delay 0.6+(loadedCells*0.1)
@@ -317,13 +312,15 @@
         }
         else {
             pullDownAddReminder.alpha = 0.0;
-            
         }
         pullDownAddReminder.frame = CGRectMake(0, 64, SCREEN_WIDTH, -scrollView.contentOffset.y - 64);
-        
     }
     if (scrollView.contentOffset.y < -135) {
         scrollView.contentOffset = CGPointMake(0, -135);
+        [pullDownAddReminder setText:@"Release to Add Course"];
+    }
+    else {
+        [pullDownAddReminder setText:@"Pull Down to Add Course"];
     }
 }
 
