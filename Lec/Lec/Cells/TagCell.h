@@ -12,8 +12,10 @@
 @interface TagCell : UITableViewCell
 
 -(void)populateFor:(LECTagCellViewModel *)vm;
+- (void)renderProgressBar:(CGFloat)percentage;
 
 @property UILabel *tagNameLabel;
 @property UILabel *tagDescriptionLabel;
+@property UIView *progressBar;
 
 @end

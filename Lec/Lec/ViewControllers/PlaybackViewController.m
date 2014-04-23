@@ -23,10 +23,12 @@
 {
     self = [super initWithNibName:@"PlaybackViewController" bundle:nil];
     if (self) {
-        NSLog(@"Playback View Controller!");
         viewModel = [LECLectureViewModel viewModelWithLecture:lecture];
+        [viewModel setDelegate:self];
+        
         [viewModel prepareForPlaybackWithCompletion:^{
-            [self disableActionBar];
+            viewModel.canTag = NO;
+            [self.tableView reloadData];
         }];
         [viewModel startAudioPlayback];
         
@@ -36,6 +38,7 @@
         noSections = 2;
         
         actionBar = [LECActionBar tagBarWithTarget:self andSelector:@selector(actionBarPressed)];
+        [viewModel addObserver:actionBar forKeyPath:NSStringFromSelector(@selector(canTag)) options:NSKeyValueObservingOptionNew context:NULL];
     }
     return self;
 }
@@ -62,9 +65,9 @@
     [self.view addSubview:self.headerView];
 }
 
--(void)disableActionBar
+-(void)setTag:(NSInteger)tag toProgress:(CGFloat)progress
 {
-    NSLog(@"Disable the action bar you fools!");
+    
 }
 
 #pragma mark Abstract methods implemented
@@ -73,12 +76,8 @@
     TagCell *cell = [[TagCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CELL_ID_TAG_CELL];
     LECTagCellViewModel *cellViewModel = [[self tableData] objectAtIndex:indexRow];
     [cell populateFor:cellViewModel];
+    [cell renderProgressBar:cellViewModel.progressPercentage];
     return (UITableViewCell *)cell;
-}
-
--(void)deleteObjectFromViewModel:(NSInteger)index
-{
-    // delete tag!
 }
 
 -(id) viewModelFromSubclass
@@ -94,15 +93,26 @@
 -(void) didSelectCellAt:(NSInteger)index
 {
     [viewModel goToTag:index];
+    [self.tableView reloadData];
 }
 
 -(void) actionBarPressed
 {
-    [viewModel insertTagAtCurrentTime];
-    [self.tableView reloadData];
-    // scroll to keep new cell at bottom of screen
-    NSIndexPath *indexPath = [NSIndexPath indexPathForItem:[viewModel.tableData count]-1 inSection:contentSection];
-    [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+    if ([viewModel insertTagAtCurrentTime]){
+        [self.tableView reloadData];
+        // scroll to keep new cell at bottom of screen
+        NSIndexPath *indexPath = [NSIndexPath indexPathForItem:[viewModel.tableData count]-1 inSection:contentSection];
+        [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+    }
+}
+
+-(void)reloadCellAtIndex:(NSInteger)index
+{
+    //[self.tableView reloadData];
+    NSIndexPath *path = [NSIndexPath indexPathForRow:index inSection:1];
+    NSLog(@"Index path: %ld", (long)path.row);
+    [self.tableView reloadRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationNone];
+
 }
 
 @end

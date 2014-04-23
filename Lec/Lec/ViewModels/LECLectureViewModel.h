@@ -7,15 +7,27 @@
 //
 
 #import "LECBaseViewModel.h"
+#import "LECAudioService.h"
 
-@interface LECLectureViewModel : LECBaseViewModel
+@protocol PlaybackViewDelegate <NSObject>
+
+-(void)reloadCellAtIndex:(NSInteger)index;
+
+@end
+
+@interface LECLectureViewModel : LECBaseViewModel <AudioServicePlaybackDelegate>
 
 +(LECLectureViewModel *)viewModelWithLecture:(Lecture *)lecture;
 
+@property id<PlaybackViewDelegate> delegate;
 @property NSString *icon;
 @property Lecture *lecture;
 @property NSMutableArray *tags;
 @property (nonatomic) NSString *recordingPath;
+@property BOOL canTag;
+@property long currentTag;
+@property double currentTagStartTime;
+@property double currentTagFinishTime;
 
 @property NSString *courseName;
 
@@ -28,6 +40,8 @@
 -(void) prepareForPlaybackWithCompletion:(void (^)(void))block;
 -(void) startAudioPlayback;
 -(void) stopAudioPlayback;
+
+-(BOOL) audioIsPlaying;
 -(void) goToTag:(NSInteger)index;
--(void) insertTagAtCurrentTime;
+-(BOOL) insertTagAtCurrentTime;
 @end

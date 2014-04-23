@@ -9,10 +9,17 @@
 #import <Foundation/Foundation.h>
 #import <AVFoundation/AVFoundation.h>
 
+@protocol AudioServicePlaybackDelegate <NSObject>
+
+-(void)playbackIsAtTime:(double)time;
+
+@end
+
 @interface LECAudioService : NSObject <AVAudioRecorderDelegate, AVAudioPlayerDelegate>
 
-+ (LECAudioService *)sharedAudioService;
+@property id<AudioServicePlaybackDelegate> delegate;
 
++ (LECAudioService *)sharedAudioService;
 
 -(void) setupAudioRecordingForPath:(NSString *)path;
 -(void) startRecording;
@@ -21,6 +28,8 @@
 -(void) setupAudioPlayback:(NSString *)path withCompletion:(void (^)(void))block;
 -(void) startPlayback;
 -(void) stopPlayback;
+-(BOOL) isAudioPlaying;
+-(double) getRecordingLength;
 
 -(void) goToTime:(NSNumber *)time;
 -(NSNumber *) getCurrentTime;
