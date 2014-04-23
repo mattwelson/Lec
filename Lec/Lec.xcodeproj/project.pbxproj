@@ -75,8 +75,8 @@
 		73BBDE4718EA77F400D7E397 /* icon_subject_money@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 73BBDE1918EA77F400D7E397 /* icon_subject_money@2x.png */; };
 		73BBDE4818EA77F400D7E397 /* icon_subject_music.png in Resources */ = {isa = PBXBuildFile; fileRef = 73BBDE1A18EA77F400D7E397 /* icon_subject_music.png */; };
 		73BBDE4918EA77F400D7E397 /* icon_subject_music@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 73BBDE1B18EA77F400D7E397 /* icon_subject_music@2x.png */; };
-		73BBDE4A18EA77F400D7E397 /* icon_subject_physcology.png in Resources */ = {isa = PBXBuildFile; fileRef = 73BBDE1C18EA77F400D7E397 /* icon_subject_physcology.png */; };
-		73BBDE4B18EA77F400D7E397 /* icon_subject_physcology@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 73BBDE1D18EA77F400D7E397 /* icon_subject_physcology@2x.png */; };
+		73BBDE4A18EA77F400D7E397 /* icon_subject_psychology.png in Resources */ = {isa = PBXBuildFile; fileRef = 73BBDE1C18EA77F400D7E397 /* icon_subject_psychology.png */; };
+		73BBDE4B18EA77F400D7E397 /* icon_subject_psychcology@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 73BBDE1D18EA77F400D7E397 /* icon_subject_psychcology@2x.png */; };
 		73BBDE4C18EA77F400D7E397 /* icon_subject_physics.png in Resources */ = {isa = PBXBuildFile; fileRef = 73BBDE1E18EA77F400D7E397 /* icon_subject_physics.png */; };
 		73BBDE4D18EA77F400D7E397 /* icon_subject_physics@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 73BBDE1F18EA77F400D7E397 /* icon_subject_physics@2x.png */; };
 		73BBDE4E18EA77F400D7E397 /* icon_subject_politics.png in Resources */ = {isa = PBXBuildFile; fileRef = 73BBDE2018EA77F400D7E397 /* icon_subject_politics.png */; };
@@ -227,8 +227,8 @@
 		73BBDE1918EA77F400D7E397 /* icon_subject_money@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_subject_money@2x.png"; sourceTree = "<group>"; };
 		73BBDE1A18EA77F400D7E397 /* icon_subject_music.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_subject_music.png; sourceTree = "<group>"; };
 		73BBDE1B18EA77F400D7E397 /* icon_subject_music@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_subject_music@2x.png"; sourceTree = "<group>"; };
-		73BBDE1C18EA77F400D7E397 /* icon_subject_physcology.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_subject_physcology.png; sourceTree = "<group>"; };
-		73BBDE1D18EA77F400D7E397 /* icon_subject_physcology@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_subject_physcology@2x.png"; sourceTree = "<group>"; };
+		73BBDE1C18EA77F400D7E397 /* icon_subject_psychology.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_subject_psychology.png; sourceTree = "<group>"; };
+		73BBDE1D18EA77F400D7E397 /* icon_subject_psychcology@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_subject_psychcology@2x.png"; sourceTree = "<group>"; };
 		73BBDE1E18EA77F400D7E397 /* icon_subject_physics.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_subject_physics.png; sourceTree = "<group>"; };
 		73BBDE1F18EA77F400D7E397 /* icon_subject_physics@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_subject_physics@2x.png"; sourceTree = "<group>"; };
 		73BBDE2018EA77F400D7E397 /* icon_subject_politics.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_subject_politics.png; sourceTree = "<group>"; };
@@ -453,8 +453,8 @@
 				73BBDE1918EA77F400D7E397 /* icon_subject_money@2x.png */,
 				73BBDE1A18EA77F400D7E397 /* icon_subject_music.png */,
 				73BBDE1B18EA77F400D7E397 /* icon_subject_music@2x.png */,
-				73BBDE1C18EA77F400D7E397 /* icon_subject_physcology.png */,
-				73BBDE1D18EA77F400D7E397 /* icon_subject_physcology@2x.png */,
+				73BBDE1C18EA77F400D7E397 /* icon_subject_psychology.png */,
+				73BBDE1D18EA77F400D7E397 /* icon_subject_psychcology@2x.png */,
 				73BBDE1E18EA77F400D7E397 /* icon_subject_physics.png */,
 				73BBDE1F18EA77F400D7E397 /* icon_subject_physics@2x.png */,
 				73BBDE2018EA77F400D7E397 /* icon_subject_politics.png */,
@@ -821,7 +821,7 @@
 				0B6BD587188914B300A7D8F9 /* MainViewController.xib in Resources */,
 				BBB5885018BC34BF00845089 /* nav_settings_btn@2x.png in Resources */,
 				73BBDE3318EA77F400D7E397 /* icon_subject_doctor@2x.png in Resources */,
-				73BBDE4A18EA77F400D7E397 /* icon_subject_physcology.png in Resources */,
+				73BBDE4A18EA77F400D7E397 /* icon_subject_psychology.png in Resources */,
 				73BBDE3718EA77F400D7E397 /* icon_subject_engineering2@2x.png in Resources */,
 				73C476F318E66C8200AAB8C8 /* playback_pause_btn@2x.png in Resources */,
 				73BBDE5218EA7B1300D7E397 /* icon_bar_tag.png in Resources */,
@@ -829,7 +829,7 @@
 				73C476F218E66C8200AAB8C8 /* playback_pause_btn.png in Resources */,
 				C9B0C5F2187FBE7F002D4A63 /* Images.xcassets in Resources */,
 				73BBDE3618EA77F400D7E397 /* icon_subject_engineering2.png in Resources */,
-				73BBDE4B18EA77F400D7E397 /* icon_subject_physcology@2x.png in Resources */,
+				73BBDE4B18EA77F400D7E397 /* icon_subject_psychcology@2x.png in Resources */,
 				73BBDE2E18EA77F400D7E397 /* icon_subject_compsci2.png in Resources */,
 				0B6BD59C18891B1E00A7D8F9 /* nav_add_btn@2x.png in Resources */,
 				73BBDE4518EA77F400D7E397 /* icon_subject_math@2x.png in Resources */,
