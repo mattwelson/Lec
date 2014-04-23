@@ -11,8 +11,10 @@
 
 @interface LECHeaderView : UIView
 
+@property id currentViewModel;
+
 - (id)initWithCourse:(LECCourseViewModel *)course;
-- (id)initWithLecture:(LECLectureViewModel *)lecture;
+-(id)initWithLecture:(LECLectureViewModel *)lectureModel andIsRecording:(BOOL)isRecording;
 
 -(void)changeAlpha:(CGFloat) tableOffset;
 

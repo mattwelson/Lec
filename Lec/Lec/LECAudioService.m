@@ -7,6 +7,7 @@
 //
 
 #import "LECAudioService.h"
+#import "LECDefines.h"
 
 @implementation LECAudioService {
     AVAudioSession *session;
@@ -70,7 +71,6 @@ static LECAudioService *sharedService;
     [session setCategory:AVAudioSessionCategoryPlayback error:&error];
     
     recordingPath = [self recordingPath:path];
-    
     audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:recordingPath error:&error];
     audioPlayer.delegate = self;
     playbackFinished = block;
@@ -84,7 +84,9 @@ static LECAudioService *sharedService;
 {
     [session setActive:YES error:nil];
     if ([audioPlayer prepareToPlay]) {
+        audioPlayer.enableRate = YES;
         [audioPlayer play];
+        [[NSNotificationCenter defaultCenter] postNotificationName:kPlayerNotification object:self];
         assert([audioPlayer isPlaying]); // TODO: Take out? Once at a production stage
     }
     else {
@@ -98,10 +100,49 @@ static LECAudioService *sharedService;
     assert(![audioPlayer isPlaying]);
 }
 
+-(void)pausePlayback{
+    [audioPlayer pause];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kPlayerNotification object:self];
+}
+
+
+-(void)speedUpPlaybackRate{
+    [audioPlayer setRate:2.0];
+    if (!audioPlayer.isPlaying) {
+        [self startPlayback];
+    }
+    else [audioPlayer play];
+}
+
+-(void)normalPlaybackRate{
+    [audioPlayer setRate:1.0];
+    if (!audioPlayer.isPlaying) {
+        [self startPlayback];
+    }
+    else [audioPlayer play];
+}
+
+-(void)rewindPlaybackRate{
+    [audioPlayer setRate:-1.0];
+    if (!audioPlayer.isPlaying) {
+        [self startPlayback];
+    }
+    else [audioPlayer play];
+}
+
+-(BOOL)isPlaying{
+    if ([audioPlayer isPlaying]) {
+        return YES;
+    }
+    else {
+        return NO;
+    }
+}
+
 #pragma mark Tag Stuff
 -(void)goToTime:(NSNumber *)time
 {
-    if (!audioPlayer.playing) [audioPlayer play];
+    if (!audioPlayer.playing) [self startPlayback];
     audioPlayer.currentTime = [time doubleValue];
 }
 
@@ -137,7 +178,7 @@ static LECAudioService *sharedService;
 
 -(NSDictionary *)audioRecordingSettings {
     return @{
-             AVFormatIDKey: @(kAudioFormatAppleLossless),
+             AVFormatIDKey: @(kAudioFormatMPEG4AAC),
              AVSampleRateKey: @(44100.0f),
              AVNumberOfChannelsKey: @1,
              AVEncoderAudioQualityKey: @(AVAudioQualityLow)

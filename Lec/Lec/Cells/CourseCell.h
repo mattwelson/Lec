@@ -16,5 +16,6 @@
 @property UIImageView *iconImage;
 @property UILabel *courseNameLabel;
 @property UILabel *courseDescriptionLabel;
+@property UIView *selectedView;
 
 @end

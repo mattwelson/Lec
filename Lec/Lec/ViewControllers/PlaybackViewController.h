@@ -9,9 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "Lecture.h"
 #import "PullupTableViewController.h"
+#import "LECPlaybackControls.h"
+#import "LECLectureEditScreen.h"
 
-@interface PlaybackViewController : PullupTableViewController
-
+@interface PlaybackViewController : PullupTableViewController<LectureEditDelegate,PlaybackControlDelegate>
 -(id)initWithLecture:(Lecture *)lecture;
 
 @end

@@ -13,6 +13,8 @@
 
 -(void)populateFor:(LECLectureCellViewModel *)vm;
 
+@property LECLectureCellViewModel *vm;
+
 @property UILabel *courseNameLabel;
 @property UILabel *courseDescriptionLabel;
 
