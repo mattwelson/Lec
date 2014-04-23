@@ -73,6 +73,7 @@
     
     [self.tableView registerClass:[LectureCell class] forCellReuseIdentifier:CELL_ID_HEADER];
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:CELL_ID_ADD_CELL];
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -85,8 +86,14 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == actionSection) [self actionBarPressed];
-    else [self didSelectCellAt:indexPath.row];
+    if (indexPath.section == actionSection) {
+        [self actionBarPressed];
+    }
+    else {
+        [self didSelectCellAt:indexPath.row];
+    }
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -97,6 +104,15 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    if (section == contentSection && [self tableData].count == 0) {
+        [reminderView removeFromSuperview];
+        reminderView = [LECPullDownReminder createReminderViewCourseScreen];
+        [self.tableView addSubview:reminderView];
+        [self.tableView sendSubviewToBack:reminderView];
+    }
+    else if (isRecordingScreen || isPlaybackScreen || ((section == contentSection) && [self tableData].count > 0)) {
+        [reminderView removeFromSuperview];
+    }
     return section == contentSection ? [[self tableData] count] : 1;
 }
 
@@ -120,8 +136,8 @@
     
     if ([indexPath section] == contentSection) {
         cell = [self cellForIndexRow:indexPath.row];
-    } else if (indexPath.section == actionSection) {
-        return (UITableViewCell *) actionBar;
+//    } else if (indexPath.section == actionSection) {
+//        return (UITableViewCell *) actionBar;
     }
     else {
         cell = [[LectureCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CELL_ID_HEADER];
@@ -134,21 +150,28 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if ([indexPath section] == 0)
-        return 136;
-    else
+    if ([indexPath section] == 0){
+        if ([self tableData].count == 0 && isRecordingScreen == NO) {
+            return SCREEN_HEIGHT-64;
+        }
+        else {
+            return self.headerView.frame.size.height-64;
+        }
+    }
+    else {
         return 75;
+    }
 }
 
 -(CGFloat) tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-    return hasFooter && section == contentSection ? 75 : 0;
+    // Is 50 for the bottom bar
+    return hasFooter && section == contentSection ? 50 : 0;
 }
 
 -(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
     if (!(hasFooter && section == contentSection)) return nil;
-    
     return (UIView *)actionBar;
 }
 
@@ -156,21 +179,50 @@
 {
     if (editingStyle == UITableViewCellEditingStyleDelete)
     {
-        [self deleteObjectFromViewModel:indexPath.row];
-        [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-        [self. tableView reloadData];
+        deleteIndexPath = indexPath;
+//        NSString *deleteTitle = [@"Delete " stringByAppendingString:[[[self.viewModel.tableData objectAtIndex:indexPath.row] course]courseName]];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Delete"
+                                                        message:@"Are you sure you want to delete this?"
+                                                       delegate:self
+                                              cancelButtonTitle:@"Delete"
+                                              otherButtonTitles:@"Cancel", nil];
+        [alert show];
+    }
+}
+
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 0) {
+        [self deleteObjectFromViewModel:deleteIndexPath.row];
+        [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:deleteIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+    }
+    else {
+        [self.tableView setEditing:NO];
+        [alertView removeFromSuperview];
     }
 }
 
 #pragma mark Scrolling Delegates
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    [self courseScroll:scrollView.contentOffset.y];
     [self.headerView changeAlpha:self.tableView.contentOffset.y];
     [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor colorWithWhite:1.0 alpha:-0.3+(self.tableView.contentOffset.y/100)], NSForegroundColorAttributeName, [UIFont fontWithName:DEFAULTFONT size:HEADERSIZE], NSFontAttributeName, nil]];
     
-    if (scrollView.contentOffset.y < 0) {
-        scrollView.contentOffset = CGPointMake(0, 0);
+    if (scrollView.contentOffset.y < -65) {
+        scrollView.contentOffset = CGPointMake(0, -65);
+        //[pullDownAddReminder setText:@"Release to Add Course"];
     }
     
+//    if (scrollView.contentOffset.y < 0) {
+//        scrollView.contentOffset = CGPointMake(0, 0);
+//    }
+}
+
+-(void) scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+{
+    if (scrollView.contentOffset.y <= -65) {
+        [self quickRecord];
+    }
 }
 
 #pragma mark Abstract methods
@@ -205,6 +257,16 @@
 -(void) didSelectCellAt:(NSInteger)index
 {
     [self abstractMethod:@"didSelectCellAt"];
+}
+
+-(void) courseScroll:(CGFloat)scrollOffset
+{
+    [self abstractMethod:@"scrollingTable"];
+}
+
+-(void)quickRecord
+{
+    [self abstractMethod:@"quickRecord"];
 }
 
 -(void) actionBarPressed

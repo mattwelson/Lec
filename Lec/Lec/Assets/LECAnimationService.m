@@ -42,10 +42,28 @@ static LECAnimationService *sharedService;
                      }];
 }
 
+//ORIGINAL METHOD, MIGHT WORK BETTER THAN THE OTHER ONE
+//-(void)addPop:(UIView *)view withSpeed:(double)speed withDelay:(double)delay{
+//    CGRect originalFrame = view.frame;
+//    
+//    view.frame = CGRectMake(originalFrame.origin.x, originalFrame.origin.y+20, originalFrame.size.width-40, originalFrame.size.height-40);
+//    
+//    [UIView animateWithDuration:speed
+//                          delay:delay
+//         usingSpringWithDamping:0.4
+//          initialSpringVelocity:0.5
+//                        options:UIViewAnimationOptionLayoutSubviews
+//                     animations:^{
+//                         view.frame = originalFrame;
+//                     }
+//                     completion:^(BOOL finished){
+//                         NULL;
+//                     }];
+//    
+//}
+
 -(void)addPop:(UIView *)view withSpeed:(double)speed withDelay:(double)delay{
-    CGRect originalFrame = view.frame;
-    
-    view.frame = CGRectMake(originalFrame.origin.x, originalFrame.origin.y+20, originalFrame.size.width-40, originalFrame.size.height-40);
+    view.transform = CGAffineTransformMakeScale(1.5, 1.5);
     
     [UIView animateWithDuration:speed
                           delay:delay
@@ -53,7 +71,8 @@ static LECAnimationService *sharedService;
           initialSpringVelocity:0.5
                         options:UIViewAnimationOptionLayoutSubviews
                      animations:^{
-                         view.frame = originalFrame;
+                         view.transform = CGAffineTransformMakeScale(1, 1);
+
                      }
                      completion:^(BOOL finished){
                          NULL;

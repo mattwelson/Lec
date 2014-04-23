@@ -12,6 +12,7 @@
 #import "LECTagCellViewModel.h"
 
 @implementation LECLectureViewModel
+static void * localContext = &localContext;
 
 +(LECLectureViewModel *)viewModelWithLecture:(Lecture *)lecture
 {
@@ -19,8 +20,8 @@
     vm.lecture = lecture;
     vm.icon = lecture.course.icon;
     vm.colourString = lecture.course.colour;
-    vm.navTitle = [lecture lectureName];
-    vm.subTitle = [NSString stringWithFormat:@"Lecture %@", [lecture lectureNumber]];
+    vm.subTitle = [lecture lectureName];
+    vm.navTitle = [NSString stringWithFormat:@"Lecture %@", [lecture lectureNumber]];
     
     vm.courseName = [[lecture course] courseName];
     
@@ -28,6 +29,8 @@
     if (!vm.recordingPath) {
         [vm setInitialRecordingPath];
     }
+    [vm setupObservation];
+
     
     NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:NSStringFromSelector(@selector(currentTime)) ascending:YES];
     NSArray *sortedTags = [lecture.tags sortedArrayUsingDescriptors:@[sortDescriptor]];
@@ -36,6 +39,11 @@
         [vm.tableData addObject:[LECTagCellViewModel tagCellVMWithTag:tag andColour:vm.colourString]];
     }
     return vm;
+}
+
+-(void) dealloc
+{
+    [self deallocObservation];
 }
 
 #pragma mark Recording
@@ -73,9 +81,9 @@
 }
 
 #pragma mark Playback
--(void) prepareForPlayback
+-(void) prepareForPlaybackWithCompletion:(void (^)(void))block
 {
-    [[LECAudioService sharedAudioService] setupAudioPlayback:[self recordingPath]];
+    [[LECAudioService sharedAudioService] setupAudioPlayback:[self recordingPath] withCompletion:block];
 }
 
 -(void) startAudioPlayback
@@ -107,6 +115,42 @@
     }];
     
     [self.tableData insertObject:tagCVM atIndex:newIndex];
+}
+
+#pragma mark - KVO
+-(void) setupObservation
+{
+    [self.lecture addObserver:self forKeyPath:NSStringFromSelector(@selector(lectureName)) options:NSKeyValueObservingOptionNew context:localContext];
+    [self.lecture addObserver:self forKeyPath:NSStringFromSelector(@selector(lectureNumber)) options:NSKeyValueObservingOptionNew context:localContext];
+}
+
+-(void)deallocObservation
+{
+    @try {
+        [self.lecture removeObserver:self forKeyPath:NSStringFromSelector(@selector(lectureName))];
+        [self.lecture removeObserver:self forKeyPath:NSStringFromSelector(@selector(lectureNumber))];
+    }
+    @catch (NSException * __unused exception) {}
+}
+
+// Updates view model when the managed object changes (edit screen)
+-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    if (context != localContext) {
+        return;
+    }
+    if ([keyPath isEqualToString:NSStringFromSelector(@selector(lectureName))])
+    {
+        self.subTitle = change[NSKeyValueChangeNewKey];
+    }
+    if ([keyPath isEqualToString:NSStringFromSelector(@selector(lectureNumber))])
+    {
+        self.navTitle = [NSString stringWithFormat:@"Lecture %@", change[NSKeyValueChangeNewKey]];
+    }
+    if (change[NSKeyValueChangeNewKey] == [NSNull null]){
+        [self deallocObservation];
+        return;
+    }
 }
 
 @end

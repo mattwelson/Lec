@@ -2,57 +2,53 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>music</key>
-	<string>subject_music.png</string>
-	<key>music - 2</key>
-	<string>subject_music.png</string>
-	<key>music - 2 - 2</key>
-	<string>subject_music.png</string>
-	<key>music - 2 - 2 - 2</key>
-	<string>subject_music.png</string>
-	<key>music - 2 - 2 - 3</key>
-	<string>subject_music.png</string>
-	<key>music - 2 - 2 - 4</key>
-	<string>subject_music.png</string>
-	<key>music - 2 - 2 - 5</key>
-	<string>subject_music.png</string>
-	<key>music - 2 - 2 - 6</key>
-	<string>subject_music.png</string>
-	<key>music - 2 - 2 - 7</key>
-	<string>subject_music.png</string>
-	<key>music - 2 - 2 - 8</key>
-	<string>subject_music.png</string>
-	<key>music - 2 - 2 - 9</key>
-	<string>subject_music.png</string>
-	<key>music - 2 - 2 - 10</key>
-	<string>subject_music.png</string>
-	<key>music - 2 - 2 - 11</key>
-	<string>subject_music.png</string>
-	<key>music - 2 - 2 - 12</key>
-	<string>subject_music.png</string>
-	<key>music - 2 - 2 - 13</key>
-	<string>subject_music.png</string>
-	<key>music - 2 - 2 - 14</key>
-	<string>subject_music.png</string>
-	<key>music - 2 - 2 - 15</key>
-	<string>subject_music.png</string>
+	<key>music2</key>
+	<string>icon_subject_music2.png</string>
 	<key>finance</key>
-	<string>subject_finance.png</string>
-	<key>finance - 2</key>
-	<string>subject_finance.png</string>
-	<key>finance - 2 - 2</key>
-	<string>subject_finance.png</string>
-	<key>chem</key>
-	<string>subject_chem.png</string>
-	<key>chem - 2</key>
-	<string>subject_chem.png</string>
-	<key>chem - 2 - 2</key>
-	<string>subject_chem.png</string>
-	<key>cs</key>
-	<string>subject_cs.png</string>
-	<key>cs - 2</key>
-	<string>subject_cs.png</string>
-	<key>cs - 3</key>
-	<string>subject_cs.png</string>
+	<string>icon_subject_finance.png</string>
+	<key>law2</key>
+	<string>icon_subject_law2.png</string>
+	<key>politics</key>
+	<string>icon_subject_politics.png</string>
+	<key>physics</key>
+	<string>icon_subject_physics.png</string>
+	<key>psychology</key>
+	<string>icon_subject_psychology.png</string>
+	<key>music</key>
+	<string>icon_subject_music.png</string>
+	<key>money</key>
+	<string>icon_subject_money.png</string>
+	<key>math</key>
+	<string>icon_subject_math.png</string>
+	<key>law</key>
+	<string>icon_subject_law.png</string>
+	<key>language</key>
+	<string>icon_subject_language.png</string>
+	<key>geography</key>
+	<string>icon_subject_geography.png</string>
+	<key>font</key>
+	<string>icon_subject_font.png</string>
+	<key>film</key>
+	<string>icon_subject_film.png</string>
+	<key>engineering2</key>
+	<string>icon_subject_engineering2.png</string>
+	<key>engineering</key>
+	<string>icon_subject_engineering.png</string>
+	<key>doctor</key>
+	<string>icon_subject_doctor.png</string>
+	<key>compsci3</key>
+	<string>icon_subject_compsci3.png</string>
+	<key>compsci2</key>
+	<string>icon_subject_compsci2.png</string>
+	<key>compsci</key>
+	<string>icon_subject_compsci.png</string>
+	<key>chemistry</key>
+	<string>icon_subject_chemistry.png</string>
+	<key>bsns</key>
+	<string>icon_subject_bsns.png</string>
+	<key>biology</key>
+	<string>icon_subject_biology.png</string>
+	<key>balance</key>
+	<string>icon_subject_balance.png</string>
 </dict>
 </plist>

@@ -23,6 +23,7 @@
 
 #pragma mark Lecture Operations
 - (Lecture *) newLectureForCourse:(Course *)course;
+- (void) deleteLectureFile:(Lecture *)lecture;
 
 #pragma mark Tag Operations
 -(Tag *) newTagForLecture:(Lecture *)lecture;

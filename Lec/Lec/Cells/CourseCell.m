@@ -44,7 +44,6 @@ static void * localContext = &localContext;
         [self setFrame:frame];
         [[self contentView] setFrame:frame];
         
-        
         if(PARALLAX_ON) {
             [[LECParallaxService sharedParallaxService]addParallaxToView:self.courseNameLabel strength:1];
             [[LECParallaxService sharedParallaxService]addParallaxToView:self.courseDescriptionLabel strength:1];
@@ -61,14 +60,11 @@ static void * localContext = &localContext;
     [[LECIconService sharedIconService] retrieveIcon:[vm icon] toView:self.iconImage];
     [[LECColourService sharedColourService] addGradientForColour:[vm colourString] toView:self.backgroundView];
     
+    self.selectedView = [[UIView alloc]init];
+    self.selectedView.backgroundColor = [[LECColourService sharedColourService]highlightColourFor:[vm colourString]];
+    self.selectedBackgroundView = self.selectedView;
+    
     [self setupObservingOf:vm];
-}
-
-#warning Will delete if we're not using.
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated
-{
-    [super setSelected:selected animated:animated];
-    // Configure the view for the selected state
 }
 
 #pragma mark - KVO
@@ -105,7 +101,8 @@ static void * localContext = &localContext;
     if ([keyPath isEqualToString:NSStringFromSelector(@selector(colourString))])
     {
         [[LECColourService sharedColourService] changeGradientToColour:change[NSKeyValueChangeNewKey] forView:self.backgroundView];
-
+        self.selectedView.backgroundColor = [[LECColourService sharedColourService]highlightColourFor:change[NSKeyValueChangeNewKey]];
+        self.selectedBackgroundView = self.selectedView;
     }
     
     if ([keyPath isEqualToString:NSStringFromSelector(@selector(icon))])

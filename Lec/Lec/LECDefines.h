@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+static NSString *const kPlayerNotification = @"PlayerNotification";
+
 // tableview cell identifier
 #define CELL_ID_HEADER @"courseheader"
 #define CELL_ID_LECTURE_CELL @"lecturecell"
@@ -22,7 +24,6 @@
 #define SCREEN_WIDTH [UIScreen mainScreen].bounds.size.width
 #define SCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height
 
-
 #define DEFAULTFONT @"Avenir"
 #define DEFAULTFONTLIGHT @"Avenir-Book"
 
@@ -31,10 +32,10 @@
 #define NAVTINTCOLOR [UIColor colorWithRed:2/255. green:208/255. blue:198/255. alpha:1.0]
 
 #define COURSENAMEECELLFONTSIZE 32
-#define COURSEDESCRIPTIONCELLFONTSIZE 14
+#define COURSEDESCRIPTIONCELLFONTSIZE 16
 
 #define LECTURENAMEECELLFONTSIZE 24
-#define LECTUREDESCRIPTIONCELLFONTSIZE 15
+#define LECTUREDESCRIPTIONCELLFONTSIZE 16
 
 @interface LECDefines : NSObject
 
