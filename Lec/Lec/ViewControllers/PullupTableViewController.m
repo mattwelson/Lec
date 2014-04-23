@@ -73,7 +73,7 @@
     
     [self.tableView registerClass:[LectureCell class] forCellReuseIdentifier:CELL_ID_HEADER];
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:CELL_ID_ADD_CELL];
-}
+} 
 
 - (void)didReceiveMemoryWarning
 {
@@ -86,7 +86,10 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == actionSection) [self actionBarPressed];
-    else [self didSelectCellAt:indexPath.row];
+    else {
+        [self didSelectCellAt:indexPath.row];
+        [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+    }
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -142,13 +145,13 @@
 
 -(CGFloat) tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-    return hasFooter && section == contentSection ? 75 : 0;
+    // Is 50 for the bottom bar
+    return hasFooter && section == contentSection ? 50 : 0;
 }
 
 -(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
     if (!(hasFooter && section == contentSection)) return nil;
-    
     return (UIView *)actionBar;
 }
 
@@ -157,8 +160,10 @@
     if (editingStyle == UITableViewCellEditingStyleDelete)
     {
         [self deleteObjectFromViewModel:indexPath.row];
-        [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-        [self. tableView reloadData];
+        //[self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+        [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+#warning If we remove the reload data, the animation works, not sure what implications it may have though
+        //[self.tableView reloadData];
     }
 }
 
@@ -167,9 +172,9 @@
     [self.headerView changeAlpha:self.tableView.contentOffset.y];
     [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor colorWithWhite:1.0 alpha:-0.3+(self.tableView.contentOffset.y/100)], NSForegroundColorAttributeName, [UIFont fontWithName:DEFAULTFONT size:HEADERSIZE], NSFontAttributeName, nil]];
     
-    if (scrollView.contentOffset.y < 0) {
-        scrollView.contentOffset = CGPointMake(0, 0);
-    }
+//    if (scrollView.contentOffset.y < 0) {
+//        scrollView.contentOffset = CGPointMake(0, 0);
+//    }
     
 }
 

@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 @class LECHeaderView;
+@class LECPlaybackControls;
 @class LECActionBar;
 
 @interface PullupTableViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
@@ -16,6 +17,7 @@
     NSInteger contentSection;
     NSInteger actionSection;
     LECActionBar *actionBar;
+    LECPlaybackControls *playbackBar;
     BOOL hasFooter;
     NSInteger noSections;
     NSArray *visibleCells;

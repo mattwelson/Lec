@@ -111,7 +111,7 @@
     [iconPickerButton addTarget:Nil action:@selector(iconViewAppear) forControlEvents:UIControlEventTouchDown];
     [iconButtonView addSubview:iconPickerButton];
     
-    selectedIcon = @"cs";
+    selectedIcon = @"compsci";
 }
 
 - (void) colorViewAppear

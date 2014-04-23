@@ -7,6 +7,7 @@
 //
 
 #import "CourseViewController.h"
+#import "LECAnimationService.h"
 #import "LectureCell.h"
 #import "LECActionBar.h"
 
@@ -44,9 +45,14 @@
     return self;
 }
 
-- (void) viewDidAppear:(BOOL)animated
+- (void) viewWillAppear:(BOOL)animated
 {
     // TODO: Fix it up so the mic gets swapped to a chevron where appropriate
+    
+    //Hacked this so it moves the tableview slightly, when going to it, this forces it to scroll, hence recalculates the titlebar
+    CGPoint point = CGPointMake(0, self.tableView.contentOffset.y-1);
+    [self.tableView setContentOffset:point animated:YES];
+    
 }
 
 - (void) navigationTopBar
@@ -64,14 +70,10 @@
     editView = [[UIView alloc] initWithFrame:self.view.bounds];
     [[LECColourService sharedColourService] addGradientForColour:[currentCourse colour] toView:editView];
     
-    UILabel *courseName = [[UILabel alloc] initWithFrame:CGRectMake(20, 50, 200, 50)];
-    UILabel *descriptionName = [[UILabel alloc] initWithFrame:CGRectMake(20, 100, 200, 50)];
     
-    UILabel *colorPicker = [[UILabel alloc] initWithFrame:CGRectMake(20, 150, 200, 50)];
-    UILabel *iconPicker = [[UILabel alloc] initWithFrame:CGRectMake(20, 300, 200, 50)];
+    newCourseName = [[UITextField alloc] initWithFrame:CGRectMake(0, 75, SCREEN_WIDTH, 50)];
+    newDescription = [[UITextField alloc] initWithFrame:CGRectMake(0, 125, SCREEN_WIDTH, 50)];
     
-    newCourseName = [[UITextField alloc] initWithFrame:CGRectMake(130, 50, 200, 50)];
-    newDescription = [[UITextField alloc] initWithFrame:CGRectMake(130, 100, 200, 50)];
     
     UIScrollView *colorView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 200, 320, 100)];
     [colorView setContentSize:CGSizeMake(680, 100)];
@@ -79,7 +81,6 @@
     UIScrollView *iconView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 350, 320, 100)];
     [iconView setContentSize:CGSizeMake(1000, 100)];
     
-    NSLog(@"%f, %f, %f, %f" , colorView.bounds.origin.x, colorView.bounds.origin.y, colorView.bounds.size.width, colorView.bounds.size.height);
     [colorView setBackgroundColor:[[UIColor blackColor] colorWithAlphaComponent:0.5f]];
     [iconView setBackgroundColor:[[UIColor blackColor] colorWithAlphaComponent:0.5f]];
     
@@ -100,10 +101,6 @@
                                yOffset,
                                size.width,
                                size.height);
-        NSLog(@"%f, %f, %f, %f" , xOffset * (size.width + lineSpace),
-              yOffset * (size.height + lineSpace),
-              size.width,
-              size.height);
         [[LECColourService sharedColourService] addGradientForColour:colourNames[i] toView:tmp];
         tmp.layer.cornerRadius = tmp.frame.size.height/2;
         tmp.layer.masksToBounds = YES;
@@ -124,10 +121,6 @@
                                yOffset,
                                size.width,
                                size.height);
-        NSLog(@"%f, %f, %f, %f" , xOffset * (size.width + lineSpace),
-              yOffset * (size.height + lineSpace),
-              size.width,
-              size.height);
         UIImageView *tmpImageView = [[UIImageView alloc]init];
         tmpImageView = [[LECIconService sharedIconService] retrieveIcon:iconNames[i] toView:tmpImageView];
         [tmp setImage:tmpImageView.image forState:UIControlStateNormal];
@@ -139,34 +132,43 @@
         [iconView addSubview:tmp];
     }
     
-    
-    
-    [courseName setTextColor:[UIColor whiteColor]];
-    [descriptionName setTextColor:[UIColor whiteColor]];
     [newCourseName setTextColor:[UIColor whiteColor]];
+    newCourseName.textAlignment = NSTextAlignmentCenter;
+    [newCourseName setFont:[UIFont fontWithName:DEFAULTFONT size:40]];
+    newCourseName.placeholder = @"Course Name";
+    newCourseName.clearButtonMode = UITextFieldViewModeWhileEditing;
     [newDescription setTextColor:[UIColor whiteColor]];
-    [colorPicker setTextColor:[UIColor whiteColor]];
-    [iconPicker setTextColor:[UIColor whiteColor]];
-    [colorPicker setText:@"Course Colour: "];
-    [iconPicker setText:@"Course Icon: "];
-    [courseName setText:@"Course: "];
-    [descriptionName setText:@"Description: "];
+    newDescription.textAlignment = NSTextAlignmentCenter;
+    [newDescription setFont:[UIFont fontWithName:DEFAULTFONT size:25]];
+    newDescription.placeholder = @"Description";
+    newDescription.clearButtonMode = UITextFieldViewModeWhileEditing;
     [newCourseName setText:viewModel.navTitle];
     [newDescription setText:viewModel.subTitle];
     
     UIImage *checkImg = [UIImage imageNamed:@"icon_checkmark.png"];
+//    checkImg = [checkImg imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+//    UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
+//    rightButton.frame = CGRectMake(SCREEN_WIDTH - 40, 30, 30, 30);
+//    [rightButton setBackgroundImage:checkImg forState:UIControlStateNormal];
+//    [rightButton.imageView setTintColor:[UIColor whiteColor]];
+//    [rightButton addTarget:self action:@selector(saveEdit) forControlEvents:UIControlEventTouchDown];
+    
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:checkImg style:UIBarButtonItemStylePlain target:self action:@selector(saveEdit)];
+    
+    UIImage *crossImg = [UIImage imageNamed:@"icon_cancel.png"];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:crossImg style:UIBarButtonItemStylePlain target:self action:@selector(closeEdit)];
     self.navigationItem.title = nil;
     
-    [editView addSubview:iconPicker];
-    [editView addSubview:colorPicker];
-    [editView addSubview:courseName];
-    [editView addSubview:descriptionName];
     [editView addSubview:newCourseName];
     [editView addSubview:newDescription];
     [editView addSubview:colorView];
     [editView addSubview:iconView];
+    //[editView addSubview:rightButton];
     [self.view addSubview:editView];
+    
+    //self.navigationController.navigationBar.hidden = YES;
+    
+    [[LECAnimationService sharedAnimationService]addAlphaToView:editView withSpeed:0.2 withDelay:0.0];
 }
 
 -(void) saveEdit
@@ -177,8 +179,16 @@
     if (newColor)currentCourse.colour = newColor;
     if (newIcon) currentCourse.icon = newIcon;
     [[LECDatabaseService sharedDBService] saveChanges];
-    [editView removeFromSuperview];
+    [self closeEdit];
+}
+
+-(void)closeEdit
+{
     [self.navigationController popViewControllerAnimated:YES];
+    //self.navigationController.navigationBar.hidden = NO;
+    self.navigationItem.leftBarButtonItem = NULL;
+    //[editView removeFromSuperview];
+
 }
 
 - (IBAction)iconSelected:(id)sender
@@ -188,7 +198,6 @@
     }
     iconMaySelect = TRUE;
     NSInteger i = ((UIButton *)sender).tag;
-    NSLog(@"%@",iconNames[i]);
     newIcon = iconNames[i];
     ((UIButton *)sender).tintColor = [[UIColor whiteColor] colorWithAlphaComponent:1];
     pastSelectedButton = ((UIButton *)sender);
@@ -199,7 +208,12 @@
 {
     NSInteger i = ((UIButton *)sender).tag;
     NSLog(@"%@",colourNames[i]);
-    [[LECColourService sharedColourService] changeGradientToColour:colourNames[i] forView:editView];
+    [UIView transitionWithView:self.view duration:0.2 options:UIViewAnimationOptionTransitionCrossDissolve animations:
+     ^{
+        [[LECColourService sharedColourService] changeGradientToColour:colourNames[i] forView:editView];
+    }completion:^(BOOL finished){
+        nil;
+    }];
     newColor = colourNames[i];
     
     

@@ -20,12 +20,12 @@
         self.tagNameLabel = [[UILabel alloc]initWithFrame:CGRectMake(20, 10, self.frame.size.width-80, 40)];
         self.tagNameLabel.textColor = [UIColor whiteColor];
         self.tagNameLabel.font = [UIFont fontWithName:DEFAULTFONT size:COURSENAMEECELLFONTSIZE];
-        [self addSubview:self.tagNameLabel];
+        [self.contentView addSubview:self.tagNameLabel];
         
         self.tagDescriptionLabel = [[UILabel alloc]initWithFrame:CGRectMake(20, 35, self.frame.size.width-80, 40)];
         self.tagDescriptionLabel.textColor = [UIColor whiteColor];
         self.tagDescriptionLabel.font = [UIFont fontWithName:DEFAULTFONT size:COURSEDESCRIPTIONCELLFONTSIZE];
-        [self addSubview:self.tagDescriptionLabel];
+        [self.contentView addSubview:self.tagDescriptionLabel];
         
         CGRect frame = [self frame];
         frame.size.height = 75;

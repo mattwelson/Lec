@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 South45. All rights reserved.
 //
 
+#import "LECAnimationService.h"
 #import "RecordViewController.h"
 #import "LECImportHeader.h"
 #import "LECActionBar.h"
@@ -39,9 +40,21 @@
     return self;
 }
 
+-(void)viewDidAppear:(BOOL)animated{
+    self.navigationController.navigationBar.alpha = 0.0;
+    self.navigationController.navigationBar.backIndicatorImage = [UIImage imageNamed:@"icon_cancel.png"];
+    self.navigationController.navigationBar.backIndicatorTransitionMaskImage = [UIImage imageNamed:@"icon_cancel.png"];
+    [[LECAnimationService sharedAnimationService]addAlphaToView:self.navigationController.navigationBar withSpeed:0.2 withDelay:0.0];
+    self.navigationController.interactivePopGestureRecognizer.enabled = NO;
+}
+
+
 -(void)viewWillDisappear:(BOOL)animated
 {
     [viewModel stopRecordingAudio];
+    self.navigationController.navigationBar.backIndicatorImage = NULL;
+    self.navigationController.navigationBar.backIndicatorTransitionMaskImage = NULL;
+    self.navigationController.interactivePopGestureRecognizer.enabled = YES;
 }
 
 - (void)didReceiveMemoryWarning
@@ -57,7 +70,7 @@
 
 -(void)createHeaderView
 {
-    self.headerView = [[LECHeaderView alloc] initWithLecture:viewModel];
+    self.headerView = [[LECHeaderView alloc] initWithLecture:viewModel andIsRecording:YES];
     [self.view addSubview:self.headerView];
 }
 
