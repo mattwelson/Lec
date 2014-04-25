@@ -107,7 +107,10 @@ static LECAudioService *sharedService;
 
 -(void)updateProgress
 {
-    [self.delegate playbackIsAtTime:[audioPlayer currentTime]];
+    double time = [audioPlayer currentTime];
+    if (time > 0 && time < [self getRecordingLength] && [audioPlayer isPlaying]){
+        [self.delegate playbackIsAtTime:[audioPlayer currentTime]];
+    }
 }
 
 -(BOOL) isAudioPlaying
@@ -143,8 +146,8 @@ static LECAudioService *sharedService;
 #pragma mark - Playback
 -(void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag
 {
-    playbackFinished(); // this is a black, that was pretty confusing!
     [timer invalidate];
+    playbackFinished(); // this is a block, that was pretty confusing!
 }
 
 #pragma mark Private

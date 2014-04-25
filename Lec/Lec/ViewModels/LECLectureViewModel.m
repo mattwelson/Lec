@@ -176,6 +176,7 @@
 {
     // check if time is outside the current tags boundaries.
     if (time < self.currentTagStartTime || time > self.currentTagFinishTime) {
+        NSLog(@"Current start time: %f, current finish time: %f, current time: %f", self.currentTagStartTime, self.currentTagFinishTime, time);
         self.currentTag =
         [tagTimes indexOfObject:@(time) inSortedRange:NSMakeRange(0, tagTimes.count) options:NSBinarySearchingInsertionIndex usingComparator:^(NSNumber *obj1, NSNumber *obj2){
             return [obj1 compare:obj2];
@@ -197,7 +198,7 @@
 {
     cTag = currentTag;
     self.currentTagStartTime = [[(LECTagCellViewModel *)[self.tableData objectAtIndex:self.currentTag] time] doubleValue];
-    if (self.currentTag < self.tableData.count - 1 ) { // is not the last tag
+    if (self.currentTag < self.tableData.count - 1) { // is not the last tag
         self.currentTagFinishTime = [[(LECTagCellViewModel *)[self.tableData objectAtIndex:self.currentTag+1] time] doubleValue];
     } else {
         self.currentTagFinishTime = [[LECAudioService sharedAudioService] getRecordingLength];

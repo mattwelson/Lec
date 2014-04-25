@@ -109,7 +109,7 @@
 -(void)reloadCellAtIndex:(NSInteger)index
 {
     //[self.tableView reloadData];
-    NSIndexPath *path = [NSIndexPath indexPathForRow:index inSection:1];
+    NSIndexPath *path = [NSIndexPath indexPathForRow:index inSection:contentSection];
     NSLog(@"Index path: %ld", (long)path.row);
     [self.tableView reloadRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationNone];
 
