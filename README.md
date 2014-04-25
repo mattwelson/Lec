@@ -8,8 +8,11 @@ Lecture Recorder to end all lecture recorders! (Fuck Recordium)
 To be the very best, like no one ever was.
 
 ##Deadline
-~~16th of Feb~~ 
-End of Feb
+~~16th of Feb~~
+
+~~End of Feb~~
+
+End of semester one (June)
 
 
 ##Minimum Viable Product
