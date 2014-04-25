@@ -22,8 +22,8 @@ static LECParallaxService *sharedService;
 
 -(void)addParallaxToView:(UIView *)view strength:(int)strength{
     int parallaxStrength;
-    CGSize shadowStrengthMin;
-    CGSize shadowStrengthMax;
+    CGSize shadowStrengthMin = CGSizeZero;
+    CGSize shadowStrengthMax = CGSizeZero;
 
     
     switch (strength) {
