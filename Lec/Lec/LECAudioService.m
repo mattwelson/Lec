@@ -86,7 +86,7 @@ static LECAudioService *sharedService;
     if ([audioPlayer prepareToPlay]) {
         audioPlayer.enableRate = YES;
         [audioPlayer play];
-        [[NSNotificationCenter defaultCenter] postNotificationName:kPlayerNotification object:self];
+        [[NSNotificationCenter defaultCenter] postNotificationName:kPlayStateNotification object:self];
         assert([audioPlayer isPlaying]); // TODO: Take out? Once at a production stage
     }
     else {
@@ -102,7 +102,7 @@ static LECAudioService *sharedService;
 
 -(void)pausePlayback{
     [audioPlayer pause];
-    [[NSNotificationCenter defaultCenter] postNotificationName:kPlayerNotification object:self];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kPlayStateNotification object:self];
 }
 
 

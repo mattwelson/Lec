@@ -29,5 +29,5 @@
 -(void) startAudioPlayback;
 -(void) stopAudioPlayback;
 -(void) goToTag:(NSInteger)index;
--(void) insertTagAtCurrentTime;
+-(NSUInteger) insertTagAtCurrentTime;
 @end

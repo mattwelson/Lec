@@ -102,7 +102,7 @@ static void * localContext = &localContext;
     [[LECAudioService sharedAudioService] goToTime:[tagCVM time]];
 }
 
--(void)insertTagAtCurrentTime
+-(NSUInteger)insertTagAtCurrentTime
 {
     Tag *tag = [[LECDatabaseService sharedDBService] newTagForLecture:self.lecture];
     tag.currentTime = [[LECAudioService sharedAudioService] getCurrentTime];
@@ -115,6 +115,7 @@ static void * localContext = &localContext;
     }];
     
     [self.tableData insertObject:tagCVM atIndex:newIndex];
+    return newIndex;
 }
 
 #pragma mark - KVO

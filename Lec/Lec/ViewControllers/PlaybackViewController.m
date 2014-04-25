@@ -166,13 +166,12 @@
     
 }
 
-//TODO: Get the scroll to move to the right place
 - (void)tagButtonPressed
 {
-    [viewModel insertTagAtCurrentTime];
+    NSUInteger newIndex = [viewModel insertTagAtCurrentTime];
     [self.tableView reloadData];
     // scroll to keep new cell at bottom of screen
-    NSIndexPath *indexPath = [NSIndexPath indexPathForItem:[viewModel.tableData count]-1 inSection:contentSection];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForItem:newIndex inSection:contentSection];
     [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
 }
 

@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-static NSString *const kPlayerNotification = @"PlayerNotification";
+static NSString *const kPlayStateNotification = @"PlayStateNotification";
 
 // tableview cell identifier
 #define CELL_ID_HEADER @"courseheader"
