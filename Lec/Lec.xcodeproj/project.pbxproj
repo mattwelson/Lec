@@ -479,18 +479,18 @@
 		8BE7582C188B876E007B6C02 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				C9605CC2188A179400F3DE57 /* LECColourService.h */,
-				C9605CC3188A179400F3DE57 /* LECColourService.m */,
-				73CD6EB01895F06400F183C7 /* LECIconService.h */,
-				73CD6EB11895F06400F183C7 /* LECIconService.m */,
-				C9605CC6188A311100F3DE57 /* LECDatabaseService.h */,
-				C9605CC7188A311100F3DE57 /* LECDatabaseService.m */,
-				C96BCA1D189CAC4800D5E7FD /* LECAudioService.h */,
-				C96BCA1E189CAC4800D5E7FD /* LECAudioService.m */,
-				730DABD218A500C000DFE3E7 /* LECParallaxService.h */,
-				730DABD318A500C000DFE3E7 /* LECParallaxService.m */,
 				733C9BC418AAEE57007E92B6 /* LECAnimationService.h */,
 				733C9BC518AAEE57007E92B6 /* LECAnimationService.m */,
+				C96BCA1D189CAC4800D5E7FD /* LECAudioService.h */,
+				C96BCA1E189CAC4800D5E7FD /* LECAudioService.m */,
+				C9605CC2188A179400F3DE57 /* LECColourService.h */,
+				C9605CC3188A179400F3DE57 /* LECColourService.m */,
+				C9605CC6188A311100F3DE57 /* LECDatabaseService.h */,
+				C9605CC7188A311100F3DE57 /* LECDatabaseService.m */,
+				73CD6EB01895F06400F183C7 /* LECIconService.h */,
+				73CD6EB11895F06400F183C7 /* LECIconService.m */,
+				730DABD218A500C000DFE3E7 /* LECParallaxService.h */,
+				730DABD318A500C000DFE3E7 /* LECParallaxService.m */,
 			);
 			name = Services;
 			sourceTree = "<group>";

@@ -24,10 +24,12 @@
 {
     self = [super initWithNibName:@"PlaybackViewController" bundle:nil];
     if (self) {
-        NSLog(@"Playback View Controller!");
         viewModel = [LECLectureViewModel viewModelWithLecture:lecture];
+        [viewModel setDelegate:self];
+        
         [viewModel prepareForPlaybackWithCompletion:^{
-            [self disableActionBar];
+            viewModel.canTag = NO;
+            [self.tableView reloadData];
         }];
         [viewModel startAudioPlayback];
         
@@ -84,9 +86,9 @@
     [self.view addSubview:self.headerView];
 }
 
--(void)disableActionBar
+-(void)setTag:(NSInteger)tag toProgress:(CGFloat)progress
 {
-    NSLog(@"Disable the action bar you fools!");
+    
 }
 
 -(void)lectureEdit
@@ -132,12 +134,8 @@
     TagCell *cell = [[TagCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CELL_ID_TAG_CELL];
     LECTagCellViewModel *cellViewModel = [[self tableData] objectAtIndex:indexRow];
     [cell populateFor:cellViewModel];
+    [cell renderProgressBar:cellViewModel.progressPercentage];
     return (UITableViewCell *)cell;
-}
-
--(void)deleteObjectFromViewModel:(NSInteger)index
-{
-    // delete tag!
 }
 
 -(id) viewModelFromSubclass
@@ -153,6 +151,7 @@
 -(void) didSelectCellAt:(NSInteger)index
 {
     [viewModel goToTag:index];
+    [self.tableView reloadData];
 }
 
 //Need to refactor
