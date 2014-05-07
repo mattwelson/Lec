@@ -20,6 +20,9 @@
     cellViewModel.colourString = colourString;
     cellViewModel.tintColour = [[LECColourService sharedColourService] baseColourFor:colourString];
     cellViewModel.titleText = [tag name];
+    cellViewModel.subText = [NSString stringWithFormat:@"Time: %@", [tag currentTime]];
+    cellViewModel.playState = notPlayed;
+    
     cellViewModel.subText = [cellViewModel formatTimeToString:[[tag currentTime] doubleValue]];
     return cellViewModel;
 }

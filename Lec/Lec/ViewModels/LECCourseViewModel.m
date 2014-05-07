@@ -68,7 +68,7 @@ static void * localContext = &localContext;
     LECDatabaseService *dbService = [LECDatabaseService sharedDBService];
     newLecture = [dbService newLectureForCourse:self.currentCourse];
     newLecture.lectureName = name;
-    newLecture.lectureNumber = [NSNumber numberWithInteger:number];
+    newLecture.lectureNumber = [NSNumber numberWithUnsignedInteger:self.i];
     [dbService saveChanges];
     [self.tableData insertObject:[LECLectureCellViewModel lectureCellVMWithLecture:newLecture] atIndex:0];
 }

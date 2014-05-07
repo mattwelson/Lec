@@ -28,6 +28,8 @@
 -(void) setupAudioPlayback:(NSString *)path withCompletion:(void (^)(void))block;
 -(void) startPlayback;
 -(void) stopPlayback;
+-(BOOL) isAudioPlaying;
+-(double) getRecordingLength;
 -(void) pausePlayback;
 -(void) speedUpPlaybackRate;
 -(void) normalPlaybackRate;

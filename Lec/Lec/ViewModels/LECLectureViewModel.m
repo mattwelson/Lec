@@ -12,6 +12,10 @@
 #import "LECTagCellViewModel.h"
 
 @implementation LECLectureViewModel
+{
+    long cTag; // HACK because wouldn't build with _currentTag :(
+    NSMutableArray *tagTimes;
+}
 static void * localContext = &localContext;
 
 +(LECLectureViewModel *)viewModelWithLecture:(Lecture *)lecture
@@ -115,29 +119,7 @@ static void * localContext = &localContext;
     self.canTag = YES;
     LECTagCellViewModel *tagCVM = self.tableData[index];
     [[LECAudioService sharedAudioService] goToTime:[tagCVM time]];
-
     self.currentTag = index;
-}
-
--(void)goToTagVisually:(NSInteger)index
-{
-    for (int i = 0; i < [self.tableData count]; i ++)
-    {
-        if (i < index)
-        {
-            ((LECTagCellViewModel *)self.tableData[i]).playState = hasPlayed;
-        }
-        else if (i > index)
-        {
-            ((LECTagCellViewModel *)self.tableData[i]).playState = notPlayed;
-        }
-        else
-        {
-            ((LECTagCellViewModel *)self.tableData[i]).playState = isPlaying;
-            ((LECTagCellViewModel *)self.tableData[i]).progress = 0;
-        }
-    }
-    
 }
 
 -(BOOL)insertTagAtStart
@@ -171,6 +153,7 @@ static void * localContext = &localContext;
     }];
     
     [self.tableData insertObject:tagCVM atIndex:newIndex];
+    self.currentTag = self.currentTag + 1;
     return newIndex;
 }
 
@@ -209,6 +192,23 @@ static void * localContext = &localContext;
         return;
     }
 }
+#pragma mark - Crazy tag shit
+-(void)playbackIsAtTime:(double)time
+{
+    // check if time is outside the current tags boundaries.
+    if (time < self.currentTagStartTime || time > self.currentTagFinishTime) {
+        NSLog(@"Current start time: %f, current finish time: %f, current time: %f", self.currentTagStartTime, self.currentTagFinishTime, time);
+        self.currentTag =
+        [tagTimes indexOfObject:@(time) inSortedRange:NSMakeRange(0, tagTimes.count) options:NSBinarySearchingInsertionIndex usingComparator:^(NSNumber *obj1, NSNumber *obj2){
+            return [obj1 compare:obj2];
+        }] - 1;
+        [self.delegate reloadTable];
+    }
+    CGFloat progress = (time - self.currentTagStartTime) / (self.currentTagFinishTime - self.currentTagStartTime);
+    
+    [self setCurrentTagProgress:progress];
+    //NSLog(@"%f", progress);
+}
 
 -(void)setCurrentTagProgress:(CGFloat)progress
 {
@@ -226,7 +226,7 @@ static void * localContext = &localContext;
         self.currentTagFinishTime = [[LECAudioService sharedAudioService] getRecordingLength];
     }
     
-    [self goToTagVisually:currentTag];
+//    [self goToTagVisually:currentTag];
 }
 
 -(long)currentTag
@@ -234,3 +234,4 @@ static void * localContext = &localContext;
     return cTag;
 }
 @end
+

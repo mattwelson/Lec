@@ -46,6 +46,7 @@
         playbackBar.playbackDelegate = self;
         [self.view addSubview:playbackBar];
         [self setupNavigationBar];
+        [viewModel addObserver:actionBar forKeyPath:NSStringFromSelector(@selector(canTag)) options:NSKeyValueObservingOptionNew context:NULL];
     }
     return self;
 }
@@ -180,6 +181,21 @@
 -(NSInteger) numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 2;
+}
+
+
+-(void)reloadCellAtIndex:(NSInteger)index
+{
+    //[self.tableView reloadData];
+    NSIndexPath *path = [NSIndexPath indexPathForRow:index inSection:contentSection];
+    NSLog(@"Index path: %ld", (long)path.row);
+    [self.tableView reloadRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationNone];
+    
+}
+
+-(void)reloadTable
+{
+    [self.tableView reloadData];
 }
 
 

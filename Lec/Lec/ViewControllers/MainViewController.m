@@ -303,7 +303,7 @@
     course.courseDescription = courseDescriptionText;
     course.colour = colour;
     course.icon = icon;
-    course.courseIndex = [NSNumber numberWithInt:(int)[self.viewModel.tableData count]];
+    course.courseIndex = [NSNumber numberWithUnsignedInteger:[self.viewModel.tableData count]];
     
     [[LECDatabaseService sharedDBService] saveChanges]; // saves changes made to course scratch pad
     

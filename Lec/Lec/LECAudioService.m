@@ -99,7 +99,7 @@ static LECAudioService *sharedService;
     else {
         @throw [NSException exceptionWithName:@"Audio player!" reason:@"Oh no!" userInfo:nil];
     }
-}// test
+}
 
 -(void) stopPlayback
 {
@@ -121,12 +121,25 @@ static LECAudioService *sharedService;
     else [audioPlayer play];
 }
 
+-(void)updateProgress
+{
+    double time = [audioPlayer currentTime];
+    if (time > 0 && time < [self getRecordingLength] && [audioPlayer isPlaying]){
+        [self.delegate playbackIsAtTime:[audioPlayer currentTime]];
+    }
+}
+
 -(void)normalPlaybackRate{
     [audioPlayer setRate:1.0];
     if (!audioPlayer.isPlaying) {
         [self startPlayback];
     }
     else [audioPlayer play];
+}
+
+-(BOOL) isAudioPlaying
+{
+    return [audioPlayer isPlaying];
 }
 
 -(void)rewindPlaybackRate{
@@ -149,7 +162,9 @@ static LECAudioService *sharedService;
 #pragma mark Tag Stuff
 -(void)goToTime:(NSNumber *)time
 {
+//    if (!audioPlayer.playing) [audioPlayer play];
     if (!audioPlayer.playing) [self startPlayback];
+
     audioPlayer.currentTime = [time doubleValue];
 }
 
