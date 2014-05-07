@@ -115,4 +115,9 @@
 
 }
 
+-(void)reloadTable
+{
+    [self.tableView reloadData];
+}
+
 @end

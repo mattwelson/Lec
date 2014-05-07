@@ -181,6 +181,7 @@
         [tagTimes indexOfObject:@(time) inSortedRange:NSMakeRange(0, tagTimes.count) options:NSBinarySearchingInsertionIndex usingComparator:^(NSNumber *obj1, NSNumber *obj2){
             return [obj1 compare:obj2];
         }] - 1;
+        [self.delegate reloadTable];
     }
     CGFloat progress = (time - self.currentTagStartTime) / (self.currentTagFinishTime - self.currentTagStartTime);
 
