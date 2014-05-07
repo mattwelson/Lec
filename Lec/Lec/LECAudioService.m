@@ -97,7 +97,7 @@ static LECAudioService *sharedService;
     else {
         @throw [NSException exceptionWithName:@"Audio player!" reason:@"Oh no!" userInfo:nil];
     }
-}
+}// test
 
 -(void) stopPlayback
 {
