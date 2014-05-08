@@ -15,6 +15,7 @@
     AVAudioRecorder *audioRecorder;
     AVAudioPlayer *audioPlayer;
     void (^playbackFinished)(void);
+    NSTimer *timer;
 }
 
 static LECAudioService *sharedService;
@@ -86,8 +87,14 @@ static LECAudioService *sharedService;
     if ([audioPlayer prepareToPlay]) {
         audioPlayer.enableRate = YES;
         [audioPlayer play];
-        [[NSNotificationCenter defaultCenter] postNotificationName:kPlayerNotification object:self];
+        [[NSNotificationCenter defaultCenter] postNotificationName:kPlayStateNotification object:self];
         assert([audioPlayer isPlaying]); // TODO: Take out? Once at a production stage
+        timer = [NSTimer scheduledTimerWithTimeInterval:0.1
+                                                      target:self
+                                                    selector:@selector(updateProgress)
+                                                    userInfo:nil
+                                                     repeats:YES];
+        [[NSRunLoop mainRunLoop]addTimer:timer forMode:NSRunLoopCommonModes];
     }
     else {
         @throw [NSException exceptionWithName:@"Audio player!" reason:@"Oh no!" userInfo:nil];
@@ -102,7 +109,7 @@ static LECAudioService *sharedService;
 
 -(void)pausePlayback{
     [audioPlayer pause];
-    [[NSNotificationCenter defaultCenter] postNotificationName:kPlayerNotification object:self];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kPlayStateNotification object:self];
 }
 
 
@@ -114,12 +121,25 @@ static LECAudioService *sharedService;
     else [audioPlayer play];
 }
 
+-(void)updateProgress
+{
+    double time = [audioPlayer currentTime];
+    if (time > 0 && time < [self getRecordingLength] && [audioPlayer isPlaying]){
+        [self.delegate playbackIsAtTime:[audioPlayer currentTime]];
+    }
+}
+
 -(void)normalPlaybackRate{
     [audioPlayer setRate:1.0];
     if (!audioPlayer.isPlaying) {
         [self startPlayback];
     }
     else [audioPlayer play];
+}
+
+-(BOOL) isAudioPlaying
+{
+    return [audioPlayer isPlaying];
 }
 
 -(void)rewindPlaybackRate{
@@ -142,7 +162,9 @@ static LECAudioService *sharedService;
 #pragma mark Tag Stuff
 -(void)goToTime:(NSNumber *)time
 {
+//    if (!audioPlayer.playing) [audioPlayer play];
     if (!audioPlayer.playing) [self startPlayback];
+
     audioPlayer.currentTime = [time doubleValue];
 }
 
@@ -157,11 +179,16 @@ static LECAudioService *sharedService;
     @throw [NSException exceptionWithName:@"WhatTheFuckException" reason:@"Nothing is playing or recording" userInfo:nil];
 }
 
-#pragma mark - Protocol
+-(double)getRecordingLength
+{
+    return [audioPlayer duration];
+}
+
 #pragma mark - Playback
 -(void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag
 {
-    playbackFinished();
+    [timer invalidate];
+    playbackFinished(); // this is a block, that was pretty confusing!
 }
 
 #pragma mark Private

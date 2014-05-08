@@ -21,7 +21,27 @@
     cellViewModel.tintColour = [[LECColourService sharedColourService] baseColourFor:colourString];
     cellViewModel.titleText = [tag name];
     cellViewModel.subText = [NSString stringWithFormat:@"Time: %@", [tag currentTime]];
+    cellViewModel.playState = notPlayed;
+    
+    cellViewModel.subText = [cellViewModel formatTimeToString:[[tag currentTime] doubleValue]];
     return cellViewModel;
+}
+
+-(CGFloat)progressPercentage
+{
+    switch (self.playState) {
+        case hasPlayed:
+            return 1.0f; // full
+            break;
+        case notPlayed:
+            return 0.0f; // nothing
+            break;
+        case isPlaying:
+            return [self progress];
+            break;
+        default:
+            return -1;
+    }
 }
 
 @end

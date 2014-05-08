@@ -24,10 +24,12 @@
 {
     self = [super initWithNibName:@"PlaybackViewController" bundle:nil];
     if (self) {
-        NSLog(@"Playback View Controller!");
         viewModel = [LECLectureViewModel viewModelWithLecture:lecture];
+        [viewModel setDelegate:self];
+        
         [viewModel prepareForPlaybackWithCompletion:^{
-            [self disableActionBar];
+            viewModel.canTag = NO;
+            [self.tableView reloadData];
         }];
         [viewModel startAudioPlayback];
         
@@ -44,6 +46,7 @@
         playbackBar.playbackDelegate = self;
         [self.view addSubview:playbackBar];
         [self setupNavigationBar];
+        [viewModel addObserver:actionBar forKeyPath:NSStringFromSelector(@selector(canTag)) options:NSKeyValueObservingOptionNew context:NULL];
     }
     return self;
 }
@@ -84,9 +87,9 @@
     [self.view addSubview:self.headerView];
 }
 
--(void)disableActionBar
+-(void)setTag:(NSInteger)tag toProgress:(CGFloat)progress
 {
-    NSLog(@"Disable the action bar you fools!");
+    
 }
 
 -(void)lectureEdit
@@ -132,12 +135,8 @@
     TagCell *cell = [[TagCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CELL_ID_TAG_CELL];
     LECTagCellViewModel *cellViewModel = [[self tableData] objectAtIndex:indexRow];
     [cell populateFor:cellViewModel];
+    [cell renderProgressBar:cellViewModel.progressPercentage];
     return (UITableViewCell *)cell;
-}
-
--(void)deleteObjectFromViewModel:(NSInteger)index
-{
-    // delete tag!
 }
 
 -(id) viewModelFromSubclass
@@ -153,6 +152,7 @@
 -(void) didSelectCellAt:(NSInteger)index
 {
     [viewModel goToTag:index];
+    [self.tableView reloadData];
 }
 
 //Need to refactor
@@ -166,13 +166,12 @@
     
 }
 
-//TODO: Get the scroll to move to the right place
 - (void)tagButtonPressed
 {
-    [viewModel insertTagAtCurrentTime];
+    NSUInteger newIndex = [viewModel insertTagAtCurrentTime];
     [self.tableView reloadData];
     // scroll to keep new cell at bottom of screen
-    NSIndexPath *indexPath = [NSIndexPath indexPathForItem:[viewModel.tableData count]-1 inSection:contentSection];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForItem:newIndex inSection:contentSection];
     [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
 }
 
@@ -182,6 +181,21 @@
 -(NSInteger) numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 2;
+}
+
+
+-(void)reloadCellAtIndex:(NSInteger)index
+{
+    //[self.tableView reloadData];
+    NSIndexPath *path = [NSIndexPath indexPathForRow:index inSection:contentSection];
+    NSLog(@"Index path: %ld", (long)path.row);
+    [self.tableView reloadRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationNone];
+    
+}
+
+-(void)reloadTable
+{
+    [self.tableView reloadData];
 }
 
 

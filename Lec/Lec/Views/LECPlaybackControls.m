@@ -30,7 +30,7 @@
             [self updateButtonImage];
         }];
         
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateButtonImage) name:kPlayerNotification object:[LECAudioService sharedAudioService]];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playStateChanged) name:kPlayStateNotification object:[LECAudioService sharedAudioService]];
         
         [self setupButtons];
     }
@@ -93,22 +93,25 @@
     self.twoTimesForwardButton.frame = CGRectMake(280, self.frame.size.height/2-22, 44, 44);
     [self.twoTimesForwardButton setTitle:@"2x" forState:UIControlStateNormal];
     [self.twoTimesForwardButton.titleLabel setFont:[UIFont fontWithName:DEFAULTFONT size:18]];
-    [self.twoTimesForwardButton.titleLabel setTextColor:[[LECColourService sharedColourService] baseColourFor:[self.viewModel colourString]]];
-    //[self.twoTimesForwardButton setImage:[UIImage imageNamed:@"playback_fastforward_btn.png"] forState:UIControlStateNormal];
+    //[self.twoTimesForwardButton.titleLabel setTextColor:[[LECColourService sharedColourService] baseColourFor:[self.viewModel colourString]]];
+    [self.twoTimesForwardButton setTitleColor:[[LECColourService sharedColourService] baseColourFor:[self.viewModel colourString]] forState:UIControlStateNormal];
     [self addSubview:self.twoTimesForwardButton];
+    
+    // disable buttons for initial non-playing state
+    [self.twoTimesForwardButton setEnabled:NO];
+    [self.splitTagButton setEnabled:NO];
 }
 
--(void)splitTagButtonPressed:(id)sender{
-    [self.playbackDelegate tagButtonPressed];
+-(void)playStateChanged
+{
+    [self updateButtonImage];
+    [self toggleButtons];
 }
 
--(void)playPauseButtonPressed:(id)sender{
-    if ([[LECAudioService sharedAudioService]isPlaying]) {
-        [[LECAudioService sharedAudioService]pausePlayback];
-    }
-    else {
-        [[LECAudioService sharedAudioService]startPlayback];
-    }
+-(void)toggleButtons
+{
+    [self.splitTagButton setEnabled:!self.splitTagButton.enabled];
+    [self.twoTimesForwardButton setEnabled:!self.twoTimesForwardButton.enabled];
 }
 
 -(void)updateButtonImage{
@@ -128,6 +131,19 @@
     }];
 }
 
+#pragma mark Buttons and Shit
+-(void)splitTagButtonPressed:(id)sender{
+    [self.playbackDelegate tagButtonPressed];
+}
+
+-(void)playPauseButtonPressed:(id)sender{
+    if ([[LECAudioService sharedAudioService]isPlaying]) {
+        [[LECAudioService sharedAudioService]pausePlayback];
+    }
+    else {
+        [[LECAudioService sharedAudioService]startPlayback];
+    }
+}
 
 -(void)fastForward:(UILongPressGestureRecognizer *)sender{
     

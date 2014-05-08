@@ -18,4 +18,6 @@
 
 @property NSString *colourString;
 
+-(NSString *)formatTimeToString:(double)time;
+
 @end

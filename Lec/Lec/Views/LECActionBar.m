@@ -8,6 +8,7 @@
 
 #import "LECActionBar.h"
 #import "LECColourService.h"
+#import "LECLectureViewModel.h"
 
 @implementation LECActionBar {
     UIImageView *iconView;
@@ -85,5 +86,19 @@
 {
     [iconView setImage:[icon imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
     _icon = icon;
+}
+
+-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    if ([keyPath isEqualToString:NSStringFromSelector(@selector(canTag))])
+    {
+        // changes the colour of the tag button based on if it's playing or not - could be used to say play or pause
+        if ((BOOL)change[NSKeyValueChangeNewKey])
+        {
+            [self setBackgroundColor:[UIColor whiteColor]];
+        } else {
+            [self setBackgroundColor:[UIColor lightGrayColor]];
+        }
+    }
 }
 @end
