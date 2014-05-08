@@ -122,6 +122,27 @@ static void * localContext = &localContext;
     self.currentTag = index;
 }
 
+-(void)goToTagVisually:(NSInteger)index
+{
+    for (int i = 0; i < [self.tableData count]; i ++)
+    {
+        if (i < index)
+        {
+            ((LECTagCellViewModel *)self.tableData[i]).playState = hasPlayed;
+        }
+        else if (i > index)
+        {
+            ((LECTagCellViewModel *)self.tableData[i]).playState = notPlayed;
+        }
+        else
+        {
+            ((LECTagCellViewModel *)self.tableData[i]).playState = isPlaying;
+            ((LECTagCellViewModel *)self.tableData[i]).progress = 0;
+        }
+    }
+    
+}
+
 -(BOOL)insertTagAtStart
 {
     Tag *tag = [[LECDatabaseService sharedDBService] newTagForLecture:self.lecture];
@@ -226,7 +247,7 @@ static void * localContext = &localContext;
         self.currentTagFinishTime = [[LECAudioService sharedAudioService] getRecordingLength];
     }
     
-//    [self goToTagVisually:currentTag];
+    [self goToTagVisually:currentTag];
 }
 
 -(long)currentTag
