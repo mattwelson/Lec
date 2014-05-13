@@ -10,6 +10,10 @@
 #import "Tag.h"
 
 @implementation LECTagCellViewModel
+{
+    CABasicAnimation *animation;
+    double proportionPerSecond;
+}
 
 +(instancetype)tagCellVMWithTag:(Tag *)tag andColour:(NSString *)colourString
 {
@@ -24,6 +28,7 @@
     cellViewModel.playState = notPlayed;
     
     cellViewModel.subText = [cellViewModel formatTimeToString:[[tag currentTime] doubleValue]];
+    
     return cellViewModel;
 }
 
@@ -42,6 +47,25 @@
         default:
             return -1;
     }
+}
+
+-(void)setProgress:(CGFloat)progress
+{
+    animation.fromValue = @(progress);
+    animation.toValue = @(progress + proportionPerSecond);
+    
+    [self.delegate animateWithAnimation:animation];
+    _progress = progress;
+}
+
+-(void)setLengthTo:(double)otherTime
+{
+    self.length = otherTime - [self.time doubleValue];
+    proportionPerSecond = 1.0 / self.length;
+    
+    animation = [CABasicAnimation animation];
+    animation.keyPath = @"bounds.size.width";
+    animation.duration = 1;
 }
 
 @end

@@ -29,6 +29,7 @@
         
         self.progressBar = [[UIView alloc] initWithFrame:CGRectMake(0, 70, 0, 2)];
         [self addSubview:self.progressBar];
+        self.progressBar.layer.anchorPoint = CGPointZero;
         
         CGRect frame = [self frame];
         frame.size.height = 75;
@@ -46,6 +47,8 @@
     self.tagNameLabel.textColor = [[LECColourService sharedColourService] baseColourFor:vm.colourString];
     self.backgroundColor = [UIColor whiteColor];
     [self.progressBar setBackgroundColor:[[LECColourService sharedColourService] baseColourFor:vm.colourString]];
+    
+    [vm setDelegate:self];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
@@ -62,6 +65,11 @@
     frame.size.width = SCREEN_WIDTH * percentage;
     [self.progressBar setFrame:frame];
     [self addSubview:self.progressBar];
+}
+
+-(void)animateWithAnimation:(CABasicAnimation *)animation
+{
+    [self.progressBar.layer addAnimation:animation forKey:@"tagAnimation"];
 }
 
 @end

@@ -15,6 +15,12 @@ typedef enum {
     notPlayed
 } PlayStateType;
 
+@protocol tagCellDelegate <NSObject>
+
+-(void)animateWithAnimation:(CABasicAnimation *)animation;
+
+@end
+
 @class Tag;
 
 @interface LECTagCellViewModel : LECBaseCellViewModel
@@ -22,9 +28,12 @@ typedef enum {
 @property Tag *tag;
 @property NSNumber *time;
 @property PlayStateType playState;
-@property CGFloat progress;
+@property(nonatomic) CGFloat progress;
+@property double length;
+@property id<tagCellDelegate> delegate;
 
 +(instancetype)tagCellVMWithTag:(Tag *)tag andColour:(NSString *)colourString;
 -(CGFloat)progressPercentage;
+-(void)setLengthTo:(double)otherTime;
 
 @end

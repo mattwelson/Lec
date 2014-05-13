@@ -9,9 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "LECTagCellViewModel.h"
 
-@interface TagCell : UITableViewCell
+@interface TagCell : UITableViewCell <tagCellDelegate>
 
--(void)populateFor:(LECTagCellViewModel *)vm;
+- (void)populateFor:(LECTagCellViewModel *)vm;
 - (void)renderProgressBar:(CGFloat)percentage;
 
 @property UILabel *tagNameLabel;

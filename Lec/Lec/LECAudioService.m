@@ -89,7 +89,7 @@ static LECAudioService *sharedService;
         [audioPlayer play];
         [[NSNotificationCenter defaultCenter] postNotificationName:kPlayStateNotification object:self];
         assert([audioPlayer isPlaying]); // TODO: Take out? Once at a production stage
-        timer = [NSTimer scheduledTimerWithTimeInterval:0.1
+        timer = [NSTimer scheduledTimerWithTimeInterval:1
                                                       target:self
                                                     selector:@selector(updateProgress)
                                                     userInfo:nil

@@ -47,6 +47,15 @@
         [self.view addSubview:playbackBar];
         [self setupNavigationBar];
         [viewModel addObserver:actionBar forKeyPath:NSStringFromSelector(@selector(canTag)) options:NSKeyValueObservingOptionNew context:NULL];
+        
+        [viewModel.tableData enumerateObjectsUsingBlock:^(id obj, NSUInteger index, BOOL *stop){
+            LECTagCellViewModel *current = (LECTagCellViewModel *)obj;
+            if (index == [viewModel.tableData count] - 1){
+                [current setLengthTo:[[LECAudioService sharedAudioService] getRecordingLength]];
+            } else {
+                [current setLengthTo:[[(LECTagCellViewModel *)viewModel.tableData[index+1] time] doubleValue]];
+            }
+        }];
     }
     return self;
 }
