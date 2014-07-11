@@ -31,6 +31,7 @@ typedef enum {
 @property(nonatomic) CGFloat progress;
 @property double length;
 @property id<tagCellDelegate> delegate;
+@property UIView *viewToAnimate; // progress bar
 
 +(instancetype)tagCellVMWithTag:(Tag *)tag andColour:(NSString *)colourString;
 -(CGFloat)progressPercentage;

@@ -49,6 +49,7 @@
     [self.progressBar setBackgroundColor:[[LECColourService sharedColourService] baseColourFor:vm.colourString]];
     
     [vm setDelegate:self];
+    [vm setViewToAnimate:self.progressBar];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated

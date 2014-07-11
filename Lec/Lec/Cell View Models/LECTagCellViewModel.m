@@ -8,6 +8,7 @@
 
 #import "LECTagCellViewModel.h"
 #import "Tag.h"
+#import "LECDefines.h"
 
 @implementation LECTagCellViewModel
 {
@@ -51,10 +52,18 @@
 
 -(void)setProgress:(CGFloat)progress
 {
-    animation.fromValue = @(progress);
-    animation.toValue = @(progress + proportionPerSecond);
+    CGRect frame = self.viewToAnimate.frame;
+    frame.size.width = frame.size.width + (SCREEN_WIDTH  * (progress + proportionPerSecond));
+    [UIView animateWithDuration:1.0f
+                          delay:0.0f
+                        options: UIViewAnimationOptionCurveLinear
+                     animations:^{
+                         self.viewToAnimate.frame = frame;
+                     }
+                     completion:^(BOOL finished){
+                         //NSLog(@"Done!");
+                     }];
     
-    [self.delegate animateWithAnimation:animation];
     _progress = progress;
 }
 
