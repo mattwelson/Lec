@@ -53,8 +53,8 @@
 -(void)setProgress:(CGFloat)progress
 {
     CGRect frame = self.viewToAnimate.frame;
-    frame.size.width = frame.size.width + (SCREEN_WIDTH  * (progress + proportionPerSecond));
-    [UIView animateWithDuration:1.0f
+    frame.size.width = frame.size.width + (SCREEN_WIDTH  * proportionPerSecond);//(progress + proportionPerSecond));
+    [UIView animateWithDuration:0.9f
                           delay:0.0f
                         options: UIViewAnimationOptionCurveLinear
                      animations:^{
