@@ -52,19 +52,27 @@
 
 -(void)setProgress:(CGFloat)progress
 {
-    CGRect frame = self.viewToAnimate.frame;
-    frame.size.width = frame.size.width + (SCREEN_WIDTH  * proportionPerSecond);//(progress + proportionPerSecond));
-    [UIView animateWithDuration:0.9f
-                          delay:0.0f
-                        options: UIViewAnimationOptionCurveLinear
-                     animations:^{
-                         self.viewToAnimate.frame = frame;
-                     }
-                     completion:^(BOOL finished){
-                         //NSLog(@"Done!");
-                     }];
+//    CGRect frame = self.viewToAnimate.frame;
+//    frame.size.width = frame.size.width + (SCREEN_WIDTH  * proportionPerSecond);//(progress + proportionPerSecond));
+//    [UIView animateWithDuration:0.9f
+//                          delay:0.0f
+//                        options: UIViewAnimationOptionCurveLinear
+//                     animations:^{
+//                         self.viewToAnimate.frame = frame;
+//                     }
+//                     completion:^(BOOL finished){
+//                         //NSLog(@"Done!");
+//                     }];
+//    
+//    _progress = progress;
     
+    animation.fromValue = @(progress * SCREEN_WIDTH);
+    animation.toValue = @((progress + proportionPerSecond) * SCREEN_WIDTH);
+    
+    [self.delegate animateWithAnimation:animation];
     _progress = progress;
+    
+    NSLog(@"progress: %f - proportionPerSec: %f - toValue:%f", progress, proportionPerSecond, (progress + proportionPerSecond) * SCREEN_WIDTH);
 }
 
 -(void)setLengthTo:(double)otherTime
