@@ -31,7 +31,7 @@
             viewModel.canTag = NO;
             [self.tableView reloadData];
         }];
-        [viewModel startAudioPlayback];
+        //[viewModel startAudioPlayback];
         
         contentSection = 1; // the section with table data
         actionSection = -1; // the section with an action bar
